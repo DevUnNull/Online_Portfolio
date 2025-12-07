@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngọc Hải Nguyễn Mai - [DevUnNull] Profile</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* CSS Giao diện Game */
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: linear-gradient(180deg, #0a1628 0%, #0d1a26 50%, #1a0a1f 100%);
+            color: #00ff99;
+            margin: 0;
+            padding: 20px 10px;
+            padding-top: 80px;
+            padding-bottom: 300px;
+            font-size: 14px;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 26, 38, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00ff99;
+            box-shadow: 0 2px 20px rgba(0, 255, 153, 0.3);
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav-logo {
+            color: #ccff00;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ccff00;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-menu a {
+            color: #00ff99;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .nav-menu a:hover {
+            color: #ccff00;
+            border: 1px solid #00ff99;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            background: rgba(0, 255, 153, 0.1);
+            text-decoration: none;
+        }
+
+        .nav-menu a.active {
+            color: #ccff00;
+            border: 1px solid #ccff00;
+            box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+            background: rgba(204, 255, 0, 0.1);
+        }
+
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 2px solid #00ff99;
+            color: #00ff99;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(0, 255, 153, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+                margin-top: 10px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                width: 100%;
+                text-align: center;
+                border: 1px solid #00ff99;
+            }
+
+            .nav-container {
+                justify-content: space-between;
+            }
+        }
+
+        /* Parallax Scenery Layers - Left Side */
+        .parallax-left {
+            position: fixed;
+            left: 0;
+            width: 15vw;
+            max-width: 200px;
+            min-width: 100px;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Parallax Scenery Layers - Right Side */
+        .parallax-right {
+            position: fixed;
+            right: 0;
+            width: 15vw;
+            max-width: 200px;
+            min-width: 100px;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Hide parallax on small screens */
+        @media (max-width: 1200px) {
+
+            .parallax-left,
+            .parallax-right {
+                display: none;
+            }
+        }
+
+        /* Game Elements - Mountains */
+        .mountain-layer-left,
+        .mountain-layer-right {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40%;
+            opacity: 0.3;
+        }
+
+        .mountain-layer-left {
+            background: linear-gradient(135deg, transparent 45%, #00ff99 45%, #00ff99 55%, transparent 55%),
+                linear-gradient(135deg, transparent 25%, #00cc77 25%, #00cc77 35%, transparent 35%);
+            background-size: 80px 80px, 120px 120px;
+            background-position: 0 100%, 40px 100%;
+        }
+
+        .mountain-layer-right {
+            background: linear-gradient(225deg, transparent 45%, #00ff99 45%, #00ff99 55%, transparent 55%),
+                linear-gradient(225deg, transparent 25%, #00cc77 25%, #00cc77 35%, transparent 35%);
+            background-size: 80px 80px, 120px 120px;
+            background-position: 0 100%, -40px 100%;
+        }
+
+        /* Game Elements - Trees */
+        .trees-layer-left,
+        .trees-layer-right {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            opacity: 0.5;
+        }
+
+        .trees-layer-left {
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 10px, #00ff99 10px, #00ff99 50px, transparent 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 20px, #00ff99 20px, #00ff99 23px, transparent 23px);
+            background-size: 100% 100%, 100% 100%;
+        }
+
+        .trees-layer-right {
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 10px, #00ff99 10px, #00ff99 50px, transparent 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 20px, #00ff99 20px, #00ff99 23px, transparent 23px);
+            background-size: 100% 100%, 100% 100%;
+        }
+
+        /* Game Elements - Clouds */
+        .clouds-layer-left,
+        .clouds-layer-right {
+            position: absolute;
+            top: 10%;
+            width: 100%;
+            height: 20%;
+            opacity: 0.2;
+        }
+
+        .clouds-layer-left {
+            background-image: radial-gradient(ellipse 60px 30px, #00ffff 40%, transparent 40%);
+            background-size: 150px 80px;
+            background-position: 0 0;
+        }
+
+        .clouds-layer-right {
+            background-image: radial-gradient(ellipse 60px 30px, #00ffff 40%, transparent 40%);
+            background-size: 150px 80px;
+            background-position: 0 0;
+        }
+
+        /* Game Elements - Particles */
+        .particles-layer-left,
+        .particles-layer-right {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .particles-layer-left {
+            background-image:
+                radial-gradient(circle, #ccff00 1px, transparent 1px),
+                radial-gradient(circle, #00ffff 1px, transparent 1px);
+            background-size: 50px 50px, 80px 80px;
+            background-position: 0 0, 25px 40px;
+        }
+
+        .particles-layer-right {
+            background-image:
+                radial-gradient(circle, #ccff00 1px, transparent 1px),
+                radial-gradient(circle, #00ffff 1px, transparent 1px);
+            background-size: 50px 50px, 80px 80px;
+            background-position: 0 0, 25px 40px;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            margin: auto;
+            border: 3px solid #00ff99;
+            box-shadow: 0 0 15px #00ff99;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .skill-list {
+                columns: 1;
+                -webkit-columns: 1;
+                -moz-columns: 1;
+            }
+
+            .header-info {
+                flex-direction: column;
+            }
+
+            .header-info div {
+                flex-basis: 100%;
+                margin-bottom: 10px;
+            }
+
+            .video-container {
+                max-width: 100%;
+            }
+        }
+
+        .header-info,
+        .section {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 5px #ccff00;
+            font-size: clamp(20px, 4vw, 28px);
+            text-align: center;
+            border-bottom: none;
+            padding-bottom: 0;
+            word-wrap: break-word;
+        }
+
+        .section-title {
+            color: #00ff99;
+            font-size: clamp(16px, 3vw, 18px);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .header-info div {
+            flex-basis: 48%;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid rgba(0, 255, 153, 0.5);
+        }
+
+        .project h4 {
+            color: #00ffff;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .project-details {
+            margin-left: 15px;
+            border-left: 2px solid #ccff00;
+            padding-left: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            margin: 15px auto;
+            padding: 10px;
+            border: 2px solid #00ff99;
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container::before {
+            content: '[ VIDEO PREVIEW ]';
+            display: block;
+            color: #ccff00;
+            font-size: 12px;
+            text-align: center;
+            margin-bottom: 5px;
+            text-shadow: 0 0 5px #ccff00;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .skill-list {
+            list-style-type: '» ';
+            padding-left: 20px;
+            columns: 2;
+            -webkit-columns: 2;
+            -moz-columns: 2;
+        }
+
+        .stat-block {
+            background-color: rgba(0, 255, 153, 0.1);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #ccff00;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <div class="nav-logo">⚔️ DEVUNNULL</div>
+            <button class="nav-toggle" onclick="toggleMenu()">☰ MENU</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#cv-container" class="nav-link">🏠 TOP</a></li>
+                <li><a href="#objective-section" class="nav-link">🎯 OBJECTIVE</a></li>
+                <li><a href="#projects-section" class="nav-link">🛠️ PROJECTS</a></li>
+                <li><a href="#skills-section" class="nav-link">⚙️ SKILLS</a></li>
+                <li><a href="#education-section" class="nav-link">🎓 EDUCATION</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Parallax Game Scenery - Left Side -->
+    <div class="parallax-left">
+        <div class="particles-layer-left"></div>
+        <div class="clouds-layer-left"></div>
+        <div class="mountain-layer-left"></div>
+        <div class="trees-layer-left"></div>
+    </div>
+
+    <!-- Parallax Game Scenery - Right Side -->
+    <div class="parallax-right">
+        <div class="particles-layer-right"></div>
+        <div class="clouds-layer-right"></div>
+        <div class="mountain-layer-right"></div>
+        <div class="trees-layer-right"></div>
+    </div>
+
+    <div class="container" id="cv-container">
+        <h1>⚔️ NGUYEN MAI NGOC HAI - DEVOPS LOG ⚔️</h1>
+        <div class="header-info">
+            <div>
+                <p><strong>[CODE NAME]</strong>: DevUnNull</p>
+                <p><strong>[CLASSIFICATION]</strong>: Developer / Student (Year 3)</p>
+                <p><strong>[LOCATION]</strong>: Hưng Yên City</p>
+                <p><strong>[CONTACT]</strong>: +84 0964023903 | hai23092003@gmail.com</p>
+                <p><strong>[LINK HUB]</strong>: <a href="https://github.com/DevUnNull" target="_blank">GitHub
+                        Repository</a> | <a href="https://www.facebook.com/hoho.haha.35977897" target="_blank">Social
+                        Link</a></p>
+            </div>
+            <div class="stat-block">
+                <h3>⚙️ CORE STATS ⚙️</h3>
+                <p><strong>Primary Weapon</strong>: C# / Unity Engine</p>
+                <p><strong>Focus Protocol</strong>: OOP, SOLID Principles</p>
+                <p><strong>Specialization</strong>: 2D Game Development (Unity)</p>
+                <p><strong>Certificate Acquired</strong>: CodeGym - Unity (05/2024)</p>
+            </div>
+        </div>
+
+        <div class="section" id="objective-section">
+            <h3 class="section-title">🎯 OBJECTIVE: INTERNSHIP TARGET 🎯</h3>
+            <p>Sinh viên năm 3 Kỹ thuật phần mềm, vững C# và OOP, có kinh nghiệm thực hiện các dự án game 2D
+                bằng Unity.</p>
+            <p><strong>[MISSION]</strong>: Tìm kiếm cơ hội thực tập Unity Developer để áp dụng kiến thức lập
+                trình vững chắc vào phát triển Gameplay/Tính năng, đồng thời trau dồi kinh nghiệm làm việc chuyên nghiệp
+                trong môi trường phát triển game.</p>
+        </div>
+
+        <div class="section" id="projects-section">
+            <h3 class="section-title">🛠️ PROJECT LOG: COMBAT EXPERIENCE 🛠️</h3>
+
+            <div class="project">
+                <h4>[P02] HEROIC DEFENSE (Tower Defense)</h4>
+                <p><strong>[TIME STAMP]</strong>: 10/2025 – 11/2025 |
+                    <strong>[ROLE]</strong>: Lập trình viên chính
+                </p>
+
+                <!-- Video Demo Container -->
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/Rm03AIO-GHY"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="project-details">
+                    <p><strong>[DESCRIPTION]</strong>: Game chiến thuật Tower Defense 2D, tập trung vào cơ
+                        chế xây dựng, nâng cấp tướng phòng thủ và quản lý tài nguyên.</p>
+                    <p><strong>[SKILLS USED]</strong>:</p>
+                    <ul class="skill-list">
+                        <li>Object Pooling & Tối ưu Performance</li>
+                        <li>Audio Mixer & Quản lý Audio</li>
+                        <li>Design Patterns (Singleton, State Machine, Observer, Strategy)</li>
+                        <li>SOLID Principles (SRP, OCP, DIP)</li>
+                        <li>Animation/Animator & Animation Events</li>
+                        <li>Git/GitHub</li>
+                    </ul>
+                    <p class="achievement"><strong>[ACHIEVEMENT]</strong>: Dự án đạt kết quả tốt trong quá
+                        trình học tập tại trường.</p>
+                    <p><strong>[ACCESS]</strong>: <a href="https://youtu.be/Rm03AIO-GHY" target="_blank">Video Demo</a>
+                        | <a href="https://devunnull.itch.io/hero-defense" target="_blank">Itch.io Deployment</a></p>
+                </div>
+            </div>
+
+            <div class="project">
+                <h4>[P01] JUNGLE (2D Platformer Survivor)</h4>
+                <p><strong>[TIME STAMP]</strong>: 06/2024 – 07/2024 |
+                    <strong>[ROLE]</strong>: Lập trình viên chính (Full Stack)
+                </p>
+
+                <!-- Video Demo Container -->
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/3jibVCOz_Oc"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="project-details">
+                    <p><strong>[MISSION GOAL]</strong>: Xây dựng game hành động 2D với vòng lặp sống sót -
+                        lên cấp - chọn nâng cấp.</p>
+                    <p><strong>[ACHIEVEMENT]</strong>:</p>
+                    <ul>
+                        <li>Thiết kế & lập trình toàn bộ gameplay loop: di chuyển, combat, kĩ năng đặc biệt,
+                            Al enemy đuổi theo và hệ thống difficulty tăng dần.</li>
+                        <li class="achievement">Xây dựng kiến trúc **Factory + Strategy Pattern** cho hệ
+                            thống nâng cấp 6 nhánh, giúp thêm buff mới trong < 30 phút mà không động vào logic cũ. </li>
+                        <li>Phát triển hệ thống UI/UX hoàn thiện (TextMesh Pro, animation UI) và lưu best score bằng
+                            PlayerPrefs.</li>
+                        <li>Tích hợp audio manager dùng **Singleton pattern**, tái sử dụng qua nhiều scene.
+                        </li>
+                    </ul>
+                    <p><strong>[SKILLS USED]</strong>: Unity 2D C#, Design Patterns (Singleton, Factory,
+                        Strategy), Animation/Animator, Ul Toolkit, Audio Mixer, Game balancing & level design.</p>
+                    <p><strong>[ACCESS]</strong>: <a href="https://youtu.be/3jibVCOz_Oc" target="_blank">Video Demo</a>
+                        | <a href="https://devunnull.itch.io/junglesuvivor" target="_blank">Itch.io Deployment</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="skills-section">
+            <h3 class="section-title">⚙️ ABILITIES & TOOLKIT ⚙️</h3>
+            <p><strong>[MAIN] C# & OOP</strong>:</p>
+            <ul>
+                <li>Áp dụng OOP cơ bản để tổ chức mã nguồn (Kế thừa, Đa hình).</li>
+                <li>Vận dụng các Design Pattern quan trọng trong Unity như **Singleton, State Pattern, và
+                    Object Pool** để tối ưu hiệu suất và cấu trúc gameplay.</li>
+            </ul>
+            <p><strong>[TOOL] Unity Engine (Scripting, UI, Animation, Physics)</strong>:</p>
+            <ul>
+                <li>Triển khai các tính năng Gameplay cốt lõi (logic điều khiển nhân vật, kẻ thù, tương tác
+                    vật lý 2D).</li>
+                <li>UI/UX: Xây dựng giao diện người dùng cơ bản (Canvas, Layout Groups).</li>
+                <li>Animation: Quản lý chuyển động nhân vật qua Animator.</li>
+            </ul>
+            <p><strong>[OTHERS]</strong>:</p>
+            <ul class="skill-list">
+                <li>**SQL, MySQL**: Hiểu biết và áp dụng được cho các tính năng lưu trữ dữ liệu đơn giản.
+                </li>
+                <li>**Git, GitHub**: Sử dụng hiệu quả cho việc quản lý phiên bản cá nhân và làm việc nhóm cơ
+                    bản.</li>
+                <li>**Photoshop, AI Assets**: Tự tạo và tối ưu hóa Assets (ảnh, sprites, Animation) độc đáo
+                    để tăng tốc độ phát triển.</li>
+                <li>**Giải thuật & Cấu trúc dữ liệu cơ bản**: Kiến thức nền tảng để giải quyết các vấn đề
+                    logic và tối ưu hóa code.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="education-section">
+            <h3 class="section-title">🎓 ACADEMIC LOG 🎓</h3>
+            <p><strong>[INSTITUTION]</strong>: Đại học FPT</p>
+            <p><strong>[PROGRAM]</strong>: Kỹ thuật Phần mềm (Đang theo học, Năm 3)</p>
+            <p><strong>[TIME]</strong>: 2022 - nay</p>
+            <p>• Hoàn thành các kỳ học đầu tiên của UNITY với nền tảng vững chắc về lập trình.
+            </p>
+        </div>
+
+        <div class="section" id="hobbies-section">
+            <h3 class="section-title">🕹️ RESEARCH & TRAINING 🕹️</h3>
+            <p>• Nghiên cứu về Game: Thường xuyên chơi và **phân tích cơ chế gameplay** để tìm hiểu cách các
+                tính năng cốt lõi được lập trình và áp dụng vào dự án cá nhân.</p>
+            <p>• Hoạt động thể chất (Thể thao, Tập gym): Duy trì sự tập trung, sức bền và kỷ luật cá nhân.
+            </p>
+        </div>
+
+        <p style="text-align: center; font-size: 10px; margin-top: 20px;">[END OF TRANSMISSION] | Data Source:
+            Ngoc-Hai-Nguyen-CV.pdf</p>
+
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const neonColorStart = "#00ff99";
+        const neonColorEnd = "#00ffff";
+
+        // 1. Hiệu ứng Fade In cho Container
+        gsap.fromTo("#cv-container",
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out"
+            }
+        );
+
+        // 2. Hiệu ứng Chuyển màu viền Container
+        gsap.to("#cv-container", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1,
+            },
+            border: `3px solid ${neonColorEnd}`,
+            boxShadow: `0 0 20px ${neonColorEnd}`,
+            ease: "none"
+        });
+
+        // 3. Hiệu ứng Slide Up cho các Section
+        gsap.utils.toArray(".section, .header-info").forEach(section => {
+            gsap.fromTo(section,
+                { opacity: 0, y: 40 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 90%",
+                        end: "top 60%",
+                        scrub: 0.5,
+                    }
+                }
+            );
+        });
+
+        // 4. Hiệu ứng Chi tiết dự án
+        gsap.utils.toArray(".project-details").forEach(details => {
+            gsap.fromTo(details.children,
+                { opacity: 0, x: -20 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.5,
+                    stagger: 0.15,
+                    ease: "power1.out",
+                    scrollTrigger: {
+                        trigger: details,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                    }
+                }
+            );
+        });
+
+        // ========== PARALLAX GAME SCENERY ANIMATIONS ==========
+
+        // Particles - Slow floating movement
+        gsap.to(".particles-layer-left", {
+            backgroundPositionY: "200px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 3,
+            }
+        });
+
+        gsap.to(".particles-layer-right", {
+            backgroundPositionY: "-200px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 3,
+            }
+        });
+
+        // Clouds - Medium speed parallax
+        gsap.to(".clouds-layer-left", {
+            backgroundPositionY: "300px",
+            backgroundPositionX: "-100px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 2,
+            }
+        });
+
+        gsap.to(".clouds-layer-right", {
+            backgroundPositionY: "300px",
+            backgroundPositionX: "100px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 2,
+            }
+        });
+
+        // Mountains - Slower parallax (farther away)
+        gsap.to(".mountain-layer-left", {
+            backgroundPositionY: "100px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.5,
+            }
+        });
+
+        gsap.to(".mountain-layer-right", {
+            backgroundPositionY: "100px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.5,
+            }
+        });
+
+        // Trees - Fastest parallax (closest)
+        gsap.to(".trees-layer-left", {
+            backgroundPositionY: "150px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5,
+            }
+        });
+
+        gsap.to(".trees-layer-right", {
+            backgroundPositionY: "150px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 0.5,
+            }
+        });
+
+        // Fade and color transitions on scroll
+        gsap.to(".parallax-left, .parallax-right", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "50% top",
+                scrub: 1,
+            },
+            filter: "hue-rotate(90deg) brightness(1.2)",
+            ease: "none"
+        });
+
+        // ========== NAVIGATION FUNCTIONALITY ==========
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth scroll to sections
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 80; // Account for fixed header
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+
+                // Close mobile menu after click
+                if (window.innerWidth <= 768) {
+                    document.getElementById('navMenu').classList.remove('active');
+                }
+            });
+        });
+
+        // Active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section, #cv-container');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

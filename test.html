@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Scroll Scenery</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* ======================== CSS CHUNG ======================== */
+        body {
+            height: 300vh;
+            /* Tạo chiều cao giả để có thể cuộn và kích hoạt animation */
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #ffb86c;
+            /* Màu nền ban đầu (Hoàng hôn) */
+        }
+
+        /* Container chứa toàn bộ cảnh vật, cố định trên màn hình */
+        .scene-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ======================== CSS CÁC LỚP CẢNH VẬT ======================== */
+        /* Mặt trời / Mặt trăng */
+        #sun-moon {
+            position: absolute;
+            top: 30%;
+            /* Vị trí ban đầu (Hoàng hôn) */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 250px;
+            background-color: #fffb96;
+            /* Màu vàng cam của mặt trời */
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        /* Núi và Cây - Các lớp Layer Parallax */
+        .mountain-layer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat-x;
+        }
+
+        /* Lớp Núi Xa (Dịch chuyển ít nhất) */
+        #mountain-far {
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 100" xmlns="http://www.w3.org/2000/svg"><path fill="%23c44848" d="M0 80 L100 20 L200 60 L350 0 L450 40 L500 20 L650 80 L750 30 L850 70 L950 50 L1000 90 L1000 100 L0 100 Z"/></svg>');
+            background-size: 500px 100%;
+            opacity: 1;
+            z-index: 20;
+            height: 30%;
+        }
+
+        /* Lớp Núi Gần (Dịch chuyển nhiều hơn) */
+        #mountain-near {
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 100" xmlns="http://www.w3.org/2000/svg"><path fill="%239c3636" d="M0 100 L50 40 L150 80 L250 20 L400 60 L500 40 L600 80 L700 30 L800 70 L900 50 L1000 100 Z"/></svg>');
+            background-size: 400px 100%;
+            z-index: 30;
+            height: 40%;
+        }
+
+        /* Lớp Cây Tiền Cảnh (Dịch chuyển nhiều nhất) */
+        #trees-foreground {
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1000 100" xmlns="http://www.w3.org/2000/svg"><path fill="%23451e1e" d="M0 100 L0 50 Q50 20 100 50 T200 50 T300 50 T400 50 T500 50 T600 50 T700 50 T800 50 T900 50 T1000 50 L1000 100 Z"/></svg>');
+            background-size: 300px 100%;
+            z-index: 40;
+            height: 60%;
+            opacity: 1;
+        }
+
+        /* Các ngôi sao (Khởi tạo mờ) */
+        #stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(white 1px, transparent 0);
+            background-size: 50px 50px;
+            opacity: 0;
+            /* Ẩn ban đầu */
+            z-index: 5;
+        }
+
+        /* Hiển thị chỉ dẫn cuộn */
+        #scroll-hint {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            z-index: 50;
+            font-family: sans-serif;
+            font-size: 18px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scene-container">
+        <div id="stars"></div>
+        <div id="sun-moon"></div>
+        <div id="mountain-far" class="mountain-layer"></div>
+        <div id="mountain-near" class="mountain-layer"></div>
+        <div id="trees-foreground" class="mountain-layer"></div>
+
+        <div id="scroll-hint">SCROLL DOWN TO NIGHT</div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Tạo Timeline chính đồng bộ với việc cuộn chuột
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom top",
+                scrub: 2, // Đặt scrub = 2 để làm hoạt ảnh trễ và mượt hơn khi cuộn
+                // markers: true, // Bỏ comment để bật debug markers
+            }
+        });
+
+        // ======================= HOẠT ẢNH CHUYỂN CẢNH (Hoàng hôn -> Ban đêm) =======================
+
+        // 1. Chuyển màu nền (Mô phỏng Sky)
+        tl.to("body", {
+            backgroundColor: "#1a1f33", // Màu xanh tím đậm của bầu trời đêm
+            ease: "none"
+        }, 0) // Tham số 0 đặt hoạt ảnh này tại điểm bắt đầu của timeline
+
+        // 2. Di chuyển Mặt trời / Mặt trăng (Parallax Y)
+        tl.to("#sun-moon", {
+            top: "80%", // Mặt trời lặn xuống, mặt trăng hiện lên
+            backgroundColor: "#bfbfff", // Chuyển màu sang trắng xanh của mặt trăng
+            scale: 0.7,
+            ease: "none"
+        }, 0)
+
+        // 3. Hiệu ứng Ngôi sao Fade In
+        tl.to("#stars", {
+            opacity: 1,
+            ease: "none"
+        }, 0)
+
+        // 4. Chuyển màu các lớp Núi/Cây (Silhouette Effect)
+        // Lưu ý: Do sử dụng SVG data URL cho hình dạng, ta sẽ dùng GSAP để thay đổi opacity
+        // hoặc dùng filter để giả lập màu tối. (Trong ví dụ này: thay đổi màu sắc và làm tối)
+
+        // Để đơn giản, ta sẽ dùng hiệu ứng làm tối tổng thể (opacity và filter)
+        // Tuy nhiên, đối với núi/cây, tôi sẽ tạo hiệu ứng Parallax (dịch chuyển ngang)
+
+        // ======================= HOẠT ẢNH PARALLAX (Dịch chuyển ngang) =======================
+
+        // Núi xa (Di chuyển chậm nhất)
+        tl.to("#mountain-far", {
+            backgroundPositionX: "300px", // Dịch chuyển chậm (xa nhất)
+            filter: "brightness(0.5)", // Làm tối cảnh vật
+            ease: "none"
+        }, 0)
+
+        // Núi gần (Di chuyển nhanh hơn)
+        tl.to("#mountain-near", {
+            backgroundPositionX: "600px",
+            filter: "brightness(0.3)", // Tối hơn
+            ease: "none"
+        }, 0)
+
+        // Cây tiền cảnh (Di chuyển nhanh nhất)
+        tl.to("#trees-foreground", {
+            backgroundPositionX: "1000px",
+            filter: "brightness(0.1)", // Rất tối
+            ease: "none"
+        }, 0)
+
+        // Ẩn chỉ dẫn cuộn khi hoạt ảnh bắt đầu
+        tl.to("#scroll-hint", {
+            opacity: 0,
+            ease: "none"
+        }, 0)
+
+
+    </script>
+</body>
+
+</html>
