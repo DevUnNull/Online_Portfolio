@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Knowledge — DevUnNull</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background: #0d1a26;
+            color: #00ff99;
+            padding: 30px
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px;
+            border: 2px solid #00ff99
+        }
+
+        .back {
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #00ff99;
+            transition: all 0.3s ease;
+        }
+
+        .back:hover {
+            background: rgba(0, 255, 153, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 0;
+            margin-left: 0;
+        }
+
+        .nav-menu a {
+            display: inline-block;
+            padding: 12px 20px;
+            border: 2px solid #00ff99;
+            color: #00ff99;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            background: transparent;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(0, 255, 153, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+            text-decoration: none;
+        }
+
+        .section {
+            border-top: 1px dashed rgba(0, 255, 153, 0.15);
+            padding-top: 12px;
+            margin-top: 12px
+        }
+
+        .section h2 {
+            color: #00ff99;
+            margin: 20px 0 10px 0;
+            font-size: 18px;
+        }
+
+        .section p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← Quay lại hồ sơ</a>
+        <h1>📚 Knowledge Shares</h1>
+
+        <ul class="nav-menu">
+            <li><a href="#design-patterns">🔧 Design Patterns</a></li>
+            <li><a href="#solid">📐 SOLID</a></li>
+            <li><a href="#best-practices">⭐ Best Practices</a></li>
+            <li><a href="#performance">⚡ Performance</a></li>
+        </ul>
+
+        <div class="section" id="design-patterns">
+            <h2>🔧 Design Patterns</h2>
+            <p>Các pattern thiết kế và cách áp dụng vào Unity game development.</p>
+            <p><a href="design-patterns.html">Xem chi tiết →</a></p>
+        </div>
+
+        <div class="section" id="solid">
+            <h2>📐 SOLID Principles</h2>
+            <p>5 nguyên tắc thiết kế phần mềm hướng đối tượng giúp code maintainable và scalable.</p>
+            <p>Coming soon...</p>
+        </div>
+
+        <div class="section" id="best-practices">
+            <h2>⭐ Best Practices</h2>
+            <p>Những thực hành tốt nhất trong lập trình game với Unity.</p>
+            <p>Coming soon...</p>
+        </div>
+
+        <div class="section" id="performance">
+            <h2>⚡ Performance Optimization</h2>
+            <p>Kỹ thuật tối ưu hiệu suất game để chạy mượt trên nhiều thiết bị.</p>
+            <p>Coming soon...</p>
+        </div>
+    </div>
+</body>
+
+</html>

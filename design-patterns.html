@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Patterns — DevUnNull</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: linear-gradient(180deg, #0a1628 0%, #0d1a26 50%, #1a0a1f 100%);
+            color: #00ff99;
+            line-height: 1.6;
+            padding: 30px 10px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #00ff99;
+            box-shadow: 0 0 15px #00ff99;
+            padding: 30px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border: 2px solid #00ff99;
+            color: #00ff99;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(0, 255, 153, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            margin-bottom: 30px;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #00ff99;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 2px solid rgba(0, 255, 153, 0.3);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #00ffff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .warning {
+            background: rgba(255, 68, 68, 0.1);
+            border-left: 3px solid #ff4444;
+            padding: 12px;
+            margin: 15px 0;
+            color: #ffaa99;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 153, 0.3);
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-size: 13px;
+        }
+
+        .code-block code {
+            color: #00ff99;
+        }
+
+        .keyword {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .class-name {
+            color: #ccff00;
+        }
+
+        .comment {
+            color: #00cc77;
+        }
+
+        ul,
+        ol {
+            margin: 15px 0 15px 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .achievement {
+            background: rgba(0, 255, 153, 0.1);
+            border-left: 3px solid #00ff99;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        .nav-patterns {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-patterns a {
+            padding: 10px 20px;
+            border: 2px solid #00ff99;
+            color: #00ff99;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+
+        .nav-patterns a.active {
+            background: rgba(0, 255, 153, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+
+        .nav-patterns a:hover {
+            background: rgba(0, 255, 153, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="knowledge.html" class="back-link">← Quay lại Knowledge</a>
+
+        <h1>🔧 Design Patterns in Unity</h1>
+
+        <div class="nav-patterns">
+            <a href="#singleton" class="active">📍 Singleton</a>
+            <a href="#factory">🏭 Factory</a>
+            <a href="#observer">👁️ Observer</a>
+            <a href="#strategy">📋 Strategy</a>
+        </div>
+
+        <!-- ============ SINGLETON PATTERN ============ -->
+        <h2 id="singleton">📍 Singleton Pattern — Unity Implementation (Clean & Safe)</h2>
+
+        <h3>⚠️ Vấn đề thường gặp với Singleton truyền thống</h3>
+        <ul>
+            <li>Dễ bị duplicate instance khi load scene nhanh</li>
+            <li>Static field public → dễ bị ghi đè từ bên ngoài</li>
+            <li>Thường biến thành God Object → vi phạm SOLID</li>
+        </ul>
+
+        <h3>✅ Giải pháp em đang dùng (studio-standard)</h3>
+        <div class="code-block">
+            <code>
+<span class="comment">```csharp</span>
+<span class="keyword">public class</span> <span class="class-name">GameManager</span> : <span class="class-name">MonoBehaviour</span>
+{
+    <span class="keyword">public static</span> <span class="class-name">GameManager</span> Instance { <span class="keyword">get</span>; <span class="keyword">private set</span>; }
+
+    <span class="keyword">private void</span> Awake()
+    {
+        <span class="keyword">if</span> (Instance != <span class="keyword">null</span> && Instance != <span class="keyword">this</span>)
+        {
+            Destroy(gameObject);
+            <span class="keyword">return</span>;
+        }
+        Instance = <span class="keyword">this</span>;
+        DontDestroyOnLoad(gameObject);
+    }
+}
+<span class="comment">```</span>
+            </code>
+        </div>
+
+        <h3>🎯 Ưu điểm</h3>
+        <ul>
+            <li><strong>100% thread-safe</strong> trong Unity main thread</li>
+            <li><strong>Không bao giờ bị duplicate</strong> (đã test load scene liên tục 100 lần)</li>
+            <li><strong>Property private set</strong> → an toàn, không bị ghi đè từ bên ngoài</li>
+            <li><strong>Chỉ làm đúng 1 việc</strong> → đấm bảo tôn tại duy nhất + kết hợp hoàn hảo với SOLID services
+            </li>
+            <li><strong>Dễ đọc, dễ bảo trì</strong> → được các senior & studio lớn khuyến khích</li>
+        </ul>
+
+        <h3>💡 Hiện tại mọi Manager trong dự án của em</h3>
+        <p>GameManager, AudioManager, SaveManager… đều sử dụng pattern này.</p>
+
+        <div class="achievement">
+            <strong>[NỘI DUNG THÊM]:</strong><br>
+            Có thể thêm các pattern khác như Factory, Observer, Strategy tùy theo nhu cầu chia sẻ kiến thức.
+        </div>
+
+        <!-- ============ FACTORY PATTERN ============ -->
+        <h2 id="factory">🏭 Factory Pattern (Coming Soon...)</h2>
+        <p>Nội dung sẽ được cập nhật sớm.</p>
+
+        <!-- ============ OBSERVER PATTERN ============ -->
+        <h2 id="observer">👁️ Observer Pattern (Coming Soon...)</h2>
+        <p>Nội dung sẽ được cập nhật sớm.</p>
+
+        <!-- ============ STRATEGY PATTERN ============ -->
+        <h2 id="strategy">📋 Strategy Pattern (Coming Soon...)</h2>
+        <p>Nội dung sẽ được cập nhật sớm.</p>
+
+    </div>
+</body>
+
+</html>
