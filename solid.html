@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnNull — SOLID Principles</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background: #0d1a26;
+            color: #00ff99;
+            padding: 30px
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            transition: all .3s ease
+        }
+
+        a:hover {
+            text-decoration: underline
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: rgba(0, 0, 0, .85);
+            padding: 24px;
+            border: 2px solid #00ff99
+        }
+
+        .back {
+            margin-bottom: 18px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #00ff99;
+            transition: all .3s ease
+        }
+
+        .back:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .5)
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            font-size: 28px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px
+        }
+
+        h2 {
+            color: #00ff99;
+            font-size: 18px;
+            margin: 16px 0 8px
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            line-height: 1.6
+        }
+
+        .note {
+            color: #00ffff
+        }
+
+        .section {
+            border-top: 1px dashed rgba(0, 255, 153, .15);
+            padding-top: 12px;
+            margin-top: 12px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .card {
+            border: 1px solid rgba(0, 255, 153, .3);
+            padding: 12px;
+            background: rgba(0, 255, 153, .05)
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid rgba(0, 255, 153, .25);
+            padding: 8px;
+            font-size: 14px
+        }
+
+        .code {
+            background: #0a1628;
+            border: 1px solid rgba(0, 255, 153, .25);
+            padding: 12px;
+            overflow: auto;
+            margin: 10px 0;
+            color: #e6fff5
+        }
+
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0
+        }
+
+        .toc a {
+            padding: 6px 10px;
+            border: 1px solid rgba(0, 255, 153, .35)
+        }
+
+        .callout {
+            background: rgba(0, 255, 153, .1);
+            border-left: 3px solid #00ff99;
+            padding: 10px;
+            margin: 10px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="knowledge.html#solid" class="back">← Quay lại mục SOLID</a>
+        <a href="index.html" class="back" style="margin-left:8px">← Về trang hồ sơ</a>
+        <h1>📐 SOLID Principles</h1>
+
+        <div class="toc">
+            <a href="#intro">Giới thiệu</a>
+            <a href="#overview">Tổng quan</a>
+            <a href="#srp">SRP</a>
+            <a href="#ocp">OCP</a>
+            <a href="#lsp">LSP</a>
+            <a href="#isp">ISP</a>
+            <a href="#dip">DIP</a>
+            <a href="#conclusion">Kết luận</a>
+        </div>
+
+        <div class="section" id="intro">
+            <h2>I. Giới Thiệu & Tầm Quan Trọng</h2>
+            <ul>
+                <li>Ngăn ngừa hỗn độn: dùng nguyên tắc thiết kế để tránh trở thành mớ khó quản lý.</li>
+                <li>Cân bằng: giữ cấu trúc rõ ràng đồng thời linh hoạt để mở rộng.</li>
+                <li>Tiến độ ổn định: giảm công việc không cần thiết, tránh đập đi làm lại.</li>
+            </ul>
+            <div class="callout">
+                <span class="note">Lưu ý:</span> hiểu intention sau mỗi quy tắc để biết khi nào nên theo, khi nào cần
+                phá vỡ có chủ đích.
+            </div>
+        </div>
+
+        <div class="section" id="overview">
+            <h2>II. Giới Thiệu Bộ Nguyên Tắc SOLID</h2>
+            <table class="table">
+                <tr>
+                    <th>Chữ cái</th>
+                    <th>Nguyên tắc</th>
+                    <th>Tên tiếng Anh</th>
+                </tr>
+                <tr>
+                    <td>S</td>
+                    <td>Trách nhiệm đơn lẻ</td>
+                    <td>Single Responsibility Principle</td>
+                </tr>
+                <tr>
+                    <td>O</td>
+                    <td>Mở/Đóng</td>
+                    <td>Open/Closed Principle</td>
+                </tr>
+                <tr>
+                    <td>L</td>
+                    <td>Thay thế Liskov</td>
+                    <td>Liskov Substitution Principle</td>
+                </tr>
+                <tr>
+                    <td>I</td>
+                    <td>Phân tách Interface</td>
+                    <td>Interface Segregation Principle</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>Đảo ngược Phụ thuộc</td>
+                    <td>Dependency Inversion Principle</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section" id="srp">
+            <h2>1. Single Responsibility Principle (SRP)</h2>
+            <ul>
+                <li>Một class chỉ có một lý do để thay đổi.</li>
+                <li>Trong Unity, tách logic kiểm tra mặt đất khỏi điều khiển đầu vào.</li>
+                <li>Ngoại lệ thực tế: nếu class được thiết kế chỉ phục vụ Player hoặc một đối tượng cụ thể và không cần
+                    tái sử dụng cho đối tượng khác, việc gộp các logic liên quan vẫn phù hợp với SRP vì class chỉ có một
+                    lý do thay đổi gắn với đối tượng đó.</li>
+            </ul>
+            <div class="grid">
+                <div class="card">
+                    <strong>Vấn đề</strong>
+                    <p>Movement và Ground Check gộp chung làm khó tái sử dụng.</p>
+                </div>
+                <div class="card">
+                    <strong>Giải pháp</strong>
+                    <p>Dùng kế thừa: lớp nền kiểm tra mặt đất, lớp dẫn xuất xử lý điều khiển.</p>
+                </div>
+            </div>
+            <p><strong>Ví dụ sai (vi phạm SRP)</strong></p>
+            <div class="code">
+                <pre>using UnityEngine;
+
+public class PlayerController : MonoBehaviour {
+    bool grounded;
+    int score;
+    void Update() {
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.1f);
+        if (grounded && Input.GetButtonDown("Jump")) {}
+        if (Input.GetKeyDown(KeyCode.P)) score++;
+    }
+}
+</pre>
+            </div>
+            <p><strong>Ví dụ đúng (tách Ground Check khỏi Input)</strong></p>
+            <div class="code">
+                <pre>using UnityEngine;
+
+public class Groundable : MonoBehaviour {
+    protected bool IsGrounded() {
+        return Physics.Raycast(transform.position, Vector3.down, 0.1f);
+    }
+}
+
+public class Controllable : Groundable {
+    void Update() {
+        if (IsGrounded() && Input.GetButtonDown("Jump")) { }
+    }
+}
+
+public class Moveable : Groundable {
+    void Update() { }
+}
+</pre>
+            </div>
+        </div>
+
+        <div class="section" id="ocp">
+            <h2>2. Open/Closed Principle (OCP)</h2>
+            <ul>
+                <li>Mở rộng bằng lớp mới, không sửa lớp đang chạy ổn.</li>
+                <li>Giải pháp: Abstraction qua Interface hoặc Inheritance.</li>
+            </ul>
+            <p><strong>Ví dụ sai (vi phạm OCP)</strong></p>
+            <div class="code">
+                <pre>using UnityEngine;
+public class Collector : MonoBehaviour {
+    void OnTriggerEnter(Collider other) {
+        if (other.GetComponent&lt;PointsPickup&gt;() != null) {}
+        else if (other.GetComponent&lt;HealthPickup&gt;() != null) {}
+    }
+}
+public class PointsPickup : MonoBehaviour {}
+public class HealthPickup : MonoBehaviour {}
+</pre>
+            </div>
+            <p><strong>Ví dụ đúng (dùng Interface để mở rộng)</strong></p>
+            <div class="code">
+                <pre>public interface ICollectable {
+    void Collect(GameObject collector);
+}
+
+using UnityEngine;
+public class Collector : MonoBehaviour {
+    void OnTriggerEnter(Collider other) {
+        var c = other.GetComponent&lt;ICollectable&gt;();
+        if (c != null) c.Collect(gameObject);
+    }
+}
+
+public class PointsPickup : MonoBehaviour, ICollectable {
+    public void Collect(GameObject collector) { }
+}
+
+public class HealthPickup : MonoBehaviour, ICollectable {
+    public void Collect(GameObject collector) { }
+}
+</pre>
+            </div>
+        </div>
+
+        <div class="section" id="lsp">
+            <h2>3. Liskov Substitution Principle (LSP)</h2>
+            <ul>
+                <li>Đối tượng dẫn xuất phải thay thế được đối tượng cơ sở mà không phá vỡ hành vi mong đợi.</li>
+                <li>Trong Unity: các loại Collider đều là subtype của Collider, API dùng được như nhau.</li>
+                <li>Giữ hợp đồng nhất quán: không thay đổi ý nghĩa tham số/giá trị trả về.</li>
+            </ul>
+            <p><strong>Ví dụ sai (vi phạm LSP)</strong></p>
+            <div class="code">
+                <pre>public class Ellipse {
+    public virtual float Width { get; set; }
+    public virtual float Height { get; set; }
+}
+public class Circle : Ellipse {
+    public override float Width { get { return base.Width; } set { base.Width = value; base.Height = value; } }
+    public override float Height { get { return base.Height; } set { base.Width = value; base.Height = value; } }
+}
+</pre>
+            </div>
+            <p><strong>Ví dụ đúng</strong></p>
+            <div class="code">
+                <pre>using UnityEngine;
+public interface IShape { float Area(); }
+public class Circle : IShape { public float Radius; public float Area() { return Mathf.PI * Radius * Radius; } }
+public class EllipseShape : IShape { public float A; public float B; public float Area() { return Mathf.PI * A * B; } }
+</pre>
+            </div>
+        </div>
+
+        <div class="section" id="isp">
+            <h2>4. Interface Segregation Principle (ISP)</h2>
+            <ul>
+                <li>Không buộc class phải implement những thứ không dùng.</li>
+                <li>Tách thành nhiều interface nhỏ theo nhu cầu cụ thể.</li>
+            </ul>
+            <p><strong>Ví dụ sai (vi phạm ISP)</strong></p>
+            <div class="code">
+                <pre>public interface IEnemy {
+    void Damage(float amount);
+    void Stun(float duration);
+    void Move();
+}
+using UnityEngine;
+public class WoodenCrateWrong : MonoBehaviour, IEnemy {
+    public void Damage(float amount) {}
+    public void Stun(float duration) {}
+    public void Move() {}
+}
+</pre>
+            </div>
+            <p><strong>Ví dụ đúng (tách thành nhiều interface nhỏ)</strong></p>
+            <div class="code">
+                <pre>public interface IDamageable { void Damage(float amount); }
+public interface IStunnable { void Stun(float duration); }
+
+using UnityEngine;
+public class WoodenCrate : MonoBehaviour, IDamageable {
+    public void Damage(float amount) { }
+}
+</pre>
+            </div>
+        </div>
+
+        <div class="section" id="dip">
+            <h2>5. Dependency Inversion Principle (DIP)</h2>
+            <ul>
+                <li>High-level phụ thuộc vào abstraction, không phụ thuộc trực tiếp vào low-level cụ thể.</li>
+                <li>Dùng Dependency Injection để gắn implementation khi chạy.</li>
+            </ul>
+            <p><strong>Ví dụ sai (vi phạm DIP)</strong></p>
+            <div class="code">
+                <pre>using UnityEngine;
+public class MusicPlayerWrong : MonoBehaviour {
+    SpecificMusicSequencer _sequencer = new SpecificMusicSequencer();
+    void Start() {
+        if (!_sequencer.IsPlaying()) _sequencer.StartNewSong(new SongData());
+    }
+}
+public class SpecificMusicSequencer {
+    public void StartNewSong(SongData data) {}
+    public bool IsPlaying() { return true; }
+}
+public struct SongData {}
+</pre>
+            </div>
+            <p><strong>Ví dụ đúng (High-level phụ thuộc vào abstraction)</strong></p>
+            <div class="code">
+                <pre>public interface IMusicInteraction {
+    void StartNewSong(SongData data);
+    bool IsPlaying();
+}
+
+using UnityEngine;
+public class MusicPlayer : MonoBehaviour {
+    [SerializeField] MonoBehaviour sequencerComponent;
+    IMusicInteraction _sequencer;
+    void Awake() { _sequencer = (IMusicInteraction)sequencerComponent; }
+    void Start() { if (!_sequencer.IsPlaying()) _sequencer.StartNewSong(new SongData()); }
+}
+
+public class SpecificMusicSequencer : MonoBehaviour, IMusicInteraction {
+    public void StartNewSong(SongData data) { }
+    public bool IsPlaying() { return true; }
+}
+
+public struct SongData {}
+</pre>
+            </div>
+        </div>
+
+        <div class="section" id="conclusion">
+            <h2>IV. Kết Luận</h2>
+            <ul>
+                <li>SRP để tách trách nhiệm, dễ tái sử dụng.</li>
+                <li>OCP để mở rộng an toàn bằng lớp mới.</li>
+                <li>LSP để thay thế nhất quán.</li>
+                <li>ISP để interface gọn, đúng nhu cầu.</li>
+                <li>DIP để giảm phụ thuộc cứng, dễ test và thay thế.</li>
+            </ul>
+            <p class="note">Mục tiêu là code cập nhật ổn định, dễ bảo trì và mở rộng.</p>
+        </div>
+    </div>
+</body>
+
+</html>

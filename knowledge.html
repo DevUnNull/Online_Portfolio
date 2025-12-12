@@ -94,6 +94,26 @@
         .section p {
             font-size: 14px;
         }
+
+        .cta-link {
+            display: inline-block;
+            padding: 10px 16px;
+            border: 2px solid #ccff00;
+            color: #0d1a26;
+            background: linear-gradient(135deg, #00ff99, #ccff00);
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 0 12px rgba(0, 255, 153, 0.5);
+            transition: all 0.25s ease;
+            border-radius: 4px;
+        }
+
+        .cta-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 16px rgba(204, 255, 0, 0.7);
+            text-decoration: none;
+            filter: brightness(1.05);
+        }
     </style>
 </head>
 
@@ -112,13 +132,13 @@
         <div class="section" id="design-patterns">
             <h2>🔧 Design Patterns</h2>
             <p>Các pattern thiết kế và cách áp dụng vào Unity game development.</p>
-            <p><a href="design-patterns.html">Xem chi tiết →</a></p>
+            <p><a class="cta-link" href="design-patterns.html">Xem chi tiết →</a></p>
         </div>
 
         <div class="section" id="solid">
             <h2>📐 SOLID Principles</h2>
             <p>5 nguyên tắc thiết kế phần mềm hướng đối tượng giúp code maintainable và scalable.</p>
-            <p>Coming soon...</p>
+            <p><a class="cta-link" href="solid.html">Xem chi tiết →</a></p>
         </div>
 
         <div class="section" id="best-practices">
