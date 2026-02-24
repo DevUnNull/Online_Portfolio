@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnNull — Unity Packages</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background: #0d1a26;
+            color: #00ff99;
+            padding: 30px;
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(0, 0, 0, .85);
+            padding: 24px;
+            border: 2px solid #00ff99;
+        }
+
+        .back {
+            margin-bottom: 18px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #00ff99;
+            transition: all .3s ease;
+        }
+
+        .back:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .5);
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #00ff99;
+            font-size: 18px;
+            margin: 16px 0 8px;
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .section {
+            border-top: 1px dashed rgba(0, 255, 153, .15);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .package-card {
+            border: 1px solid rgba(0, 255, 153, .4);
+            background: rgba(0, 255, 153, .03);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .package-name {
+            font-weight: bold;
+            color: #ccff00;
+        }
+
+        .package-tag {
+            font-size: 11px;
+            border: 1px solid rgba(0, 255, 153, .6);
+            padding: 2px 6px;
+        }
+
+        .package-video {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            border: 1px solid rgba(0, 255, 153, .4);
+            margin-top: 4px;
+        }
+
+        .package-video iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .package-meta {
+            font-size: 12px;
+            color: #00ffff;
+        }
+
+        .package-link {
+            margin-top: 6px;
+            align-self: flex-start;
+            padding: 6px 10px;
+            border: 1px solid #00ff99;
+            font-size: 12px;
+        }
+
+        .package-link:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 8px rgba(0, 255, 153, .6);
+            text-decoration: none;
+        }
+
+        .note {
+            color: #00ffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← Về trang hồ sơ</a>
+        <h1>📦 Unity Packages Showcase</h1>
+        <p>Trang này tổng hợp các <strong>Unity package</strong> mình tự làm để tái sử dụng trong dự án: tập trung vào
+            những thứ có thể plug-and-play, giúp rút ngắn thời gian dev khi lặp lại cùng một kiểu logic.</p>
+
+        <div class="section">
+            <h2>I. Danh sách package</h2>
+            <p class="note">Mỗi ô dưới đây là một package: gồm video demo + mô tả ngắn. Nhấn vào nút “Xem chi tiết” để
+                vào trang giới thiệu kỹ hơn (cách dùng, case thực tế, lưu ý tích hợp...).</p>
+
+            <div class="packages-grid">
+                <!-- Package 1: Upgrade -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div class="package-name">Upgrade Package</div>
+                        <div class="package-tag">Progression / Leveling</div>
+                    </div>
+                    <div class="package-meta">Quản lý hệ thống nâng cấp nhân vật/kỹ năng theo kiểu modular.</div>
+                    <div class="package-video">
+                        <!-- TODO: thay link demo thực tế của bạn -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_UPGRADE" allowfullscreen></iframe>
+                    </div>
+                    <p>
+                        Bộ package dùng để xây dựng hệ thống nâng cấp (Upgrade) cho game: cho phép định nghĩa nhiều
+                        nhánh nâng cấp, mỗi nhánh có nhiều cấp độ, bonus khác nhau (damage, speed, HP, spawn rate...).
+                        Thiết kế tập trung vào <strong>data-driven</strong>, đổi config là chính, hạn chế đụng vào code.
+                    </p>
+                    <a href="Upgrade.html" class="package-link">→ Xem chi tiết Upgrade Package</a>
+                </div>
+
+                <!-- Ví dụ Package khác (placeholder) -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div class="package-name">Pooling Utility (Example)</div>
+                        <div class="package-tag">Performance</div>
+                    </div>
+                    <div class="package-meta">Quản lý Object Pool cho bullet / enemy / hiệu ứng.</div>
+                    <div class="package-video">
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_POOL" allowfullscreen></iframe>
+                    </div>
+                    <p>
+                        Ví dụ một package khác: quản lý Object Pool chung cho nhiều loại prefab, giúp giảm GC và tăng
+                        FPS trong các game bắn súng / tower defense. (Phần này bạn có thể chỉnh lại đúng với package
+                        thực tế sau.)
+                    </p>
+                    <a href="#" class="package-link">→ Xem chi tiết (điền sau)</a>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-header">
+                        <div class="package-name">Save System (Example)</div>
+                        <div class="package-tag">Persistence</div>
+                    </div>
+                    <div class="package-meta">Lưu/Load dữ liệu player bằng ScriptableObject + JSON.</div>
+                    <div class="package-video">
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_SAVE" allowfullscreen></iframe>
+                    </div>
+                    <p>
+                        Một ví dụ khác cho layout: package lưu dữ liệu (level, item, setting...) bằng JSON hoặc
+                        ScriptableObject. Bạn có thể tái sử dụng block này để thêm các package mới.
+                    </p>
+                    <a href="#" class="package-link">→ Xem chi tiết (điền sau)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+

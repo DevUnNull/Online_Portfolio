@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnNull — Upgrade Package</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background: #0d1a26;
+            color: #00ff99;
+            padding: 30px;
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(0, 0, 0, .85);
+            padding: 24px;
+            border: 2px solid #00ff99;
+        }
+
+        .back {
+            margin-bottom: 18px;
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid #00ff99;
+            transition: all .3s ease;
+        }
+
+        .back:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .5);
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            font-size: 28px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #00ff99;
+            font-size: 18px;
+            margin: 16px 0 8px;
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .section {
+            border-top: 1px dashed rgba(0, 255, 153, .15);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 16px;
+        }
+
+        .card {
+            border: 1px solid rgba(0, 255, 153, .3);
+            padding: 12px;
+            background: rgba(0, 255, 153, .05);
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            border: 1px solid rgba(0, 255, 153, .6);
+            padding: 2px 6px;
+            margin-right: 4px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            border: 1px solid rgba(0, 255, 153, .4);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .note {
+            color: #00ffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="Package.html" class="back">← Về danh sách Package</a>
+        <a href="index.html" class="back" style="margin-left:8px">← Về trang hồ sơ</a>
+
+        <h1>Upgrade Package</h1>
+
+        <div class="section" id="overview">
+            <h2>I. Mục đích & bối cảnh dùng</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <p><strong>Upgrade Package</strong> là một bộ công cụ nhỏ mình làm để xử lý phần
+                        <span class="note">hệ thống nâng cấp (progression)</span> trong game: tăng damage, tăng tốc độ
+                        bắn, mở rộng số lượng đạn, tăng HP, v.v... theo từng cấp (level) và từng nhánh (branch).
+                    </p>
+                    <p>Mục tiêu chính:</p>
+                    <ul>
+                        <li>Tách logic nâng cấp khỏi gameplay core (bắn, di chuyển...).</li>
+                        <li>Cho phép <strong>thiết kế Upgrade bằng data</strong> (ScriptableObject / config) thay vì viết
+                            lại code mỗi lần.</li>
+                        <li>Dễ tái sử dụng cho nhiều dự án 2D/3D khác nhau.</li>
+                    </ul>
+                    <p>Package này mình dùng trong các game dạng roguelike / survivor / tower defense – nơi cần rất
+                        nhiều nâng cấp nhỏ nhưng phải dễ thêm/bớt.</p>
+                </div>
+                <div class="card">
+                    <div class="video-container">
+                        <!-- TODO: thay link video demo thực tế của Upgrade Package -->
+                        <iframe src="https://www.youtube.com/embed/VIDEO_ID_UPGRADE" allowfullscreen></iframe>
+                    </div>
+                    <p style="margin-top:8px;" class="note">Video demo: minh họa UI chọn Upgrade và hiệu ứng khi áp
+                        dụng vào nhân vật (bạn tự gắn video thật vào đây).</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="features">
+            <h2>II. Tính năng chính</h2>
+            <ul>
+                <li><span class="tag">Branch-based</span> Hỗ trợ nhiều nhánh nâng cấp (Offense / Defense / Utility...).</li>
+                <li><span class="tag">Level-based</span> Mỗi nhánh có nhiều cấp, mỗi cấp áp dụng một tập hiệu ứng.</li>
+                <li><span class="tag">Data-driven</span> Toàn bộ thông tin nâng cấp (tên, mô tả, icon, giá, hiệu ứng...)
+                    được định nghĩa bằng data.</li>
+                <li><span class="tag">Event-based</span> Khi chọn Upgrade, package bắn event để gameplay lắng nghe và xử
+                    lý.</li>
+                <li><span class="tag">UI-ready</span> Chuẩn bị sẵn cấu trúc data phù hợp để bind lên UI lựa chọn nâng
+                    cấp.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="usage">
+            <h2>III. Cách tích hợp (mô tả khái quát)</h2>
+            <ol>
+                <li><strong>Khai báo data Upgrade</strong>  
+                    Tạo các ScriptableObject (ví dụ: <code>UpgradeBranch</code>, <code>UpgradeLevel</code>) để mô tả
+                    từng nhánh và từng cấp.</li>
+                <li><strong>Gắn vào hệ thống UpgradeManager</strong>  
+                    Một component trung tâm (UpgradeManager) sẽ giữ danh sách các nhánh, xử lý logic chọn cấp tiếp theo
+                    và bắn event khi người chơi nhận Upgrade.</li>
+                <li><strong>Gameplay lắng nghe event</strong>  
+                    Player / Weapon / EnemySpawner... subscribe event Upgrade để áp dụng thay đổi (tăng damage, tăng
+                    tốc, spawn nhiều hơn...).</li>
+                <li><strong>UI hiển thị lựa chọn</strong>  
+                    UI lấy list Upgrade khả dụng từ UpgradeManager, random 2–3 option, show icon + mô tả, và gọi hàm
+                    <code>ApplyUpgrade</code> khi người chơi bấm chọn.</li>
+            </ol>
+            <p>(Phần này chỉ là khung mô tả, bạn có thể thay lại bằng đúng tên class, script, flow thực tế của bạn.)</p>
+        </div>
+
+        <div class="section" id="notes">
+            <h2>IV. Ghi chú & hướng mở rộng</h2>
+            <ul>
+                <li>Package được viết theo hướng <strong>mở rộng dễ</strong>: muốn thêm kiểu Upgrade mới chỉ cần tạo
+                    thêm data + xử lý trong nơi lắng nghe event.</li>
+                <li>Có thể gắn chung với <span class="note">Object Pooling</span> hoặc <span class="note">Enemy
+                        Spawner</span> để tạo các build gameplay rất khác nhau mà vẫn dùng chung core.</li>
+                <li>Dự định nâng cấp thêm: hỗ trợ <strong>synergy</strong> giữa nhiều Upgrade, hoặc Unlock bằng điều kiện
+                    (chơi đủ số wave, đạt đủ stat...).</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
+
