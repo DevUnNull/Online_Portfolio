@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnNull — Real Projects</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background: #0d1a26;
+            color: #00ff99;
+            padding: 30px;
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: rgba(0, 0, 0, .88);
+            padding: 28px;
+            border: 2px solid #00ff99;
+            border-radius: 26px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, .12);
+        }
+
+        .back {
+            margin-bottom: 18px;
+            display: inline-block;
+            padding: 10px 22px;
+            border: 2px solid #00ff99;
+            border-radius: 999px;
+            transition: all .3s ease;
+        }
+
+        .back:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .5);
+        }
+
+        .page-head {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            font-size: 32px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #00ff99;
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .section {
+            border-top: 1px dashed rgba(0, 255, 153, .15);
+            padding-top: 20px;
+            margin-top: 24px;
+        }
+
+        .intro-box,
+        .project-block,
+        .summary-box {
+            border: 1px solid rgba(0, 255, 153, .25);
+            background: rgba(0, 255, 153, .05);
+            border-radius: 28px;
+            padding: 22px;
+            margin-top: 16px;
+        }
+
+        .intro-box p {
+            max-width: 860px;
+            margin: 0;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .project-block {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .project-top {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .project-title {
+            margin: 0;
+            font-size: 20px;
+            color: #ccff00;
+        }
+
+        .project-subtitle {
+            margin: 6px 0 0;
+            color: #00ffff;
+            font-size: 14px;
+        }
+
+        .project-meta {
+            display: grid;
+            gap: 10px;
+            align-content: start;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 130px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 255, 153, .45);
+            background: rgba(0, 255, 153, .08);
+            font-size: 13px;
+            color: #00ffff;
+        }
+
+        .project-details {
+            display: grid;
+            gap: 10px;
+            padding-left: 8px;
+        }
+
+        .project-details strong {
+            color: #ffffff;
+        }
+
+        .project-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .project-list li {
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .project-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #00ff99;
+        }
+
+        .project-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .project-summary {
+            color: #bafcff;
+            padding-left: 8px;
+        }
+
+        .project-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .project-link,
+        .outline-link {
+            padding: 10px 14px;
+            border: 1px solid #00ff99;
+            border-radius: 999px;
+            color: #00ff99;
+            font-size: 13px;
+        }
+
+        .project-link:hover,
+        .outline-link:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .3);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        .summary-card {
+            border: 1px solid rgba(0, 255, 153, .2);
+            background: rgba(0, 255, 153, .06);
+            border-radius: 20px;
+            padding: 16px;
+        }
+
+        .summary-card h3 {
+            margin: 0 0 10px;
+            color: #ccff00;
+            font-size: 16px;
+        }
+
+        .summary-card p {
+            margin: 0;
+            color: #bafcff;
+        }
+
+        .note {
+            color: #00ffff;
+        }
+
+        @media (max-width: 700px) {
+            .project-top {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-head">
+            <a href="index.html" class="back">← Về trang hồ sơ</a>
+            <h1>REAL PROJECTS</h1>
+        </div>
+
+
+        <div class="section" id="projects">
+
+            <div class="project-grid">
+                <div class="project-block">
+                    <div class="project-top">
+                        <div>
+                            <h3 class="project-title">Heroic Defense</h3>
+                            <p class="project-subtitle">Tower Defense 2D | Dự án học phần</p>
+                        </div>
+                        <div class="project-meta">
+                            <span class="meta-pill">10/2025 - 11/2025</span>
+                            <span class="meta-pill">Tự phát triển</span>
+                            <span class="meta-pill">Full stack Unity Developer</span>
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-details project-summary">
+                            <p>Game Tower Defense 2D với cơ chế đặt tướng, nâng cấp công trình và cân bằng multi-wave.
+                            </p>
+                            <p><strong>Công nghệ</strong>: Unity 2D, C#, Animator, Audio Mixer, GSAP, Design Patterns.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-footer">
+                        <a href="HeroicDefense.html" class="project-link">Xem chi tiết</a>
+                        <a href="index.html#projects-section" class="outline-link">Về trang chính</a>
+                    </div>
+                </div>
+
+                <div class="project-block">
+                    <div class="project-top">
+                        <div>
+                            <h3 class="project-title">Jungle Survivor</h3>
+                            <p class="project-subtitle">2D Platformer Survivor | Portfolio</p>
+                        </div>
+                        <div class="project-meta">
+                            <span class="meta-pill">06/2024 - 07/2024</span>
+                            <span class="meta-pill">Tự phát triển</span>
+                            <span class="meta-pill">Full stack Unity Developer</span>
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-details project-summary">
+                            <p>Game platformer sinh tồn 2D với vòng lặp nâng cấp nhân vật, combat và AI enemy thông
+                                minh.</p>
+                            <p><strong>Công nghệ</strong>: Unity 2D, C#, PlayerPrefs, Animation Events, TextMesh Pro.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-footer">
+                        <a href="JungleSurvivor.html" class="project-link">Xem chi tiết</a>
+                        <a href="index.html#projects-section" class="outline-link">Về trang chính</a>
+                    </div>
+                </div>
+
+                <div class="project-block">
+                    <div class="project-top">
+                        <div>
+                            <h3 class="project-title">Behind the Mask</h3>
+                            <p class="project-subtitle">Psychological Horror | Game Jam</p>
+                        </div>
+                        <div class="project-meta">
+                            <span class="meta-pill">01/2026</span>
+                            <span class="meta-pill">Team project</span>
+                            <span class="meta-pill">Game designer & developer</span>
+                        </div>
+                    </div>
+
+                    <div class="project-content">
+                        <div class="project-details project-summary">
+                            <p>Game kinh dị tâm lý góc nhìn thứ nhất về đeo/tháo mặt nạ để thay đổi thế giới và giải
+                                đố trong môi trường đầy lo âu.</p>
+                            <p><strong>Công nghệ</strong>: Unity 3D, C#, thiết kế gameplay và giải đố trạng thái.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-footer">
+                        <a href="BehindTheMask.html" class="project-link">Xem chi tiết</a>
+                        <a href="index.html#projects-section" class="outline-link">Về trang chính</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

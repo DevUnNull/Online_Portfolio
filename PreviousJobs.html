@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UnNull — Previous Jobs</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background: #0d1a26;
+            color: #00ff99;
+            padding: 30px;
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: auto;
+            background: rgba(0, 0, 0, .9);
+            padding: 28px;
+            border: 2px solid #00ff99;
+            border-radius: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 153, .12);
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            border: 2px solid #00ff99;
+            margin-bottom: 18px;
+        }
+
+        .back:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 34px;
+            color: #ccff00;
+            text-shadow: 0 0 10px #ccff00;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #00ff99;
+        }
+
+        h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #ccff00;
+        }
+
+        p,
+        li {
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .intro-card,
+        .job-card,
+        .summary-card {
+            border: 1px solid rgba(0, 255, 153, .25);
+            background: rgba(0, 255, 153, .05);
+            border-radius: 26px;
+            padding: 22px;
+            margin-top: 16px;
+        }
+
+        .intro-card p {
+            margin: 0;
+            max-width: 880px;
+        }
+
+        .jobs-list {
+            display: grid;
+            gap: 22px;
+            margin-top: 16px;
+        }
+
+        .job-card {
+            display: grid;
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .job-top {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .job-main {
+            display: grid;
+            gap: 16px;
+        }
+
+        .job-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .job-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 255, 153, .45);
+            background: rgba(0, 255, 153, .08);
+            color: #00ffff;
+            font-size: 13px;
+        }
+
+        .job-projects {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .job-projects li {
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .job-projects li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #00ff99;
+        }
+
+        .job-content {
+            display: grid;
+            grid-template-columns: 1fr minmax(220px, 320px);
+            gap: 18px;
+        }
+
+        .job-right {
+            display: grid;
+            gap: 12px;
+        }
+
+        .job-highlight {
+            padding: 16px 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(0, 255, 153, .3);
+            background: rgba(0, 255, 153, .08);
+            color: #bffcff;
+            font-size: 14px;
+        }
+
+        .job-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .outline-link {
+            padding: 10px 14px;
+            border: 1px solid #00ff99;
+            border-radius: 999px;
+            color: #00ff99;
+            font-size: 13px;
+        }
+
+        .outline-link:hover {
+            background: rgba(0, 255, 153, .1);
+            box-shadow: 0 0 10px rgba(0, 255, 153, .3);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        .summary-card h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #ccff00;
+        }
+
+        .summary-card p {
+            margin: 0;
+            color: #bafcff;
+        }
+
+        .note {
+            color: #00ffff;
+        }
+
+        @media (max-width: 780px) {
+            .job-card {
+                grid-template-columns: 1fr;
+            }
+
+            .job-right {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← Về trang hồ sơ</a>
+        <div class="page-header">
+            <div>
+                <h1>PREVIOUS JOBS</h1>
+                <p class="note">Danh sách nơi mình đã làm việc, vai trò đảm nhận và các project đã tham gia.</p>
+            </div>
+        </div>
+
+        <div class="intro-card">
+            <h2>Giới thiệu chung</h2>
+            <p>Trang này liệt kê các nơi mình đã làm việc, theo từng giai đoạn với thời gian, chức vụ và danh sách
+                project đã tham gia. Nội dung được giữ đơn giản và dễ đọc, chỉ tập trung vào thông tin chính.</p>
+        </div>
+
+        <div class="jobs-list">
+            <div class="job-card">
+                <div class="job-top">
+                    <div>
+                        <h3>Đại học FPT</h3>
+                        <div class="job-pill-row">
+                            <span class="job-pill">08/2023 - hiện tại</span>
+                            <span class="job-pill">Lập trình viên Unity</span>
+                            <span class="job-pill">Dự án học phần</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-main">
+                    <p><strong>Dự án tham gia</strong></p>
+                    <ul class="job-projects">
+                        <li><strong>Heroic Defense</strong>: Thiết kế tower defense 2D, AI enemy, audio manager và wave
+                            system.</li>
+                    </ul>
+                </div>
+                <div class="job-footer">
+                    <a href="ListProjects.html" class="outline-link">Xem ListProject</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-top">
+                    <div>
+                        <h3>Cá nhân / Freelance</h3>
+                        <div class="job-pill-row">
+                            <span class="job-pill">05/2024 - hiện tại</span>
+                            <span class="job-pill">Developer & Designer</span>
+                            <span class="job-pill">Portfolio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-main">
+                    <p><strong>Dự án tham gia</strong></p>
+                    <ul class="job-projects">
+                        <li><strong>Portfolio Website</strong>: Thiết kế trang hồ sơ với hiệu ứng parallax và showcase
+                            dự án.</li>
+                        <li><strong>Giao diện Demo</strong>: Xây dựng layout trình bày kỹ năng, dự án và liên hệ dùng
+                            HTML/CSS/JS.</li>
+                        <li><strong>Jungle Survivor</strong>: Xây dựng game platformer sinh tồn với hệ thống upgrade
+                            modular và UI score.</li>
+                    </ul>
+                </div>
+                <div class="job-footer">
+                    <a href="index.html" class="outline-link">Về trang chính</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-top">
+                    <div>
+                        <h3>Team Game Jam</h3>
+                        <div class="job-pill-row">
+                            <span class="job-pill">01/2026 - 02/2026</span>
+                            <span class="job-pill">Unity Developer</span>
+                            <span class="job-pill">Sự kiện Game Jam</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-main">
+                    <p><strong>Dự án tham gia</strong></p>
+                    <ul class="job-projects">
+                        <li><strong>Behind The Mask</strong>: Game Jam 36h, tập trung gameplay core, scope rõ ràng và
+                            demo nhanh.</li>
+                    </ul>
+                </div>
+                <div class="job-footer">
+                    <a href="GameJam.html" class="outline-link">Xem Game Jam</a>
+                </div>
+            </div>
+
+            <div class="job-card">
+                <div class="job-top">
+                    <div>
+                        <h3>Phòng DXLab tại Đại học FPT</h3>
+                        <div class="job-pill-row">
+                            <span class="job-pill">5/1/2026 - 25/4/2026</span>
+                            <span class="job-pill">Unity Developer</span>
+                            <span class="job-pill">Intern</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-main">
+                    <p><strong>Dự án tham gia</strong></p>
+                    <ul class="job-projects">
+                        <li><strong>Behind The Mask</strong>: Game Jam 36h, tập trung gameplay core, scope rõ ràng và
+                            demo nhanh.</li>
+                    </ul>
+                </div>
+                <div class="job-footer">
+                    <a href="ListProjects.html" class="outline-link">Xem ListProjects</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
