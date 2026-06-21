@@ -1,204 +1,108 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Patterns — DevUnNull</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background: linear-gradient(180deg, #0a1628 0%, #0d1a26 50%, #1a0a1f 100%);
-            color: #00ff99;
-            line-height: 1.6;
-            padding: 30px 10px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.9);
-            border: 3px solid #00ff99;
-            box-shadow: 0 0 15px #00ff99;
-            padding: 30px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 10px 20px;
-            border: 2px solid #00ff99;
-            color: #00ff99;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            background: rgba(0, 255, 153, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-        }
-
-        h1 {
-            color: #ccff00;
-            text-shadow: 0 0 10px #ccff00;
-            margin-bottom: 30px;
-            font-size: 32px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            color: #00ff99;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 24px;
-            border-bottom: 2px solid rgba(0, 255, 153, 0.3);
-            padding-bottom: 10px;
-        }
-
-        h3 {
-            color: #00ffff;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        p {
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-
-        .warning {
-            background: rgba(255, 68, 68, 0.1);
-            border-left: 3px solid #ff4444;
-            padding: 12px;
-            margin: 15px 0;
-            color: #ffaa99;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 153, 0.3);
-            border-radius: 5px;
-            padding: 15px;
-            margin: 15px 0;
-            overflow-x: auto;
-            font-size: 13px;
-        }
-
-        .code-block code {
-            color: #00ff99;
-        }
-
-        .keyword {
-            color: #00ffff;
-            font-weight: bold;
-        }
-
-        .class-name {
-            color: #ccff00;
-        }
-
-        .comment {
-            color: #00cc77;
-        }
-
-        ul,
-        ol {
-            margin: 15px 0 15px 20px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .achievement {
-            background: rgba(0, 255, 153, 0.1);
-            border-left: 3px solid #00ff99;
-            padding: 12px;
-            margin: 15px 0;
-        }
-
-        .nav-patterns {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .nav-patterns a {
-            padding: 10px 20px;
-            border: 2px solid #00ff99;
-            color: #00ff99;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 13px;
-        }
-
-        .nav-patterns a.active {
-            background: rgba(0, 255, 153, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-        }
-
-        .nav-patterns a:hover {
-            background: rgba(0, 255, 153, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 153, 0.5);
-        }
-    </style>
+    <title data-en="Design Patterns — DevUnNull" data-vi="Design Patterns — DevUnNull">Design Patterns — DevUnNull</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-        <a href="knowledge.html" class="back-link">← Quay lại Knowledge</a>
+        <a href="knowledge.html" class="back-link">
+            <span class="lang-en">← Back to Knowledge</span>
+            <span class="lang-vi">← Quay lại Knowledge</span>
+        </a>
 
         <h1>🔧 Design Patterns in Unity</h1>
 
-        <h2>⭐ Giới thiệu nhanh về Design Pattern</h2>
+        <h2>
+            <span class="lang-en">⭐ Quick Introduction to Design Patterns</span>
+            <span class="lang-vi">⭐ Giới thiệu nhanh về Design Pattern</span>
+        </h2>
 
-        <h3>1. Ai là người làm ra Design Pattern?</h3>
-        <p>Design pattern trong lập trình được phổ biến bởi bốn tác giả, thường gọi là <strong>Gang of Four
-                (GoF)</strong>:</p>
+        <h3>
+            <span class="lang-en">1. Who created Design Patterns?</span>
+            <span class="lang-vi">1. Ai là người làm ra Design Pattern?</span>
+        </h3>
+        <p>
+            <span class="lang-en">Design patterns in programming were popularized by four authors, commonly known as the <strong>Gang of Four (GoF)</strong>:</span>
+            <span class="lang-vi">Design pattern trong lập trình được phổ biến bởi bốn tác giả, thường gọi là <strong>Gang of Four (GoF)</strong>:</span>
+        </p>
         <ul>
             <li>Erich Gamma</li>
             <li>Richard Helm</li>
             <li>Ralph Johnson</li>
             <li>John Vlissides</li>
         </ul>
-        <p>Họ xuất bản cuốn sách năm 1994: <strong>📘 Design Patterns: Elements of Reusable Object-Oriented
-                Software</strong>. Cuốn sách này đặt nền móng cho hầu hết các pattern được dùng ngày nay.</p>
+        <p>
+            <span class="lang-en">They published a book in 1994: <strong>📘 Design Patterns: Elements of Reusable Object-Oriented Software</strong>. This book laid the foundation for most patterns used today.</span>
+            <span class="lang-vi">Họ xuất bản cuốn sách năm 1994: <strong>📘 Design Patterns: Elements of Reusable Object-Oriented Software</strong>. Cuốn sách này đặt nền móng cho hầu hết các pattern được dùng ngày nay.</span>
+        </p>
 
-        <h3>2. Mục đích của Design Pattern là gì?</h3>
-        <h3>🎯 1. Giải quyết các vấn đề kiến trúc OOP lặp lại</h3>
+        <h3>
+            <span class="lang-en">2. What is the purpose of Design Patterns?</span>
+            <span class="lang-vi">2. Mục đích của Design Pattern là gì?</span>
+        </h3>
+        <h3>
+            <span class="lang-en">🎯 1. Solve recurring OOP architectural problems</span>
+            <span class="lang-vi">🎯 1. Giải quyết các vấn đề kiến trúc OOP lặp lại</span>
+        </h3>
         <ul>
-            <li>Tạo object linh hoạt, quản lý phụ thuộc, tổ chức hành vi, giao tiếp giữa đối tượng, mở rộng mà không phá
-                code cũ.</li>
-            <li>Pattern cung cấp giải pháp đã được kiểm chứng, thay vì tự nghĩ lại từ đầu.</li>
+            <li>
+                <span class="lang-en">Create flexible objects, manage dependencies, organize behaviors, facilitate communication between objects, and extend without breaking old code.</span>
+                <span class="lang-vi">Tạo object linh hoạt, quản lý phụ thuộc, tổ chức hành vi, giao tiếp giữa đối tượng, mở rộng mà không phá code cũ.</span>
+            </li>
+            <li>
+                <span class="lang-en">Patterns provide proven solutions rather than reinventing the wheel.</span>
+                <span class="lang-vi">Pattern cung cấp giải pháp đã được kiểm chứng, thay vì tự nghĩ lại từ đầu.</span>
+            </li>
         </ul>
-        <h3>🎯 2. Giúp code dễ hiểu, dễ bảo trì, dễ mở rộng</h3>
+        <h3>
+            <span class="lang-en">🎯 2. Make code readable, maintainable, and extensible</span>
+            <span class="lang-vi">🎯 2. Giúp code dễ hiểu, dễ bảo trì, dễ mở rộng</span>
+        </h3>
         <ul>
-            <li>Giảm phụ thuộc (coupling), tăng tái sử dụng.</li>
-            <li>Giữ rõ ràng trách nhiệm của object, hỗ trợ <strong>OCP</strong> (Open/Closed Principle).</li>
+            <li>
+                <span class="lang-en">Reduce coupling, increase reusability.</span>
+                <span class="lang-vi">Giảm phụ thuộc (coupling), tăng tái sử dụng.</span>
+            </li>
+            <li>
+                <span class="lang-en">Keep object responsibilities clear, supporting the <strong>OCP</strong> (Open/Closed Principle).</span>
+                <span class="lang-vi">Giữ rõ ràng trách nhiệm của object, hỗ trợ <strong>OCP</strong> (Open/Closed Principle).</span>
+            </li>
         </ul>
-        <h3>🎯 3. Tạo ngôn ngữ chung giữa lập trình viên</h3>
+        <h3>
+            <span class="lang-en">🎯 3. Establish a common language among developers</span>
+            <span class="lang-vi">🎯 3. Tạo ngôn ngữ chung giữa lập trình viên</span>
+        </h3>
         <ul>
-            <li>Ví dụ: “Dùng <strong>Strategy</strong> pattern” → ai cũng hiểu vấn đề và giải pháp, không cần giải thích
-                dài dòng.</li>
+            <li>
+                <span class="lang-en">Example: "Use the <strong>Strategy</strong> pattern" → everyone understands the context and solution, no long explanations needed.</span>
+                <span class="lang-vi">Ví dụ: “Dùng <strong>Strategy</strong> pattern” → ai cũng hiểu vấn đề và giải pháp, không cần giải thích dài dòng.</span>
+            </li>
         </ul>
-        <h3>🎯 4. Viết code chuyên nghiệp và có cấu trúc</h3>
+        <h3>
+            <span class="lang-en">🎯 4. Write professional and structured code</span>
+            <span class="lang-vi">🎯 4. Viết code chuyên nghiệp và có cấu trúc</span>
+        </h3>
         <ul>
-            <li>Design pattern là kinh nghiệm tích lũy của nhiều thế hệ lập trình viên — sử dụng chúng là đứng trên vai
-                người khổng lồ.</li>
+            <li>
+                <span class="lang-en">Design patterns represent the accumulated experience of generations of developers — using them is standing on the shoulders of giants.</span>
+                <span class="lang-vi">Design pattern là kinh nghiệm tích lũy của nhiều thế hệ lập trình viên — sử dụng chúng là đứng trên vai người khổng lồ.</span>
+            </li>
         </ul>
 
-        <h3>3. Ba nhóm chính (GoF)</h3>
-        <h3>Creational (khởi tạo)</h3>
+        <h3>
+            <span class="lang-en">3. Three Main Categories (GoF)</span>
+            <span class="lang-vi">3. Ba nhóm chính (GoF)</span>
+        </h3>
+        <h3>
+            <span class="lang-en">Creational (Instantiation)</span>
+            <span class="lang-vi">Creational (Khởi tạo)</span>
+        </h3>
         <ul>
             <li>Singleton</li>
             <li>Factory Method</li>
@@ -206,7 +110,10 @@
             <li>Builder</li>
             <li>Prototype</li>
         </ul>
-        <h3>Structural (cấu trúc)</h3>
+        <h3>
+            <span class="lang-en">Structural (Composition)</span>
+            <span class="lang-vi">Structural (Cấu trúc)</span>
+        </h3>
         <ul>
             <li>Adapter</li>
             <li>Decorator</li>
@@ -215,7 +122,10 @@
             <li>Flyweight</li>
             <li>Proxy</li>
         </ul>
-        <h3>Behavioral (hành vi)</h3>
+        <h3>
+            <span class="lang-en">Behavioral (Interaction)</span>
+            <span class="lang-vi">Behavioral (Hành vi)</span>
+        </h3>
         <ul>
             <li>Strategy</li>
             <li>State</li>
@@ -236,14 +146,29 @@
         <!-- ============ SINGLETON PATTERN ============ -->
         <h2 id="singleton">📍 Singleton Pattern — Unity Implementation (Clean & Safe)</h2>
 
-        <h3>⚠️ Vấn đề thường gặp với Singleton truyền thống</h3>
+        <h3>
+            <span class="lang-en">⚠️ Common Problems with Traditional Singletons</span>
+            <span class="lang-vi">⚠️ Vấn đề thường gặp với Singleton truyền thống</span>
+        </h3>
         <ul>
-            <li>Dễ bị duplicate instance khi load scene nhanh</li>
-            <li>Static field public → dễ bị ghi đè từ bên ngoài</li>
-            <li>Thường biến thành God Object → vi phạm SOLID</li>
+            <li>
+                <span class="lang-en">Easily duplicates instances during fast scene loading</span>
+                <span class="lang-vi">Dễ bị duplicate instance khi load scene nhanh</span>
+            </li>
+            <li>
+                <span class="lang-en">Public static fields → vulnerable to being overwritten externally</span>
+                <span class="lang-vi">Static field public → dễ bị ghi đè từ bên ngoài</span>
+            </li>
+            <li>
+                <span class="lang-en">Often devolves into a God Object → violates SOLID principles</span>
+                <span class="lang-vi">Thường biến thành God Object → vi phạm SOLID</span>
+            </li>
         </ul>
 
-        <h3>✅ Giải pháp em đang dùng (studio-standard)</h3>
+        <h3>
+            <span class="lang-en">✅ My Current Solution (Studio-Standard)</span>
+            <span class="lang-vi">✅ Giải pháp em đang dùng (studio-standard)</span>
+        </h3>
         <div class="code-block">
             <code>
 <span class="comment">```csharp</span>
@@ -266,35 +191,76 @@
             </code>
         </div>
 
-        <h3>🎯 Ưu điểm</h3>
+        <h3>
+            <span class="lang-en">🎯 Key Advantages</span>
+            <span class="lang-vi">🎯 Ưu điểm</span>
+        </h3>
         <ul>
-            <li><strong>100% thread-safe</strong> trong Unity main thread</li>
-            <li><strong>Không bao giờ bị duplicate</strong> (đã test load scene liên tục 100 lần)</li>
-            <li><strong>Property private set</strong> → an toàn, không bị ghi đè từ bên ngoài</li>
-            <li><strong>Chỉ làm đúng 1 việc</strong> → đấm bảo tôn tại duy nhất + kết hợp hoàn hảo với SOLID services
+            <li>
+                <span class="lang-en"><strong>100% thread-safe</strong> on the Unity main thread</span>
+                <span class="lang-vi"><strong>100% thread-safe</strong> trong Unity main thread</span>
             </li>
-            <li><strong>Dễ đọc, dễ bảo trì</strong> → được các senior & studio lớn khuyến khích</li>
+            <li>
+                <span class="lang-en"><strong>Zero duplication</strong> (validated by reloading scenes 100 times consecutively)</span>
+                <span class="lang-vi"><strong>Không bao giờ bị duplicate</strong> (đã test load scene liên tục 100 lần)</span>
+            </li>
+            <li>
+                <span class="lang-en"><strong>Private set property</strong> → secure, preventing external overrides</span>
+                <span class="lang-vi"><strong>Property private set</strong> → an toàn, không bị ghi đè từ bên ngoài</span>
+            </li>
+            <li>
+                <span class="lang-en"><strong>Single responsibility</strong> → ensures unique existence + integrates perfectly with SOLID services</span>
+                <span class="lang-vi"><strong>Chỉ làm đúng 1 việc</strong> → đảm bảo tồn tại duy nhất + kết hợp hoàn hảo với SOLID services</span>
+            </li>
+            <li>
+                <span class="lang-en"><strong>Readable and maintainable</strong> → highly recommended by seniors & major studios</span>
+                <span class="lang-vi"><strong>Dễ đọc, dễ bảo trì</strong> → được các senior & studio lớn khuyến khích</span>
+            </li>
         </ul>
 
-        <h3>💡 Hiện tại mọi Manager trong dự án của em</h3>
-        <p>GameManager, AudioManager, SaveManager… đều sử dụng pattern này.</p>
+        <h3>
+            <span class="lang-en">💡 Currently, all Managers in my projects</span>
+            <span class="lang-vi">💡 Hiện tại mọi Manager trong dự án của em</span>
+        </h3>
+        <p>
+            <span class="lang-en">GameManager, AudioManager, SaveManager... all utilize this pattern.</span>
+            <span class="lang-vi">GameManager, AudioManager, SaveManager… đều sử dụng pattern này.</span>
+        </p>
 
         <div class="achievement">
-            <strong>[NỘI DUNG THÊM]:</strong><br>
-            Có thể thêm các pattern khác như Factory, Observer, Strategy tùy theo nhu cầu chia sẻ kiến thức.
+            <span class="lang-en"><strong>[BONUS CONTENT]:</strong><br>Other patterns like Factory, Observer, or Strategy can be added as needed to share knowledge.</span>
+            <span class="lang-vi"><strong>[NỘI DUNG THÊM]:</strong><br>Có thể thêm các pattern khác như Factory, Observer, Strategy tùy theo nhu cầu chia sẻ kiến thức.</span>
         </div>
 
         <!-- ============ FACTORY PATTERN ============ -->
-        <h2 id="factory">🏭 Factory Pattern (Coming Soon...)</h2>
-        <p>Nội dung sẽ được cập nhật sớm.</p>
+        <h2 id="factory">
+            <span class="lang-en">🏭 Factory Pattern (Coming Soon...)</span>
+            <span class="lang-vi">🏭 Factory Pattern (Sắp ra mắt...)</span>
+        </h2>
+        <p>
+            <span class="lang-en">Content will be updated soon.</span>
+            <span class="lang-vi">Nội dung sẽ được cập nhật sớm.</span>
+        </p>
 
         <!-- ============ OBSERVER PATTERN ============ -->
-        <h2 id="observer">👁️ Observer Pattern (Coming Soon...)</h2>
-        <p>Nội dung sẽ được cập nhật sớm.</p>
+        <h2 id="observer">
+            <span class="lang-en">👁️ Observer Pattern (Coming Soon...)</span>
+            <span class="lang-vi">👁️ Observer Pattern (Sắp ra mắt...)</span>
+        </h2>
+        <p>
+            <span class="lang-en">Content will be updated soon.</span>
+            <span class="lang-vi">Nội dung sẽ được cập nhật sớm.</span>
+        </p>
 
         <!-- ============ STRATEGY PATTERN ============ -->
-        <h2 id="strategy">📋 Strategy Pattern (Coming Soon...)</h2>
-        <p>Nội dung sẽ được cập nhật sớm.</p>
+        <h2 id="strategy">
+            <span class="lang-en">📋 Strategy Pattern (Coming Soon...)</span>
+            <span class="lang-vi">📋 Strategy Pattern (Sắp ra mắt...)</span>
+        </h2>
+        <p>
+            <span class="lang-en">Content will be updated soon.</span>
+            <span class="lang-vi">Nội dung sẽ được cập nhật sớm.</span>
+        </p>
 
     </div>
 </body>

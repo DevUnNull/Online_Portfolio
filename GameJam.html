@@ -1,217 +1,162 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UnNull — Game Jam Log</title>
-    <style>
-        body {
-            font-family: Consolas, monospace;
-            background: #0d1a26;
-            color: #00ff99;
-            padding: 30px;
-        }
-
-        a {
-            color: #00ff99;
-            text-decoration: none;
-            transition: all .3s ease;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 950px;
-            margin: auto;
-            background: rgba(0, 0, 0, .85);
-            padding: 24px;
-            border: 2px solid #00ff99;
-        }
-
-        .back {
-            margin-bottom: 18px;
-            display: inline-block;
-            padding: 10px 20px;
-            border: 2px solid #00ff99;
-            transition: all .3s ease;
-        }
-
-        .back:hover {
-            background: rgba(0, 255, 153, .1);
-            box-shadow: 0 0 10px rgba(0, 255, 153, .5);
-        }
-
-        h1 {
-            color: #ccff00;
-            text-shadow: 0 0 10px #ccff00;
-            font-size: 28px;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            color: #00ff99;
-            font-size: 18px;
-            margin: 16px 0 8px;
-        }
-
-        p,
-        li {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .note {
-            color: #00ffff;
-        }
-
-        .section {
-            border-top: 1px dashed rgba(0, 255, 153, .15);
-            padding-top: 12px;
-            margin-top: 12px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .card {
-            border: 1px solid rgba(0, 255, 153, .3);
-            padding: 12px;
-            background: rgba(0, 255, 153, .05);
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table th,
-        .table td {
-            border: 1px solid rgba(0, 255, 153, .25);
-            padding: 8px;
-            font-size: 14px;
-        }
-
-        .code {
-            background: #0a1628;
-            border: 1px solid rgba(0, 255, 153, .25);
-            padding: 12px;
-            overflow: auto;
-            margin: 10px 0;
-            color: #e6fff5;
-        }
-
-        .toc {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0;
-        }
-
-        .toc a {
-            padding: 6px 10px;
-            border: 1px solid rgba(0, 255, 153, .35);
-        }
-
-        .callout {
-            background: rgba(0, 255, 153, .1);
-            border-left: 3px solid #00ff99;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        .jam-link {
-            font-weight: bold;
-            color: #ccff00;
-            text-shadow: 0 0 8px rgba(204, 255, 0, .8);
-            border-bottom: 1px dashed rgba(204, 255, 0, .8);
-        }
-
-        .jam-link:hover {
-            color: #ffffff;
-            text-shadow: 0 0 12px rgba(204, 255, 0, 1);
-            border-bottom-style: solid;
-        }
-    </style>
+    <title data-en="UnNull — Game Jam Log" data-vi="UnNull — Nhật Ký Game Jam">UnNull — Game Jam Log</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-        <a href="index.html#projects-section" class="back">← Về danh sách Project</a>
-        <a href="index.html" class="back" style="margin-left:8px">← Về trang hồ sơ</a>
+        <a href="index.html#projects" class="back">
+            <span class="lang-en">← Back to Projects List</span>
+            <span class="lang-vi">← Về danh sách Project</span>
+        </a>
+        <a href="index.html" class="back" style="margin-left:8px">
+            <span class="lang-en">← Back to Profile</span>
+            <span class="lang-vi">← Về trang hồ sơ</span>
+        </a>
         <h1>🎮 Game Jam Log</h1>
 
         <div class="toc">
-            <a href="#intro">Giới thiệu</a>
-            <a href="#events">Các Game Jam</a>
-            <a href="#role">Vai trò & Kỹ năng</a>
-            <a href="#lessons">Bài học rút ra</a>
+            <a href="#intro">
+                <span class="lang-en">Introduction</span>
+                <span class="lang-vi">Giới thiệu</span>
+            </a>
+            <a href="#events">
+                <span class="lang-en">Game Jams</span>
+                <span class="lang-vi">Các Game Jam</span>
+            </a>
+            <a href="#role">
+                <span class="lang-en">Roles & Skills</span>
+                <span class="lang-vi">Vai trò & Kỹ năng</span>
+            </a>
+            <a href="#lessons">
+                <span class="lang-en">Lessons Learned</span>
+                <span class="lang-vi">Bài học rút ra</span>
+            </a>
         </div>
 
         <div class="section" id="intro">
-            <h2>I. Giới thiệu</h2>
-            <p>Game Jam là môi trường tuyệt vời để luyện khả năng <span class="note">làm game nhanh, rõ scope và có
-                    deadline cứng</span>. Tại đây mình rèn luyện tư duy ưu tiên tính năng, tối ưu thời gian và giao tiếp
-                với teammate.</p>
+            <h2>
+                <span class="lang-en">I. Introduction</span>
+                <span class="lang-vi">I. Giới thiệu</span>
+            </h2>
+            <p>
+                <span class="lang-en">Game Jams are excellent environments for practicing <span class="note">rapid development, scope containment, and strict deadlines</span>. Through them, I hone prioritization, time management, and team communication skills.</span>
+                <span class="lang-vi">Game Jam là môi trường tuyệt vời để luyện khả năng <span class="note">làm game nhanh, rõ scope và có deadline cứng</span>. Tại đây mình rèn luyện tư duy ưu tiên tính năng, tối ưu thời gian và giao tiếp với teammate.</span>
+            </p>
         </div>
 
         <div class="section" id="events">
-            <h2>II. Các Game Jam đã tham gia</h2>
+            <h2>
+                <span class="lang-en">II. Game Jams Participated</span>
+                <span class="lang-vi">II. Các Game Jam đã tham gia</span>
+            </h2>
             <table class="table">
                 <tr>
-                    <th>Thời gian</th>
-                    <th>Tên Jam</th>
-                    <th>Thời lượng</th>
-                    <th>Ghi chú</th>
+                    <th>
+                        <span class="lang-en">Date</span>
+                        <span class="lang-vi">Thời gian</span>
+                    </th>
+                    <th>
+                        <span class="lang-en">Jam Name</span>
+                        <span class="lang-vi">Tên Jam</span>
+                    </th>
+                    <th>
+                        <span class="lang-en">Duration</span>
+                        <span class="lang-vi">Thời lượng</span>
+                    </th>
+                    <th>
+                        <span class="lang-en">Notes</span>
+                        <span class="lang-vi">Ghi chú</span>
+                    </th>
                 </tr>
                 <tr>
                     <td>30/1/2026 - 1/2/2026</td>
                     <td><a href="BehindTheMask.html" class="jam-link">Behind the Mask</a></td>
                     <td>36h</td>
-                    <td>Tập trung gameplay core loop, UI đơn giản nhưng rõ ràng, chủ đề của game là làm về mặt nạ.</td>
+                    <td>
+                        <span class="lang-en">Focused on core gameplay loop, simple but clean UI, themed around masks.</span>
+                        <span class="lang-vi">Tập trung gameplay core loop, UI đơn giản nhưng rõ ràng, chủ đề của game là làm về mặt nạ.</span>
+                    </td>
                 </tr>
             </table>
         </div>
 
         <div class="section" id="role">
-            <h2>III. Vai trò & Kỹ năng trong Game Jam</h2>
+            <h2>
+                <span class="lang-en">III. Roles & Skills in Game Jams</span>
+                <span class="lang-vi">III. Vai trò & Kỹ năng trong Game Jam</span>
+            </h2>
             <div class="grid">
                 <div class="card">
-                    <strong>Unity & Gameplay</strong>
+                    <strong>
+                        <span class="lang-en">Unity & Gameplay</span>
+                        <span class="lang-vi">Unity & Gameplay</span>
+                    </strong>
                     <ul>
-                        <li>Xây dựng prototype nhanh bằng C# / Unity.</li>
-                        <li>Ưu tiên core mechanic trước: di chuyển, combat, vòng lặp chơi lại.</li>
-                        <li>Dùng pattern đơn giản để dễ mở rộng nếu còn thời gian.</li>
+                        <li>
+                            <span class="lang-en">Rapid prototyping with C# / Unity.</span>
+                            <span class="lang-vi">Xây dựng prototype nhanh bằng C# / Unity.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Prioritizing core mechanics: movement, combat, replay loops.</span>
+                            <span class="lang-vi">Ưu tiên core mechanic trước: di chuyển, combat, vòng lặp chơi lại.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Using simple patterns to allow expansion if time permits.</span>
+                            <span class="lang-vi">Dùng pattern đơn giản để dễ mở rộng nếu còn thời gian.</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
-                    <strong>Teamwork & Scope</strong>
+                    <strong>
+                        <span class="lang-en">Teamwork & Scope</span>
+                        <span class="lang-vi">Teamwork & Scope</span>
+                    </strong>
                     <ul>
-                        <li>Chia task rõ ràng: code, art, sound.</li>
-                        <li>Giảm bớt feature không quan trọng khi gần hết thời gian.</li>
-                        <li>Commit/Git thường xuyên để tránh mất tiến độ.</li>
+                        <li>
+                            <span class="lang-en">Clear task delegation: programming, art, sound.</span>
+                            <span class="lang-vi">Chia task rõ ràng: code, art, sound.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Pruning secondary features as deadlines approach.</span>
+                            <span class="lang-vi">Giảm bớt feature không quan trọng khi gần hết thời gian.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Frequent Git commits to secure progression.</span>
+                            <span class="lang-vi">Commit/Git thường xuyên để tránh mất tiến độ.</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div class="section" id="lessons">
-            <h2>IV. Bài học rút ra</h2>
+            <h2>
+                <span class="lang-en">IV. Lessons Learned</span>
+                <span class="lang-vi">IV. Bài học rút ra</span>
+            </h2>
             <ul>
-                <li><span class="note">Design nhỏ nhưng hoàn chỉnh</span> tốt hơn là một game lớn nhưng dang dở.</li>
-                <li>Prototype nhanh, chấp nhận code chưa hoàn hảo, sau đó refactor nếu còn thời gian.</li>
-                <li>Thống nhất concept, art style và scope ngay từ đầu giúp tiết kiệm rất nhiều giờ làm lại.</li>
+                <li>
+                    <span class="lang-en"><span class="note">A small but complete design</span> is far better than an ambitious but unfinished one.</span>
+                    <span class="lang-vi"><span class="note">Design nhỏ nhưng hoàn chỉnh</span> tốt hơn là một game lớn nhưng dang dở.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Prototype fast; accept imperfect code and refactor later if time allows.</span>
+                    <span class="lang-vi">Prototype nhanh, chấp nhận code chưa hoàn hảo, sau đó refactor nếu còn thời gian.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Aligning on concept, art style, and scope early saves hours of rework.</span>
+                    <span class="lang-vi">Thống nhất concept, art style và scope ngay từ đầu giúp tiết kiệm rất nhiều giờ làm lại.</span>
+                </li>
             </ul>
         </div>
     </div>
 </body>
 
 </html>
-

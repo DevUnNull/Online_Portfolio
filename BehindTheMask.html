@@ -1,243 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UnNull — Behind the Mask</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Source+Code+Pro:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0d1a26;
-            --primary: #00ff99;
-            --accent: #ccff00;
-            --cyan: #00ffff;
-            --card-bg: rgba(0, 255, 153, 0.08);
-            --border: rgba(0, 255, 153, 0.4);
-            --glow: 0 0 12px rgba(0, 255, 153, 0.6);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Source Code Pro', monospace;
-            background: var(--bg);
-            color: var(--primary);
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            background: rgba(13, 26, 38, 0.92);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-        }
-
-        .nav {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.2rem;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-radius: 4px;
-        }
-
-        .back-btn:hover {
-            background: rgba(0, 255, 153, 0.15);
-            box-shadow: var(--glow);
-            transform: translateY(-2px);
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.2rem, 6vw, 3.8rem);
-            color: var(--accent);
-            text-shadow: 0 0 20px rgba(204, 255, 0, 0.6);
-            margin: 2rem 0 1.5rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin: 3rem 0 1.2rem;
-            border-left: 4px solid var(--primary);
-            padding-left: 1rem;
-        }
-
-        .hero {
-            position: relative;
-            height: 0;
-            padding-top: 56.25%;
-            margin-bottom: 3rem;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .hero iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: var(--glow);
-            transform: translateY(-6px);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-        }
-
-        th,
-        td {
-            border: 1px solid rgba(0, 255, 153, 0.25);
-            padding: 0.8rem;
-            text-align: left;
-        }
-
-        th {
-            background: rgba(0, 255, 153, 0.1);
-        }
-
-        .callout {
-            background: rgba(0, 255, 153, 0.12);
-            border-left: 4px solid var(--primary);
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-
-        .note {
-            color: var(--cyan);
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.2rem 1rem;
-            }
-
-            h1 {
-                font-size: 2.8rem;
-            }
-
-            h2 {
-                font-size: 1.6rem;
-            }
-
-            .nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero {
-                height: 40vh;
-                min-height: 300px;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-            }
-
-            thead tr {
-                position: absolute;
-                left: -9999px;
-            }
-
-            tr {
-                margin-bottom: 1rem;
-                border: 1px solid rgba(0, 255, 153, 0.3);
-                border-radius: 6px;
-            }
-
-            td {
-                border: none;
-                border-bottom: 1px solid rgba(0, 255, 153, 0.15);
-                position: relative;
-                padding-left: 50%;
-            }
-
-            td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 1rem;
-                width: 45%;
-                font-weight: 600;
-                color: var(--cyan);
-            }
-        }
-    </style>
+    <title data-en="UnNull — Behind the Mask" data-vi="UnNull — Sau Tấm Mặt Nạ">UnNull — Behind the Mask</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
 </head>
 
 <body>
@@ -245,8 +14,14 @@
     <header>
         <div class="container">
             <div class="nav">
-                <a href="GameJam.html" class="back-btn">← Về Game Jam Log</a>
-                <a href="index.html" class="back-btn">← Về trang hồ sơ</a>
+                <a href="GameJam.html" class="back-btn">
+                    <span class="lang-en">← Back to Game Jam Log</span>
+                    <span class="lang-vi">← Về Game Jam Log</span>
+                </a>
+                <a href="index.html" class="back-btn">
+                    <span class="lang-en">← Back to Profile</span>
+                    <span class="lang-vi">← Về trang hồ sơ</span>
+                </a>
             </div>
         </div>
     </header>
@@ -261,15 +36,16 @@
         </div>
 
         <div class="section" id="overview">
-            <h2>I. Tổng quan game</h2>
-            <p><strong>Thời gian Jam:</strong> 30/01/2026 – 01/02/2026 (36 giờ)</p>
-            <p><strong>Tên đội:</strong> AbsoluteSingleton</p>
-            <p><strong>Thể loại:</strong> Kinh dị tâm lý (Psychological Horror), Giải đố (Puzzle), Góc nhìn thứ nhất</p>
-            <p><strong>Chủ đề:</strong> <span class="note">“Behind the Mask”</span> – Lựa chọn giữa thực tại “an toàn”
-                bị giới hạn bởi mặt nạ và thực tại “chân thực” nhưng u ám, đầy lo âu.</p>
-            <p><strong>Mục tiêu:</strong> Thu thập mảnh ghép bức vẽ, quản lý trạng thái mặt nạ để kiểm soát lo âu, tránh
-                cái bóng truy đuổi, mở khóa Normal hoặc True Ending.</p>
-            <p><strong>Thành viên:</strong></p>
+            <h2>
+                <span class="lang-en">I. Game Overview</span>
+                <span class="lang-vi">I. Tổng quan game</span>
+            </h2>
+            <p><strong><span class="lang-en">Jam Duration:</span><span class="lang-vi">Thời gian Jam:</span></strong> 30/01/2026 – 01/02/2026 (36 <span class="lang-en">hours</span><span class="lang-vi">giờ</span>)</p>
+            <p><strong><span class="lang-en">Team Name:</span><span class="lang-vi">Tên đội:</span></strong> AbsoluteSingleton</p>
+            <p><strong><span class="lang-en">Genre:</span><span class="lang-vi">Thể loại:</span></strong> <span class="lang-en">Psychological Horror, Puzzle, First-Person</span><span class="lang-vi">Kinh dị tâm lý (Psychological Horror), Giải đố (Puzzle), Góc nhìn thứ nhất</span></p>
+            <p><strong><span class="lang-en">Theme:</span><span class="lang-vi">Chủ đề:</span></strong> <span class="note">“Behind the Mask”</span> – <span class="lang-en">Choosing between a "safe" reality limited by the mask and a "true" but gloomy, anxiety-filled reality.</span><span class="lang-vi">Lựa chọn giữa thực tại “an toàn” bị giới hạn bởi mặt nạ và thực tại “chân thực” nhưng u ám, đầy lo âu.</span></p>
+            <p><strong><span class="lang-en">Objective:</span><span class="lang-vi">Mục tiêu:</span></strong> <span class="lang-en">Collect drawing fragments, manage the mask state to control anxiety levels, evade chasing shadows, and unlock the Normal or True Ending.</span><span class="lang-vi">Thu thập mảnh ghép bức vẽ, quản lý trạng thái mặt nạ để kiểm soát lo âu, tránh cái bóng truy đuổi, mở khóa Normal hoặc True Ending.</span></p>
+            <p><strong><span class="lang-en">Team Members:</span><span class="lang-vi">Thành viên:</span></strong></p>
             <ul>
                 <li>Nguyễn Mai Ngọc Hải – Dev</li>
                 <li>Phạm Nam Khánh – Dev, Design</li>
@@ -280,75 +56,164 @@
         </div>
 
         <div class="section" id="gameplay">
-            <h2>II. Gameplay chính</h2>
+            <h2>
+                <span class="lang-en">II. Core Gameplay</span>
+                <span class="lang-vi">II. Gameplay chính</span>
+            </h2>
             <ul>
-                <li><strong>Concept cốt lõi:</strong> Kinh dị tâm lý góc nhìn thứ nhất – đeo/tháo mặt nạ thay đổi cách
-                    nhìn thế giới, phản ánh trạng thái trầm cảm, sợ giao tiếp xã hội.</li>
-                <li><strong>Gameplay loop:</strong> Khám phá → Đeo/Tháo mặt nạ giải đố → Thu thập mảnh → Quản lý lo âu →
-                    Né kẻ thù → Kết thúc.</li>
-                <li><strong>Cơ chế mặt nạ:</strong>
+                <li>
+                    <strong><span class="lang-en">Core Concept:</span><span class="lang-vi">Concept cốt lõi:</span></strong> 
+                    <span class="lang-en">First-person psychological horror — donning/removing the mask alters your vision of the world, reflecting depression and social anxiety.</span>
+                    <span class="lang-vi">Kinh dị tâm lý góc nhìn thứ nhất – đeo/tháo mặt nạ thay đổi cách nhìn thế giới, phản ánh trạng thái trầm cảm, sợ giao tiếp xã hội.</span>
+                </li>
+                <li>
+                    <strong><span class="lang-en">Gameplay Loop:</span><span class="lang-vi">Gameplay loop:</span></strong> 
+                    <span class="lang-en">Explore → Don/Remove mask to solve puzzles → Collect fragments → Manage anxiety → Evade enemies → Ending.</span>
+                    <span class="lang-vi">Khám phá → Đeo/Tháo mặt nạ giải đố → Thu thập mảnh → Quản lý lo âu → Né kẻ thù → Kết thúc.</span>
+                </li>
+                <li>
+                    <strong><span class="lang-en">Mask Mechanics:</span><span class="lang-vi">Cơ chế mặt nạ:</span></strong>
                     <ul>
-                        <li>Đeo: Thế giới sáng, màu rõ, tầm nhìn hạn chế (tunnel vision qua lỗ mặt nạ).</li>
-                        <li>Tháo: Tầm nhìn đầy đủ, thế giới tối u ám, kích hoạt thanh lo âu.</li>
+                        <li>
+                            <span class="lang-en">Donned: Bright world, distinct colors, restricted field of view (tunnel vision through mask holes).</span>
+                            <span class="lang-vi">Đeo: Thế giới sáng, màu rõ, tầm nhìn hạn chế (tunnel vision qua lỗ mặt nạ).</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Removed: Complete vision, gloomy dark world, activates the anxiety meter.</span>
+                            <span class="lang-vi">Tháo: Tầm nhìn đầy đủ, thế giới tối u ám, kích hoạt thanh lo âu.</span>
+                        </li>
                     </ul>
                 </li>
-                <li><strong>Hệ thống lo âu:</strong> Tăng dần khi tháo mặt nạ → đạt ngưỡng → kẻ thù xuất hiện truy đuổi.
+                <li>
+                    <strong><span class="lang-en">Anxiety System:</span><span class="lang-vi">Hệ thống lo âu:</span></strong> 
+                    <span class="lang-en">Increases over time while the mask is off → triggers enemies to chase when reaching a threshold.</span>
+                    <span class="lang-vi">Tăng dần khi tháo mặt nạ → đạt ngưỡng → kẻ thù xuất hiện truy đuổi.</span>
                 </li>
-                <li><strong>Giải đố & khám phá:</strong> Manh mối, vật thể chỉ hiện rõ ở một trạng thái → buộc phải
-                    chuyển đổi liên tục.</li>
-                <li><strong>Kết thúc:</strong>
+                <li>
+                    <strong><span class="lang-en">Puzzles & Exploration:</span><span class="lang-vi">Giải đố & khám phá:</span></strong> 
+                    <span class="lang-en">Clues and objects only manifest clearly in one state → forcing frequent transitions.</span>
+                    <span class="lang-vi">Manh mối, vật thể chỉ hiện rõ ở một trạng thái → buộc phải chuyển đổi liên tục.</span>
+                </li>
+                <li>
+                    <strong><span class="lang-en">Endings:</span><span class="lang-vi">Kết thúc:</span></strong>
                     <ul>
-                        <li>Normal: Thu thập đủ mảnh & hoàn thành mục tiêu chính.</li>
-                        <li>True: Hoàn thành chuỗi hành động phụ từ bức vẽ.</li>
-                        <li>Game over: Bị bắt khi lo âu max và không kịp đeo mặt nạ.</li>
+                        <li>
+                            <span class="lang-en">Normal: Collect all fragments & complete core objectives.</span>
+                            <span class="lang-vi">Normal: Thu thập đủ mảnh & hoàn thành mục tiêu chính.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">True: Complete the secondary sequence of actions revealed by the drawing.</span>
+                            <span class="lang-vi">True: Hoàn thành chuỗi hành động phụ từ bức vẽ.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Game Over: Caught when anxiety is maxed out without putting the mask back on in time.</span>
+                            <span class="lang-vi">Game over: Bị bắt khi lo âu max và không kịp đeo mặt nạ.</span>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
 
         <div class="section" id="controls">
-            <h2>III. Điều khiển</h2>
+            <h2>
+                <span class="lang-en">III. Controls</span>
+                <span class="lang-vi">III. Điều khiển</span>
+            </h2>
             <table>
                 <tr>
-                    <th>Hành động</th>
-                    <th>Phím</th>
-                    <th>Mô tả</th>
+                    <th>
+                        <span class="lang-en">Action</span>
+                        <span class="lang-vi">Hành động</span>
+                    </th>
+                    <th>
+                        <span class="lang-en">Key</span>
+                        <span class="lang-vi">Phím</span>
+                    </th>
+                    <th>
+                        <span class="lang-en">Description</span>
+                        <span class="lang-vi">Mô tả</span>
+                    </th>
                 </tr>
                 <tr>
-                    <td data-label="Hành động">Di chuyển</td>
+                    <td data-label="Hành động" data-en="Movement" data-vi="Di chuyển">
+                        <span class="lang-en">Movement</span>
+                        <span class="lang-vi">Di chuyển</span>
+                    </td>
                     <td data-label="Phím">W A S D</td>
-                    <td data-label="Mô tả">W tiến, S lùi, A trái, D phải</td>
+                    <td data-label="Mô tả" data-en="W forward, S backward, A left, D right" data-vi="W tiến, S lùi, A trái, D phải">
+                        <span class="lang-en">W forward, S backward, A left, D right</span>
+                        <span class="lang-vi">W tiến, S lùi, A trái, D phải</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td data-label="Hành động">Xoay camera</td>
-                    <td data-label="Phím">Chuột</td>
-                    <td data-label="Mô tả">Di chuyển chuột</td>
+                    <td data-label="Hành động" data-en="Rotate Camera" data-vi="Xoay camera">
+                        <span class="lang-en">Rotate Camera</span>
+                        <span class="lang-vi">Xoay camera</span>
+                    </td>
+                    <td data-label="Phím" data-en="Mouse" data-vi="Chuột">
+                        <span class="lang-en">Mouse</span>
+                        <span class="lang-vi">Chuột</span>
+                    </td>
+                    <td data-label="Mô tả" data-en="Move mouse" data-vi="Di chuyển chuột">
+                        <span class="lang-en">Move mouse</span>
+                        <span class="lang-vi">Di chuyển chuột</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td data-label="Hành động">Tương tác</td>
-                    <td data-label="Phím">Chuột trái</td>
-                    <td data-label="Mô tả">Nhặt / sử dụng / mở TV</td>
+                    <td data-label="Hành động" data-en="Interact" data-vi="Tương tác">
+                        <span class="lang-en">Interact</span>
+                        <span class="lang-vi">Tương tác</span>
+                    </td>
+                    <td data-label="Phím" data-en="Left Click" data-vi="Chuột trái">
+                        <span class="lang-en">Left Click</span>
+                        <span class="lang-vi">Chuột trái</span>
+                    </td>
+                    <td data-label="Mô tả" data-en="Pick up / use / turn on TV" data-vi="Nhặt / sử dụng / mở TV">
+                        <span class="lang-en">Pick up / use / turn on TV</span>
+                        <span class="lang-vi">Nhặt / sử dụng / mở TV</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td data-label="Hành động">Điều khiển TV</td>
+                    <td data-label="Hành động" data-en="TV Controls" data-vi="Điều khiển TV">
+                        <span class="lang-en">TV Controls</span>
+                        <span class="lang-vi">Điều khiển TV</span>
+                    </td>
                     <td data-label="Phím">N</td>
-                    <td data-label="Mô tả">Chuyển kênh khi TV mở</td>
+                    <td data-label="Mô tả" data-en="Switch channel when TV is on" data-vi="Chuyển kênh khi TV mở">
+                        <span class="lang-en">Switch channel when TV is on</span>
+                        <span class="lang-vi">Chuyển kênh khi TV mở</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td data-label="Hành động">Mặt nạ</td>
+                    <td data-label="Hành động" data-en="Mask Toggle" data-vi="Mặt nạ">
+                        <span class="lang-en">Mask Toggle</span>
+                        <span class="lang-vi">Mặt nạ</span>
+                    </td>
                     <td data-label="Phím">Tab</td>
-                    <td data-label="Mô tả">Đeo / tháo mặt nạ</td>
+                    <td data-label="Mô tả" data-en="Don / remove mask" data-vi="Đeo / tháo mặt nạ">
+                        <span class="lang-en">Don / remove mask</span>
+                        <span class="lang-vi">Đeo / tháo mặt nạ</span>
+                    </td>
                 </tr>
                 <tr>
-                    <td data-label="Hành động">Tăng tốc</td>
+                    <td data-label="Hành động" data-en="Sprint" data-vi="Tăng tốc">
+                        <span class="lang-en">Sprint</span>
+                        <span class="lang-vi">Tăng tốc</span>
+                    </td>
                     <td data-label="Phím">Shift</td>
-                    <td data-label="Mô tả">Chạy nhanh</td>
+                    <td data-label="Mô tả" data-en="Run fast" data-vi="Chạy nhanh">
+                        <span class="lang-en">Run fast</span>
+                        <span class="lang-vi">Chạy nhanh</span>
+                    </td>
                 </tr>
             </table>
         </div>
 
         <div class="section" id="moments">
-            <h2>IV. Ảnh kỷ niệm</h2>
+            <h2>
+                <span class="lang-en">IV. Memorable Highlights</span>
+                <span class="lang-vi">IV. Ảnh kỷ niệm</span>
+            </h2>
             <div class="grid">
                 <div class="card">
                     <div
@@ -356,7 +221,10 @@
                         <iframe src="https://streamable.com/e/clsq5y" frameborder="0" allow="autoplay; fullscreen"
                             allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
-                    <p style="margin-top:0.8rem;color:#bafcff;font-size:0.95rem;">Được lên Pageee</p>
+                    <p style="margin-top:0.8rem;color:#bafcff;font-size:0.95rem;">
+                        <span class="lang-en">Featured on Pageee</span>
+                        <span class="lang-vi">Được lên Pageee</span>
+                    </p>
                 </div>
                 <div class="card">
                     <div
@@ -364,59 +232,128 @@
                         <iframe src="https://streamable.com/e/4xxk5m" frameborder="0" allow="autoplay; fullscreen"
                             allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     </div>
-                    <p style="margin-top:0.8rem;color:#bafcff;font-size:0.95rem;">Nice</p>
+                    <p style="margin-top:0.8rem;color:#bafcff;font-size:0.95rem;">
+                        <span class="lang-en">Nice</span>
+                        <span class="lang-vi">Nice</span>
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="section" id="process">
-            <h2>V. Quá trình 36 giờ</h2>
+            <h2>
+                <span class="lang-en">V. The 36-Hour Journey</span>
+                <span class="lang-vi">V. Quá trình 36 giờ</span>
+            </h2>
             <div class="grid">
                 <div class="card">
-                    <strong>Giai đoạn 1 – Ý tưởng & Task</strong>
+                    <strong>
+                        <span class="lang-en">Phase 1 – Concept & Tasks</span>
+                        <span class="lang-vi">Giai đoạn 1 – Ý tưởng & Task</span>
+                    </strong>
                     <ul>
-                        <li>Brainstorm → chốt cơ chế mặt nạ</li>
-                        <li>Phân chia code, art, level, âm thanh</li>
-                        <li>Xác định scope tối ưu 36h</li>
+                        <li>
+                            <span class="lang-en">Brainstorming → locked in the mask mechanics</span>
+                            <span class="lang-vi">Brainstorm → chốt cơ chế mặt nạ</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Delegating code, art, level, and audio tasks</span>
+                            <span class="lang-vi">Phân chia code, art, level, âm thanh</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Defining the optimal scope for 36 hours</span>
+                            <span class="lang-vi">Xác định scope tối ưu 36h</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
-                    <strong>Giai đoạn 2 – Prototype</strong>
+                    <strong>
+                        <span class="lang-en">Phase 2 – Prototyping</span>
+                        <span class="lang-vi">Giai đoạn 2 – Prototype</span>
+                    </strong>
                     <ul>
-                        <li>Movement, camera, core mask switch</li>
-                        <li>Test liên tục để fix bug sớm</li>
+                        <li>
+                            <span class="lang-en">Movement, camera, and core mask switching</span>
+                            <span class="lang-vi">Movement, camera, core mask switch</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Continuous testing for early bug fixes</span>
+                            <span class="lang-vi">Test liên tục để fix bug sớm</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
-                    <strong>Giai đoạn 3 – Level & Polish</strong>
+                    <strong>
+                        <span class="lang-en">Phase 3 – Level Design & Polish</span>
+                        <span class="lang-vi">Giai đoạn 3 – Level & Polish</span>
+                    </strong>
                     <ul>
-                        <li>Thiết kế level ngắn, tập trung mechanic</li>
-                        <li>UI tối giản + hiệu ứng nhỏ</li>
-                        <li>Tối ưu cảm giác điều khiển</li>
+                        <li>
+                            <span class="lang-en">Designing a short level focused on mechanics</span>
+                            <span class="lang-vi">Thiết kế level ngắn, tập trung mechanic</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Minimal UI + micro-feedback effects</span>
+                            <span class="lang-vi">UI tối giản + hiệu ứng nhỏ</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Optimizing control feel and response</span>
+                            <span class="lang-vi">Tối ưu cảm giác điều khiển</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
-                    <strong>Release</strong>
+                    <strong>
+                        <span class="lang-en">Release</span>
+                        <span class="lang-vi">Release</span>
+                    </strong>
                     <ul>
-                        <li>Build & kiểm tra phút chót</li>
-                        <li>Viết mô tả cho trang Jam</li>
+                        <li>
+                            <span class="lang-en">Last-minute builds and playtests</span>
+                            <span class="lang-vi">Build & kiểm tra phút chót</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Writing the Jam page description</span>
+                            <span class="lang-vi">Viết mô tả cho trang Jam</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div class="section" id="memories">
-            <h2>VI. Kỷ niệm & Kết quả</h2>
+            <h2>
+                <span class="lang-en">VI. Memories & Results</span>
+                <span class="lang-vi">VI. Kỷ niệm & Kết quả</span>
+            </h2>
             <ul>
-                <li>Moment “a-ha” khi cơ chế mask vừa hợp chủ đề vừa giải quyết puzzle/combat</li>
-                <li>Chạy deadline fix bug + cắt feature thừa</li>
-                <li>Cả team chơi build cuối → cười vì chi tiết nhỏ</li>
+                <li>
+                    <span class="lang-en">The "a-ha" moment when the mask mechanic fits the theme and solves puzzles/combat.</span>
+                    <span class="lang-vi">Moment “a-ha” khi cơ chế mask vừa hợp chủ đề vừa giải quyết puzzle/combat</span>
+                </li>
+                <li>
+                    <span class="lang-en">Rushing to fix bugs and cutting non-essential features near the deadline.</span>
+                    <span class="lang-vi">Chạy deadline fix bug + cắt feature thừa</span>
+                </li>
+                <li>
+                    <span class="lang-en">The team playtesting the final build together, laughing at micro-details.</span>
+                    <span class="lang-vi">Cả team chơi build cuối → cười vì chi tiết nhỏ</span>
+                </li>
             </ul>
             <div class="callout">
-                <span class="note">Link demo/playable:</span> (sẽ cập nhật sau – Itch.io hoặc Google Drive)<br>
+                <span class="note">
+                    <span class="lang-en">Demo/Playable Link:</span>
+                    <span class="lang-vi">Link demo/playable:</span>
+                </span>
+                <span class="lang-en">(to be updated – Itch.io or Google Drive)</span>
+                <span class="lang-vi">(sẽ cập nhật sau – Itch.io hoặc Google Drive)</span>
+                <br>
                 <a style="color: #00ff99;"
                     href="https://docs.google.com/document/d/19bUXFBkJwTzaNUPW9Q8qJHp6OtEO1_3ll4usYCGqq_g/edit?usp=sharing"
-                    target="_blank" rel="noopener">Tài liệu chi tiết → Google Docs</a>
+                    target="_blank" rel="noopener">
+                    <span class="lang-en">Detailed Documentation → Google Docs</span>
+                    <span class="lang-vi">Tài liệu chi tiết → Google Docs</span>
+                </a>
             </div>
         </div>
     </div>

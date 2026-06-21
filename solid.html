@@ -1,220 +1,132 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UnNull — SOLID Principles</title>
-    <style>
-        body {
-            font-family: Consolas, monospace;
-            background: #0d1a26;
-            color: #00ff99;
-            padding: 30px
-        }
-
-        a {
-            color: #00ff99;
-            text-decoration: none;
-            transition: all .3s ease
-        }
-
-        a:hover {
-            text-decoration: underline
-        }
-
-        .container {
-            max-width: 950px;
-            margin: auto;
-            background: rgba(0, 0, 0, .85);
-            padding: 24px;
-            border: 2px solid #00ff99
-        }
-
-        .back {
-            margin-bottom: 18px;
-            display: inline-block;
-            padding: 10px 20px;
-            border: 2px solid #00ff99;
-            transition: all .3s ease
-        }
-
-        .back:hover {
-            background: rgba(0, 255, 153, .1);
-            box-shadow: 0 0 10px rgba(0, 255, 153, .5)
-        }
-
-        h1 {
-            color: #ccff00;
-            text-shadow: 0 0 10px #ccff00;
-            font-size: 28px;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-            letter-spacing: 2px
-        }
-
-        h2 {
-            color: #00ff99;
-            font-size: 18px;
-            margin: 16px 0 8px
-        }
-
-        p,
-        li {
-            font-size: 14px;
-            line-height: 1.6
-        }
-
-        .note {
-            color: #00ffff
-        }
-
-        .section {
-            border-top: 1px dashed rgba(0, 255, 153, .15);
-            padding-top: 12px;
-            margin-top: 12px
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px
-        }
-
-        .card {
-            border: 1px solid rgba(0, 255, 153, .3);
-            padding: 12px;
-            background: rgba(0, 255, 153, .05)
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse
-        }
-
-        .table th,
-        .table td {
-            border: 1px solid rgba(0, 255, 153, .25);
-            padding: 8px;
-            font-size: 14px
-        }
-
-        .code {
-            background: #0a1628;
-            border: 1px solid rgba(0, 255, 153, .25);
-            padding: 12px;
-            overflow: auto;
-            margin: 10px 0;
-            color: #e6fff5
-        }
-
-        .toc {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 10px 0
-        }
-
-        .toc a {
-            padding: 6px 10px;
-            border: 1px solid rgba(0, 255, 153, .35)
-        }
-
-        .callout {
-            background: rgba(0, 255, 153, .1);
-            border-left: 3px solid #00ff99;
-            padding: 10px;
-            margin: 10px 0
-        }
-    </style>
+    <title data-en="UnNull — SOLID Principles" data-vi="UnNull — Nguyên tắc SOLID">UnNull — SOLID Principles</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-        <a href="knowledge.html#solid" class="back">← Quay lại mục SOLID</a>
-        <a href="index.html" class="back" style="margin-left:8px">← Về trang hồ sơ</a>
+        <a href="knowledge.html#solid" class="back">
+            <span class="lang-en">← Back to SOLID</span>
+            <span class="lang-vi">← Quay lại mục SOLID</span>
+        </a>
+        <a href="index.html" class="back" style="margin-left:8px">
+            <span class="lang-en">← Back to Profile</span>
+            <span class="lang-vi">← Về trang hồ sơ</span>
+        </a>
         <h1>📐 SOLID Principles</h1>
 
         <div class="toc">
-            <a href="#intro">Giới thiệu</a>
-            <a href="#overview">Tổng quan</a>
+            <a href="#intro"><span class="lang-en">Introduction</span><span class="lang-vi">Giới thiệu</span></a>
+            <a href="#overview"><span class="lang-en">Overview</span><span class="lang-vi">Tổng quan</span></a>
             <a href="#srp">SRP</a>
             <a href="#ocp">OCP</a>
             <a href="#lsp">LSP</a>
             <a href="#isp">ISP</a>
             <a href="#dip">DIP</a>
-            <a href="#conclusion">Kết luận</a>
+            <a href="#conclusion"><span class="lang-en">Conclusion</span><span class="lang-vi">Kết luận</span></a>
         </div>
 
         <div class="section" id="intro">
-            <h2>I. Giới Thiệu & Tầm Quan Trọng</h2>
+            <h2>
+                <span class="lang-en">I. Introduction & Importance</span>
+                <span class="lang-vi">I. Giới Thiệu & Tầm Quan Trọng</span>
+            </h2>
             <ul>
-                <li>Ngăn ngừa hỗn độn: dùng nguyên tắc thiết kế để tránh trở thành mớ khó quản lý.</li>
-                <li>Cân bằng: giữ cấu trúc rõ ràng đồng thời linh hoạt để mở rộng.</li>
-                <li>Tiến độ ổn định: giảm công việc không cần thiết, tránh đập đi làm lại.</li>
+                <li>
+                    <span class="lang-en">Prevent chaos: use design principles to avoid creating unmanageable code spaghetti.</span>
+                    <span class="lang-vi">Ngăn ngừa hỗn độn: dùng nguyên tắc thiết kế để tránh trở thành mớ khó quản lý.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Balance: keep structures clear while maintaining flexibility for extension.</span>
+                    <span class="lang-vi">Cân bằng: giữ cấu trúc rõ ràng đồng thời linh hoạt để mở rộng.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Steady progress: reduce redundant work, avoid rewriting from scratch.</span>
+                    <span class="lang-vi">Tiến độ ổn định: giảm công việc không cần thiết, tránh đập đi làm lại.</span>
+                </li>
             </ul>
             <div class="callout">
-                <span class="note">Lưu ý:</span> hiểu intention sau mỗi quy tắc để biết khi nào nên theo, khi nào cần
-                phá vỡ có chủ đích.
+                <span class="note"><span class="lang-en">Note:</span><span class="lang-vi">Lưu ý:</span></span>
+                <span class="lang-en">understand the intention behind each rule to know when to follow it and when to break it intentionally.</span>
+                <span class="lang-vi">hiểu intention sau mỗi quy tắc để biết khi nào nên theo, khi nào cần phá vỡ có chủ đích.</span>
             </div>
         </div>
 
         <div class="section" id="overview">
-            <h2>II. Giới Thiệu Bộ Nguyên Tắc SOLID</h2>
+            <h2>
+                <span class="lang-en">II. Overview of SOLID Principles</span>
+                <span class="lang-vi">II. Giới Thiệu Bộ Nguyên Tắc SOLID</span>
+            </h2>
             <table class="table">
                 <tr>
-                    <th>Chữ cái</th>
-                    <th>Nguyên tắc</th>
-                    <th>Tên tiếng Anh</th>
+                    <th><span class="lang-en">Letter</span><span class="lang-vi">Chữ cái</span></th>
+                    <th><span class="lang-en">Principle</span><span class="lang-vi">Nguyên tắc</span></th>
+                    <th><span class="lang-en">English Name</span><span class="lang-vi">Tên tiếng Anh</span></th>
                 </tr>
                 <tr>
                     <td>S</td>
-                    <td>Trách nhiệm đơn lẻ</td>
+                    <td><span class="lang-en">Single Responsibility</span><span class="lang-vi">Trách nhiệm đơn lẻ</span></td>
                     <td>Single Responsibility Principle</td>
                 </tr>
                 <tr>
                     <td>O</td>
-                    <td>Mở/Đóng</td>
+                    <td><span class="lang-en">Open/Closed</span><span class="lang-vi">Mở/Đóng</span></td>
                     <td>Open/Closed Principle</td>
                 </tr>
                 <tr>
                     <td>L</td>
-                    <td>Thay thế Liskov</td>
+                    <td><span class="lang-en">Liskov Substitution</span><span class="lang-vi">Thay thế Liskov</span></td>
                     <td>Liskov Substitution Principle</td>
                 </tr>
                 <tr>
                     <td>I</td>
-                    <td>Phân tách Interface</td>
+                    <td><span class="lang-en">Interface Segregation</span><span class="lang-vi">Phân tách Interface</span></td>
                     <td>Interface Segregation Principle</td>
                 </tr>
                 <tr>
                     <td>D</td>
-                    <td>Đảo ngược Phụ thuộc</td>
+                    <td><span class="lang-en">Dependency Inversion</span><span class="lang-vi">Đảo ngược Phụ thuộc</span></td>
                     <td>Dependency Inversion Principle</td>
                 </tr>
             </table>
         </div>
 
         <div class="section" id="srp">
-            <h2>1. Single Responsibility Principle (SRP)</h2>
+            <h2>
+                <span class="lang-en">1. Single Responsibility Principle (SRP)</span>
+                <span class="lang-vi">1. Nguyên tắc Trách nhiệm đơn lẻ (SRP)</span>
+            </h2>
             <ul>
-                <li>Một class chỉ có một lý do để thay đổi.</li>
-                <li>Trong Unity, tách logic kiểm tra mặt đất khỏi điều khiển đầu vào.</li>
-                <li>Ngoại lệ thực tế: nếu class được thiết kế chỉ phục vụ Player hoặc một đối tượng cụ thể và không cần
-                    tái sử dụng cho đối tượng khác, việc gộp các logic liên quan vẫn phù hợp với SRP vì class chỉ có một
-                    lý do thay đổi gắn với đối tượng đó.</li>
+                <li>
+                    <span class="lang-en">A class should have only one reason to change.</span>
+                    <span class="lang-vi">Một class chỉ có một lý do để thay đổi.</span>
+                </li>
+                <li>
+                    <span class="lang-en">In Unity, separate ground check logic from input controls.</span>
+                    <span class="lang-vi">Trong Unity, tách logic kiểm tra mặt đất khỏi điều khiển đầu vào.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Practical Exception: if a class is designed solely to serve the Player or a specific object and doesn't need reuse, grouping related logic still conforms to SRP since the class only changes based on that single object.</span>
+                    <span class="lang-vi">Ngoại lệ thực tế: nếu class được thiết kế chỉ phục vụ Player hoặc một đối tượng cụ thể và không cần tái sử dụng cho đối tượng khác, việc gộp các logic liên quan vẫn phù hợp với SRP vì class chỉ có một lý do thay đổi gắn với đối tượng đó.</span>
+                </li>
             </ul>
             <div class="grid">
                 <div class="card">
-                    <strong>Vấn đề</strong>
-                    <p>Movement và Ground Check gộp chung làm khó tái sử dụng.</p>
+                    <strong><span class="lang-en">Problem</span><span class="lang-vi">Vấn đề</span></strong>
+                    <p><span class="lang-en">Movement and Ground Check are combined, making reuse difficult.</span><span class="lang-vi">Movement và Ground Check gộp chung làm khó tái sử dụng.</span></p>
                 </div>
                 <div class="card">
-                    <strong>Giải pháp</strong>
-                    <p>Dùng kế thừa: lớp nền kiểm tra mặt đất, lớp dẫn xuất xử lý điều khiển.</p>
+                    <strong><span class="lang-en">Solution</span><span class="lang-vi">Giải pháp</span></strong>
+                    <p><span class="lang-en">Use inheritance: base class checks ground, derived class handles inputs.</span><span class="lang-vi">Dùng kế thừa: lớp nền kiểm tra mặt đất, lớp dẫn xuất xử lý điều khiển.</span></p>
                 </div>
             </div>
-            <p><strong>Ví dụ sai (vi phạm SRP)</strong></p>
+            <p><strong><span class="lang-en">Bad Example (SRP Violation)</span><span class="lang-vi">Ví dụ sai (vi phạm SRP)</span></strong></p>
             <div class="code">
                 <pre>using UnityEngine;
 
@@ -229,7 +141,7 @@ public class PlayerController : MonoBehaviour {
 }
 </pre>
             </div>
-            <p><strong>Ví dụ đúng (tách Ground Check khỏi Input)</strong></p>
+            <p><strong><span class="lang-en">Good Example (Separating Ground Check from Input)</span><span class="lang-vi">Ví dụ đúng (tách Ground Check khỏi Input)</span></strong></p>
             <div class="code">
                 <pre>using UnityEngine;
 
@@ -253,12 +165,21 @@ public class Moveable : Groundable {
         </div>
 
         <div class="section" id="ocp">
-            <h2>2. Open/Closed Principle (OCP)</h2>
+            <h2>
+                <span class="lang-en">2. Open/Closed Principle (OCP)</span>
+                <span class="lang-vi">2. Nguyên tắc Đóng/Mở (OCP)</span>
+            </h2>
             <ul>
-                <li>Mở rộng bằng lớp mới, không sửa lớp đang chạy ổn.</li>
-                <li>Giải pháp: Abstraction qua Interface hoặc Inheritance.</li>
+                <li>
+                    <span class="lang-en">Extend with new classes, don't modify existing working code.</span>
+                    <span class="lang-vi">Mở rộng bằng lớp mới, không sửa lớp đang chạy ổn.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Solution: Abstraction via Interfaces or Inheritance.</span>
+                    <span class="lang-vi">Giải pháp: Abstraction qua Interface hoặc Inheritance.</span>
+                </li>
             </ul>
-            <p><strong>Ví dụ sai (vi phạm OCP)</strong></p>
+            <p><strong><span class="lang-en">Bad Example (OCP Violation)</span><span class="lang-vi">Ví dụ sai (vi phạm OCP)</span></strong></p>
             <div class="code">
                 <pre>using UnityEngine;
 public class Collector : MonoBehaviour {
@@ -271,7 +192,7 @@ public class PointsPickup : MonoBehaviour {}
 public class HealthPickup : MonoBehaviour {}
 </pre>
             </div>
-            <p><strong>Ví dụ đúng (dùng Interface để mở rộng)</strong></p>
+            <p><strong><span class="lang-en">Good Example (Using Interface for Extension)</span><span class="lang-vi">Ví dụ đúng (dùng Interface để mở rộng)</span></strong></p>
             <div class="code">
                 <pre>public interface ICollectable {
     void Collect(GameObject collector);
@@ -297,13 +218,25 @@ public class HealthPickup : MonoBehaviour, ICollectable {
         </div>
 
         <div class="section" id="lsp">
-            <h2>3. Liskov Substitution Principle (LSP)</h2>
+            <h2>
+                <span class="lang-en">3. Liskov Substitution Principle (LSP)</span>
+                <span class="lang-vi">3. Nguyên tắc Thay thế Liskov (LSP)</span>
+            </h2>
             <ul>
-                <li>Đối tượng dẫn xuất phải thay thế được đối tượng cơ sở mà không phá vỡ hành vi mong đợi.</li>
-                <li>Trong Unity: các loại Collider đều là subtype của Collider, API dùng được như nhau.</li>
-                <li>Giữ hợp đồng nhất quán: không thay đổi ý nghĩa tham số/giá trị trả về.</li>
+                <li>
+                    <span class="lang-en">Derived objects must be substitutable for base objects without breaking expected behavior.</span>
+                    <span class="lang-vi">Đối tượng dẫn xuất phải thay thế được đối tượng cơ sở mà không phá vỡ hành vi mong đợi.</span>
+                </li>
+                <li>
+                    <span class="lang-en">In Unity: all Collider types are subtypes of Collider, APIs are used identically.</span>
+                    <span class="lang-vi">Trong Unity: các loại Collider đều là subtype của Collider, API dùng được như nhau.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Keep contracts consistent: do not change parameter meanings or return value semantics.</span>
+                    <span class="lang-vi">Giữ hợp đồng nhất quán: không thay đổi ý nghĩa tham số/giá trị trả về.</span>
+                </li>
             </ul>
-            <p><strong>Ví dụ sai (vi phạm LSP)</strong></p>
+            <p><strong><span class="lang-en">Bad Example (LSP Violation)</span><span class="lang-vi">Ví dụ sai (vi phạm LSP)</span></strong></p>
             <div class="code">
                 <pre>public class Ellipse {
     public virtual float Width { get; set; }
@@ -315,7 +248,7 @@ public class Circle : Ellipse {
 }
 </pre>
             </div>
-            <p><strong>Ví dụ đúng</strong></p>
+            <p><strong><span class="lang-en">Good Example</span><span class="lang-vi">Ví dụ đúng</span></strong></p>
             <div class="code">
                 <pre>using UnityEngine;
 public interface IShape { float Area(); }
@@ -326,12 +259,21 @@ public class EllipseShape : IShape { public float A; public float B; public floa
         </div>
 
         <div class="section" id="isp">
-            <h2>4. Interface Segregation Principle (ISP)</h2>
+            <h2>
+                <span class="lang-en">4. Interface Segregation Principle (ISP)</span>
+                <span class="lang-vi">4. Nguyên tắc Phân tách Interface (ISP)</span>
+            </h2>
             <ul>
-                <li>Không buộc class phải implement những thứ không dùng.</li>
-                <li>Tách thành nhiều interface nhỏ theo nhu cầu cụ thể.</li>
+                <li>
+                    <span class="lang-en">Do not force classes to implement things they do not use.</span>
+                    <span class="lang-vi">Không buộc class phải implement những thứ không dùng.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Split into multiple small interfaces according to specific needs.</span>
+                    <span class="lang-vi">Tách thành nhiều interface nhỏ theo nhu cầu cụ thể.</span>
+                </li>
             </ul>
-            <p><strong>Ví dụ sai (vi phạm ISP)</strong></p>
+            <p><strong><span class="lang-en">Bad Example (ISP Violation)</span><span class="lang-vi">Ví dụ sai (vi phạm ISP)</span></strong></p>
             <div class="code">
                 <pre>public interface IEnemy {
     void Damage(float amount);
@@ -346,7 +288,7 @@ public class WoodenCrateWrong : MonoBehaviour, IEnemy {
 }
 </pre>
             </div>
-            <p><strong>Ví dụ đúng (tách thành nhiều interface nhỏ)</strong></p>
+            <p><strong><span class="lang-en">Good Example (Splitting into smaller interfaces)</span><span class="lang-vi">Ví dụ đúng (tách thành nhiều interface nhỏ)</span></strong></p>
             <div class="code">
                 <pre>public interface IDamageable { void Damage(float amount); }
 public interface IStunnable { void Stun(float duration); }
@@ -360,12 +302,21 @@ public class WoodenCrate : MonoBehaviour, IDamageable {
         </div>
 
         <div class="section" id="dip">
-            <h2>5. Dependency Inversion Principle (DIP)</h2>
+            <h2>
+                <span class="lang-en">5. Dependency Inversion Principle (DIP)</span>
+                <span class="lang-vi">5. Nguyên tắc Đảo ngược Phụ thuộc (DIP)</span>
+            </h2>
             <ul>
-                <li>High-level phụ thuộc vào abstraction, không phụ thuộc trực tiếp vào low-level cụ thể.</li>
-                <li>Dùng Dependency Injection để gắn implementation khi chạy.</li>
+                <li>
+                    <span class="lang-en">High-level modules should depend on abstractions, not directly on concrete low-level implementations.</span>
+                    <span class="lang-vi">High-level phụ thuộc vào abstraction, không phụ thuộc trực tiếp vào low-level cụ thể.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Use Dependency Injection to bind implementations at runtime.</span>
+                    <span class="lang-vi">Dùng Dependency Injection để gắn implementation khi chạy.</span>
+                </li>
             </ul>
-            <p><strong>Ví dụ sai (vi phạm DIP)</strong></p>
+            <p><strong><span class="lang-en">Bad Example (DIP Violation)</span><span class="lang-vi">Ví dụ sai (vi phạm DIP)</span></strong></p>
             <div class="code">
                 <pre>using UnityEngine;
 public class MusicPlayerWrong : MonoBehaviour {
@@ -381,7 +332,7 @@ public class SpecificMusicSequencer {
 public struct SongData {}
 </pre>
             </div>
-            <p><strong>Ví dụ đúng (High-level phụ thuộc vào abstraction)</strong></p>
+            <p><strong><span class="lang-en">Good Example (High-level depending on abstraction)</span><span class="lang-vi">Ví dụ đúng (High-level phụ thuộc vào abstraction)</span></strong></p>
             <div class="code">
                 <pre>public interface IMusicInteraction {
     void StartNewSong(SongData data);
@@ -407,15 +358,36 @@ public struct SongData {}
         </div>
 
         <div class="section" id="conclusion">
-            <h2>IV. Kết Luận</h2>
+            <h2>
+                <span class="lang-en">IV. Conclusion</span>
+                <span class="lang-vi">IV. Kết Luận</span>
+            </h2>
             <ul>
-                <li>SRP để tách trách nhiệm, dễ tái sử dụng.</li>
-                <li>OCP để mở rộng an toàn bằng lớp mới.</li>
-                <li>LSP để thay thế nhất quán.</li>
-                <li>ISP để interface gọn, đúng nhu cầu.</li>
-                <li>DIP để giảm phụ thuộc cứng, dễ test và thay thế.</li>
+                <li>
+                    <span class="lang-en">SRP to split responsibilities, easy to reuse.</span>
+                    <span class="lang-vi">SRP để tách trách nhiệm, dễ tái sử dụng.</span>
+                </li>
+                <li>
+                    <span class="lang-en">OCP to extend safely using new classes.</span>
+                    <span class="lang-vi">OCP để mở rộng an toàn bằng lớp mới.</span>
+                </li>
+                <li>
+                    <span class="lang-en">LSP for consistent substitutions.</span>
+                    <span class="lang-vi">LSP để thay thế nhất quán.</span>
+                </li>
+                <li>
+                    <span class="lang-en">ISP for clean interfaces matching specific needs.</span>
+                    <span class="lang-vi">ISP để interface gọn, đúng nhu cầu.</span>
+                </li>
+                <li>
+                    <span class="lang-en">DIP to reduce hard dependencies, making testing and substitution easy.</span>
+                    <span class="lang-vi">DIP để giảm phụ thuộc cứng, dễ test và thay thế.</span>
+                </li>
             </ul>
-            <p class="note">Mục tiêu là code cập nhật ổn định, dễ bảo trì và mở rộng.</p>
+            <p class="note">
+                <span class="lang-en">The goal is code that updates stably, is easy to maintain and expand.</span>
+                <span class="lang-vi">Mục tiêu là code cập nhật ổn định, dễ bảo trì và mở rộng.</span>
+            </p>
         </div>
     </div>
 </body>

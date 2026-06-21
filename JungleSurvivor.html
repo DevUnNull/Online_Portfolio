@@ -1,180 +1,32 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UnNull — Jungle Survivor</title>
-    <style>
-        body {
-            font-family: Consolas, monospace;
-            background: #0d1a26;
-            color: #00ff99;
-            padding: 30px;
-        }
-
-        a {
-            color: #00ff99;
-            text-decoration: none;
-            transition: all .3s ease;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            background: rgba(0, 0, 0, .88);
-            padding: 28px;
-            border: 2px solid #00ff99;
-            border-radius: 26px;
-            box-shadow: 0 0 30px rgba(0, 255, 153, .12);
-        }
-
-        .back {
-            margin-bottom: 18px;
-            display: inline-block;
-            padding: 10px 22px;
-            border: 2px solid #00ff99;
-            border-radius: 999px;
-            transition: all .3s ease;
-        }
-
-        .back:hover {
-            background: rgba(0, 255, 153, .1);
-            box-shadow: 0 0 10px rgba(0, 255, 153, .5);
-        }
-
-        h1 {
-            color: #ccff00;
-            text-shadow: 0 0 10px #ccff00;
-            font-size: 32px;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            color: #00ff99;
-            font-size: 20px;
-            margin: 0 0 10px;
-        }
-
-        p,
-        li {
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .project-meta {
-            display: grid;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .meta-pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 130px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            border: 1px solid rgba(0, 255, 153, .45);
-            background: rgba(0, 255, 153, .08);
-            font-size: 13px;
-            color: #00ffff;
-        }
-
-        .content-block,
-        .summary-box {
-            border: 1px solid rgba(0, 255, 153, .25);
-            background: rgba(0, 255, 153, .05);
-            border-radius: 28px;
-            padding: 22px;
-            margin-top: 20px;
-        }
-
-        .project-video {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            background: #000;
-            border: 1px solid rgba(0, 255, 153, .25);
-            border-radius: 18px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
-        .project-video iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .detail-button,
-        .outline-link {
-            padding: 10px 14px;
-            border: 1px solid #00ff99;
-            border-radius: 999px;
-            color: #00ff99;
-            font-size: 13px;
-            display: inline-block;
-        }
-
-        .detail-button:hover,
-        .outline-link:hover {
-            background: rgba(0, 255, 153, .1);
-            box-shadow: 0 0 10px rgba(0, 255, 153, .3);
-        }
-
-        .detail-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .project-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            gap: 10px;
-        }
-
-        .project-list li {
-            padding-left: 18px;
-            position: relative;
-        }
-
-        .project-list li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: #00ff99;
-        }
-
-        @media (max-width: 700px) {
-            .detail-actions {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <title data-en="UnNull — Jungle Survivor" data-vi="UnNull — Jungle Survivor">UnNull — Jungle Survivor</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
 </head>
 
 <body>
     <div class="container">
-        <a href="ListProjects.html" class="back">← Quay lại List Projects</a>
+        <a href="ListProjects.html" class="back">
+            <span class="lang-en">← Back to Projects List</span>
+            <span class="lang-vi">← Quay lại List Projects</span>
+        </a>
         <h1>JUNGLE SURVIVOR</h1>
 
         <div class="project-meta">
             <span class="meta-pill">06/2024 - 07/2024</span>
-            <span class="meta-pill">Tự phát triển</span>
-            <span class="meta-pill">Full stack Unity Developer</span>
+            <span class="meta-pill">
+                <span class="lang-en">Self-developed</span>
+                <span class="lang-vi">Tự phát triển</span>
+            </span>
+            <span class="meta-pill">
+                <span class="lang-en">Full Stack Unity Developer</span>
+                <span class="lang-vi">Full stack Unity Developer</span>
+            </span>
         </div>
 
         <div class="project-video">
@@ -184,31 +36,58 @@
         </div>
 
         <div class="content-block">
-            <h2>Giới thiệu</h2>
-            <p>Jungle Survivor là game platformer 2D với vòng lặp sinh tồn, hệ thống nâng cấp nhân vật và combat liên
-                tục. Người chơi khám phá môi trường rừng rậm, thu thập tài nguyên và gia tăng sức mạnh để chống lại quái
-                vật.</p>
-            <p>Dự án tập trung vào thiết kế gameplay mạch lạc, UI/UX rõ ràng và mô hình nâng cấp linh hoạt cho nhân vật.
+            <h2>
+                <span class="lang-en">Introduction</span>
+                <span class="lang-vi">Giới thiệu</span>
+            </h2>
+            <p>
+                <span class="lang-en">Jungle Survivor is a 2D platformer survival game featuring character upgrade progression and continuous combat loops. Players explore deep jungle environments, gather resources, and scale up attributes to fight off monsters.</span>
+                <span class="lang-vi">Jungle Survivor là game platformer 2D với vòng lặp sinh tồn, hệ thống nâng cấp nhân vật và combat liên tục. Người chơi khám phá môi trường rừng rậm, thu thập tài nguyên và gia tăng sức mạnh để chống lại quái vật.</span>
+            </p>
+            <p>
+                <span class="lang-en">The project emphasizes cohesive gameplay design, clear UI/UX feedback, and a highly flexible progression model for character statistics.</span>
+                <span class="lang-vi">Dự án tập trung vào thiết kế gameplay mạch lạc, UI/UX rõ ràng và mô hình nâng cấp linh hoạt cho nhân vật.</span>
             </p>
         </div>
 
         <div class="content-block">
-            <h2>Chi tiết kỹ thuật</h2>
+            <h2>
+                <span class="lang-en">Technical Details</span>
+                <span class="lang-vi">Chi tiết kỹ thuật</span>
+            </h2>
             <ul class="project-list">
-                <li><strong>Gameplay</strong>: Vòng lặp sinh tồn, upgrade nhân vật, hệ thống combat kết hợp skill và di
-                    chuyển.</li>
-                <li><strong>Hệ thống mở rộng</strong>: Thiết kế modular cho phép thêm buff mới mà không thay đổi logic
-                    chính.</li>
-                <li><strong>Tính ổn định</strong>: Quản lý trạng thái người chơi, lưu trữ data dùng PlayerPrefs,
-                    animation động.</li>
-                <li><strong>Công nghệ</strong>: Unity 2D, C#, PlayerPrefs, Animation Events, TextMesh Pro, Factory +
-                    Strategy Pattern.</li>
+                <li>
+                    <strong>Gameplay</strong>: 
+                    <span class="lang-en">Survival loops, character upgrade tree, combat systems integrating skill utilization and pathfinding movement.</span>
+                    <span class="lang-vi">Vòng lặp sinh tồn, upgrade nhân vật, hệ thống combat kết hợp skill và di chuyển.</span>
+                </li>
+                <li>
+                    <strong><span class="lang-en">Extensible Systems</span><span class="lang-vi">Hệ thống mở rộng</span></strong>: 
+                    <span class="lang-en">Modular system architectures that allow adding new buffs/modifiers without affecting the underlying gameplay core logic.</span>
+                    <span class="lang-vi">Thiết kế modular cho phép thêm buff mới mà không thay đổi logic chính.</span>
+                </li>
+                <li>
+                    <strong><span class="lang-en">Stability & Persistence</span><span class="lang-vi">Tính ổn định</span></strong>: 
+                    <span class="lang-en">Player state management, persistence via PlayerPrefs, and dynamic event-driven animations.</span>
+                    <span class="lang-vi">Quản lý trạng thái người chơi, lưu trữ data dùng PlayerPrefs, animation động.</span>
+                </li>
+                <li>
+                    <strong><span class="lang-en">Technologies</span><span class="lang-vi">Công nghệ</span></strong>: 
+                    <span class="lang-en">Unity 2D, C#, PlayerPrefs, Animation Events, TextMesh Pro, Factory + Strategy Patterns.</span>
+                    <span class="lang-vi">Unity 2D, C#, PlayerPrefs, Animation Events, TextMesh Pro, Factory + Strategy Pattern.</span>
+                </li>
             </ul>
         </div>
 
         <div class="detail-actions">
-            <a href="index.html#projects-section" class="detail-button">Về trang chính</a>
-            <a href="ListProjects.html" class="outline-link">Quay lại danh sách</a>
+            <a href="index.html#projects" class="detail-button">
+                <span class="lang-en">Back to Profile</span>
+                <span class="lang-vi">Về trang chính</span>
+            </a>
+            <a href="ListProjects.html" class="outline-link">
+                <span class="lang-en">Back to List</span>
+                <span class="lang-vi">Quay lại danh sách</span>
+            </a>
         </div>
     </div>
 </body>
