@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title data-en="UnNull — Wave Enemy Spawn System" data-vi="UnNull — Hệ thống Quản lý và Triệu hồi Quái vật theo Đợt">UnNull — Wave Enemy Spawn System</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <a href="Package.html" class="back">
+            <span class="lang-en">← Back to Package List</span>
+            <span class="lang-vi">← Về danh sách Package</span>
+        </a>
+        <a href="index.html" class="back" style="margin-left:8px">
+            <span class="lang-en">← Back to Profile</span>
+            <span class="lang-vi">← Về trang hồ sơ</span>
+        </a>
+
+        <h1>
+            <span class="lang-en">Wave Enemy Spawn System</span>
+            <span class="lang-vi">Hệ thống Quản lý và Triệu hồi Quái vật</span>
+        </h1>
+
+        <div class="section" id="overview">
+            <h2>
+                <span class="lang-en">I. Overview</span>
+                <span class="lang-vi">I. Mô tả tổng quan</span>
+            </h2>
+            <div class="grid-2">
+                <div class="card">
+                    <p>
+                        <span class="lang-en">The <strong>Wave Enemy Spawn System</strong> is a highly customizable and flexible Tool/Framework in Unity, designed modularly to help Game Designers easily configure, manage, and control the entire routing, positions, quantities, and spawn frequencies of enemies per wave/turn in Tower Defense or Strategy games (like Plants vs. Zombies).</span>
+                        <span class="lang-vi">Hệ thống là một <strong>Tool/Framework</strong> tùy biến linh hoạt trong Unity, được thiết kế theo dạng mô-đun (modular) giúp các Game Designer dễ dàng cấu hình, quản lý và kiểm soát toàn bộ lộ trình, vị trí, số lượng cũng như tần suất xuất hiện của quái vật (Enemy Spawn) theo từng đợt (Wave/Turn) trong các tựa game dạng Tower Defense hoặc Strategy (như Plants vs. Zombies).</span>
+                    </p>
+                    <p>
+                        <span class="lang-en">Tech Stack & Technical Highlights:</span>
+                        <span class="lang-vi">Công nghệ sử dụng & Điểm cộng kỹ thuật:</span>
+                    </p>
+                    <ul>
+                        <li>
+                            <span class="lang-en"><strong>Tech Stack:</strong> Unity Engine, C# Scripting, Unity UI (uGUI), Scriptable Objects / Data-driven Design.</span>
+                            <span class="lang-vi"><strong>Tech Stack:</strong> Unity Engine, C# Scripting, Unity UI (uGUI), Scriptable Objects / Data-driven Design.</span>
+                        </li>
+                        <li>
+                            <span class="lang-en"><strong>Advantages:</strong> Highly reusable, scalable, with a clear separation between System Logic and Design Data (enabling Game Designers to setup levels without touching code).</span>
+                            <span class="lang-vi"><strong>Ưu điểm hệ thống:</strong> Tính tái sử dụng cao (Reusable), dễ mở rộng (Scalable), tách biệt rõ ràng giữa Logic hệ thống và Dữ liệu thiết kế (giúp Game Designer thiết lập màn chơi mà không cần can thiệp vào Code).</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/HVYx18PSEIQ?start=67" allowfullscreen></iframe>
+                    </div>
+                    <p style="margin-top:8px;" class="note">
+                        <span class="lang-en">Demo Video: Showcases the setup and execution of the wave spawn system in action.</span>
+                        <span class="lang-vi">Video demo: Cấu hình và chạy thực tế hệ thống Wave Enemy Spawn.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="features">
+            <h2>
+                <span class="lang-en">II. Core Features</span>
+                <span class="lang-vi">II. Các chức năng cốt lõi của hệ thống</span>
+            </h2>
+            
+            <h3 style="margin-top:16px;">
+                <span class="lang-en">1. Waypoint & Path System</span>
+                <span class="lang-vi">1. Hệ thống Định tuyến & Thiết kế Lộ trình di chuyển</span>
+            </h3>
+            <ul>
+                <li><span class="tag">Flexible Paths</span> <span class="lang-en">Allows creating and customizing paths for Enemies based on waypoints. Supports flexible point configuration based on map designs.</span><span class="lang-vi"><strong>Định nghĩa Path linh hoạt:</strong> Cho phép tạo và tùy biến các đường đi (Path) cho Enemy dựa trên các tập hợp điểm mốc (Waypoints/Points). Hỗ trợ cấu hình số lượng điểm linh hoạt tùy theo thiết kế của từng bản đồ (Map).</span></li>
+                <li><span class="tag">Path ID System</span> <span class="lang-en">Integrates Scriptable Objects or Enums (Edit Script) to automatically update and display path lists as visual options in the Inspector, minimizing manual configuration errors.</span><span class="lang-vi"><strong>Quản lý ID Lộ trình tập trung:</strong> Tích hợp Scriptable Object hoặc Enum tinh chỉnh (Edit Script) giúp tự động cập nhật và hiển thị danh sách các tuyến đường dưới dạng Option trực quan trên Inspector, giảm thiểu sai sót khi cấu hình thủ công.</span></li>
+            </ul>
+
+            <h3 style="margin-top:16px;">
+                <span class="lang-en">2. Spawn Point Controller</span>
+                <span class="lang-vi">2. Hệ thống Quản lý Vị trí Xuất hiện</span>
+            </h3>
+            <ul>
+                <li><span class="tag">Mapping</span> <span class="lang-en">Setup enemy spawn locations on the map (e.g., emerging from pipes, portals...).</span><span class="lang-vi"><strong>Bản đồ hóa điểm Spawn (Spawn Point Mapping):</strong> Chức năng thiết lập vị trí xuất hiện của Enemy trên bản đồ (ví dụ: đi ra từ đường ống, cổng map...).</span></li>
+                <li><span class="tag">Dynamic Link</span> <span class="lang-en">Direct drag-and-drop feature to link a Spawn Point with a specific Path, forcing enemies spawned there to precisely follow the predetermined route.</span><span class="lang-vi"><strong>Liên kết Động (Dynamic Linking):</strong> Tính năng kéo-thả trực tiếp để liên kết Spawn Point với một Path cụ thể, buộc Enemy khi sinh ra tại điểm đó phải di chuyển chuẩn xác theo lộ trình đã định sẵn.</span></li>
+            </ul>
+
+            <h3 style="margin-top:16px;">
+                <span class="lang-en">3. Turn/Wave Data Configuration</span>
+                <span class="lang-vi">3. Hệ thống Cấu hình Dữ liệu Đợt Quái</span>
+            </h3>
+            <ul>
+                <li><span class="tag">Data-Driven</span> <span class="lang-en">Independent data storage with Scriptable Objects (Turn Config), allowing separate wave configuration assets without affecting code logic.</span><span class="lang-vi"><strong>Lưu trữ dữ liệu độc lập (Turn Config):</strong> Sử dụng kiến trúc Data-Driven, cho phép tạo các file asset cấu hình đợt quái riêng biệt mà không ảnh hưởng đến Logic code.</span></li>
+                <li><span class="tag">Hierarchical</span> <span class="lang-en">Supports total turns/waves per level. Detailed customization of micro-waves within a Turn: specifying quantity and types of enemies (e.g., Normal, Fast, Minorus) appearing simultaneously or sequentially.</span><span class="lang-vi"><strong>Cấu hình phân cấp chi tiết:</strong> Hỗ trợ thiết lập tổng số lượt (Total Turns/Waves). Cho phép tùy chỉnh chi tiết từng đợt nhỏ trong một Turn: quy định số lượng, phân loại các chủng loại Enemy khác nhau sẽ xuất hiện đồng thời hoặc nối tiếp.</span></li>
+            </ul>
+
+            <h3 style="margin-top:16px;">
+                <span class="lang-en">4. Wave Trigger & Countdown UI</span>
+                <span class="lang-vi">4. Hệ thống Kích hoạt & Đồng hồ Đếm ngược UI</span>
+            </h3>
+            <ul>
+                <li><span class="tag">Manual/Auto Trigger</span> <span class="lang-en">Event handling via Button allows players to proactively summon the next wave early.</span><span class="lang-vi"><strong>Kích hoạt thủ công/Tự động (Next Wave Call):</strong> Cơ chế xử lý sự kiện qua Button cho phép người chơi chủ động triệu hồi đợt quái tiếp theo sớm hơn dự kiến.</span></li>
+                <li><span class="tag">Real-time UI</span> <span class="lang-en">Automatically calculates and updates the countdown text for the next wave and the current wave number on the UI (Canvas UI).</span><span class="lang-vi"><strong>Đồng bộ dữ liệu thời gian thực (Real-time UI Binding):</strong> Tự động tính toán, cập nhật trạng thái text hiển thị thời gian đếm ngược (Countdown) của Wave tiếp theo và số thứ tự Wave hiện tại lên giao diện người dùng (Canvas UI).</span></li>
+            </ul>
+
+            <h3 style="margin-top:16px;">
+                <span class="lang-en">5. Centralized Wave Manager & Game Manager</span>
+                <span class="lang-vi">5. Bộ điều phối Trung tâm</span>
+            </h3>
+            <ul>
+                <li><span class="tag">Dependency Injection</span> <span class="lang-en">Visual dependency injection to aggregate and link all independent components (Spawn Point, Path, UI Button, UI Text, and Turn Config File) in a single place.</span><span class="lang-vi"><strong>Dependency Injection trực quan:</strong> Tổng hợp và liên kết tất cả các thành phần độc lập (Spawn Point, Path, UI Button, UI Text, và Turn Config File) tại một nơi duy nhất.</span></li>
+                <li><span class="tag">Lifecycle</span> <span class="lang-en">Controls core logic from countdown initiation, spawning enemies according to configuration, until the wave ends to transition to the next state of the level.</span><span class="lang-vi"><strong>Quản lý Vòng đời & Trạng thái Trận đấu:</strong> Kiểm soát logic cốt lõi từ lúc bắt đầu đếm ngược, sinh quái theo đúng tiến độ cấu hình, cho đến khi kết thúc đợt quái để chuyển sang trạng thái tiếp theo của màn chơi.</span></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

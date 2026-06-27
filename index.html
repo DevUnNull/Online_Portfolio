@@ -323,6 +323,18 @@
             z-index: 1;
         }
 
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
         .hero-overlay {
             position: absolute;
             inset: 0;
@@ -466,9 +478,30 @@
 
         .section-dark {
             background: rgba(13, 10, 8, 0.75);
-            border-top: 1px solid rgba(139, 0, 0, 0.15);
-            border-bottom: 1px solid rgba(139, 0, 0, 0.15);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        #objective::before, #contact::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -15px;
+            width: 100%;
+            height: 16px;
+            background-repeat: repeat-x;
+            background-size: 150px 16px;
+            z-index: 10;
+            pointer-events: none;
+            filter: url(#joly-torn-edge);
+        }
+
+        #objective::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(13, 10, 8, 0.75)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(139, 0, 0, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
+        }
+
+        #contact::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(10, 8, 6, 0.85)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(139, 0, 0, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
         }
 
         .container {
@@ -696,7 +729,6 @@
            ============================================================ */
         .contact-section {
             background: rgba(10, 8, 6, 0.85);
-            border-top: 1px solid var(--border-dark);
             padding: 5rem 2rem;
         }
 
@@ -954,6 +986,10 @@
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
         style="position: absolute; width: 0; height: 0; pointer-events: none;">
         <defs>
+            <filter id="joly-torn-edge" x="-10%" y="-20%" width="120%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
             <filter id="joly-liquid-goo">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
                 <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
@@ -992,6 +1028,7 @@
     </nav>
 
     <section id="home" class="hero">
+        <video class="hero-bg-video" autoplay loop muted playsinline src="assets/videoBackGround.MOV"></video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-eyebrow">
