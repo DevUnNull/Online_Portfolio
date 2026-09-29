@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-en="Ngoc Hai | Personal Portfolio (UnNull)" data-vi="Ngọc Hải | Portfolio cá nhân (UnNull)">Ngoc Hai | Personal Portfolio (UnNull)</title>
+    <title data-en="Ngoc Hai | Personal Portfolio (SSS Studio)" data-vi="Ngọc Hải | Portfolio cá nhân (SSS Studio)">Ngoc Hai |
+        Personal Portfolio (SSS Studio)</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -18,22 +19,22 @@
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Cormorant+Garamond+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
         :root {
-            --blood-red: #8B0000;
-            --crimson: #C41E3A;
-            --dark-bg: #0D0A07;
-            --black-coal: #080604;
-            --dark-card: #1C1410;
-            --burnt-orange: #A84800;
-            --amber: #C8720A;
-            --light-grey: #C8C1BC;
-            --parchment: #C4A882;
-            --cream: #DDD0B8;
-            --bright-gold: #E8C060;
-            --border-dark: #2E201A;
-            --border-mid: #4A3028;
-            --shadow-red: rgba(139, 0, 0, 0.35);
-            --glow-red: rgba(196, 30, 58, 0.5);
-            --glow-amber: rgba(200, 114, 10, 0.45);
+            --blood-red: #0284c7;
+            --crimson: #0ea5e9;
+            --dark-bg: #0f172a;
+            --black-coal: #020617;
+            --dark-card: #1e293b;
+            --burnt-orange: #10b981;
+            --amber: #059669;
+            --light-grey: #cbd5e1;
+            --parchment: #94a3b8;
+            --cream: #f8fafc;
+            --bright-gold: #38bdf8;
+            --border-dark: #334155;
+            --border-mid: #475569;
+            --shadow-red: rgba(2, 132, 199, 0.35);
+            --glow-red: rgba(14, 165, 233, 0.5);
+            --glow-amber: rgba(16, 185, 129, 0.45);
         }
 
         *,
@@ -50,7 +51,7 @@
 
         body {
             font-family: 'Lora', serif;
-            background: #080604;
+            background: #020617;
             color: var(--cream);
             overflow-x: hidden;
             min-height: 100vh;
@@ -65,7 +66,7 @@
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
-            background: linear-gradient(180deg, #0b0806 0%, #140d0a 50%, #050403 100%);
+            background: linear-gradient(180deg, #090f1b 0%, #1e293b 50%, #020617 100%);
         }
 
         .joly-flickering-grid {
@@ -101,9 +102,9 @@
             top: -50vh;
             left: -25vw;
             filter: blur(140px);
-            background: radial-gradient(circle at 30% 30%, rgba(196, 30, 58, 0.15), transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(200, 114, 10, 0.08), transparent 50%),
-                radial-gradient(circle at 50% 40%, rgba(139, 0, 0, 0.12), transparent 45%);
+            background: radial-gradient(circle at 30% 30%, rgba(14, 165, 233, 0.15), transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(16, 185, 129, 0.08), transparent 50%),
+                radial-gradient(circle at 50% 40%, rgba(2, 132, 199, 0.12), transparent 45%);
             animation: jolyAuroraRotate 30s linear infinite;
             will-change: transform;
         }
@@ -133,8 +134,8 @@
             width: 100%;
             max-width: 550px;
             height: 140px;
-            background: rgba(13, 10, 8, 0.4);
-            border: 1px dashed rgba(196, 30, 58, 0.25);
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px dashed rgba(14, 165, 233, 0.25);
             border-radius: 16px;
             overflow: hidden;
             margin-top: 0.5rem;
@@ -155,20 +156,23 @@
            ============================================================ */
         .navbar {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 1000;
-            background: rgba(8, 6, 4, 0.94);
-            border-bottom: 1px solid var(--border-dark);
-            padding: 0 2rem;
-            height: 80px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 0.4rem 0.5rem 0.4rem 1rem;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 1rem;
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            box-shadow: 0 4px 35px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            width: max-content;
+            max-width: 95%;
         }
 
         .navbar-brand {
@@ -183,79 +187,60 @@
             border-radius: 50%;
             object-fit: cover;
             display: block;
-            border: 1.5px solid var(--crimson);
-            background: rgba(8, 6, 4, 0.8);
-            box-shadow: 0 0 10px rgba(196, 30, 58, 0.2);
+            border: 1.5px solid #0ea5e9;
+            background: rgba(2, 6, 23, 0.8);
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
             transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease, border-color 0.3s ease;
         }
 
         .navbar-brand:hover img {
             transform: scale(1.08);
-            border-color: var(--bright-gold);
-            filter: drop-shadow(0 0 10px var(--glow-red));
+            border-color: #38bdf8;
+            filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.6));
         }
 
         .navbar-nav {
             display: flex;
-            gap: 0.4rem;
+            gap: 0;
             list-style: none;
             align-items: center;
-            /* Tạo hiệu ứng màng nhớt liquid co giãn giữa các nút kề nhau */
-            filter: url('#joly-liquid-goo');
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            backdrop-filter: none;
+            box-shadow: none;
         }
 
-        /* JOLYUI COMPONENT: LIQUID METAL BUTTON ARCHITECTURE */
         .navbar-nav .nav-item .joly-liquid-metal-btn {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
+            font-weight: 600;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--light-grey);
+            color: var(--parchment);
             padding: 0.6rem 1.2rem;
             border-radius: 24px;
-            /* Bo góc tròn mạnh để tạo giọt chất lỏng */
             text-decoration: none;
-            background: linear-gradient(145deg, #1c1512, #0d0a08);
-            border: 1px solid rgba(255, 255, 255, 0.03);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
             user-select: none;
+            background: transparent;
+            border: none;
         }
 
-        /* Sóng kim loại lỏng bùng ra khi hover */
-        .navbar-nav .nav-item .joly-liquid-metal-btn::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 28px;
-            background: linear-gradient(90deg, var(--crimson), var(--bright-gold), var(--blood-red));
-            z-index: -1;
-            opacity: 0;
-            transform: scale(0.85);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        .navbar-nav .nav-item .joly-liquid-metal-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .navbar-nav .nav-item .joly-liquid-metal-btn:hover,
         .navbar-nav .nav-item .joly-liquid-metal-btn.active {
             color: #ffffff;
-            transform: scale(1.04);
-            background: linear-gradient(145deg, #2a1a15, #140d0a);
-            border-color: rgba(196, 30, 58, 0.4);
-            box-shadow: 0 8px 20px rgba(196, 30, 58, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.1);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Kích hoạt dòng chảy sóng kim loại */
-        .navbar-nav .nav-item .joly-liquid-metal-btn:hover::before,
-        .navbar-nav .nav-item .joly-liquid-metal-btn.active::before {
-            opacity: 1;
-            transform: scale(1);
-            filter: blur(2px);
+            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+            box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
         }
 
         .navbar-cta {
@@ -338,7 +323,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(8, 6, 4, 0.9) 0%, rgba(74, 8, 8, 0.15) 30%, rgba(8, 6, 4, 0.95) 80%);
+            background: linear-gradient(135deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 47, 73, 0.15) 30%, rgba(2, 6, 23, 0.95) 80%);
             z-index: 0;
         }
 
@@ -353,7 +338,7 @@
         }
 
         .joly-shiny-text {
-            background: linear-gradient(120deg, rgba(232, 192, 96, 0.3) 30%, rgba(255, 255, 255, 0.9) 50%, rgba(232, 192, 96, 0.3) 70%);
+            background: linear-gradient(120deg, rgba(56, 189, 248, 0.3) 30%, rgba(255, 255, 255, 0.9) 50%, rgba(56, 189, 248, 0.3) 70%);
             background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -429,7 +414,7 @@
             width: 320px;
             border-radius: 24px;
             padding: 10px;
-            background: rgba(20, 15, 12, 0.85);
+            background: rgba(30, 41, 59, 0.85);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             overflow: hidden;
@@ -455,7 +440,7 @@
             width: 100%;
             border-radius: 18px;
             object-fit: cover;
-            border: 2px solid rgba(196, 30, 58, 0.2);
+            border: 2px solid rgba(14, 165, 233, 0.2);
             transition: transform 0.5s ease;
         }
 
@@ -477,12 +462,13 @@
         }
 
         .section-dark {
-            background: rgba(13, 10, 8, 0.75);
+            background: rgba(15, 23, 42, 0.75);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             position: relative;
         }
 
-        #objective::before, #contact::before {
+        #objective::before,
+        #contact::before {
             content: '';
             position: absolute;
             left: 0;
@@ -497,11 +483,11 @@
         }
 
         #objective::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(13, 10, 8, 0.75)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(139, 0, 0, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(15, 23, 42, 0.75)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(2, 132, 199, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
         }
 
         #contact::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(10, 8, 6, 0.85)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(139, 0, 0, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(2, 6, 23, 0.85)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(2, 132, 199, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
         }
 
         .container {
@@ -521,7 +507,7 @@
             color: var(--crimson);
             margin-bottom: 0.5rem;
             display: inline-block;
-            text-shadow: 0 0 10px rgba(196, 30, 58, 0.4);
+            text-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
         }
 
         .section-title {
@@ -557,7 +543,7 @@
         .character-card {
             border-radius: 32px;
             padding: 14px;
-            background: linear-gradient(145deg, rgba(28, 20, 16, 0.9), rgba(15, 12, 10, 0.95));
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(30, 41, 59, 0.95));
             position: relative;
             display: flex;
             flex-direction: column;
@@ -569,8 +555,8 @@
 
         .card:hover,
         .character-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.25), 0 0 30px rgba(0, 0, 0, 0.8);
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(2, 132, 199, 0.25), 0 0 30px rgba(0, 0, 0, 0.8);
         }
 
         .card-screen {
@@ -579,7 +565,7 @@
             width: 100%;
             overflow: hidden;
             border-radius: 22px;
-            background-color: #050403;
+            background-color: #020617;
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -615,7 +601,7 @@
         .card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(8, 6, 4, 0.4) 0%, rgba(13, 10, 8, 0.6) 50%, rgba(5, 4, 0, 0.95) 100%);
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.4) 0%, rgba(15, 23, 42, 0.6) 50%, rgba(5, 4, 0, 0.95) 100%);
             z-index: 2;
         }
 
@@ -637,8 +623,8 @@
             text-transform: uppercase;
             color: var(--bright-gold);
             margin-bottom: 0.6rem;
-            background: rgba(139, 0, 0, 0.25);
-            border: 1px solid rgba(196, 30, 58, 0.4);
+            background: rgba(2, 132, 199, 0.25);
+            border: 1px solid rgba(14, 165, 233, 0.4);
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             width: fit-content;
@@ -657,7 +643,7 @@
 
         .card-text {
             font-size: 0.9rem;
-            color: rgba(221, 208, 184, 0.85);
+            color: rgba(248, 250, 252, 0.85);
             line-height: 1.6;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
         }
@@ -687,7 +673,7 @@
             background: var(--blood-red);
             color: var(--cream);
             border: 1px solid var(--crimson);
-            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
         }
 
         .btn-primary:hover {
@@ -703,7 +689,7 @@
         }
 
         .btn-secondary:hover {
-            background: rgba(196, 30, 58, 0.15);
+            background: rgba(14, 165, 233, 0.15);
             border-color: var(--crimson);
             color: var(--cream);
             transform: translateY(-2px);
@@ -728,7 +714,7 @@
            CONTACT FORM
            ============================================================ */
         .contact-section {
-            background: rgba(10, 8, 6, 0.85);
+            background: rgba(2, 6, 23, 0.85);
             padding: 5rem 2rem;
         }
 
@@ -764,7 +750,7 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem 1.2rem;
-            background: rgba(20, 16, 14, 0.8);
+            background: rgba(15, 23, 42, 0.8);
             border: 1px solid var(--border-dark);
             border-radius: 12px;
             transition: all 0.3s ease;
@@ -801,8 +787,8 @@
 
         .form-group:focus-within {
             border-color: var(--crimson);
-            background: rgba(196, 30, 58, 0.05);
-            box-shadow: 0 0 15px rgba(196, 30, 58, 0.1);
+            background: rgba(14, 165, 233, 0.05);
+            box-shadow: 0 0 15px rgba(14, 165, 233, 0.1);
         }
 
         .form-submit {
@@ -837,7 +823,7 @@
 
         .form-message.success {
             display: block;
-            background: rgba(232, 192, 96, 0.1);
+            background: rgba(56, 189, 248, 0.1);
             border: 1px solid var(--bright-gold);
             color: var(--bright-gold);
         }
@@ -847,7 +833,7 @@
            ============================================================ */
         footer {
             padding: 4rem 2rem 2rem;
-            background: #050403;
+            background: #020617;
             border-top: 1px solid var(--border-dark);
             color: var(--light-grey);
             font-size: 0.9rem;
@@ -960,7 +946,7 @@
                 left: 0;
                 right: 0;
                 flex-direction: column;
-                background: rgba(8, 6, 4, 0.98);
+                background: rgba(2, 6, 23, 0.98);
                 padding: 1.5rem;
                 border-bottom: 1px solid var(--border-dark);
                 gap: 1rem;
@@ -1007,19 +993,25 @@
 
     <nav class="navbar" role="navigation">
         <a href="#home" class="navbar-brand">
-            <img src="assets/Logo.png" alt="UnNull Logo">
+            <img src="assets/Logo.png" alt="SSS Studio Logo">
         </a>
 
         <ul class="navbar-nav" id="navMenu">
-            <li class="nav-item"><a href="#home" class="joly-liquid-metal-btn active"><span class="lang-en">Home</span><span class="lang-vi">Trang chủ</span></a></li>
-            <li class="nav-item"><a href="#objective" class="joly-liquid-metal-btn"><span class="lang-en">About</span><span class="lang-vi">Giới thiệu</span></a></li>
-            <li class="nav-item"><a href="#projects" class="joly-liquid-metal-btn"><span class="lang-en">Projects</span><span class="lang-vi">Dự án</span></a></li>
-            <li class="nav-item"><a href="#skills" class="joly-liquid-metal-btn"><span class="lang-en">Skills</span><span class="lang-vi">Kỹ năng</span></a></li>
-            <li class="nav-item"><a href="#education" class="joly-liquid-metal-btn"><span class="lang-en">Journey</span><span class="lang-vi">Hành trình</span></a></li>
-            <li class="nav-item"><a href="#contact" class="joly-liquid-metal-btn"><span class="lang-en">Contact</span><span class="lang-vi">Liên hệ</span></a></li>
+            <li class="nav-item"><a href="#home" class="joly-liquid-metal-btn active"><span
+                        class="lang-en">Home</span><span class="lang-vi">Trang chủ</span></a></li>
+            <li class="nav-item"><a href="#objective" class="joly-liquid-metal-btn"><span
+                        class="lang-en">About</span><span class="lang-vi">Giới thiệu</span></a></li>
+            <li class="nav-item"><a href="#projects" class="joly-liquid-metal-btn"><span
+                        class="lang-en">Projects</span><span class="lang-vi">Dự án</span></a></li>
+            <li class="nav-item"><a href="#skills" class="joly-liquid-metal-btn"><span
+                        class="lang-en">Skills</span><span class="lang-vi">Kỹ năng</span></a></li>
+            <li class="nav-item"><a href="#education" class="joly-liquid-metal-btn"><span
+                        class="lang-en">Journey</span><span class="lang-vi">Hành trình</span></a></li>
+            <li class="nav-item"><a href="#contact" class="joly-liquid-metal-btn"><span
+                        class="lang-en">Contact</span><span class="lang-vi">Liên hệ</span></a></li>
         </ul>
 
-        <a href="#contact" class="navbar-cta"><span class="lang-en">Connect</span><span class="lang-vi">Kết nối</span></a>
+
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -1027,34 +1019,30 @@
         </button>
     </nav>
 
-    <section id="home" class="hero">
-        <video class="hero-bg-video" autoplay loop muted playsinline src="assets/videoBackGround.MOV"></video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-eyebrow">
-                <span class="lang-en">Game Developer & Software Engineer</span>
-                <span class="lang-vi">Lập trình viên Game & Software Engineer</span>
+    <section id="home" class="hero" style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; min-height: 100vh;">
+        <!-- Animated Background Canvas -->
+        <canvas id="hero-animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.6;"></canvas>
+        <div class="hero-overlay" style="z-index: 1;"></div>
+        
+        <div class="hero-content" style="z-index: 2; display: flex; flex-direction: column; align-items: center; max-width: 1200px; width: 100%; padding: 0 2rem; margin: 0 auto; transform: none; width: 100%;">
+            <div class="hero-eyebrow" style="color: var(--bright-gold); font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem;">
+                <span class="lang-en">SSS STUDIO</span>
+                <span class="lang-vi">SSS STUDIO</span>
             </div>
 
-            <div class="joly-falling-container" id="fallingTextZone">
-                <canvas id="joly-falling-canvas"></canvas>
-            </div>
+            <h1 class="hero-massive-title" style="font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 900; line-height: 1.05; margin: 1.5rem 0; letter-spacing: -0.03em; font-family: 'Inter', sans-serif; text-transform: uppercase; color: var(--cream); text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <span class="lang-en">THINK BIG.<br>WORK SMART.</span>
+                <span class="lang-vi">THINK BIG.<br>WORK SMART.</span>
+            </h1>
 
-            <p class="hero-title-sub joly-shiny-text">Game Developer · Unity Engineer · Creative Programmer</p>
-            <div class="hero-divider"></div>
-            <p class="hero-desc">
-                <span class="lang-en">Welcome to the Portfolio of Ngoc Hai (UnNull). I am a developer passionate about building immersive game worlds and high-quality software applications using Unity Engine.</span>
-                <span class="lang-vi">Chào mừng đến với Portfolio của Ngọc Hải (UnNull). Tôi là một lập trình viên đam mê kiến tạo những thế giới game chân thực và ứng dụng phần mềm chất lượng cao bằng Unity Engine.</span>
+            <p class="hero-desc" style="font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--light-grey); max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;">
+                <span class="lang-en">Our games entertain and inspire players every day, everywhere. We specialize in realistic 2D & 3D experiences using Unity Engine.</span>
+                <span class="lang-vi">Các tựa game của chúng tôi mang lại niềm vui và cảm hứng cho người chơi mỗi ngày, ở bất cứ đâu. Chuyên phát triển game 2D & 3D chân thực bằng Unity Engine.</span>
             </p>
-            <div class="hero-buttons">
+            <div class="hero-buttons" style="justify-content: center; display: flex; gap: 1rem;">
                 <a href="#projects" class="btn btn-secondary"><span class="lang-en">Explore Projects</span><span class="lang-vi">Khám Phá Dự Án</span></a>
                 <a href="#contact" class="btn btn-primary"><span class="lang-en">Work Together</span><span class="lang-vi">Hợp Tác Phát Triển</span></a>
             </div>
-        </div>
-
-        <div class="hero-avatar-wrapper joly-beam-card">
-            <img id="profileAvatarLarge" class="hero-avatar" src="assets/Avata.jpg"
-                alt="Ngọc Hải (UnNull) - Portfolio Avatar">
         </div>
     </section>
 
@@ -1063,8 +1051,10 @@
         <section id="objective" class="section section-dark">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow"><span class="lang-en">OBJECTIVE & PHILOSOPHY</span><span class="lang-vi">MỤC TIÊU & TRIẾT LÝ</span></span>
-                    <h2 class="section-title"><span class="lang-en">Vision & Personal Direction</span><span class="lang-vi">Tầm nhìn & Định hướng cá nhân</span></h2>
+                    <span class="section-eyebrow"><span class="lang-en">OBJECTIVE & PHILOSOPHY</span><span
+                            class="lang-vi">MỤC TIÊU & TRIẾT LÝ</span></span>
+                    <h2 class="section-title"><span class="lang-en">About SSS Studio</span><span
+                            class="lang-vi">Về SSS Studio</span></h2>
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-2">
@@ -1074,10 +1064,15 @@
                             <img class="card-media" src="assets/MucTieuCaNhan.png" alt="Objective Background 1">
                             <div class="card-overlay"></div>
                             <div class="card-body">
-                                <h3 class="card-title"><span class="lang-en">Personal Objective</span><span class="lang-vi">Mục tiêu cá nhân</span></h3>
+                                <h3 class="card-title"><span class="lang-en">Core Objective</span><span
+                                        class="lang-vi">Mục tiêu cốt lõi</span></h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Build and release high-quality games & applications, focusing on realistic physics interactions and creating great entertainment value for players.</span>
-                                    <span class="lang-vi">Xây dựng và phát hành các tựa game & ứng dụng chất lượng cao, tập trung vào trải nghiệm tương tác vật lý chân thực và tạo ra giá trị giải trí lớn cho người chơi.</span>
+                                    <span class="lang-en">Build and release high-quality games & applications, focusing
+                                        on realistic physics interactions and creating great entertainment value for
+                                        players.</span>
+                                    <span class="lang-vi">Xây dựng và phát hành các tựa game & ứng dụng chất lượng cao,
+                                        tập trung vào trải nghiệm tương tác vật lý chân thực và tạo ra giá trị giải trí
+                                        lớn cho người chơi.</span>
                                 </p>
                             </div>
                         </div>
@@ -1088,10 +1083,85 @@
                             <img class="card-media" src="assets/TrietLyLamGame.png" alt="Game Dev Philosophy">
                             <div class="card-overlay"></div>
                             <div class="card-body">
-                                <h3 class="card-title"><span class="lang-en">Game Dev Philosophy</span><span class="lang-vi">Triết lý làm game</span></h3>
+                                <h3 class="card-title"><span class="lang-en">Development Philosophy</span><span
+                                        class="lang-vi">Triết lý phát triển</span></h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Put player experience at the center. Harmoniously combine engaging gameplay, smooth physics mechanics, and maximum performance optimization across all devices.</span>
-                                    <span class="lang-vi">Đặt trải nghiệm người chơi làm trung tâm. Kết hợp hài hòa giữa gameplay lôi cuốn, cơ chế vật lý mượt mà và tối ưu hóa hiệu năng tối đa trên mọi thiết bị.</span>
+                                    <span class="lang-en">Put player experience at the center. Harmoniously combine
+                                        engaging gameplay, smooth physics mechanics, and maximum performance
+                                        optimization across all devices.</span>
+                                    <span class="lang-vi">Đặt trải nghiệm người chơi làm trung tâm. Kết hợp hài hòa giữa
+                                        gameplay lôi cuốn, cơ chế vật lý mượt mà và tối ưu hóa hiệu năng tối đa trên mọi
+                                        thiết bị.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="studio-team" class="section section-dark">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-eyebrow"><span class="lang-en">OUR TEAM</span><span class="lang-vi">ĐỘI NGŨ CỦA CHÚNG TÔI</span></span>
+                    <h2 class="section-title"><span class="lang-en">Meet SSS Studio</span><span class="lang-vi">Gặp gỡ SSS Studio</span></h2>
+                    <div class="section-divider"></div>
+                    <p style="text-align: center; color: var(--light-grey); max-width: 700px; margin: 1rem auto 3rem; line-height: 1.6;">
+                        <span class="lang-en">We are a studio of over 30 passionate members across all disciplines, specializing in creating high-quality 2D and 3D games. Here is our core leadership team.</span>
+                        <span class="lang-vi">Chúng tôi là một studio gồm hơn 30 thành viên tâm huyết với đầy đủ các lĩnh vực, chuyên phát triển các tựa game 2D và 3D chất lượng cao. Dưới đây là đội ngũ lãnh đạo nòng cốt.</span>
+                    </p>
+                </div>
+
+                <div style="margin-bottom: 5rem; text-align: center; position: relative; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                    <img src="assets/MucTieuCaNhan.png" alt="SSS Studio Team" style="width: 100%; height: 400px; object-fit: cover; border-radius: 20px; border: 1px solid var(--border-mid); box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+                    <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(2,6,23,0.85); padding: 12px 24px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid var(--bright-gold);">
+                        <span class="lang-en" style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">+30 Members across all disciplines</span>
+                        <span class="lang-vi" style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">Hơn 30 thành viên đầy đủ các lĩnh vực</span>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card joly-beam-card">
+                        <div class="card-screen">
+                            <div class="card-notch"></div>
+                            <img class="card-media" src="assets/Hoang.jpg" alt="Hoang Avatar" style="object-position: top; filter: grayscale(30%);">
+                            <div class="card-overlay"></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Hoàng</h3>
+                                <p class="card-text" style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">Chief Production Officer</p>
+                                <p class="card-text" style="font-size: 0.95rem;">
+                                    <span class="lang-en">3+ years of experience. Specializes in production management, external communication, and product strategy.</span>
+                                    <span class="lang-vi">Hơn 3 năm kinh nghiệm. Chuyên về quản lý sản xuất, giao tiếp đối ngoại và chiến lược sản phẩm.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card joly-beam-card">
+                        <div class="card-screen">
+                            <div class="card-notch"></div>
+                            <img class="card-media" src="assets/Hai.jpg" alt="Hai Avatar" style="object-position: top;">
+                            <div class="card-overlay"></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Hải</h3>
+                                <p class="card-text" style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">CEO & Co-Founder</p>
+                                <p class="card-text" style="font-size: 0.95rem;">
+                                    <span class="lang-en">3+ years of experience. The visionary behind SSS Studio, leading the overarching strategy and operations.</span>
+                                    <span class="lang-vi">Hơn 3 năm kinh nghiệm. Người định hướng tầm nhìn cho SSS Studio, dẫn dắt chiến lược và vận hành tổng thể.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card joly-beam-card">
+                        <div class="card-screen">
+                            <div class="card-notch"></div>
+                            <img class="card-media" src="assets/Nam.jpg" alt="Nam Avatar" style="object-position: top; filter: grayscale(30%);">
+                            <div class="card-overlay"></div>
+                            <div class="card-body">
+                                <h3 class="card-title">Nam</h3>
+                                <p class="card-text" style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">Chief Technology Officer</p>
+                                <p class="card-text" style="font-size: 0.95rem;">
+                                    <span class="lang-en">7+ years of experience. The technical mastermind, architecting robust systems and advanced gameplay mechanics.</span>
+                                    <span class="lang-vi">Hơn 7 năm kinh nghiệm. Bậc thầy kỹ thuật, thiết kế các hệ thống vững chắc và cơ chế gameplay bậc cao.</span>
                                 </p>
                             </div>
                         </div>
@@ -1103,33 +1173,14 @@
         <section id="projects" class="section section-dark">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow"><span class="lang-en">FEATURED PROJECTS</span><span class="lang-vi">SẢN PHẨM NỔI BẬT</span></span>
-                    <h2 class="section-title"><span class="lang-en">Production-Ready Projects</span><span class="lang-vi">Các Dự Án Thực Chiến</span></h2>
+                    <span class="section-eyebrow"><span class="lang-en">FEATURED PROJECTS</span><span
+                            class="lang-vi">SẢN PHẨM NỔI BẬT</span></span>
+                    <h2 class="section-title"><span class="lang-en">Production-Ready Projects</span><span
+                            class="lang-vi">Các Dự Án Thực Chiến</span></h2>
                     <div class="section-divider"></div>
                 </div>
 
-                <div id="sphere-wrap" style="margin-bottom: 5rem;">
-                    <div id="sphere-container"
-                        style="position:relative; width:100%; height:450px; background: radial-gradient(circle, rgba(18,13,10,0.9) 0%, rgba(5,4,3,1) 100%); border-radius: 28px; overflow:hidden; border: 1px solid rgba(196,30,58,0.35); box-shadow: 0 20px 50px rgba(0,0,0,0.85); cursor: grab;">
 
-                        <canvas id="sphere-canvas" style="width:100%; height:100%; display:block;"></canvas>
-
-                        <div id="sphere-project-overlay"
-                            style="position:absolute; bottom:25px; left:25px; background: rgba(8,6,4,0.92); border: 1px solid var(--crimson); padding: 14px 22px; border-radius: 14px; backdrop-filter: blur(8px); pointer-events: none; max-width: 350px; box-shadow: 0 10px 25px rgba(0,0,0,0.6);">
-                            <p
-                                style="font-size: 11px; color: var(--bright-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 3px;">
-                                <span class="lang-en">Currently Displayed Project</span><span class="lang-vi">Dự án đang hiển thị</span></p>
-                            <h4 id="sphere-project-title"
-                                style="font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; color: var(--cream); font-weight: 700;">
-                                Brainrot Runner</h4>
-                        </div>
-
-                        <div
-                            style="position:absolute; bottom:25px; right:25px; font-size:11px; color:rgba(200,193,188,0.4); letter-spacing:.15em; text-transform:uppercase; pointer-events:none;">
-                            <span class="lang-en">☽ Drag mouse to rotate project sphere ☽</span><span class="lang-vi">☽ Vuốt chuột xoay vòng xoáy dự án ☽</span>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="grid-3">
                     <a href="BrainrotRunner.html" class="card joly-beam-card" style="text-decoration: none;">
@@ -1141,8 +1192,12 @@
                                 <span class="card-tag">Procedural Runner / Team</span>
                                 <h3 class="card-title">Brainrot Runner</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">An endless runner game featuring random portal teleportation and boss evolution cycles. Implemented Object Pooling for optimal spawning performance and State Pattern for boss AI.</span>
-                                    <span class="lang-vi">Game endless-runner với cơ chế cổng dịch chuyển ngẫu nhiên và chu kỳ tiến hóa boss. Áp dụng Object Pooling tối ưu hiệu năng phát sinh vật thể và State Pattern cho AI boss.</span>
+                                    <span class="lang-en">An endless runner game featuring random portal teleportation
+                                        and boss evolution cycles. Implemented Object Pooling for optimal spawning
+                                        performance and State Pattern for boss AI.</span>
+                                    <span class="lang-vi">Game endless-runner với cơ chế cổng dịch chuyển ngẫu nhiên và
+                                        chu kỳ tiến hóa boss. Áp dụng Object Pooling tối ưu hiệu năng phát sinh vật thể
+                                        và State Pattern cho AI boss.</span>
                                 </p>
                             </div>
                         </div>
@@ -1156,8 +1211,12 @@
                                 <span class="card-tag">Global Game Jam / Team</span>
                                 <h3 class="card-title">Behind the Mask</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">A 36-hour game jam project for Global Game Jam 2026. Programmed core gameplay mechanics in C#, optimized assets, and delivered a complete game under intense time pressure.</span>
-                                    <span class="lang-vi">Dự án game 36 giờ tại Global Game Jam 2026. Lập trình logic cốt lõi bằng C#, tối ưu hóa asset và xây dựng gameplay hoàn chỉnh dưới áp lực thời gian cực lớn.</span>
+                                    <span class="lang-en">A 36-hour game jam project for Global Game Jam 2026.
+                                        Programmed core gameplay mechanics in C#, optimized assets, and delivered a
+                                        complete game under intense time pressure.</span>
+                                    <span class="lang-vi">Dự án game 36 giờ tại Global Game Jam 2026. Lập trình logic
+                                        cốt lõi bằng C#, tối ưu hóa asset và xây dựng gameplay hoàn chỉnh dưới áp lực
+                                        thời gian cực lớn.</span>
                                 </p>
                             </div>
                         </div>
@@ -1171,8 +1230,12 @@
                                 <span class="card-tag">2D Tower Defense / Personal</span>
                                 <h3 class="card-title">Heroic Defense</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Personal 2D tower defense project. Developed tower placement systems, dynamic upgrades, real-time resource management, and wave spawning mechanics.</span>
-                                    <span class="lang-vi">Dự án thủ thành 2D cá nhân. Phát triển hệ thống đặt tháp (tower placement), nâng cấp thuộc tính động, quản lý tài nguyên thời gian thực và spawn quái theo làn (wave spawning).</span>
+                                    <span class="lang-en">Personal 2D tower defense project. Developed tower placement
+                                        systems, dynamic upgrades, real-time resource management, and wave spawning
+                                        mechanics.</span>
+                                    <span class="lang-vi">Dự án thủ thành 2D cá nhân. Phát triển hệ thống đặt tháp
+                                        (tower placement), nâng cấp thuộc tính động, quản lý tài nguyên thời gian thực
+                                        và spawn quái theo làn (wave spawning).</span>
                                 </p>
                             </div>
                         </div>
@@ -1186,8 +1249,12 @@
                                 <span class="card-tag">2D Action Platformer / Personal</span>
                                 <h3 class="card-title">Jungle Survivor</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Personal 2D action platformer game. Programmed smooth physics movement, responsive combat system, random upgrades, and smart enemy behavior.</span>
-                                    <span class="lang-vi">Game nhập vai hành động 2D cá nhân. Lập trình hệ thống vật lý di chuyển mượt mà, cơ chế chiến đấu responsive, nâng cấp ngẫu nhiên và hành vi quái vật thông minh.</span>
+                                    <span class="lang-en">Personal 2D action platformer game. Programmed smooth physics
+                                        movement, responsive combat system, random upgrades, and smart enemy
+                                        behavior.</span>
+                                    <span class="lang-vi">Game nhập vai hành động 2D cá nhân. Lập trình hệ thống vật lý
+                                        di chuyển mượt mà, cơ chế chiến đấu responsive, nâng cấp ngẫu nhiên và hành vi
+                                        quái vật thông minh.</span>
                                 </p>
                             </div>
                         </div>
@@ -1199,8 +1266,10 @@
         <section id="skills" class="section section-dark">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow"><span class="lang-en">CORE SKILLS</span><span class="lang-vi">KỸ NĂNG CỐT LÕI</span></span>
-                    <h2 class="section-title"><span class="lang-en">Core Technologies & Tools</span><span class="lang-vi">Công nghệ & Công cụ chính</span></h2>
+                    <span class="section-eyebrow"><span class="lang-en">CORE SKILLS</span><span class="lang-vi">KỸ NĂNG
+                            CỐT LÕI</span></span>
+                    <h2 class="section-title"><span class="lang-en">Core Technologies & Tools</span><span
+                            class="lang-vi">Công nghệ & Công cụ chính</span></h2>
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-3">
@@ -1215,8 +1284,10 @@
                                 <span class="character-class">ENGINE</span>
                                 <h3 class="character-name">Unity Engine & C#</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Program core logic optimizing MonoBehaviour structure, computing Rigidbody physics systems, and smooth Animation states.</span>
-                                    <span class="lang-vi">Lập trình logic cốt lõi ứng dụng cấu trúc MonoBehaviour tối ưu, tính toán hệ thống vật lý Rigidbody và hệ quản lý Animation mượt mà.</span>
+                                    <span class="lang-en">Program core logic optimizing MonoBehaviour structure,
+                                        computing Rigidbody physics systems, and smooth Animation states.</span>
+                                    <span class="lang-vi">Lập trình logic cốt lõi ứng dụng cấu trúc MonoBehaviour tối
+                                        ưu, tính toán hệ thống vật lý Rigidbody và hệ quản lý Animation mượt mà.</span>
                                 </p>
                             </div>
                         </div>
@@ -1232,8 +1303,11 @@
                                 <span class="character-class">ARCHITECTURE</span>
                                 <h3 class="character-name">Clean Architecture</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Design clean, layered codebase structure, applying Design Patterns (Factory, Observer, Singleton) to decouple complex systems.</span>
-                                    <span class="lang-vi">Thiết kế mã nguồn tách biệt phân lớp rõ ràng, áp dụng Design Patterns (Factory, Observer, Singleton) giải quyết triệt để bài toán phình to dữ liệu game.</span>
+                                    <span class="lang-en">Design clean, layered codebase structure, applying Design
+                                        Patterns (Factory, Observer, Singleton) to decouple complex systems.</span>
+                                    <span class="lang-vi">Thiết kế mã nguồn tách biệt phân lớp rõ ràng, áp dụng Design
+                                        Patterns (Factory, Observer, Singleton) giải quyết triệt để bài toán phình to dữ
+                                        liệu game.</span>
                                 </p>
                             </div>
                         </div>
@@ -1249,8 +1323,10 @@
                                 <span class="character-class">OPERATIONS</span>
                                 <h3 class="character-name">DevOps & Data</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Manage codebases with advanced Git, automated asset packaging, and state synchronization persistence with SQLite.</span>
-                                    <span class="lang-vi">Quản trị mã nguồn bằng Git nâng cao, đóng gói tài nguyên tự động, cùng hệ thống lưu trữ đồng bộ trạng thái qua SQLite.</span>
+                                    <span class="lang-en">Manage codebases with advanced Git, automated asset packaging,
+                                        and state synchronization persistence with SQLite.</span>
+                                    <span class="lang-vi">Quản trị mã nguồn bằng Git nâng cao, đóng gói tài nguyên tự
+                                        động, cùng hệ thống lưu trữ đồng bộ trạng thái qua SQLite.</span>
                                 </p>
                             </div>
                         </div>
@@ -1266,8 +1342,11 @@
                                 <span class="character-class">PACKAGES</span>
                                 <h3 class="character-name">Unity Packages</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Develop and package reusable modular utilities (Upgrade System, Object Pooling, Save System) to expedite development cycles.</span>
-                                    <span class="lang-vi">Xây dựng và đóng gói các thư viện modular tái sử dụng như Upgrade System, Object Pooling, Save System giúp tối ưu hóa thời gian phát triển game.</span>
+                                    <span class="lang-en">Develop and package reusable modular utilities (Upgrade
+                                        System, Object Pooling, Save System) to expedite development cycles.</span>
+                                    <span class="lang-vi">Xây dựng và đóng gói các thư viện modular tái sử dụng như
+                                        Upgrade System, Object Pooling, Save System giúp tối ưu hóa thời gian phát triển
+                                        game.</span>
                                 </p>
                             </div>
                         </div>
@@ -1283,8 +1362,10 @@
                                 <span class="character-class">AI CO-PILOT</span>
                                 <h3 class="character-name">AI-Assisted Game Dev</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Leverage AI models (Claude, Copilot, Gemini) for architecture planning, code refactoring, and accelerated production workflows.</span>
-                                    <span class="lang-vi">Ứng dụng các mô hình AI (Claude, Copilot, Gemini) vào thiết kế kiến trúc game, tối ưu hóa mã nguồn và đẩy nhanh quy trình sản xuất.</span>
+                                    <span class="lang-en">Leverage AI models (Claude, Copilot, Gemini) for architecture
+                                        planning, code refactoring, and accelerated production workflows.</span>
+                                    <span class="lang-vi">Ứng dụng các mô hình AI (Claude, Copilot, Gemini) vào thiết kế
+                                        kiến trúc game, tối ưu hóa mã nguồn và đẩy nhanh quy trình sản xuất.</span>
                                 </p>
                             </div>
                         </div>
@@ -1300,8 +1381,11 @@
                                 <span class="character-class">SHARING</span>
                                 <h3 class="character-name">Knowledge Shares</h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Systematize and share advanced knowledge about Design Patterns, Best Practices, and performance optimization in game programming.</span>
-                                    <span class="lang-vi">Hệ thống hóa và chia sẻ kiến thức chuyên sâu về Design Patterns, Best Practices và tối ưu hóa hiệu năng trong lập trình game.</span>
+                                    <span class="lang-en">Systematize and share advanced knowledge about Design
+                                        Patterns, Best Practices, and performance optimization in game
+                                        programming.</span>
+                                    <span class="lang-vi">Hệ thống hóa và chia sẻ kiến thức chuyên sâu về Design
+                                        Patterns, Best Practices và tối ưu hóa hiệu năng trong lập trình game.</span>
                                 </p>
                             </div>
                         </div>
@@ -1313,8 +1397,10 @@
         <section id="education" class="section section-dark">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow"><span class="lang-en">DEVELOPMENT JOURNEY</span><span class="lang-vi">HÀNH TRÌNH PHÁT TRIỂN</span></span>
-                    <h2 class="section-title"><span class="lang-en">Journey & Milestones</span><span class="lang-vi">Hành trình & Cột mốc</span></h2>
+                    <span class="section-eyebrow"><span class="lang-en">DEVELOPMENT JOURNEY</span><span
+                            class="lang-vi">HÀNH TRÌNH PHÁT TRIỂN</span></span>
+                    <h2 class="section-title"><span class="lang-en">Journey & Milestones</span><span
+                            class="lang-vi">Hành trình & Cột mốc</span></h2>
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-2">
@@ -1326,10 +1412,15 @@
                                 alt="Thành lập">
                             <div class="card-overlay"></div>
                             <div class="card-body">
-                                <h3 class="card-title"><span class="lang-en">Learning & Research Phase</span><span class="lang-vi">Giai đoạn học tập & nghiên cứu</span></h3>
+                                <h3 class="card-title"><span class="lang-en">Learning & Research Phase</span><span
+                                        class="lang-vi">Giai đoạn học tập & nghiên cứu</span></h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Focused on software engineering principles and game development, sharpening algorithmic thinking and professional project workflows.</span>
-                                    <span class="lang-vi">Tập trung nghiên cứu chuyên sâu về Kỹ thuật phần mềm và Lập trình Game, rèn luyện tư duy thuật toán và quy trình phát triển dự án chuyên nghiệp.</span>
+                                    <span class="lang-en">Focused on software engineering principles and game
+                                        development, sharpening algorithmic thinking and professional project
+                                        workflows.</span>
+                                    <span class="lang-vi">Tập trung nghiên cứu chuyên sâu về Kỹ thuật phần mềm và Lập
+                                        trình Game, rèn luyện tư duy thuật toán và quy trình phát triển dự án chuyên
+                                        nghiệp.</span>
                                 </p>
                             </div>
                         </div>
@@ -1342,10 +1433,15 @@
                                 alt="Đào tạo">
                             <div class="card-overlay"></div>
                             <div class="card-body">
-                                <h3 class="card-title"><span class="lang-en">Certificates & Practice</span><span class="lang-vi">Chứng chỉ & Dự án thực tế</span></h3>
+                                <h3 class="card-title"><span class="lang-en">Certificates & Practice</span><span
+                                        class="lang-vi">Chứng chỉ & Dự án thực tế</span></h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Earning specialized Unity 2D/3D development certifications, building practical projects to accumulate industrial experience and technical expertise.</span>
-                                    <span class="lang-vi">Sở hữu chứng chỉ chuyên sâu về phát triển game Unity 2D/3D, tích cực xây dựng các dự án thực tế để tích lũy kinh nghiệm làm việc và kiến thức kỹ thuật.</span>
+                                    <span class="lang-en">Earning specialized Unity 2D/3D development certifications,
+                                        building practical projects to accumulate industrial experience and technical
+                                        expertise.</span>
+                                    <span class="lang-vi">Sở hữu chứng chỉ chuyên sâu về phát triển game Unity 2D/3D,
+                                        tích cực xây dựng các dự án thực tế để tích lũy kinh nghiệm làm việc và kiến
+                                        thức kỹ thuật.</span>
                                 </p>
                             </div>
                         </div>
@@ -1358,11 +1454,17 @@
                                 alt="Game Jam Log">
                             <div class="card-overlay"></div>
                             <div class="card-body">
-                                <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Competition / Hackathon</span><span class="lang-vi">Cạnh tranh / Hackathon</span></span>
-                                <h3 class="card-title"><span class="lang-en">Participating in Game Jams</span><span class="lang-vi">Tham gia thi Game Jam</span></h3>
+                                <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Competition
+                                        / Hackathon</span><span class="lang-vi">Cạnh tranh / Hackathon</span></span>
+                                <h3 class="card-title"><span class="lang-en">Participating in Game Jams</span><span
+                                        class="lang-vi">Tham gia thi Game Jam</span></h3>
                                 <p class="card-text">
-                                    <span class="lang-en">Challenging myself to build rapid prototypes, restrict scope, and collaborate in team environments under extreme time pressure at Game Jam tournaments.</span>
-                                    <span class="lang-vi">Thử thách bản thân thiết kế prototype game nhanh, giới hạn scope và làm việc nhóm dưới áp lực thời gian cực lớn tại các giải đấu Game Jam.</span>
+                                    <span class="lang-en">Challenging myself to build rapid prototypes, restrict scope,
+                                        and collaborate in team environments under extreme time pressure at Game Jam
+                                        tournaments.</span>
+                                    <span class="lang-vi">Thử thách bản thân thiết kế prototype game nhanh, giới hạn
+                                        scope và làm việc nhóm dưới áp lực thời gian cực lớn tại các giải đấu Game
+                                        Jam.</span>
                                 </p>
                             </div>
                         </div>
@@ -1375,11 +1477,15 @@
                                 alt="Previous Jobs">
                             <div class="card-overlay"></div>
                             <div class="card-body">
-                                <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Experience / History</span><span class="lang-vi">Kinh nghiệm / Lịch sử</span></span>
-                                <h3 class="card-title"><span class="lang-en">Working History</span><span class="lang-vi">Lịch sử làm việc</span></h3>
+                                <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Experience /
+                                        History</span><span class="lang-vi">Kinh nghiệm / Lịch sử</span></span>
+                                <h3 class="card-title"><span class="lang-en">Working History</span><span
+                                        class="lang-vi">Lịch sử làm việc</span></h3>
                                 <p class="card-text">
-                                    <span class="lang-en">A compilation of professional milestones at FPT University, freelance contracts, and internship at the DXLab research department.</span>
-                                    <span class="lang-vi">Tổng hợp các cột mốc làm việc thực tế tại Đại học FPT, Freelance và thực tập sinh tại phòng nghiên cứu DXLab.</span>
+                                    <span class="lang-en">A compilation of professional milestones at FPT University,
+                                        freelance contracts, and internship at the DXLab research department.</span>
+                                    <span class="lang-vi">Tổng hợp các cột mốc làm việc thực tế tại Đại học FPT,
+                                        Freelance và thực tập sinh tại phòng nghiên cứu DXLab.</span>
                                 </p>
                             </div>
                         </div>
@@ -1391,43 +1497,55 @@
         <section id="contact" class="section contact-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="contact-title"><span class="lang-en">Contact <span>Ngoc Hai</span></span><span class="lang-vi">Liên hệ với <span>Ngọc Hải</span></span></h2>
+                    <h2 class="contact-title"><span class="lang-en">Contact <span>Ngoc Hai</span></span><span
+                            class="lang-vi">Liên hệ với <span>SSS Studio</span></span></h2>
                     <div class="section-divider"></div>
                 </div>
                 <p class="contact-copy">
-                    <span class="lang-en">Send a message through the form below or connect with me directly for collaboration, hiring opportunities, or sharing product development ideas.</span>
-                    <span class="lang-vi">Hãy gửi tin nhắn qua biểu mẫu bên dưới hoặc kết nối trực tiếp với tôi nếu bạn có cơ hội hợp tác, tuyển dụng hoặc trao đổi ý tưởng phát triển sản phẩm.</span>
+                    <span class="lang-en">Send a message through the form below or connect with me directly for
+                        collaboration, hiring opportunities, or sharing product development ideas.</span>
+                    <span class="lang-vi">Hãy gửi tin nhắn qua biểu mẫu bên dưới hoặc kết nối trực tiếp với chúng tôi nếu bạn
+                        có cơ hội hợp tác, tuyển dụng hoặc trao đổi ý tưởng phát triển sản phẩm.</span>
                 </p>
 
                 <form id="contactForm" class="contact-form">
                     <div class="form-group">
                         <span class="form-icon">👤</span>
-                        <span class="form-label"><span class="lang-en">Full Name:</span><span class="lang-vi">Họ và tên:</span></span>
-                        <input type="text" name="name" class="form-input" data-en="Enter your name..." data-vi="Nhập tên của bạn..." placeholder="Enter your name..." required>
+                        <span class="form-label"><span class="lang-en">Full Name:</span><span class="lang-vi">Họ và
+                                tên:</span></span>
+                        <input type="text" name="name" class="form-input" data-en="Enter your name..."
+                            data-vi="Nhập tên của bạn..." placeholder="Enter your name..." required>
                     </div>
                     <div class="form-group">
                         <span class="form-icon">📧</span>
-                        <span class="form-label"><span class="lang-en">Email:</span><span class="lang-vi">Email liên hệ:</span></span>
+                        <span class="form-label"><span class="lang-en">Email:</span><span class="lang-vi">Email liên
+                                hệ:</span></span>
                         <input type="email" name="email" class="form-input" placeholder="yourmail@domain.com" required>
                     </div>
                     <div class="form-group">
                         <span class="form-icon">📱</span>
-                        <span class="form-label"><span class="lang-en">Phone:</span><span class="lang-vi">Số điện thoại:</span></span>
+                        <span class="form-label"><span class="lang-en">Phone:</span><span class="lang-vi">Số điện
+                                thoại:</span></span>
                         <input type="tel" name="phone" class="form-input" placeholder="(+84) 000 000 000">
                     </div>
                     <div class="form-group">
                         <span class="form-icon">✍️</span>
-                        <span class="form-label"><span class="lang-en">Subject:</span><span class="lang-vi">Tiêu đề:</span></span>
-                        <input type="text" name="subject" class="form-input" data-en="Enter subject..." data-vi="Nhập tiêu đề liên hệ..." placeholder="Enter subject..." required>
+                        <span class="form-label"><span class="lang-en">Subject:</span><span class="lang-vi">Tiêu
+                                đề:</span></span>
+                        <input type="text" name="subject" class="form-input" data-en="Enter subject..."
+                            data-vi="Nhập tiêu đề liên hệ..." placeholder="Enter subject..." required>
                     </div>
                     <div class="form-group">
                         <span class="form-icon">💬</span>
-                        <span class="form-label"><span class="lang-en">Message:</span><span class="lang-vi">Lời nhắn:</span></span>
-                        <textarea name="message" class="form-textarea" data-en="Your detailed message..." data-vi="Lời nhắn chi tiết của bạn..." placeholder="Your detailed message..." required></textarea>
+                        <span class="form-label"><span class="lang-en">Message:</span><span class="lang-vi">Lời
+                                nhắn:</span></span>
+                        <textarea name="message" class="form-textarea" data-en="Your detailed message..."
+                            data-vi="Lời nhắn chi tiết của bạn..." placeholder="Your detailed message..."
+                            required></textarea>
                     </div>
                     <button type="submit" class="form-submit">
                         <span class="lang-en">Send Message to Ngoc Hai</span>
-                        <span class="lang-vi">Gửi Tin Nhắn Cho Ngọc Hải</span>
+                        <span class="lang-vi">Gửi Tin Nhắn Cho SSS Studio</span>
                     </button>
                     <div id="formMessage" class="form-message"></div>
                 </form>
@@ -1438,32 +1556,42 @@
     <footer>
         <div class="footer-grid">
             <div>
-                <span class="footer-brand">NGỌC HẢI | UNNULL</span>
+                <span class="footer-brand">NGỌC HẢI | SSS Studio</span>
                 <p class="footer-tagline">
-                    <span class="lang-en">A developer passionate about creating high-quality games & applications through optimal codebases and striking designs.</span>
-                    <span class="lang-vi">Lập trình viên đam mê kiến tạo các sản phẩm game & ứng dụng chất lượng cao bằng những dòng code tối ưu và thiết kế ấn tượng.</span>
+                    <span class="lang-en">A developer passionate about creating high-quality games & applications
+                        through optimal codebases and striking designs.</span>
+                    <span class="lang-vi">Lập trình viên đam mê kiến tạo các sản phẩm game & ứng dụng chất lượng cao
+                        bằng những dòng code tối ưu và thiết kế ấn tượng.</span>
                 </p>
             </div>
             <div>
-                <p class="footer-heading"><span class="lang-en">Categories</span><span class="lang-vi">Danh mục</span></p>
+                <p class="footer-heading"><span class="lang-en">Categories</span><span class="lang-vi">Danh mục</span>
+                </p>
                 <ul class="footer-links">
-                    <li><a href="#objective"><span class="lang-en">About</span><span class="lang-vi">Giới thiệu</span></a></li>
-                    <li><a href="#projects"><span class="lang-en">Projects</span><span class="lang-vi">Dự án</span></a></li>
-                    <li><a href="#skills"><span class="lang-en">Skills</span><span class="lang-vi">Kỹ năng</span></a></li>
+                    <li><a href="#objective"><span class="lang-en">About</span><span class="lang-vi">Giới
+                                thiệu</span></a></li>
+                    <li><a href="#projects"><span class="lang-en">Projects</span><span class="lang-vi">Dự án</span></a>
+                    </li>
+                    <li><a href="#skills"><span class="lang-en">Skills</span><span class="lang-vi">Kỹ năng</span></a>
+                    </li>
                 </ul>
             </div>
             <div>
                 <p class="footer-heading"><span class="lang-en">Links</span><span class="lang-vi">Liên kết</span></p>
                 <ul class="footer-links">
-                    <li><a href="https://github.com/DevUnNull" target="_blank"><span class="lang-en">Personal GitHub</span><span class="lang-vi">GitHub cá nhân</span></a></li>
-                    <li><a href="#contact"><span class="lang-en">Hiring / Collaboration</span><span class="lang-vi">Tuyển dụng / Hợp tác</span></a></li>
+                    <li><a href="https://github.com/DevSSS Studio" target="_blank"><span class="lang-en">Personal
+                                GitHub</span><span class="lang-vi">GitHub cá nhân</span></a></li>
+                    <li><a href="#contact"><span class="lang-en">Hiring / Collaboration</span><span
+                                class="lang-vi">Tuyển dụng / Hợp tác</span></a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p class="footer-copy">
-                <span class="lang-en">© 2026 Ngoc Hai (UnNull). Crafted with JolyUI & Dark Fantasy Aesthetic. All Rights Reserved.</span>
-                <span class="lang-vi">© 2026 Ngọc Hải (UnNull). Crafted with JolyUI & Dark Fantasy Aesthetic. All Rights Reserved.</span>
+                <span class="lang-en">© 2026 Ngoc Hai (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All Rights
+                    Reserved.</span>
+                <span class="lang-vi">© 2026 Ngọc Hải (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All Rights
+                    Reserved.</span>
             </p>
             <ul class="footer-legal">
                 <li><a href="#">Privacy Policy</a></li>
@@ -1509,7 +1637,7 @@
             draw() {
                 pCtx.save();
                 pCtx.globalAlpha = this.alpha;
-                pCtx.fillStyle = Math.random() > 0.5 ? '#C41E3A' : '#E8C060';
+                pCtx.fillStyle = Math.random() > 0.5 ? '#38bdf8' : '#34d399';
                 pCtx.beginPath();
                 pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 pCtx.fill();
@@ -1548,90 +1676,67 @@
 
 
         /* ============================================================
-           JOLYUI INTEGRATION: FALLING TEXT ENGINE (MATTER.JS CORE)
+           HERO CONSTELLATION ANIMATION
            ============================================================ */
-        const initFallingText = () => {
-            const container = document.getElementById('fallingTextZone');
-            const canvas = document.getElementById('joly-falling-canvas');
+        const heroCanvas = document.getElementById('hero-animated-bg');
+        if (heroCanvas) {
+            const hCtx = heroCanvas.getContext('2d');
+            let heroParticles = [];
+            
+            const resizeHeroCanvas = () => {
+                heroCanvas.width = heroCanvas.parentElement.clientWidth;
+                heroCanvas.height = heroCanvas.parentElement.clientHeight;
+            };
+            window.addEventListener('resize', resizeHeroCanvas);
+            resizeHeroCanvas();
 
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-
-            canvas.width = width;
-            canvas.height = height;
-
-            const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint } = Matter;
-
-            const engine = Engine.create({ gravity: { y: 0.3 } });
-
-            const render = Render.create({
-                canvas: canvas,
-                engine: engine,
-                options: {
-                    width: width,
-                    height: height,
-                    background: 'transparent',
-                    wireframes: false
+            class HeroNode {
+                constructor() {
+                    this.x = Math.random() * heroCanvas.width;
+                    this.y = Math.random() * heroCanvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 2 + 1;
                 }
-            });
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > heroCanvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > heroCanvas.height) this.vy *= -1;
+                }
+                draw() {
+                    hCtx.beginPath();
+                    hCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    hCtx.fillStyle = '#38bdf8';
+                    hCtx.fill();
+                }
+            }
 
-            Render.run(render);
-            const runner = Runner.create();
-            Runner.run(runner, engine);
+            for (let i = 0; i < 70; i++) heroParticles.push(new HeroNode());
 
-            const thickness = 40;
-            const ground = Bodies.rectangle(width / 2, height + thickness / 2, width, thickness, { isStatic: true, render: { visible: false } });
-            const leftWall = Bodies.rectangle(-thickness / 2, height / 2, thickness, height, { isStatic: true, render: { visible: false } });
-            const rightWall = Bodies.rectangle(width + thickness / 2, height / 2, thickness, height, { isStatic: true, render: { visible: false } });
-            Composite.add(engine.world, [ground, leftWall, rightWall]);
-
-            const nameString = "UNNULL";
-            const chars = nameString.split("");
-
-            chars.forEach((char, index) => {
-                if (char === " ") return;
-                const size = 32;
-                const x = (width / (chars.length + 1)) * (index + 1) + (Math.random() * 20 - 10);
-                const y = -30 - (index * 30);
-
-                const charCanvas = document.createElement('canvas');
-                charCanvas.width = size * 1.5;
-                charCanvas.height = size * 1.5;
-                const ctx = charCanvas.getContext('2d');
-                ctx.fillStyle = '#C41E3A';
-                if (char === 'U' || char === 'N') ctx.fillStyle = '#E8C060';
-                ctx.font = "bold 38px 'Cormorant Garamond Decorative', serif";
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(char, charCanvas.width / 2, charCanvas.height / 2);
-
-                const charBody = Bodies.rectangle(x, y, size * 0.8, size, {
-                    restitution: 0.7,
-                    friction: 0.05,
-                    render: {
-                        sprite: {
-                            texture: charCanvas.toDataURL(),
-                            xScale: 1,
-                            yScale: 1
+            function animateHero() {
+                hCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+                for (let i = 0; i < heroParticles.length; i++) {
+                    heroParticles[i].update();
+                    heroParticles[i].draw();
+                    for (let j = i; j < heroParticles.length; j++) {
+                        const dx = heroParticles[i].x - heroParticles[j].x;
+                        const dy = heroParticles[i].y - heroParticles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 130) {
+                            hCtx.beginPath();
+                            hCtx.strokeStyle = `rgba(56, 189, 248, ${1 - dist/130})`;
+                            hCtx.lineWidth = 0.6;
+                            hCtx.moveTo(heroParticles[i].x, heroParticles[i].y);
+                            hCtx.lineTo(heroParticles[j].x, heroParticles[j].y);
+                            hCtx.stroke();
                         }
                     }
-                });
-
-                Composite.add(engine.world, charBody);
-            });
-
-            const mouse = Mouse.create(canvas);
-            const mouseConstraint = MouseConstraint.create(engine, {
-                mouse: mouse,
-                constraint: {
-                    stiffness: 0.2,
-                    render: { visible: false }
                 }
-            });
-            Composite.add(engine.world, mouseConstraint);
-        };
-
-        window.addEventListener('load', initFallingText);
+                requestAnimationFrame(animateHero);
+            }
+            animateHero();
+        }
 
 
         /* ============================================================
@@ -1685,7 +1790,6 @@
                 gsap.from(cards, {
                     scrollTrigger: { trigger: section, start: 'top 75%' },
                     opacity: 0,
-                    y: 40,
                     stagger: 0.2,
                     duration: 0.8,
                     ease: 'power2.out'
@@ -1721,6 +1825,28 @@
             });
         });
 
+        // ScrollSpy: Cập nhật active nav link khi cuộn trang
+        window.addEventListener('scroll', () => {
+            let current = 'home';
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.joly-liquid-metal-btn');
+            const scrollPos = window.scrollY;
+
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+                if (scrollPos >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const submitBtn = this.querySelector('.form-submit');
@@ -1740,18 +1866,18 @@
                 message: this.message.value
             };
 
-            emailjs.send('service_profileUnNull', 'template_mv6kgpc', templateParams)
+            emailjs.send('service_profileSSS Studio', 'template_mv6kgpc', templateParams)
                 .then(function () {
                     messageDiv.className = 'form-message success';
-                    messageDiv.textContent = isEn ? '✅ Message sent successfully! Ngoc Hai will get back to you as soon as possible.' : '✅ Gửi tin nhắn thành công! Ngọc Hải sẽ liên hệ lại với bạn trong thời gian sớm nhất.';
+                    messageDiv.textContent = isEn ? '✅ Message sent successfully! SSS Studio will get back to you as soon as possible.' : '✅ Gửi tin nhắn thành công! SSS Studio sẽ liên hệ lại với bạn trong thời gian sớm nhất.';
                     document.getElementById('contactForm').reset();
                     submitBtn.disabled = false;
-                    submitBtn.textContent = isEn ? 'Send Message to Ngoc Hai' : 'Gửi Tin Nhắn Cho Ngọc Hải';
+                    submitBtn.textContent = isEn ? 'Send Message to SSS Studio' : 'Gửi Tin Nhắn Cho SSS Studio';
                 }, function (error) {
                     messageDiv.className = 'form-message error';
                     messageDiv.textContent = isEn ? '❌ Connection error: ' + (error.text || 'Routing connection failed!') : '❌ Lỗi kết nối: ' + (error.text || 'Xảy ra lỗi định tuyến kết nối!');
                     submitBtn.disabled = false;
-                    submitBtn.textContent = isEn ? 'Send Message to Ngoc Hai' : 'Gửi Tin Nhắn Cho Ngọc Hải';
+                    submitBtn.textContent = isEn ? 'Send Message to SSS Studio' : 'Gửi Tin Nhắn Cho SSS Studio';
                 });
         });
     </script>

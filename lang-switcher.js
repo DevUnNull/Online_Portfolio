@@ -1,7 +1,7 @@
-(function() {
+(function () {
     // 1. Determine active language (default to English)
     let currentLang = localStorage.getItem('lang') || 'en';
-    
+
     // Ensure standard HTML lang matches
     document.documentElement.setAttribute('lang', currentLang);
 
@@ -30,24 +30,24 @@
             text-transform: uppercase;
             padding: 0.5rem 1rem;
             border-radius: 20px;
-            border: 1px solid #4a3028; /* var(--border-mid) equivalent */
-            background: rgba(13, 10, 7, 0.88); /* var(--dark-bg) equivalent with blur */
-            color: #ddd0b8; /* var(--cream) equivalent */
+            border: 1px solid rgba(14, 165, 233, 0.4);
+            background: rgba(2, 6, 23, 0.88);
+            color: var(--light-grey);
             cursor: pointer;
             display: inline-flex;
             gap: 6px;
             align-items: center;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 10px rgba(196, 30, 58, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 10px rgba(14, 165, 233, 0.2);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             user-select: none;
         }
 
         .lang-switcher-btn:hover {
-            border-color: #c41e3a; /* var(--crimson) equivalent */
+            border-color: #38bdf8;
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(196, 30, 58, 0.5), 0 0 15px rgba(196, 30, 58, 0.4);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4), 0 0 15px rgba(56, 189, 248, 0.3);
             transform: translateY(-2px);
         }
 
@@ -58,8 +58,8 @@
 
         .lang-switcher-btn span.active-lang {
             opacity: 1;
-            color: #e8c060; /* var(--bright-gold) equivalent */
-            text-shadow: 0 0 5px rgba(232, 192, 96, 0.3);
+            color: #38bdf8;
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
         }
 
         @media (max-width: 768px) {

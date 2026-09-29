@@ -1,27 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
-    --blood-red: #8B0000;
-    --crimson: #C41E3A;
-    --dark-bg: #0D0A07;
-    --black-coal: #080604;
-    --dark-card: #1C1410;
-    --burnt-orange: #A84800;
-    --amber: #C8720A;
-    --light-grey: #C8C1BC;
-    --parchment: #C4A882;
-    --cream: #DDD0B8;
-    --bright-gold: #E8C060;
-    --border-dark: #2E201A;
-    --border-mid: #4A3028;
-    --shadow-red: rgba(139, 0, 0, 0.35);
-    --glow-red: rgba(196, 30, 58, 0.5);
-    --glow-amber: rgba(200, 114, 10, 0.45);
+    --blood-red: #0284c7;
+    --crimson: #0ea5e9;
+    --dark-bg: #0f172a;
+    --black-coal: #020617;
+    --dark-card: #1e293b;
+    --burnt-orange: #10b981;
+    --amber: #059669;
+    --light-grey: #cbd5e1;
+    --parchment: #94a3b8;
+    --cream: #f8fafc;
+    --bright-gold: #38bdf8;
+    --border-dark: #334155;
+    --border-mid: #475569;
+    --shadow-red: rgba(2, 132, 199, 0.35);
+    --glow-red: rgba(14, 165, 233, 0.5);
+    --glow-amber: rgba(16, 185, 129, 0.45);
 }
 
 body {
     font-family: 'Lora', serif;
-    background: #080604;
+    background: #020617;
     color: var(--cream);
     padding: 3rem 1.5rem;
     min-height: 100vh;
@@ -32,7 +32,7 @@ body {
     position: relative;
     max-width: 1100px;
     margin: auto;
-    background: linear-gradient(145deg, rgba(28, 20, 16, 0.95), rgba(15, 12, 10, 0.98));
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(30, 41, 59, 0.98));
     padding: 2.5rem;
     border: 1px solid var(--border-mid);
     border-radius: 26px;
@@ -115,8 +115,8 @@ p, li {
     justify-content: center;
     padding: 0.5rem 1.2rem;
     border-radius: 20px;
-    border: 1px solid rgba(196, 30, 58, 0.4);
-    background: rgba(139, 0, 0, 0.25);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    background: rgba(2, 132, 199, 0.25);
     font-size: 0.8rem;
     color: var(--bright-gold);
     font-family: 'Lora', serif;
@@ -132,7 +132,7 @@ p, li {
 
 .content-block, .summary-box, .project-block, .card {
     border: 1px solid var(--border-dark);
-    background: rgba(20, 16, 14, 0.6);
+    background: rgba(15, 23, 42, 0.6);
     border-radius: 20px;
     padding: 1.5rem;
     margin-top: 1.5rem;
@@ -185,7 +185,7 @@ table {
     border-collapse: collapse;
     margin: 2rem 0;
     font-size: 0.9rem;
-    background: rgba(20, 16, 14, 0.4);
+    background: rgba(15, 23, 42, 0.4);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -197,7 +197,7 @@ th, td {
 }
 
 th {
-    background: rgba(139, 0, 0, 0.15);
+    background: rgba(2, 132, 199, 0.15);
     color: var(--bright-gold);
     font-family: 'Cormorant Garamond', serif;
     font-weight: 700;
@@ -210,7 +210,7 @@ td {
 }
 
 .callout, .achievement, .warning {
-    background: rgba(139, 0, 0, 0.12);
+    background: rgba(2, 132, 199, 0.12);
     border-left: 4px solid var(--crimson);
     padding: 1.2rem;
     margin: 2rem 0;
@@ -294,7 +294,7 @@ td {
 
 .summary-card {
     border: 1px solid var(--border-dark);
-    background: rgba(20, 16, 14, 0.4);
+    background: rgba(15, 23, 42, 0.4);
     border-radius: 20px;
     padding: 16px;
 }
@@ -320,7 +320,7 @@ td {
 
 .package-card {
     border: 1px solid var(--border-dark);
-    background: rgba(20, 16, 14, 0.6);
+    background: rgba(15, 23, 42, 0.6);
     border-radius: 20px;
     padding: 1.5rem;
     display: flex;
@@ -356,8 +356,8 @@ td {
     justify-content: center;
     padding: 0.2rem 0.6rem;
     border-radius: 20px;
-    border: 1px solid rgba(196, 30, 58, 0.4);
-    background: rgba(139, 0, 0, 0.25);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    background: rgba(2, 132, 199, 0.25);
     font-size: 0.75rem;
     color: var(--bright-gold);
     font-family: 'Lora', serif;
@@ -414,7 +414,7 @@ td {
 /* PreviousJobs.html specific classes */
 .intro-card, .job-card {
     border: 1px solid var(--border-dark);
-    background: rgba(20, 16, 14, 0.6);
+    background: rgba(15, 23, 42, 0.6);
     border-radius: 20px;
     padding: 1.5rem;
     margin-top: 1.5rem;
@@ -460,8 +460,8 @@ td {
     justify-content: center;
     padding: 0.4rem 1rem;
     border-radius: 20px;
-    border: 1px solid rgba(196, 30, 58, 0.4);
-    background: rgba(139, 0, 0, 0.25);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    background: rgba(2, 132, 199, 0.25);
     color: var(--bright-gold);
     font-size: 0.8rem;
     font-family: 'Lora', serif;
@@ -502,8 +502,8 @@ td {
 .job-highlight {
     padding: 16px 18px;
     border-radius: 22px;
-    border: 1px solid rgba(196, 30, 58, 0.3);
-    background: rgba(139, 0, 0, 0.12);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    background: rgba(2, 132, 199, 0.12);
     color: var(--light-grey);
     font-size: 0.9rem;
 }
@@ -550,8 +550,8 @@ td {
 .tag {
     display: inline-block;
     font-size: 0.8rem;
-    border: 1px solid rgba(196, 30, 58, 0.6);
-    background: rgba(139, 0, 0, 0.25);
+    border: 1px solid rgba(14, 165, 233, 0.6);
+    background: rgba(2, 132, 199, 0.25);
     color: var(--bright-gold);
     padding: 2px 6px;
     margin-right: 4px;
@@ -575,8 +575,8 @@ td {
     justify-content: center;
     padding: 0.5rem 1.2rem;
     border-radius: 20px;
-    border: 1px solid rgba(196, 30, 58, 0.4);
-    background: rgba(139, 0, 0, 0.25);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    background: rgba(2, 132, 199, 0.25);
     font-size: 0.8rem;
     color: var(--bright-gold);
     font-family: 'Lora', serif;
@@ -606,7 +606,7 @@ td {
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
 }
 
 .cta-link:hover {
@@ -665,8 +665,8 @@ td {
     justify-content: center;
     padding: 0.5rem 1.2rem;
     border-radius: 20px;
-    border: 1px solid rgba(196, 30, 58, 0.4);
-    background: rgba(139, 0, 0, 0.25);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    background: rgba(2, 132, 199, 0.25);
     font-size: 0.8rem;
     color: var(--bright-gold);
     font-family: 'Lora', serif;
@@ -679,3 +679,4 @@ td {
     color: #fff;
     box-shadow: 0 0 12px var(--glow-red);
 }
+
