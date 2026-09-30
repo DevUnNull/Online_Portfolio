@@ -823,7 +823,7 @@
            FOOTER
            ============================================================ */
         footer {
-            padding: 4rem 2rem 2rem;
+            padding: 4rem 2rem 5rem;
             background: #020617;
             border-top: 1px solid var(--border-dark);
             color: var(--light-grey);
@@ -886,6 +886,24 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 1.5rem;
+        }
+
+        .footer-legal {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .footer-legal a {
+            color: var(--parchment);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--crimson);
         }
 
         /* ============================================================
@@ -2028,12 +2046,8 @@
         </div>
         <div class="footer-bottom">
             <p class="footer-copy">
-                <span class="lang-en">© 2026 Ngoc Hai (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All
-                    Rights
-                    Reserved.</span>
-                <span class="lang-vi">© 2026 Ngọc Hải (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All
-                    Rights
-                    Reserved.</span>
+                <span class="lang-en">© 2026 Ngoc Hai (SSS Studio). All Rights Reserved.</span>
+                <span class="lang-vi">© 2026 Ngọc Hải (SSS Studio). All Rights Reserved.</span>
             </p>
             <ul class="footer-legal">
                 <li><a href="#">Privacy Policy</a></li>
