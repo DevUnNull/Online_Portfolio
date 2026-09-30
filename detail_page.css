@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
     --blood-red: #0284c7;
@@ -678,5 +678,32 @@ td {
     background: var(--crimson);
     color: #fff;
     box-shadow: 0 0 12px var(--glow-red);
+}
+
+/* Custom Scrollbar Styling */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--crimson) rgba(15, 23, 42, 0.8);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--crimson);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bright-gold);
+    box-shadow: 0 0 10px var(--glow-red);
 }
 

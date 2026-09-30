@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-en="Ngoc Hai | Personal Portfolio (SSS Studio)" data-vi="Ngọc Hải | Portfolio cá nhân (SSS Studio)">Ngoc Hai |
+    <title data-en="Ngoc Hai | Personal Portfolio (SSS Studio)" data-vi="Ngọc Hải | Portfolio cá nhân (SSS Studio)">Ngoc
+        Hai |
         Personal Portfolio (SSS Studio)</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -16,7 +17,7 @@
     <script src="lang-switcher.js" defer></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Cormorant+Garamond+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Cormorant+Garamond+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&family=VT323&display=swap');
 
         :root {
             --blood-red: #0284c7;
@@ -472,22 +473,12 @@
             content: '';
             position: absolute;
             left: 0;
-            top: -15px;
+            top: 0;
             width: 100%;
-            height: 16px;
-            background-repeat: repeat-x;
-            background-size: 150px 16px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+            box-shadow: 0 0 15px var(--crimson), 0 0 30px var(--glow-red);
             z-index: 10;
-            pointer-events: none;
-            filter: url(#joly-torn-edge);
-        }
-
-        #objective::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(15, 23, 42, 0.75)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(2, 132, 199, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
-        }
-
-        #contact::before {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 16' preserveAspectRatio='none'%3E%3Cpath d='M0,16 L0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6 L150,16 Z' fill='rgba(2, 6, 23, 0.85)'/%3E%3Cpath d='M0,6 L8,14 L15,3 L28,13 L38,4 L52,15 L65,1 L82,14 L95,5 L108,13 L125,4 L142,14 L150,6' fill='none' stroke='rgba(2, 132, 199, 0.35)' stroke-width='2.5'/%3E%3C/svg%3E");
         }
 
         .container {
@@ -898,6 +889,133 @@
         }
 
         /* ============================================================
+           HIGH-END VISUAL DESIGN PATTERNS
+           ============================================================ */
+        .macro-section {
+            padding: 8rem 2rem;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .bento-col-8 {
+            grid-column: span 8;
+        }
+
+        .bento-col-6 {
+            grid-column: span 6;
+        }
+
+        .bento-col-4 {
+            grid-column: span 4;
+        }
+
+        .bento-col-12 {
+            grid-column: span 12;
+        }
+
+        .double-bezel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2rem;
+            padding: 0.5rem;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+            text-decoration: none;
+            display: block;
+            min-height: 400px;
+        }
+
+        .double-bezel:hover {
+            transform: translateY(-5px);
+        }
+
+        .double-bezel-inner {
+            background: var(--dark-bg);
+            border-radius: calc(2rem - 0.5rem);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            padding: 2.5rem;
+        }
+
+        .bezel-img-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            transition: opacity 0.6s, transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+
+        .double-bezel:hover .bezel-img-bg {
+            opacity: 0.3;
+            transform: scale(1.05);
+        }
+
+        .bezel-gradient {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--black-coal) 10%, transparent 90%);
+        }
+
+        .bezel-content {
+            margin-top: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .bezel-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            color: var(--crimson);
+        }
+
+        .bezel-title {
+            font-size: 2.5rem;
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .bezel-desc {
+            color: var(--light-grey);
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .double-bezel {
+                min-height: 350px;
+            }
+        }
+
+        /* ============================================================
            RESPONSIVE SYSTEM
            ============================================================ */
         @media (max-width: 1024px) {
@@ -964,6 +1082,151 @@
                 display: none;
             }
         }
+        /* ============================================================
+           TYPOGRAPHY & FONTS
+           ============================================================ */
+        .section-title, .sim-title {
+            font-family: 'VT323', monospace !important;
+            font-size: clamp(2.5rem, 4vw, 3.5rem) !important;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+        .section-eyebrow, .sim-eyebrow {
+            font-family: 'VT323', monospace !important;
+            font-size: 1.2rem !important;
+            letter-spacing: 2px;
+        }
+
+        .arcade-btn {
+            background: var(--dark-bg); color: var(--cream);
+            border: 2px solid var(--cream);
+            box-shadow: 4px 4px 0px var(--cream);
+            padding: 12px 24px; font-family: 'VT323', monospace;
+            font-size: 1.2rem; text-decoration: none;
+            transition: transform 0.1s, box-shadow 0.1s;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .arcade-btn.primary {
+            background: var(--crimson);
+            border-color: var(--cream);
+            box-shadow: 4px 4px 0px var(--cream);
+        }
+        .arcade-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px transparent !important;
+        }
+        .retro-scanlines {
+            position: absolute; inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 1; pointer-events: none;
+        }
+
+        /* Hero Split Layout */
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+            z-index: 2;
+            text-align: left;
+        }
+        @media (max-width: 1024px) {
+            .hero-split {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 150px;
+            }
+        }
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 1024px) {
+            .hero-pills { justify-content: center; }
+        }
+        .hero-pill {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #0ff;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            font-family: 'VT323', monospace;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Sci-fi Carousel */
+        .scifi-carousel-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: 2px solid #0ff;
+            border-radius: 4px;
+            background: rgba(2, 6, 23, 0.8);
+            box-shadow: -15px 15px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.1);
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .scifi-carousel-container:hover {
+            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        .scifi-carousel-container::before {
+            content: ''; position: absolute; top: -2px; left: 30px; width: 60px; height: 2px; background: #fff; box-shadow: 0 0 10px #fff; z-index: 5;
+        }
+        .scifi-carousel-container::after {
+            content: ''; position: absolute; bottom: -2px; right: 30px; width: 60px; height: 2px; background: #fff; box-shadow: 0 0 10px #fff; z-index: 5;
+        }
+        .scifi-corner {
+            position: absolute; width: 20px; height: 20px; border: 2px solid #0ff; z-index: 5;
+        }
+        .scifi-corner.tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .scifi-corner.tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        .scifi-corner.bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        .scifi-corner.br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        .scifi-badge {
+            position: absolute; z-index: 10; padding: 0.3rem 0.8rem; font-family: 'VT323', monospace; font-size: 0.9rem; background: rgba(0, 0, 0, 0.8); border: 1px solid #0ff; color: #0ff;
+        }
+        .scifi-badge.top-left { top: 1rem; left: 1rem; }
+        .scifi-badge.top-right { top: 1rem; right: 1rem; background: rgba(0, 255, 0, 0.1); border-color: #0f0; color: #0f0;}
+        .scifi-badge.bottom-right { bottom: 1rem; right: 1rem; background: rgba(0, 255, 255, 0.1); border-color: #0ff; color: #0ff; cursor: pointer; transition: background 0.2s;}
+        .scifi-badge.bottom-right:hover { background: rgba(0, 255, 255, 0.3); }
+
+        .scifi-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 0.5s ease;
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; text-align: left;
+        }
+        .scifi-slide.active { opacity: 1; z-index: 2; }
+        .scifi-slide img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;
+        }
+        .scifi-slide-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(2,6,23,0.95) 0%, transparent 60%); z-index: -1;
+        }
+        .scifi-slide-title { font-family: 'VT323', monospace; font-size: 2rem; color: #fff; margin: 0; text-shadow: 2px 2px 0 #000; text-transform: uppercase; }
+        .scifi-slide-desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #aaa; margin: 0.5rem 0 1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .scifi-pagination {
+            position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 10;
+        }
+        .scifi-dot {
+            width: 8px; height: 8px; background: rgba(0, 255, 255, 0.3); border-radius: 50%; cursor: pointer; transition: all 0.3s;
+        }
+        .scifi-dot.active { background: #0ff; box-shadow: 0 0 10px #0ff; transform: scale(1.2); }
     </style>
 </head>
 
@@ -1003,10 +1266,6 @@
                         class="lang-en">About</span><span class="lang-vi">Giới thiệu</span></a></li>
             <li class="nav-item"><a href="#projects" class="joly-liquid-metal-btn"><span
                         class="lang-en">Projects</span><span class="lang-vi">Dự án</span></a></li>
-            <li class="nav-item"><a href="#skills" class="joly-liquid-metal-btn"><span
-                        class="lang-en">Skills</span><span class="lang-vi">Kỹ năng</span></a></li>
-            <li class="nav-item"><a href="#education" class="joly-liquid-metal-btn"><span
-                        class="lang-en">Journey</span><span class="lang-vi">Hành trình</span></a></li>
             <li class="nav-item"><a href="#contact" class="joly-liquid-metal-btn"><span
                         class="lang-en">Contact</span><span class="lang-vi">Liên hệ</span></a></li>
         </ul>
@@ -1019,29 +1278,133 @@
         </button>
     </nav>
 
-    <section id="home" class="hero" style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; min-height: 100vh;">
-        <!-- Animated Background Canvas -->
-        <canvas id="hero-animated-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.6;"></canvas>
-        <div class="hero-overlay" style="z-index: 1;"></div>
+    <section id="home" class="hero"
+        style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
         
-        <div class="hero-content" style="z-index: 2; display: flex; flex-direction: column; align-items: center; max-width: 1200px; width: 100%; padding: 0 2rem; margin: 0 auto; transform: none; width: 100%;">
-            <div class="hero-eyebrow" style="color: var(--bright-gold); font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem;">
-                <span class="lang-en">SSS STUDIO</span>
-                <span class="lang-vi">SSS STUDIO</span>
+        <div class="retro-scanlines"></div>
+
+        <!-- Animated Background Canvas -->
+        <canvas id="hero-animated-bg"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.8;"></canvas>
+        <div class="hero-overlay" style="z-index: 1;"></div>
+
+        <div class="hero-split">
+            <div class="hero-left">
+                <div class="hero-eyebrow"
+                    style="color: #0ff; font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem; font-family: 'VT323', monospace; font-size: 1.2rem;">
+                    <span class="lang-en">[ SSS STUDIO ]</span>
+                    <span class="lang-vi">[ SSS STUDIO ]</span>
+                </div>
+
+                <h1 class="hero-massive-title"
+                    style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.1; margin: 1rem 0; letter-spacing: 2px; font-family: 'VT323', monospace; text-transform: uppercase; color: var(--cream); text-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 3px 3px 0px rgba(0,0,0,0.8);">
+                    <span class="lang-en">WE BUILD WORLDS<br>WORTH PLAYING</span>
+                    <span class="lang-vi">KIẾN TẠO NHỮNG<br>THẾ GIỚI ẢO</span>
+                </h1>
+
+                <p class="hero-desc"
+                    style="font-size: 1.1rem; color: var(--light-grey); max-width: 600px; margin: 0 0 2rem; line-height: 1.6; font-family: 'Inter', sans-serif;">
+                    <span class="lang-en">We create stylized 2D & 3D games, engaging gameplay systems, and multiplayer experiences with Unity Engine.</span>
+                    <span class="lang-vi">Chúng tôi chuyên phát triển game 2D & 3D, hệ thống gameplay cuốn hút và trải nghiệm Multiplayer bằng Unity Engine.</span>
+                </p>
+                
+                <div class="hero-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#projects" class="arcade-btn" style="background: rgba(0, 255, 255, 0.1); border-color: #0ff; color: #0ff; box-shadow: 4px 4px 0px #0ff; padding: 10px 20px; font-size: 1rem;"><span class="lang-en">EXPLORE OUR GAMES ></span><span class="lang-vi">KHÁM PHÁ DỰ ÁN ></span></a>
+                    <a href="#studio-team" class="arcade-btn" style="background: transparent; border-color: var(--light-grey); color: var(--light-grey); box-shadow: 4px 4px 0px var(--light-grey); padding: 10px 20px; font-size: 1rem;"><span class="lang-en">MEET THE TEAM ></span><span class="lang-vi">GẶP GỠ ĐỘI NGŨ ></span></a>
+                </div>
+
+                <div class="hero-pills">
+                    <div class="hero-pill">UNITY 6</div>
+                    <div class="hero-pill">2D / 3D</div>
+                    <div class="hero-pill">MULTIPLAYER</div>
+                    <div class="hero-pill">PC / MOBILE</div>
+                </div>
             </div>
 
-            <h1 class="hero-massive-title" style="font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 900; line-height: 1.05; margin: 1.5rem 0; letter-spacing: -0.03em; font-family: 'Inter', sans-serif; text-transform: uppercase; color: var(--cream); text-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                <span class="lang-en">THINK BIG.<br>WORK SMART.</span>
-                <span class="lang-vi">THINK BIG.<br>WORK SMART.</span>
-            </h1>
+            <div class="hero-right">
+                <div class="scifi-carousel-container" id="heroCarousel">
+                    <div class="scifi-corner tl"></div>
+                    <div class="scifi-corner tr"></div>
+                    <div class="scifi-corner bl"></div>
+                    <div class="scifi-corner br"></div>
 
-            <p class="hero-desc" style="font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--light-grey); max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.6;">
-                <span class="lang-en">Our games entertain and inspire players every day, everywhere. We specialize in realistic 2D & 3D experiences using Unity Engine.</span>
-                <span class="lang-vi">Các tựa game của chúng tôi mang lại niềm vui và cảm hứng cho người chơi mỗi ngày, ở bất cứ đâu. Chuyên phát triển game 2D & 3D chân thực bằng Unity Engine.</span>
-            </p>
-            <div class="hero-buttons" style="justify-content: center; display: flex; gap: 1rem;">
-                <a href="#projects" class="btn btn-secondary"><span class="lang-en">Explore Projects</span><span class="lang-vi">Khám Phá Dự Án</span></a>
-                <a href="#contact" class="btn btn-primary"><span class="lang-en">Work Together</span><span class="lang-vi">Hợp Tác Phát Triển</span></a>
+                    <a href="707TheReunion.html" class="scifi-slide active">
+                        <img src="assets/707.png" alt="707 The Reunion">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ PSYCHO HORROR</div>
+                        <div class="scifi-badge top-right">▶ NEW RELEASE</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">707: THE REUNION</h3>
+                        <p class="scifi-slide-desc">A SHORT STORY-DRIVEN HORROR SET IN VIETNAM</p>
+                    </a>
+
+                    <a href="LastTrain.html" class="scifi-slide">
+                        <img src="assets/LastTrain.jpg" alt="Last Train">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ HORROR / MYSTERY</div>
+                        <div class="scifi-badge top-right">▶ NEW PROJECT</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">LAST TRAIN</h3>
+                        <p class="scifi-slide-desc">PSYCHOLOGICAL HORROR ON THE FINAL NIGHT TRAIN</p>
+                    </a>
+
+                    <a href="ChienBinhXanhNhi.html" class="scifi-slide">
+                        <img src="assets/pannerChienBinhXanhNhi.png" alt="Chiến Binh Xanh Nhí">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ FEATURED PROJECT</div>
+                        <div class="scifi-badge top-right">▶ IN DEVELOPMENT</div>
+                        <div class="scifi-badge bottom-right">PLAYTEST BUILD ➞</div>
+                        <h3 class="scifi-slide-title">CHIẾN BINH XANH NHÍ</h3>
+                        <p class="scifi-slide-desc">A CASUAL GAME ABOUT A GREENER TOMORROW</p>
+                    </a>
+
+                    <a href="BehindTheMask.html" class="scifi-slide">
+                        <img src="assets/BehindTheMask.png" alt="Behind the Mask">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ GAME JAM</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">BEHIND THE MASK</h3>
+                        <p class="scifi-slide-desc">36-HOUR HACKATHON PROJECT</p>
+                    </a>
+
+                    <a href="BrainrotRunner.html" class="scifi-slide">
+                        <img src="assets/BrainrotRunner.png" alt="Brainrot Runner">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ PROCEDURAL RUNNER</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">BRAINROT RUNNER</h3>
+                        <p class="scifi-slide-desc">ENDLESS PORTAL TELEPORTATION</p>
+                    </a>
+
+                    <a href="HeroicDefense.html" class="scifi-slide">
+                        <img src="assets/HeroicDefender.png" alt="Heroic Defense">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ TOWER DEFENSE</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">HEROIC DEFENSE</h3>
+                        <p class="scifi-slide-desc">DYNAMIC UPGRADES & REAL-TIME STRATEGY</p>
+                    </a>
+
+                    <a href="JungleSurvivor.html" class="scifi-slide">
+                        <img src="assets/Jungle.png" alt="Jungle Survivor">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ ACTION PLATFORMER</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">JUNGLE SURVIVOR</h3>
+                        <p class="scifi-slide-desc">A CLASSIC 2D ADVENTURE</p>
+                    </a>
+
+                    <a href="MixieEmpire.html" class="scifi-slide">
+                        <img src="assets/Mixie EmpirePaner.png" alt="Mixie Empire">
+                        <div class="scifi-slide-overlay"></div>
+                        <div class="scifi-badge top-left">★ SIMULATION</div>
+                        <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
+                        <h3 class="scifi-slide-title">MIXIE EMPIRE</h3>
+                        <p class="scifi-slide-desc">RESOURCE MANAGEMENT & STRATEGY</p>
+                    </a>
+
+                    <div class="scifi-pagination" id="heroPagination"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -1053,8 +1416,8 @@
                 <div class="section-header">
                     <span class="section-eyebrow"><span class="lang-en">OBJECTIVE & PHILOSOPHY</span><span
                             class="lang-vi">MỤC TIÊU & TRIẾT LÝ</span></span>
-                    <h2 class="section-title"><span class="lang-en">About SSS Studio</span><span
-                            class="lang-vi">Về SSS Studio</span></h2>
+                    <h2 class="section-title"><span class="lang-en">About SSS Studio</span><span class="lang-vi">Về SSS
+                            Studio</span></h2>
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-2">
@@ -1103,20 +1466,34 @@
         <section id="studio-team" class="section section-dark">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-eyebrow"><span class="lang-en">OUR TEAM</span><span class="lang-vi">ĐỘI NGŨ CỦA CHÚNG TÔI</span></span>
-                    <h2 class="section-title"><span class="lang-en">Meet SSS Studio</span><span class="lang-vi">Gặp gỡ SSS Studio</span></h2>
+                    <span class="section-eyebrow"><span class="lang-en">OUR TEAM</span><span class="lang-vi">ĐỘI NGŨ CỦA
+                            CHÚNG TÔI</span></span>
+                    <h2 class="section-title"><span class="lang-en">Meet SSS Studio</span><span class="lang-vi">Gặp gỡ
+                            SSS Studio</span></h2>
                     <div class="section-divider"></div>
-                    <p style="text-align: center; color: var(--light-grey); max-width: 700px; margin: 1rem auto 3rem; line-height: 1.6;">
-                        <span class="lang-en">We are a studio of over 30 passionate members across all disciplines, specializing in creating high-quality 2D and 3D games. Here is our core leadership team.</span>
-                        <span class="lang-vi">Chúng tôi là một studio gồm hơn 30 thành viên tâm huyết với đầy đủ các lĩnh vực, chuyên phát triển các tựa game 2D và 3D chất lượng cao. Dưới đây là đội ngũ lãnh đạo nòng cốt.</span>
+                    <p
+                        style="text-align: center; color: var(--light-grey); max-width: 700px; margin: 1rem auto 3rem; line-height: 1.6;">
+                        <span class="lang-en">We are a studio of over 30 passionate members across all disciplines,
+                            specializing in creating high-quality 2D and 3D games. Here is our core leadership
+                            team.</span>
+                        <span class="lang-vi">Chúng tôi là một studio gồm hơn 30 thành viên tâm huyết với đầy đủ các
+                            lĩnh vực, chuyên phát triển các tựa game 2D và 3D chất lượng cao. Dưới đây là đội ngũ lãnh
+                            đạo nòng cốt.</span>
                     </p>
                 </div>
 
-                <div style="margin-bottom: 5rem; text-align: center; position: relative; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                    <img src="assets/AnhTapThe.jpg" alt="SSS Studio Team" style="width: 100%; height: 400px; object-fit: cover; border-radius: 20px; border: 1px solid var(--border-mid); box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
-                    <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(2,6,23,0.85); padding: 12px 24px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid var(--bright-gold);">
-                        <span class="lang-en" style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">+30 Members across all disciplines</span>
-                        <span class="lang-vi" style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">Hơn 30 thành viên đầy đủ các lĩnh vực</span>
+                <div
+                    style="margin-bottom: 5rem; text-align: center; position: relative; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                    <img src="assets/AnhTapThe.jpg" alt="SSS Studio Team"
+                        style="width: 100%; height: 400px; object-fit: cover; border-radius: 20px; border: 1px solid var(--border-mid); box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
+                    <div
+                        style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(2,6,23,0.85); padding: 12px 24px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid var(--bright-gold);">
+                        <span class="lang-en"
+                            style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">+30
+                            Members across all disciplines</span>
+                        <span class="lang-vi"
+                            style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">Hơn
+                            30 thành viên đầy đủ các lĩnh vực</span>
                     </div>
                 </div>
 
@@ -1124,33 +1501,48 @@
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/AvataHoang.jpg" alt="Hoang Avatar" style="object-position: center; opacity: 1;">
-                            <div class="card-overlay" style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);"></div>
+                            <img class="card-media" src="assets/AvataHoang.jpg" alt="Hoang Avatar"
+                                style="object-position: center; opacity: 1;">
+                            <div class="card-overlay"
+                                style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
+                            </div>
                             <div class="card-body" style="text-align: center;">
                                 <h3 class="card-title">Hoàng</h3>
-                                <p class="card-text" style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">Chief Production Officer</p>
+                                <p class="card-text"
+                                    style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
+                                    Chief Production Officer</p>
                             </div>
                         </div>
                     </div>
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/Avata.jpg" alt="Hai Avatar" style="object-position: top; opacity: 1;">
-                            <div class="card-overlay" style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);"></div>
+                            <img class="card-media" src="assets/Avata.jpg" alt="Hai Avatar"
+                                style="object-position: top; opacity: 1;">
+                            <div class="card-overlay"
+                                style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
+                            </div>
                             <div class="card-body" style="text-align: center;">
                                 <h3 class="card-title">Hải</h3>
-                                <p class="card-text" style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">CEO & Co-Founder</p>
+                                <p class="card-text"
+                                    style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
+                                    CEO & Co-Founder</p>
                             </div>
                         </div>
                     </div>
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/AvataNam.jpg" alt="Nam Avatar" style="object-position: top; opacity: 1;">
-                            <div class="card-overlay" style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);"></div>
+                            <img class="card-media" src="assets/AvataNam.jpg" alt="Nam Avatar"
+                                style="object-position: top; opacity: 1;">
+                            <div class="card-overlay"
+                                style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
+                            </div>
                             <div class="card-body" style="text-align: center;">
                                 <h3 class="card-title">Nam</h3>
-                                <p class="card-text" style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">Chief Technology Officer</p>
+                                <p class="card-text"
+                                    style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
+                                    Chief Technology Officer</p>
                             </div>
                         </div>
                     </div>
@@ -1158,121 +1550,156 @@
             </div>
         </section>
 
-        <section id="projects" class="section section-dark">
+        <section id="projects" class="section section-dark macro-section">
             <div class="container">
                 <div class="section-header">
                     <span class="section-eyebrow"><span class="lang-en">FEATURED PROJECTS</span><span
                             class="lang-vi">SẢN PHẨM NỔI BẬT</span></span>
-                    <h2 class="section-title"><span class="lang-en">Production-Ready Projects</span><span
-                            class="lang-vi">Các Dự Án Thực Chiến</span></h2>
+                    <h2 class="section-title" style="font-family: 'Space Grotesk', sans-serif;"><span
+                            class="lang-en">Production-Ready Projects</span><span class="lang-vi">Các Dự Án Thực
+                            Chiến</span></h2>
                     <div class="section-divider"></div>
                 </div>
 
-
-
-                <div class="grid-3">
-                    <a href="BrainrotRunner.html" class="card joly-beam-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/BrainrotRunner.png" alt="Brainrot Runner">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag">Procedural Runner / Team</span>
-                                <h3 class="card-title">Brainrot Runner</h3>
-                                <p class="card-text">
+                <div class="bento-grid">
+                    <!-- Project 1 (Col-8) -->
+                    <a href="BrainrotRunner.html" class="double-bezel bento-col-8 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/BrainrotRunner.png" alt="Brainrot Runner">
+                            <div class="bezel-gradient"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag">Procedural Runner / Team</span>
+                                <h3 class="bezel-title">Brainrot Runner</h3>
+                                <p class="bezel-desc">
                                     <span class="lang-en">An endless runner game featuring random portal teleportation
                                         and boss evolution cycles. Implemented Object Pooling for optimal spawning
-                                        performance and State Pattern for boss AI.</span>
+                                        performance.</span>
                                     <span class="lang-vi">Game endless-runner với cơ chế cổng dịch chuyển ngẫu nhiên và
-                                        chu kỳ tiến hóa boss. Áp dụng Object Pooling tối ưu hiệu năng phát sinh vật thể
-                                        và State Pattern cho AI boss.</span>
+                                        chu kỳ tiến hóa boss. Áp dụng Object Pooling tối ưu hiệu năng phát sinh vật
+                                        thể.</span>
                                 </p>
                             </div>
                         </div>
                     </a>
-                    <a href="BehindTheMask.html" class="card joly-beam-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/BehindTheMask.png" alt="Behind the Mask">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag">Global Game Jam / Team</span>
-                                <h3 class="card-title">Behind the Mask</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">A 36-hour game jam project for Global Game Jam 2026.
-                                        Programmed core gameplay mechanics in C#, optimized assets, and delivered a
-                                        complete game under intense time pressure.</span>
+
+                    <!-- Project 2 (Col-4) -->
+                    <a href="BehindTheMask.html" class="double-bezel bento-col-4 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/BehindTheMask.png" alt="Behind the Mask">
+                            <div class="bezel-gradient"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag"
+                                    style="background: rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.3); color: var(--burnt-orange);">Global
+                                    Game Jam</span>
+                                <h3 class="bezel-title" style="font-size: 2rem;">Behind the Mask</h3>
+                                <p class="bezel-desc" style="font-size: 0.9rem;">
+                                    <span class="lang-en">A 36-hour game jam project. Programmed core mechanics in C#
+                                        under intense pressure.</span>
                                     <span class="lang-vi">Dự án game 36 giờ tại Global Game Jam 2026. Lập trình logic
-                                        cốt lõi bằng C#, tối ưu hóa asset và xây dựng gameplay hoàn chỉnh dưới áp lực
-                                        thời gian cực lớn.</span>
+                                        cốt lõi bằng C#.</span>
                                 </p>
                             </div>
                         </div>
                     </a>
-                    <a href="HeroicDefense.html" class="card joly-beam-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/HeroicDefender.png" alt="Heroic Defense">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag">2D Tower Defense / Personal</span>
-                                <h3 class="card-title">Heroic Defense</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Personal 2D tower defense project. Developed tower placement
-                                        systems, dynamic upgrades, real-time resource management, and wave spawning
-                                        mechanics.</span>
-                                    <span class="lang-vi">Dự án thủ thành 2D cá nhân. Phát triển hệ thống đặt tháp
-                                        (tower placement), nâng cấp thuộc tính động, quản lý tài nguyên thời gian thực
-                                        và spawn quái theo làn (wave spawning).</span>
+
+                    <!-- Project 3 (Col-4) -->
+                    <a href="HeroicDefense.html" class="double-bezel bento-col-4 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/HeroicDefender.png" alt="Heroic Defense">
+                            <div class="bezel-gradient"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag">Tower Defense</span>
+                                <h3 class="bezel-title" style="font-size: 2rem;">Heroic Defense</h3>
+                                <p class="bezel-desc" style="font-size: 0.9rem;">
+                                    <span class="lang-en">2D tower defense project. Dynamic upgrades and real-time
+                                        resource management.</span>
+                                    <span class="lang-vi">Dự án thủ thành 2D cá nhân. Nâng cấp thuộc tính động, quản lý
+                                        tài nguyên.</span>
                                 </p>
                             </div>
                         </div>
                     </a>
-                    <a href="JungleSurvivor.html" class="card joly-beam-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/Jungle.png" alt="Jungle Survivor">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag">2D Action Platformer / Personal</span>
-                                <h3 class="card-title">Jungle Survivor</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Personal 2D action platformer game. Programmed smooth physics
-                                        movement, responsive combat system, random upgrades, and smart enemy
-                                        behavior.</span>
-                                    <span class="lang-vi">Game nhập vai hành động 2D cá nhân. Lập trình hệ thống vật lý
-                                        di chuyển mượt mà, cơ chế chiến đấu responsive, nâng cấp ngẫu nhiên và hành vi
-                                        quái vật thông minh.</span>
+
+                    <!-- Project 4 (Col-8) -->
+                    <a href="ChienBinhXanhNhi.html" class="double-bezel bento-col-8 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/pannerChienBinhXanhNhi.png" alt="Chiến Binh Xanh Nhí">
+                            <div class="bezel-gradient"
+                                style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag"
+                                    style="background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: var(--bright-gold);">Legendary
+                                    / Educational</span>
+                                <h3 class="bezel-title">Chiến Binh Xanh Nhí</h3>
+                                <p class="bezel-desc">
+                                    <span class="lang-en">A science and technology project. A fun educational game aimed
+                                        at children to collect and sort trash, protecting the environment.</span>
+                                    <span class="lang-vi">Một dự án khoa học kỹ thuật do studio thực hiện. Game giáo dục
+                                        vui nhộn hướng tới trẻ em thu gom và phân loại rác.</span>
                                 </p>
                             </div>
                         </div>
                     </a>
-                    <a href="MixieEmpire.html" class="card joly-beam-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=600&q=80" alt="Mixie Empire">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag">SIMULATION / MANAGEMENT</span>
-                                <h3 class="card-title">Mixie Empire</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Manage and grow the Mixie boba & ice cream empire. Mix drinks, upgrade the shop, and attract customers.</span>
-                                    <span class="lang-vi">Quản lý và phát triển đế chế trà sữa & kem Mixie. Pha chế đồ uống, nâng cấp cửa hàng và thu hút khách hàng.</span>
+
+                    <!-- Project 5 (Col-6) -->
+                    <a href="JungleSurvivor.html" class="double-bezel bento-col-6 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/Jungle.png" alt="Jungle Survivor">
+                            <div class="bezel-gradient"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag">Action Platformer</span>
+                                <h3 class="bezel-title" style="font-size: 2rem;">Jungle Survivor</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 6 (Col-6) -->
+                    <a href="MixieEmpire.html" class="double-bezel bento-col-6 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg"
+                                src="assets/Mixie EmpirePaner.png"
+                                alt="Mixie Empire">
+                            <div class="bezel-gradient"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag"
+                                    style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #c084fc;">Simulation
+                                    / Management</span>
+                                <h3 class="bezel-title" style="font-size: 2rem;">Mixie Empire</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 7 (Col-12) -->
+                    <a href="LastTrain.html" class="double-bezel bento-col-12 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/LastTrain.jpg" alt="Last Train">
+                            <div class="bezel-gradient"
+                                style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag"
+                                    style="background: rgba(220,38,38,0.1); border-color: rgba(220,38,38,0.3); color: #f87171;">Horror / Exploration</span>
+                                <h3 class="bezel-title" style="font-size: 2rem;">Last Train</h3>
+                                <p class="bezel-desc">
+                                    <span class="lang-en">An exploration horror game where players board the last train of the night and slowly realize the journey is far from normal.</span>
+                                    <span class="lang-vi">Một game kinh dị khám phá, nơi người chơi bước lên chuyến tàu cuối cùng trong đêm và dần nhận ra hành trình này không hề bình thường.</span>
                                 </p>
                             </div>
                         </div>
                     </a>
-                    <a href="ChienBinhXanhNhi.html" class="card joly-beam-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/pannerChienBinhXanhNhi.png" alt="Chiến Binh Xanh Nhí">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag">2D CASUAL / EDUCATIONAL</span>
-                                <h3 class="card-title">Chiến Binh Xanh Nhí</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">A science and technology project by the studio. A fun educational game aimed at children to collect and sort trash, protecting the environment.</span>
-                                    <span class="lang-vi">Một dự án khoa học kỹ thuật do studio thực hiện. Game giáo dục vui nhộn hướng tới trẻ em, thực hiện nhiệm vụ thu gom và phân loại rác bảo vệ môi trường.</span>
+
+                    <!-- Project 8 (Col-12) -->
+                    <a href="707TheReunion.html" class="double-bezel bento-col-12 gs-reveal">
+                        <div class="double-bezel-inner">
+                            <img class="bezel-img-bg" src="assets/707.png" alt="707 The Reunion">
+                            <div class="bezel-gradient"
+                                style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
+                            <div class="bezel-content">
+                                <span class="bezel-tag"
+                                    style="background: rgba(147, 51, 234, 0.1); border-color: rgba(147, 51, 234, 0.3); color: #c084fc;">Psychological Horror / Puzzle</span>
+                                <h3 class="bezel-title" style="font-size: 2rem;">707: The Reunion</h3>
+                                <p class="bezel-desc">
+                                    <span class="lang-en">A psychological horror game set in a familiar Vietnamese apartment setting.</span>
+                                    <span class="lang-vi">Một game kinh dị tâm lý lấy bối cảnh khu chung cư quen thuộc tại Việt Nam, tập trung vào khám phá và giải đố.</span>
                                 </p>
                             </div>
                         </div>
@@ -1425,9 +1852,7 @@
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media"
-                                src="assets/nghienCuy.jpg"
-                                alt="Thành lập">
+                            <img class="card-media" src="assets/nghienCuy.jpg" alt="Thành lập">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Learning & Research Phase</span><span
@@ -1467,9 +1892,7 @@
                     <a href="GameJam.html" class="card joly-beam-card" style="text-decoration: none;">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media"
-                                src="assets/GameJam.jpg"
-                                alt="Game Jam Log">
+                            <img class="card-media" src="assets/GameJam.jpg" alt="Game Jam Log">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Competition
@@ -1490,9 +1913,7 @@
                     <a href="PreviousJobs.html" class="card joly-beam-card" style="text-decoration: none;">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media"
-                                src="assets/QuaTrinhLamViec.jpg"
-                                alt="Previous Jobs">
+                            <img class="card-media" src="assets/QuaTrinhLamViec.jpg" alt="Previous Jobs">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Experience /
@@ -1515,14 +1936,15 @@
         <section id="contact" class="section contact-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="contact-title"><span class="lang-en">Contact <span>Ngoc Hai</span></span><span
+                    <h2 class="contact-title"><span class="lang-en">Contact <span>SSS Studio</span></span><span
                             class="lang-vi">Liên hệ với <span>SSS Studio</span></span></h2>
                     <div class="section-divider"></div>
                 </div>
                 <p class="contact-copy">
-                    <span class="lang-en">Send a message through the form below or connect with me directly for
+                    <span class="lang-en">Send a message through the form below or connect with us directly for
                         collaboration, hiring opportunities, or sharing product development ideas.</span>
-                    <span class="lang-vi">Hãy gửi tin nhắn qua biểu mẫu bên dưới hoặc kết nối trực tiếp với chúng tôi nếu bạn
+                    <span class="lang-vi">Hãy gửi tin nhắn qua biểu mẫu bên dưới hoặc kết nối trực tiếp với chúng tôi
+                        nếu bạn
                         có cơ hội hợp tác, tuyển dụng hoặc trao đổi ý tưởng phát triển sản phẩm.</span>
                 </p>
 
@@ -1562,7 +1984,7 @@
                             required></textarea>
                     </div>
                     <button type="submit" class="form-submit">
-                        <span class="lang-en">Send Message to Ngoc Hai</span>
+                        <span class="lang-en">Send Message to SSS Studio</span>
                         <span class="lang-vi">Gửi Tin Nhắn Cho SSS Studio</span>
                     </button>
                     <div id="formMessage" class="form-message"></div>
@@ -1606,9 +2028,11 @@
         </div>
         <div class="footer-bottom">
             <p class="footer-copy">
-                <span class="lang-en">© 2026 Ngoc Hai (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All Rights
+                <span class="lang-en">© 2026 Ngoc Hai (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All
+                    Rights
                     Reserved.</span>
-                <span class="lang-vi">© 2026 Ngọc Hải (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All Rights
+                <span class="lang-vi">© 2026 Ngọc Hải (SSS Studio). Crafted with JolyUI & Dark Fantasy Aesthetic. All
+                    Rights
                     Reserved.</span>
             </p>
             <ul class="footer-legal">
@@ -1694,13 +2118,13 @@
 
 
         /* ============================================================
-           HERO CONSTELLATION ANIMATION
+           HERO PIXEL STARFIELD ANIMATION
            ============================================================ */
         const heroCanvas = document.getElementById('hero-animated-bg');
         if (heroCanvas) {
             const hCtx = heroCanvas.getContext('2d');
-            let heroParticles = [];
-            
+            let stars = [];
+
             const resizeHeroCanvas = () => {
                 heroCanvas.width = heroCanvas.parentElement.clientWidth;
                 heroCanvas.height = heroCanvas.parentElement.clientHeight;
@@ -1708,48 +2132,33 @@
             window.addEventListener('resize', resizeHeroCanvas);
             resizeHeroCanvas();
 
-            class HeroNode {
+            class Star {
                 constructor() {
                     this.x = Math.random() * heroCanvas.width;
                     this.y = Math.random() * heroCanvas.height;
-                    this.vx = (Math.random() - 0.5) * 0.8;
-                    this.vy = (Math.random() - 0.5) * 0.8;
-                    this.radius = Math.random() * 2 + 1;
+                    this.z = Math.random() * 2; // depth and speed multiplier
+                    this.size = Math.random() > 0.8 ? 3 : 2; 
                 }
                 update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > heroCanvas.width) this.vx *= -1;
-                    if (this.y < 0 || this.y > heroCanvas.height) this.vy *= -1;
+                    this.x -= (this.z * 0.5 + 0.2); // moving left
+                    if (this.x < 0) {
+                        this.x = heroCanvas.width;
+                        this.y = Math.random() * heroCanvas.height;
+                    }
                 }
                 draw() {
-                    hCtx.beginPath();
-                    hCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    hCtx.fillStyle = '#38bdf8';
-                    hCtx.fill();
+                    hCtx.fillStyle = `rgba(255, 255, 255, ${this.z / 2 + 0.1})`;
+                    hCtx.fillRect(this.x, this.y, this.size, this.size);
                 }
             }
 
-            for (let i = 0; i < 70; i++) heroParticles.push(new HeroNode());
+            for (let i = 0; i < 150; i++) stars.push(new Star());
 
             function animateHero() {
                 hCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-                for (let i = 0; i < heroParticles.length; i++) {
-                    heroParticles[i].update();
-                    heroParticles[i].draw();
-                    for (let j = i; j < heroParticles.length; j++) {
-                        const dx = heroParticles[i].x - heroParticles[j].x;
-                        const dy = heroParticles[i].y - heroParticles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 130) {
-                            hCtx.beginPath();
-                            hCtx.strokeStyle = `rgba(56, 189, 248, ${1 - dist/130})`;
-                            hCtx.lineWidth = 0.6;
-                            hCtx.moveTo(heroParticles[i].x, heroParticles[i].y);
-                            hCtx.lineTo(heroParticles[j].x, heroParticles[j].y);
-                            hCtx.stroke();
-                        }
-                    }
+                for (let i = 0; i < stars.length; i++) {
+                    stars[i].update();
+                    stars[i].draw();
                 }
                 requestAnimationFrame(animateHero);
             }
@@ -1838,7 +2247,6 @@
                 // Cập nhật trạng thái active
                 document.querySelectorAll('.joly-liquid-metal-btn').forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-
                 document.getElementById('navMenu').classList.remove('active');
             });
         });
@@ -1856,6 +2264,9 @@
                     current = section.getAttribute('id');
                 }
             });
+
+            // Gộp phần team vào chung tab Giới thiệu
+            if (current === 'studio-team') current = 'objective';
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -1902,7 +2313,8 @@
 
     <script>
         const sphereCanvas = document.getElementById("sphere-canvas");
-        const sScene = new THREE.Scene();
+        if (sphereCanvas) {
+            const sScene = new THREE.Scene();
 
         const sCamera = new THREE.PerspectiveCamera(50, sphereCanvas.clientWidth / sphereCanvas.clientHeight, 0.1, 1000);
         sCamera.position.z = 7.5;
@@ -2088,6 +2500,84 @@
             sCamera.updateProjectionMatrix();
             sRenderer.setSize(w, h);
         });
+        } // End if (sphereCanvas)
+        // GSAP High-End Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 3. Quest Discovered Popup
+        gsap.utils.toArray('.section-eyebrow, .sim-eyebrow').forEach(function (elem) {
+
+            gsap.fromTo(elem,
+                { scale: 0, opacity: 0, x: -50 },
+                {
+                    scale: 1, opacity: 1, x: 0,
+                    duration: 1.2,
+                    ease: "elastic.out(1, 0.4)",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+
+        // Basic reveal for cards
+        gsap.utils.toArray('.gs-reveal').forEach(function (elem) {
+            gsap.fromTo(elem,
+                { y: 60, opacity: 0, filter: 'blur(8px)' },
+                {
+                    y: 0, opacity: 1, filter: 'blur(0px)',
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        /* ============================================================
+           SCIFI CAROUSEL LOGIC
+           ============================================================ */
+        const scifiSlides = document.querySelectorAll('.scifi-slide');
+        const paginationContainer = document.getElementById('heroPagination');
+        let currentScifiSlide = 0;
+        let scifiInterval;
+
+        if (scifiSlides.length > 0) {
+            scifiSlides.forEach((slide, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('scifi-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToScifiSlide(index));
+                paginationContainer.appendChild(dot);
+            });
+
+            const scifiDots = document.querySelectorAll('.scifi-dot');
+
+            function goToScifiSlide(n) {
+                scifiSlides[currentScifiSlide].classList.remove('active');
+                scifiDots[currentScifiSlide].classList.remove('active');
+                currentScifiSlide = (n + scifiSlides.length) % scifiSlides.length;
+                scifiSlides[currentScifiSlide].classList.add('active');
+                scifiDots[currentScifiSlide].classList.add('active');
+                resetScifiInterval();
+            }
+
+            function nextScifiSlide() {
+                goToScifiSlide(currentScifiSlide + 1);
+            }
+
+            function resetScifiInterval() {
+                clearInterval(scifiInterval);
+                scifiInterval = setInterval(nextScifiSlide, 4000);
+            }
+
+            resetScifiInterval();
+        }
     </script>
 </body>
 

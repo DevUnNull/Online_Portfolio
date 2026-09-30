@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-en="SSS Studio — Last Train" data-vi="SSS Studio — Last Train">SSS Studio — Last Train</title>
+    <link rel="stylesheet" href="detail_page.css">
+    <script src="lang-switcher.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <div class="nav">
+                <a href="index.html" class="back-btn">
+                    <span class="lang-en">← Back to Profile</span>
+                    <span class="lang-vi">← Về trang hồ sơ</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>🚂 <span class="lang-en">Last Train</span><span class="lang-vi">Last Train</span></h1>
+
+        <div class="hero">
+            <iframe src="https://www.youtube.com/embed/1HintPchXL8"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; border: 1px solid rgba(0,255,153,0.2);"></iframe>
+        </div>
+
+        <div class="section" id="overview">
+            <h2>
+                <span class="lang-en">I. Game Overview</span>
+                <span class="lang-vi">I. Tổng quan game</span>
+            </h2>
+            <p><strong><span class="lang-en">Project Name:</span><span class="lang-vi">Tên game:</span></strong> <span
+                    class="lang-en">Last Train</span><span class="lang-vi">Last Train</span></p>
+            <p><strong><span class="lang-en">Genre:</span><span class="lang-vi">Thể loại:</span></strong> <span
+                    class="lang-en">Horror / Psychological Horror / Exploration / Adventure</span><span class="lang-vi">Horror / Psychological Horror / Exploration / Adventure</span></p>
+            <p><strong><span class="lang-en">Summary:</span><span class="lang-vi">Tóm tắt:</span></strong>
+                <span class="lang-en">Last Train is an exploration horror game where players board the last train of the night and slowly realize the journey is far from normal. Observe the environment, find clues, and uncover the secret behind the train before it's too late.</span>
+                <span class="lang-vi">Last Train là một trò chơi mang bầu không khí bí ẩn và căng thẳng, đưa người chơi vào hành trình trên một chuyến tàu cuối cùng trong đêm. Không gian khép kín của đoàn tàu, ánh sáng mờ và cảm giác cô lập tạo nên một trải nghiệm vừa hồi hộp vừa kích thích sự tò mò.</span>
+            </p>
+            <p><strong><span class="lang-en">Goal:</span><span class="lang-vi">Mục tiêu:</span></strong> <span
+                    class="lang-en">Explore the train's sections, interact with objects, and uncover the mystery behind the anomalous events.</span><span class="lang-vi">Khám phá từng khu vực của chuyến tàu, tương tác với các vật thể và tìm kiếm những manh mối liên quan đến những sự kiện bất thường đang xảy ra.</span></p>
+        </div>
+
+        <div class="section" id="highlights">
+            <h2>
+                <span class="lang-en">II. Key Highlights</span>
+                <span class="lang-vi">II. Điểm nổi bật</span>
+            </h2>
+            <ul>
+                <li>
+                    <span class="lang-en">Enclosed train environment creating a deep sense of isolation.</span>
+                    <span class="lang-vi">Không gian tàu điện khép kín, tạo cảm giác cô lập.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Mysterious and intense atmosphere.</span>
+                    <span class="lang-vi">Bầu không khí bí ẩn và căng thẳng.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Gameplay heavily focused on exploration and observation.</span>
+                    <span class="lang-vi">Gameplay tập trung vào khám phá và quan sát.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Players must pay close attention to unusual environmental shifts.</span>
+                    <span class="lang-vi">Người chơi phải chú ý đến những thay đổi bất thường trong môi trường.</span>
+                </li>
+                <li>
+                    <span class="lang-en">The story unfolds gradually throughout the playthrough.</span>
+                    <span class="lang-vi">Cốt truyện được hé lộ dần thông qua quá trình chơi.</span>
+                </li>
+                <li>
+                    <span class="lang-en">Masterful use of lighting and sound to build suspense without cheap jumpscares.</span>
+                    <span class="lang-vi">Sử dụng ánh sáng và âm thanh để tăng cảm giác hồi hộp mà không lạm dụng hù dọa trực tiếp.</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Fade-in on scroll
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(sec => observer.observe(sec));
+    </script>
+</body>
+
+</html>
