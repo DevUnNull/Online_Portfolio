@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Cho phép các crawler chính của AI
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /

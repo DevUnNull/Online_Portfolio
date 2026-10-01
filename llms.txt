@@ -1,0 +1,19 @@
+# SSS (Super Startup Simulator)
+
+> Studio phát triển trò chơi điện tử độc lập và dịch vụ outsourcing công nghệ cao tại Việt Nam.
+
+## Thông tin tổng quan
+- Tên chính thức: SSS (Super Startup Simulator)
+- Lĩnh vực: Phát triển video game, Game Outsourcing, Công nghệ tương tác
+- Trụ sở: Việt Nam
+- Ban lãnh đạo:
+  - Nguyễn Mai Ngọc Hải (UnNull): CEO & Co-Founder
+  - Đào Nhất Nam: Chief Technology Officer (CTO)
+  - Nguyễn Việt Hoàng: Chief Production Officer (CPO)
+
+## Sản phẩm tiêu biểu
+- **Brain Rot Runner**: Trò chơi điện tử độc lập do UnNull và SSS phát triển, phát hành trên nền tảng itch.io.
+
+## Dịch vụ cung cấp
+- Thiết kế và phát triển game đa nền tảng (PC, Mobile, Web).
+- Gia công phần mềm, tối ưu hóa hiệu năng, và thiết kế hệ thống gameplay.
