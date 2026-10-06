@@ -1100,45 +1100,57 @@
                 display: none;
             }
         }
+
         /* ============================================================
            TYPOGRAPHY & FONTS
            ============================================================ */
-        .section-title, .sim-title {
+        .section-title,
+        .sim-title {
             font-family: 'VT323', monospace !important;
             font-size: clamp(2.5rem, 4vw, 3.5rem) !important;
             line-height: 1.2;
             letter-spacing: 2px;
         }
-        .section-eyebrow, .sim-eyebrow {
+
+        .section-eyebrow,
+        .sim-eyebrow {
             font-family: 'VT323', monospace !important;
             font-size: 1.2rem !important;
             letter-spacing: 2px;
         }
 
         .arcade-btn {
-            background: var(--dark-bg); color: var(--cream);
+            background: var(--dark-bg);
+            color: var(--cream);
             border: 2px solid var(--cream);
             box-shadow: 4px 4px 0px var(--cream);
-            padding: 12px 24px; font-family: 'VT323', monospace;
-            font-size: 1.2rem; text-decoration: none;
+            padding: 12px 24px;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            text-decoration: none;
             transition: transform 0.1s, box-shadow 0.1s;
             cursor: pointer;
             display: inline-block;
         }
+
         .arcade-btn.primary {
             background: var(--crimson);
             border-color: var(--cream);
             box-shadow: 4px 4px 0px var(--cream);
         }
+
         .arcade-btn:active {
             transform: translate(4px, 4px);
             box-shadow: 0px 0px 0px transparent !important;
         }
+
         .retro-scanlines {
-            position: absolute; inset: 0;
+            position: absolute;
+            inset: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             background-size: 100% 4px, 3px 100%;
-            z-index: 1; pointer-events: none;
+            z-index: 1;
+            pointer-events: none;
         }
 
         /* Hero Split Layout */
@@ -1154,6 +1166,7 @@
             z-index: 2;
             text-align: left;
         }
+
         @media (max-width: 1024px) {
             .hero-split {
                 grid-template-columns: 1fr;
@@ -1161,15 +1174,20 @@
                 padding-top: 150px;
             }
         }
+
         .hero-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
             margin-top: 2rem;
         }
+
         @media (max-width: 1024px) {
-            .hero-pills { justify-content: center; }
+            .hero-pills {
+                justify-content: center;
+            }
         }
+
         .hero-pill {
             background: rgba(0, 255, 255, 0.05);
             border: 1px solid rgba(0, 255, 255, 0.3);
@@ -1197,54 +1215,192 @@
             transform-style: preserve-3d;
             transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
+
         .scifi-carousel-container:hover {
             transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
             box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.2);
         }
+
         .scifi-carousel-container::before {
-            content: ''; position: absolute; top: -2px; left: 30px; width: 60px; height: 2px; background: #fff; box-shadow: 0 0 10px #fff; z-index: 5;
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 30px;
+            width: 60px;
+            height: 2px;
+            background: #fff;
+            box-shadow: 0 0 10px #fff;
+            z-index: 5;
         }
+
         .scifi-carousel-container::after {
-            content: ''; position: absolute; bottom: -2px; right: 30px; width: 60px; height: 2px; background: #fff; box-shadow: 0 0 10px #fff; z-index: 5;
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 30px;
+            width: 60px;
+            height: 2px;
+            background: #fff;
+            box-shadow: 0 0 10px #fff;
+            z-index: 5;
         }
+
         .scifi-corner {
-            position: absolute; width: 20px; height: 20px; border: 2px solid #0ff; z-index: 5;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0ff;
+            z-index: 5;
         }
-        .scifi-corner.tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
-        .scifi-corner.tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
-        .scifi-corner.bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
-        .scifi-corner.br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+        .scifi-corner.tl {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .scifi-corner.tr {
+            top: -2px;
+            right: -2px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .scifi-corner.bl {
+            bottom: -2px;
+            left: -2px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .scifi-corner.br {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
 
         .scifi-badge {
-            position: absolute; z-index: 10; padding: 0.3rem 0.8rem; font-family: 'VT323', monospace; font-size: 0.9rem; background: rgba(0, 0, 0, 0.8); border: 1px solid #0ff; color: #0ff;
+            position: absolute;
+            z-index: 10;
+            padding: 0.3rem 0.8rem;
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #0ff;
+            color: #0ff;
         }
-        .scifi-badge.top-left { top: 1rem; left: 1rem; }
-        .scifi-badge.top-right { top: 1rem; right: 1rem; background: rgba(0, 255, 0, 0.1); border-color: #0f0; color: #0f0;}
-        .scifi-badge.bottom-right { bottom: 1rem; right: 1rem; background: rgba(0, 255, 255, 0.1); border-color: #0ff; color: #0ff; cursor: pointer; transition: background 0.2s;}
-        .scifi-badge.bottom-right:hover { background: rgba(0, 255, 255, 0.3); }
+
+        .scifi-badge.top-left {
+            top: 1rem;
+            left: 1rem;
+        }
+
+        .scifi-badge.top-right {
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 255, 0, 0.1);
+            border-color: #0f0;
+            color: #0f0;
+        }
+
+        .scifi-badge.bottom-right {
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #0ff;
+            color: #0ff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .scifi-badge.bottom-right:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
 
         .scifi-slide {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transition: opacity 0.5s ease;
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; text-align: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            text-align: left;
         }
-        .scifi-slide.active { opacity: 1; z-index: 2; }
+
+        .scifi-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
         .scifi-slide img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
+
         .scifi-slide-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(2,6,23,0.95) 0%, transparent 60%); z-index: -1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(2, 6, 23, 0.95) 0%, transparent 60%);
+            z-index: -1;
         }
-        .scifi-slide-title { font-family: 'VT323', monospace; font-size: 2rem; color: #fff; margin: 0; text-shadow: 2px 2px 0 #000; text-transform: uppercase; }
-        .scifi-slide-desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #aaa; margin: 0.5rem 0 1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .scifi-slide-title {
+            font-family: 'VT323', monospace;
+            font-size: 2rem;
+            color: #fff;
+            margin: 0;
+            text-shadow: 2px 2px 0 #000;
+            text-transform: uppercase;
+        }
+
+        .scifi-slide-desc {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin: 0.5rem 0 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         .scifi-pagination {
-            position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; z-index: 10;
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
         }
+
         .scifi-dot {
-            width: 8px; height: 8px; background: rgba(0, 255, 255, 0.3); border-radius: 50%; cursor: pointer; transition: all 0.3s;
+            width: 8px;
+            height: 8px;
+            background: rgba(0, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .scifi-dot.active { background: #0ff; box-shadow: 0 0 10px #0ff; transform: scale(1.2); }
+
+        .scifi-dot.active {
+            background: #0ff;
+            box-shadow: 0 0 10px #0ff;
+            transform: scale(1.2);
+        }
     </style>
 </head>
 
@@ -1298,7 +1454,7 @@
 
     <section id="home" class="hero"
         style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
-        
+
         <div class="retro-scanlines"></div>
 
         <!-- Animated Background Canvas -->
@@ -1322,13 +1478,19 @@
 
                 <p class="hero-desc"
                     style="font-size: 1.1rem; color: var(--light-grey); max-width: 600px; margin: 0 0 2rem; line-height: 1.6; font-family: 'Inter', sans-serif;">
-                    <span class="lang-en">We create stylized 2D & 3D games, engaging gameplay systems, and multiplayer experiences with Unity Engine.</span>
-                    <span class="lang-vi">Chúng tôi chuyên phát triển game 2D & 3D, hệ thống gameplay cuốn hút và trải nghiệm Multiplayer bằng Unity Engine.</span>
+                    <span class="lang-en">We create stylized 2D & 3D games, engaging gameplay systems, and multiplayer
+                        experiences with Unity Engine.</span>
+                    <span class="lang-vi">Chúng tôi chuyên phát triển game 2D & 3D, hệ thống gameplay cuốn hút và trải
+                        nghiệm Multiplayer bằng Unity Engine.</span>
                 </p>
-                
+
                 <div class="hero-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="#projects" class="arcade-btn" style="background: rgba(0, 255, 255, 0.1); border-color: #0ff; color: #0ff; box-shadow: 4px 4px 0px #0ff; padding: 10px 20px; font-size: 1rem;"><span class="lang-en">EXPLORE OUR GAMES ></span><span class="lang-vi">KHÁM PHÁ DỰ ÁN ></span></a>
-                    <a href="#studio-team" class="arcade-btn" style="background: transparent; border-color: var(--light-grey); color: var(--light-grey); box-shadow: 4px 4px 0px var(--light-grey); padding: 10px 20px; font-size: 1rem;"><span class="lang-en">MEET THE TEAM ></span><span class="lang-vi">GẶP GỠ ĐỘI NGŨ ></span></a>
+                    <a href="#projects" class="arcade-btn"
+                        style="background: rgba(0, 255, 255, 0.1); border-color: #0ff; color: #0ff; box-shadow: 4px 4px 0px #0ff; padding: 10px 20px; font-size: 1rem;"><span
+                            class="lang-en">EXPLORE OUR GAMES ></span><span class="lang-vi">KHÁM PHÁ DỰ ÁN ></span></a>
+                    <a href="#studio-team" class="arcade-btn"
+                        style="background: transparent; border-color: var(--light-grey); color: var(--light-grey); box-shadow: 4px 4px 0px var(--light-grey); padding: 10px 20px; font-size: 1rem;"><span
+                            class="lang-en">MEET THE TEAM ></span><span class="lang-vi">GẶP GỠ ĐỘI NGŨ ></span></a>
                 </div>
 
                 <div class="hero-pills">
@@ -1442,7 +1604,7 @@
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/lamviec.jpg" alt="Objective Background 1">
+                            <img class="card-media" src="assets/in707_2.png" alt="Objective Background 1">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Core Objective</span><span
@@ -1461,7 +1623,7 @@
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/unitylamviec.jpg" alt="Game Dev Philosophy">
+                            <img class="card-media" src="assets/in707_3.png" alt="Game Dev Philosophy">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Development Philosophy</span><span
@@ -1494,25 +1656,7 @@
                         <span class="lang-en">We are a studio of over 30 passionate members across all disciplines,
                             specializing in creating high-quality 2D and 3D games. Here is our core leadership
                             team.</span>
-                        <span class="lang-vi">Chúng tôi là một studio gồm hơn 30 thành viên tâm huyết với đầy đủ các
-                            lĩnh vực, chuyên phát triển các tựa game 2D và 3D chất lượng cao. Dưới đây là đội ngũ lãnh
-                            đạo nòng cốt.</span>
                     </p>
-                </div>
-
-                <div
-                    style="margin-bottom: 5rem; text-align: center; position: relative; max-width: 1000px; margin-left: auto; margin-right: auto;">
-                    <img src="assets/AnhTapThe.jpg" alt="SSS Studio Team"
-                        style="width: 100%; height: 400px; object-fit: cover; border-radius: 20px; border: 1px solid var(--border-mid); box-shadow: 0 10px 40px rgba(0,0,0,0.6);">
-                    <div
-                        style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(2,6,23,0.85); padding: 12px 24px; border-radius: 12px; backdrop-filter: blur(8px); border: 1px solid var(--bright-gold);">
-                        <span class="lang-en"
-                            style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">+30
-                            Members across all disciplines</span>
-                        <span class="lang-vi"
-                            style="color: var(--bright-gold); font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 1px;">Hơn
-                            30 thành viên đầy đủ các lĩnh vực</span>
-                    </div>
                 </div>
 
                 <div class="grid-3">
@@ -1674,9 +1818,7 @@
                     <!-- Project 6 (Col-6) -->
                     <a href="MixieEmpire.html" class="double-bezel bento-col-6 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg"
-                                src="assets/Mixie EmpirePaner.png"
-                                alt="Mixie Empire">
+                            <img class="bezel-img-bg" src="assets/Mixie EmpirePaner.png" alt="Mixie Empire">
                             <div class="bezel-gradient"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag"
@@ -1695,11 +1837,14 @@
                                 style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag"
-                                    style="background: rgba(220,38,38,0.1); border-color: rgba(220,38,38,0.3); color: #f87171;">Horror / Exploration</span>
+                                    style="background: rgba(220,38,38,0.1); border-color: rgba(220,38,38,0.3); color: #f87171;">Horror
+                                    / Exploration</span>
                                 <h3 class="bezel-title" style="font-size: 2rem;">Last Train</h3>
                                 <p class="bezel-desc">
-                                    <span class="lang-en">An exploration horror game where players board the last train of the night and slowly realize the journey is far from normal.</span>
-                                    <span class="lang-vi">Một game kinh dị khám phá, nơi người chơi bước lên chuyến tàu cuối cùng trong đêm và dần nhận ra hành trình này không hề bình thường.</span>
+                                    <span class="lang-en">An exploration horror game where players board the last train
+                                        of the night and slowly realize the journey is far from normal.</span>
+                                    <span class="lang-vi">Một game kinh dị khám phá, nơi người chơi bước lên chuyến tàu
+                                        cuối cùng trong đêm và dần nhận ra hành trình này không hề bình thường.</span>
                                 </p>
                             </div>
                         </div>
@@ -1713,11 +1858,14 @@
                                 style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag"
-                                    style="background: rgba(147, 51, 234, 0.1); border-color: rgba(147, 51, 234, 0.3); color: #c084fc;">Psychological Horror / Puzzle</span>
+                                    style="background: rgba(147, 51, 234, 0.1); border-color: rgba(147, 51, 234, 0.3); color: #c084fc;">Psychological
+                                    Horror / Puzzle</span>
                                 <h3 class="bezel-title" style="font-size: 2rem;">707: The Reunion</h3>
                                 <p class="bezel-desc">
-                                    <span class="lang-en">A psychological horror game set in a familiar Vietnamese apartment setting.</span>
-                                    <span class="lang-vi">Một game kinh dị tâm lý lấy bối cảnh khu chung cư quen thuộc tại Việt Nam, tập trung vào khám phá và giải đố.</span>
+                                    <span class="lang-en">A psychological horror game set in a familiar Vietnamese
+                                        apartment setting.</span>
+                                    <span class="lang-vi">Một game kinh dị tâm lý lấy bối cảnh khu chung cư quen thuộc
+                                        tại Việt Nam, tập trung vào khám phá và giải đố.</span>
                                 </p>
                             </div>
                         </div>
@@ -1870,7 +2018,7 @@
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/nghienCuy.jpg" alt="Thành lập">
+                            <img class="card-media" src="assets/707.png" alt="Thành lập">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Learning & Research Phase</span><span
@@ -1889,9 +2037,7 @@
                     <div class="card joly-beam-card">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media"
-                                src="assets/Screenshot 2026-09-30 123737.png"
-                                alt="Đào tạo">
+                            <img class="card-media" src="assets/Screenshot 2026-09-30 123737.png" alt="Đào tạo">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Certificates & Practice</span><span
@@ -1931,7 +2077,8 @@
                     <a href="PreviousJobs.html" class="card joly-beam-card" style="text-decoration: none;">
                         <div class="card-screen">
                             <div class="card-notch"></div>
-                            <img class="card-media" src="assets/QuaTrinhLamViec.jpg" alt="Previous Jobs">
+                            <img class="card-media" src="assets/2aobor2c8g3a9ki0aajoujym4annym0crma66f1k1.jpg"
+                                alt="Previous Jobs">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Experience /
@@ -2151,7 +2298,7 @@
                     this.x = Math.random() * heroCanvas.width;
                     this.y = Math.random() * heroCanvas.height;
                     this.z = Math.random() * 2; // depth and speed multiplier
-                    this.size = Math.random() > 0.8 ? 3 : 2; 
+                    this.size = Math.random() > 0.8 ? 3 : 2;
                 }
                 update() {
                     this.x -= (this.z * 0.5 + 0.2); // moving left
@@ -2330,190 +2477,190 @@
         if (sphereCanvas) {
             const sScene = new THREE.Scene();
 
-        const sCamera = new THREE.PerspectiveCamera(50, sphereCanvas.clientWidth / sphereCanvas.clientHeight, 0.1, 1000);
-        sCamera.position.z = 7.5;
+            const sCamera = new THREE.PerspectiveCamera(50, sphereCanvas.clientWidth / sphereCanvas.clientHeight, 0.1, 1000);
+            sCamera.position.z = 7.5;
 
-        const sRenderer = new THREE.WebGLRenderer({ canvas: sphereCanvas, alpha: true, antialias: true });
-        sRenderer.setSize(sphereCanvas.clientWidth, sphereCanvas.clientHeight);
-        sRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            const sRenderer = new THREE.WebGLRenderer({ canvas: sphereCanvas, alpha: true, antialias: true });
+            sRenderer.setSize(sphereCanvas.clientWidth, sphereCanvas.clientHeight);
+            sRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        const sphereGroup = new THREE.Group();
-        sScene.add(sphereGroup);
+            const sphereGroup = new THREE.Group();
+            sScene.add(sphereGroup);
 
-        // LÕI NĂNG LƯỢNG HẠT 3D (PARTICLE ENGINE CORE)
-        const particleCount = 150;
-        const pGeometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
+            // LÕI NĂNG LƯỢNG HẠT 3D (PARTICLE ENGINE CORE)
+            const particleCount = 150;
+            const pGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
 
-        for (let i = 0; i < particleCount; i++) {
-            const u = Math.random();
-            const v = Math.random();
-            const theta = u * 2.0 * Math.PI;
-            const phi = Math.acos(2.0 * v - 1.0);
-            const r = Math.cbrt(Math.random()) * 1.2;
+            for (let i = 0; i < particleCount; i++) {
+                const u = Math.random();
+                const v = Math.random();
+                const theta = u * 2.0 * Math.PI;
+                const phi = Math.acos(2.0 * v - 1.0);
+                const r = Math.cbrt(Math.random()) * 1.2;
 
-            positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-            positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-            positions[i * 3 + 2] = r * Math.cos(phi);
+                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = r * Math.cos(phi);
 
-            const isRed = Math.random() > 0.3;
-            colors[i * 3] = isRed ? 1.0 : 0.91;
-            colors[i * 3 + 1] = isRed ? 0.12 : 0.75;
-            colors[i * 3 + 2] = isRed ? 0.22 : 0.38;
-        }
+                const isRed = Math.random() > 0.3;
+                colors[i * 3] = isRed ? 1.0 : 0.91;
+                colors[i * 3 + 1] = isRed ? 0.12 : 0.75;
+                colors[i * 3 + 2] = isRed ? 0.22 : 0.38;
+            }
 
-        pGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        pGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            pGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            pGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        const pMaterial = new THREE.PointsMaterial({
-            size: 0.08,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.85,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
-        });
-
-        const coreParticles = new THREE.Points(pGeometry, pMaterial);
-        sphereGroup.add(coreParticles);
-
-        // Vành đai bụi hành tinh ngoài rìa
-        const ringGeometry = new THREE.TorusGeometry(3.1, 0.04, 8, 48);
-        const ringMaterial = new THREE.MeshBasicMaterial({
-            color: 0xC41E3A,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.25
-        });
-        const backgroundRing = new THREE.Mesh(ringGeometry, ringMaterial);
-        backgroundRing.rotation.x = Math.PI / 2;
-        sScene.add(backgroundRing);
-
-        // HỆ THỐNG CÁC TẤM PANEL ẢNH PHẲNG (IMAGE PANELS)
-        const projectListData = [
-            { title: "Brainrot Runner", img: "assets/BrainrotRunner.png" },
-            { title: "Behind the Mask", img: "assets/BehindTheMask.png" },
-            { title: "Heroic Defense", img: "assets/HeroicDefender.png" },
-            { title: "Jungle Survivor", img: "assets/Jungle.png" }
-        ];
-
-        const textureLoader = new THREE.TextureLoader();
-        const radius = 3.2;
-        const panelsArray = [];
-
-        projectListData.forEach((proj, idx) => {
-            const planeGeo = new THREE.PlaneGeometry(2.4, 1.5);
-            const pTexture = textureLoader.load(proj.img);
-            pTexture.minFilter = THREE.LinearFilter;
-
-            const planeMat = new THREE.MeshStandardMaterial({
-                map: pTexture,
-                side: THREE.DoubleSide,
-                roughness: 0.2,
-                metalness: 0.1
+            const pMaterial = new THREE.PointsMaterial({
+                size: 0.08,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
             });
 
-            const panelMesh = new THREE.Mesh(planeGeo, planeMat);
-            const angle = (idx / projectListData.length) * Math.PI * 2;
+            const coreParticles = new THREE.Points(pGeometry, pMaterial);
+            sphereGroup.add(coreParticles);
 
-            panelMesh.position.x = Math.sin(angle) * radius;
-            panelMesh.position.z = Math.cos(angle) * radius;
-            panelMesh.rotation.y = angle;
-            panelMesh.userData = { title: proj.title };
+            // Vành đai bụi hành tinh ngoài rìa
+            const ringGeometry = new THREE.TorusGeometry(3.1, 0.04, 8, 48);
+            const ringMaterial = new THREE.MeshBasicMaterial({
+                color: 0xC41E3A,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.25
+            });
+            const backgroundRing = new THREE.Mesh(ringGeometry, ringMaterial);
+            backgroundRing.rotation.x = Math.PI / 2;
+            sScene.add(backgroundRing);
 
-            sphereGroup.add(panelMesh);
-            panelsArray.push(panelMesh);
-        });
+            // HỆ THỐNG CÁC TẤM PANEL ẢNH PHẲNG (IMAGE PANELS)
+            const projectListData = [
+                { title: "Brainrot Runner", img: "assets/BrainrotRunner.png" },
+                { title: "Behind the Mask", img: "assets/BehindTheMask.png" },
+                { title: "Heroic Defense", img: "assets/HeroicDefender.png" },
+                { title: "Jungle Survivor", img: "assets/Jungle.png" }
+            ];
 
-        const frontStudioLight = new THREE.DirectionalLight(0xffffff, 2.5);
-        frontStudioLight.position.set(0, 2, 8);
-        sScene.add(frontStudioLight);
+            const textureLoader = new THREE.TextureLoader();
+            const radius = 3.2;
+            const panelsArray = [];
 
-        const fillRedAmbiance = new THREE.PointLight(0xC41E3A, 2.0, 15);
-        fillRedAmbiance.position.set(0, 0, 0);
-        sScene.add(fillRedAmbiance);
+            projectListData.forEach((proj, idx) => {
+                const planeGeo = new THREE.PlaneGeometry(2.4, 1.5);
+                const pTexture = textureLoader.load(proj.img);
+                pTexture.minFilter = THREE.LinearFilter;
 
-        let isDraggingSphere = false;
-        let pointerStartDeltaY = 0;
-        const overlayTitle = document.getElementById('sphere-project-title');
+                const planeMat = new THREE.MeshStandardMaterial({
+                    map: pTexture,
+                    side: THREE.DoubleSide,
+                    roughness: 0.2,
+                    metalness: 0.1
+                });
 
-        sphereCanvas.addEventListener('mousedown', (e) => {
-            isDraggingSphere = true;
-            pointerStartDeltaY = e.clientX;
-        });
+                const panelMesh = new THREE.Mesh(planeGeo, planeMat);
+                const angle = (idx / projectListData.length) * Math.PI * 2;
 
-        window.addEventListener('mouseup', () => {
-            isDraggingSphere = false;
-        });
+                panelMesh.position.x = Math.sin(angle) * radius;
+                panelMesh.position.z = Math.cos(angle) * radius;
+                panelMesh.rotation.y = angle;
+                panelMesh.userData = { title: proj.title };
 
-        sphereCanvas.addEventListener('mousemove', (e) => {
-            if (isDraggingSphere) {
-                const deltaX = e.clientX - pointerStartDeltaY;
-                sphereGroup.rotation.y += deltaX * 0.004;
+                sphereGroup.add(panelMesh);
+                panelsArray.push(panelMesh);
+            });
+
+            const frontStudioLight = new THREE.DirectionalLight(0xffffff, 2.5);
+            frontStudioLight.position.set(0, 2, 8);
+            sScene.add(frontStudioLight);
+
+            const fillRedAmbiance = new THREE.PointLight(0xC41E3A, 2.0, 15);
+            fillRedAmbiance.position.set(0, 0, 0);
+            sScene.add(fillRedAmbiance);
+
+            let isDraggingSphere = false;
+            let pointerStartDeltaY = 0;
+            const overlayTitle = document.getElementById('sphere-project-title');
+
+            sphereCanvas.addEventListener('mousedown', (e) => {
+                isDraggingSphere = true;
                 pointerStartDeltaY = e.clientX;
+            });
 
-                let closestPanel = null;
-                let maxZ = -Infinity;
-                panelsArray.forEach(panel => {
-                    const worldPos = new THREE.Vector3();
-                    panel.getWorldPosition(worldPos);
-                    if (worldPos.z > maxZ) {
-                        maxZ = worldPos.z;
-                        closestPanel = panel;
+            window.addEventListener('mouseup', () => {
+                isDraggingSphere = false;
+            });
+
+            sphereCanvas.addEventListener('mousemove', (e) => {
+                if (isDraggingSphere) {
+                    const deltaX = e.clientX - pointerStartDeltaY;
+                    sphereGroup.rotation.y += deltaX * 0.004;
+                    pointerStartDeltaY = e.clientX;
+
+                    let closestPanel = null;
+                    let maxZ = -Infinity;
+                    panelsArray.forEach(panel => {
+                        const worldPos = new THREE.Vector3();
+                        panel.getWorldPosition(worldPos);
+                        if (worldPos.z > maxZ) {
+                            maxZ = worldPos.z;
+                            closestPanel = panel;
+                        }
+                    });
+
+                    if (closestPanel && overlayTitle) {
+                        overlayTitle.textContent = closestPanel.userData.title;
                     }
-                });
-
-                if (closestPanel && overlayTitle) {
-                    overlayTitle.textContent = closestPanel.userData.title;
                 }
-            }
-        });
+            });
 
-        let clock = new THREE.Clock();
+            let clock = new THREE.Clock();
 
-        function mainSphereLoop() {
-            requestAnimationFrame(mainSphereLoop);
-            const elapsedTime = clock.getElapsedTime();
+            function mainSphereLoop() {
+                requestAnimationFrame(mainSphereLoop);
+                const elapsedTime = clock.getElapsedTime();
 
-            if (!isDraggingSphere) {
-                sphereGroup.rotation.y += 0.002;
+                if (!isDraggingSphere) {
+                    sphereGroup.rotation.y += 0.002;
 
-                let closestPanel = null;
-                let maxZ = -Infinity;
-                panelsArray.forEach(panel => {
-                    const worldPos = new THREE.Vector3();
-                    panel.getWorldPosition(worldPos);
-                    if (worldPos.z > maxZ) {
-                        maxZ = worldPos.z;
-                        closestPanel = panel;
+                    let closestPanel = null;
+                    let maxZ = -Infinity;
+                    panelsArray.forEach(panel => {
+                        const worldPos = new THREE.Vector3();
+                        panel.getWorldPosition(worldPos);
+                        if (worldPos.z > maxZ) {
+                            maxZ = worldPos.z;
+                            closestPanel = panel;
+                        }
+                    });
+                    if (closestPanel && overlayTitle) {
+                        overlayTitle.textContent = closestPanel.userData.title;
                     }
-                });
-                if (closestPanel && overlayTitle) {
-                    overlayTitle.textContent = closestPanel.userData.title;
                 }
+
+                const pPositions = coreParticles.geometry.attributes.position.array;
+                for (let i = 0; i < particleCount; i++) {
+                    pPositions[i * 3 + 1] += Math.sin(elapsedTime + i) * 0.001;
+                }
+                coreParticles.geometry.attributes.position.needsUpdate = true;
+                coreParticles.rotation.z -= 0.001;
+
+                backgroundRing.rotation.z = elapsedTime * 0.05;
+
+                sRenderer.render(sScene, sCamera);
             }
+            mainSphereLoop();
 
-            const pPositions = coreParticles.geometry.attributes.position.array;
-            for (let i = 0; i < particleCount; i++) {
-                pPositions[i * 3 + 1] += Math.sin(elapsedTime + i) * 0.001;
-            }
-            coreParticles.geometry.attributes.position.needsUpdate = true;
-            coreParticles.rotation.z -= 0.001;
-
-            backgroundRing.rotation.z = elapsedTime * 0.05;
-
-            sRenderer.render(sScene, sCamera);
-        }
-        mainSphereLoop();
-
-        window.addEventListener("resize", () => {
-            const w = sphereCanvas.clientWidth;
-            const h = sphereCanvas.clientHeight;
-            sCamera.aspect = w / h;
-            sCamera.updateProjectionMatrix();
-            sRenderer.setSize(w, h);
-        });
+            window.addEventListener("resize", () => {
+                const w = sphereCanvas.clientWidth;
+                const h = sphereCanvas.clientHeight;
+                sCamera.aspect = w / h;
+                sCamera.updateProjectionMatrix();
+                sRenderer.setSize(w, h);
+            });
         } // End if (sphereCanvas)
         // GSAP High-End Animations
         gsap.registerPlugin(ScrollTrigger);
