@@ -30,6 +30,8 @@
     <script type="module" src="hero3d.js"></script>
     <script src="lang-switcher.js" defer></script>
     <script src="founder-mode.js"></script>
+    <script src="boot.js"></script>
+    <script src="achievements.js" defer></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&family=VT323&display=swap');
@@ -2750,13 +2752,15 @@
         gsap.registerPlugin(SplitText);
         // Both language spans are split so the reveal works after switching language
         const heroTitleSplit = SplitText.create('.hero-massive-title > span', { type: 'chars' });
-        gsap.from(heroTitleSplit.chars, {
-            yPercent: 110, opacity: 0, duration: 0.9, ease: 'power4.out',
-            stagger: 0.025, delay: 0.3
-        });
-        gsap.from('.hero-eyebrow, .hero-desc, .hero-buttons, .hero-pills, .hero-right', {
-            y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.6
-        });
+        // hero intro plays once the boot screen (boot.js) is gone
+        const heroIntro = gsap.timeline({ paused: !window.bootDone });
+        heroIntro.from(heroTitleSplit.chars, {
+            yPercent: 110, opacity: 0, duration: 0.9, ease: 'power4.out', stagger: 0.025
+        }, 0.3);
+        heroIntro.from('.hero-eyebrow, .hero-desc, .hero-buttons, .hero-pills, .hero-right', {
+            y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1
+        }, 0.6);
+        window.addEventListener('boot-done', () => heroIntro.play());
 
         gsap.utils.toArray('.section').forEach(section => {
             const title = section.querySelector('.section-title');

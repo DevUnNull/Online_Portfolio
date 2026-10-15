@@ -284,8 +284,8 @@ if (renderer) {
         if (island.discovered) return;
         island.discovered = true;
         island.morph(island.found);
-        if (i > 0) window.dispatchEvent(new CustomEvent('island-discovered', { detail: i }));
         const found = islands.filter(s => s.discovered).length;
+        if (i > 0) window.dispatchEvent(new CustomEvent('island-discovered', { detail: { index: i, found, total: islands.length } }));
         if (counter) counter.textContent = `${found}/${islands.length}`;
         if (toast && i > 0) {
             const label = document.documentElement.lang === 'vi' ? 'Đã khám phá' : 'Island discovered';

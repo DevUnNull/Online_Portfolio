@@ -61,6 +61,8 @@
 | `index.html` | Trang chính (CSS + HTML + script carousel/Lenis/Projects) |
 | `hero3d.js` | Engine bản đồ khám phá (Three.js r170 qua importmap) |
 | `founder-mode.js` | Nút chuyển chế độ founder + confetti |
+| `boot.js` | Màn khởi động 3 chữ S |
+| `achievements.js` | Toast thành tựu toàn trang |
 | `voxelScenes.js` | Dữ liệu 8 cảnh voxel. **Thêm hoặc sửa đảo ở đây**, key là `href` của slide |
 | `detail_page.css` | Style chung cho 18 trang chi tiết + View Transitions |
 
@@ -87,8 +89,8 @@
 - [x] Hover/focus thì xem trước chế độ cho cả trang, click thì giữ (`founder-mode.js`). Chỉ số đặt tạm, sửa trong `style="--v: N"`.
 
 ### Bước 4: Lớp "Startup Simulator" + điểm nhấn của Hoàng
-- [ ] **Màn khởi động** thay preloader: 3 chữ S tự lắp ráp (voxel / một nét / bùng màu) rồi thành logo "Super Startup Simulator". Kèm thanh `Loading world... %`.
-- [ ] **Achievement toast** cho cả trang, không chỉ Hero: "Explorer: đã xem hết 8 đảo", "Talent Scout: đã tới trang Liên hệ"…
+- [x] **Màn khởi động** (`boot.js`, trước đó không có preloader): S voxel → S một nét → S bùng màu → "SUPER STARTUP SIMULATOR" + `Loading world... %` (theo ảnh không-lazy đã tải). Tối thiểu 1.9s, tối đa 4s, 1 lần mỗi phiên (`sessionStorage`), bấm phím/click để bỏ qua, tắt khi reduced-motion. Intro chữ Hero chờ sự kiện `boot-done`.
+- [x] **Achievement toast** (`achievements.js`, lưu `localStorage` key `achievements`): Explorer (8/8 đảo), Shape Shifter (thử đủ 3 chế độ founder), Talent Scout (tới phần Liên hệ). Thêm thành tựu: thêm vào `LIST` rồi gọi `unlock(id)`.
 - [ ] (Tuỳ chọn) Thanh chỉ số kiểu game sim: `Games Shipped: 8 · Team: 30+ · Genres: 6`.
 - [ ] (Tuỳ chọn) Form liên hệ đổi giọng: nút `[ START SIMULATION ]`.
 
