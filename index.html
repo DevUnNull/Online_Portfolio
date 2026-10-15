@@ -46,6 +46,7 @@
     <script src="founder-mode.js"></script>
     <script src="boot.js"></script>
     <script src="achievements.js" defer></script>
+    <script src="world.js" defer></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&family=VT323&display=swap');
@@ -101,6 +102,12 @@
             --glow-amber: rgba(16, 185, 129, 0.45);
             --hud: #00ffff;
             --hud-rgb: 0, 255, 255;
+            /* the sky below the hero (world.js): dusk at the top, night further down */
+            --sky-top: #0b1733;
+            --sky-mid: #070f26;
+            --sky-bottom: #020617;
+            --cloud: #e0f2fe, #f0f9ff, #bae6fd;
+            --cloud-outline: 0;
         }
 
         *,
@@ -354,7 +361,7 @@
             inset: 0;
             background:
                 linear-gradient(90deg, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.2) 50%, rgba(2, 6, 23, 0.2) 100%),
-                linear-gradient(to bottom, transparent 70%, #020617 100%);
+                linear-gradient(to bottom, transparent 70%, var(--sky-top) 100%);
             z-index: 0;
         }
 
@@ -507,7 +514,6 @@
             position: relative;
         }
 
-        #objective::before,
         #contact::before {
             content: '';
             position: absolute;
@@ -1675,6 +1681,273 @@
         }
 
         /* ============================================================
+           THE WORLD BELOW THE HERO (world.js): one continuous sky, every section a game screen
+           ============================================================ */
+        .parallax-wrapper {
+            background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 35%, var(--sky-bottom) 100%);
+            counter-reset: zone;
+        }
+
+        /* descendant, not child: GSAP wraps the pinned Projects section in a pin-spacer */
+        .parallax-wrapper .section { z-index: 1; counter-increment: zone; }
+        .parallax-wrapper .section-dark,
+        .parallax-wrapper .contact-section { background: transparent; box-shadow: none; }
+        .parallax-wrapper .section-eyebrow::before { content: 'ZONE ' counter(zone, decimal-leading-zero) ' · '; }
+
+        .sky-stars {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(1.5px 1.5px at 30px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 120px 160px, #fff, transparent),
+                radial-gradient(1px 1px at 200px 90px, #cbd5e1, transparent),
+                radial-gradient(1.5px 1.5px at 260px 220px, #e0f2fe, transparent);
+            background-size: 300px 260px;
+            /* stars only come out once you're below the clouds */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 70vh, #000 160vh);
+            mask-image: linear-gradient(to bottom, transparent 0, transparent 70vh, #000 160vh);
+            opacity: 0.7;
+        }
+
+        .cloud-dive {
+            position: relative;
+            height: 110vh;
+            margin-bottom: -20vh;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 72%, transparent);
+            mask-image: linear-gradient(transparent, #000 18%, #000 72%, transparent);
+        }
+
+        .cloud-dive canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+        .section-hint {
+            font-family: 'VT323', monospace;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
+            color: var(--hud);
+            margin-top: 1rem;
+        }
+
+        /* Inventory */
+        .inventory {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 2rem;
+            align-items: stretch;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .inv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 112px);
+            gap: 10px;
+            padding: 12px;
+            align-content: start;
+            background: rgba(2, 6, 23, 0.7);
+            border: 2px solid var(--border-mid);
+        }
+
+        .inv-slot {
+            --r: #38bdf8;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid var(--border-dark);
+            box-shadow: inset 0 -4px 0 var(--r);
+            color: var(--light-grey);
+            font-family: 'VT323', monospace;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .inv-slot[data-rarity="legendary"] { --r: #facc15; }
+        .inv-slot[data-rarity="epic"] { --r: #c084fc; }
+        .inv-icon { font-size: 2.2rem; line-height: 1; }
+        .inv-slot:hover { border-color: var(--r); transform: translateY(-2px); }
+        .inv-slot[aria-selected="true"] { border-color: var(--r); color: var(--cream); box-shadow: inset 0 -4px 0 var(--r), 0 0 18px var(--r); }
+        .inv-slot:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+
+        .inv-panel {
+            background: rgba(2, 6, 23, 0.88);
+            border: 2px solid var(--hud);
+            box-shadow: 6px 6px 0 rgba(var(--hud-rgb), 0.3);
+            padding: 1.6rem 1.8rem;
+            color: var(--light-grey);
+            line-height: 1.65;
+        }
+
+        .inv-rarity { font-family: 'VT323', monospace; font-size: 1.05rem; letter-spacing: 2px; color: var(--hud); }
+        .inv-title { font-family: 'VT323', monospace; font-weight: 400; font-size: 2.3rem; color: var(--cream); margin: 0.2rem 0 0.8rem; line-height: 1.1; }
+
+        .inv-link {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.35rem 0.9rem;
+            font-family: 'VT323', monospace;
+            font-size: 1.15rem;
+            color: #000;
+            background: var(--hud);
+            text-decoration: none;
+        }
+
+        /* Quest map */
+        .quests {
+            --progress: 0;
+            list-style: none;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .quests::before,
+        .quests::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            transform: translateX(-50%);
+        }
+
+        .quests::before { background: repeating-linear-gradient(to bottom, var(--border-mid) 0 10px, transparent 10px 18px); }
+        .quests::after { background: var(--hud); box-shadow: 0 0 12px var(--hud); transform-origin: top; transform: translateX(-50%) scaleY(var(--progress)); }
+
+        .quest { position: relative; width: 50%; padding: 0 3rem 3rem 0; }
+        .quest:nth-child(even) { margin-left: 50%; padding: 0 0 3rem 3rem; }
+
+        .quest-node {
+            position: absolute;
+            top: 1.2rem;
+            right: -22px;
+            z-index: 1;
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            font-family: 'VT323', monospace;
+            font-size: 1.3rem;
+            background: var(--dark-bg);
+            border: 3px solid var(--border-mid);
+            color: var(--parchment);
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .quest:nth-child(even) .quest-node { right: auto; left: -22px; }
+        .quest.reached .quest-node { background: var(--hud); border-color: var(--hud); color: #000; box-shadow: 0 0 16px var(--hud); }
+
+        .quest-card {
+            display: flex;
+            gap: 1.1rem;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.88);
+            border: 2px solid var(--border-dark);
+            color: var(--light-grey);
+            text-decoration: none;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        a.quest-card:hover { border-color: var(--hud); transform: translateY(-3px); }
+        .quest-card img { width: 120px; height: 120px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--border-mid); }
+        .quest-card p { font-size: 0.88rem; line-height: 1.55; }
+        .quest-status { font-family: 'VT323', monospace; font-size: 1rem; letter-spacing: 1px; color: var(--hud); }
+        .quest-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; color: var(--cream); margin: 0.25rem 0 0.4rem; }
+        .quest-link { display: inline-block; margin-top: 0.5rem; font-family: 'VT323', monospace; font-size: 1.1rem; color: var(--bright-gold); }
+        .quest-next .quest-card { border-style: dashed; }
+        .quest-next .quest-node { animation: badge-blink 1s steps(2) infinite; }
+
+        /* Contact = terminal */
+        .terminal {
+            max-width: 760px;
+            margin: 0 auto;
+            background: rgba(2, 6, 23, 0.92);
+            border: 2px solid var(--border-mid);
+            box-shadow: 8px 8px 0 rgba(var(--hud-rgb), 0.25);
+        }
+
+        .terminal-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.55rem 0.9rem;
+            border-bottom: 2px solid var(--border-mid);
+            background: rgba(15, 23, 42, 0.95);
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: var(--parchment);
+        }
+
+        .terminal-bar i { width: 10px; height: 10px; background: #ef4444; }
+        .terminal-bar i:nth-child(2) { background: #facc15; }
+        .terminal-bar i:nth-child(3) { background: #22c55e; }
+        .terminal-bar span { margin-left: 0.6rem; }
+        .terminal .contact-form { padding: 1.6rem; max-width: none; }
+        .terminal .form-group { background: transparent; border: none; border-bottom: 1px dashed var(--border-mid); border-radius: 0; padding: 0.7rem 0.2rem; }
+        .terminal .form-group:focus-within { background: rgba(var(--hud-rgb), 0.06); box-shadow: none; }
+        .terminal .form-icon { display: none; }
+        .terminal .form-label { font-family: 'VT323', monospace; font-size: 1.15rem; font-weight: 400; color: var(--hud); }
+        .terminal .form-label::before { content: '> '; }
+        .terminal .form-submit { font-family: 'VT323', monospace; font-size: 1.4rem; letter-spacing: 2px; text-transform: none; border: none; border-radius: 0; background: var(--hud); color: #000; box-shadow: 4px 4px 0 var(--cream); }
+
+        /* Minimap */
+        .minimap {
+            position: fixed;
+            right: 1.4rem;
+            top: 50%;
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(120%, -50%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .minimap.show { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
+        .minimap::before { content: ''; position: absolute; right: 6px; top: 7px; bottom: 7px; width: 2px; background: var(--border-mid); }
+
+        .minimap a {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.6rem;
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: var(--parchment);
+            text-decoration: none;
+        }
+
+        .minimap a span { opacity: 0; transform: translateX(6px); transition: opacity 0.2s ease, transform 0.2s ease; background: rgba(2, 6, 23, 0.85); padding: 0 0.4rem; }
+        .minimap a:hover span, .minimap a:focus-visible span, .minimap a.active span { opacity: 1; transform: none; }
+        .minimap a i { position: relative; z-index: 1; width: 14px; height: 14px; background: var(--dark-bg); border: 2px solid var(--border-mid); }
+        .minimap a.active { color: var(--cream); }
+        .minimap a.active i { background: var(--hud); border-color: var(--hud); box-shadow: 0 0 10px var(--hud); }
+
+        @media (max-width: 1024px) { .minimap { display: none; } }
+
+        @media (max-width: 768px) {
+            .inventory { grid-template-columns: 1fr; }
+            .inv-grid { grid-template-columns: repeat(3, 1fr); }
+            .quests::before, .quests::after { left: 22px; }
+            .quest, .quest:nth-child(even) { width: 100%; margin-left: 0; padding: 0 0 2rem 64px; }
+            .quest .quest-node, .quest:nth-child(even) .quest-node { left: 0; right: auto; }
+            .quest-card { flex-direction: column; }
+            .quest-card img { width: 100%; height: 140px; }
+        }
+
+        /* ============================================================
            FOUNDER MODES (founder-mode.js): Hải = default, Nam = minimal, Hoàng = flashy
            ============================================================ */
         .mode-switch {
@@ -1736,12 +2009,18 @@
             --glow-amber: transparent;
             --hud: #fafafa;
             --hud-rgb: 250, 250, 250;
+            --sky-top: #000000;
+            --sky-mid: #000000;
+            --sky-bottom: #000000;
+            --cloud: #fafafa;
+            --cloud-outline: 1;
         }
 
         html[data-mode="nam"] body,
         html[data-mode="nam"] .joly-bg-container { background: #000; }
         html[data-mode="nam"] .joly-aurora,
-        html[data-mode="nam"] .retro-scanlines { display: none; }
+        html[data-mode="nam"] .retro-scanlines,
+        html[data-mode="nam"] .sky-stars { display: none; }
         html[data-mode="nam"] *:not(.confetti-bit) { text-shadow: none !important; box-shadow: none !important; }
         html[data-mode="nam"] #hero-animated-bg { filter: grayscale(1) contrast(1.15); }
         html[data-mode="nam"] section img { filter: grayscale(1); }
@@ -1770,6 +2049,10 @@
             --glow-amber: rgba(250, 204, 21, 0.6);
             --hud: #f472b6;
             --hud-rgb: 244, 114, 182;
+            --sky-top: #2a0b4a;
+            --sky-mid: #1e0b3a;
+            --sky-bottom: #12051f;
+            --cloud: #f9a8d4, #fde68a, #a5f3fc, #ddd6fe;
         }
 
         html[data-mode="hoang"] body { background: #12051f; }
@@ -2087,6 +2370,8 @@
     </section>
 
     <div class="parallax-wrapper">
+        <div class="sky-stars" aria-hidden="true"></div>
+        <div class="cloud-dive" aria-hidden="true"></div>
 
 
         <section id="objective" class="section section-dark">
@@ -2392,7 +2677,7 @@
             </div>
         </section>
 
-        <section id="skills" class="section section-dark" style="display: none;">
+        <section id="skills" class="section section-dark">
             <div class="container">
                 <div class="section-header">
                     <span class="section-eyebrow"><span class="lang-en">CORE SKILLS</span><span class="lang-vi">KỸ NĂNG
@@ -2400,119 +2685,72 @@
                     <h2 class="section-title"><span class="lang-en">Core Technologies & Tools</span><span
                             class="lang-vi">Công nghệ & Công cụ chính</span></h2>
                     <div class="section-divider"></div>
+                    <p class="section-hint"><span class="lang-en">&gt; Pick an item to inspect the technology we build with</span><span
+                            class="lang-vi">&gt; Chọn một vật phẩm để xem công nghệ chúng tôi dùng</span></p>
                 </div>
-                <div class="grid-3">
-                    <div class="character-card">
-                        <div class="card-screen">
-                            <img class="card-media"
-                                src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80"
-                                alt="C# / Unity">
-                            <div class="card-overlay"></div>
-                            <div class="character-card-body">
-                                <span class="character-class">ENGINE</span>
-                                <h3 class="character-name">Unity Engine & C#</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Program core logic optimizing MonoBehaviour structure,
-                                        computing Rigidbody physics systems, and smooth Animation states.</span>
-                                    <span class="lang-vi">Lập trình logic cốt lõi ứng dụng cấu trúc MonoBehaviour tối
-                                        ưu, tính toán hệ thống vật lý Rigidbody và hệ quản lý Animation mượt mà.</span>
-                                </p>
-                            </div>
-                        </div>
+
+                <!-- game inventory: slots are tabs, the panel on the right is the item tooltip (world.js) -->
+                <div class="inventory">
+                    <div class="inv-grid" role="tablist" aria-label="Technologies & tools">
+                        <button class="inv-slot" role="tab" id="inv-tab-1" aria-controls="inv-1" aria-selected="true" data-rarity="legendary"><span class="inv-icon">🎮</span><span class="inv-name">Unity & C#</span></button>
+                        <button class="inv-slot" role="tab" id="inv-tab-2" aria-controls="inv-2" aria-selected="false" tabindex="-1" data-rarity="epic"><span class="inv-icon">🏛️</span><span class="inv-name">Architecture</span></button>
+                        <button class="inv-slot" role="tab" id="inv-tab-3" aria-controls="inv-3" aria-selected="false" tabindex="-1" data-rarity="rare"><span class="inv-icon">⚙️</span><span class="inv-name">DevOps & Data</span></button>
+                        <button class="inv-slot" role="tab" id="inv-tab-4" aria-controls="inv-4" aria-selected="false" tabindex="-1" data-rarity="epic"><span class="inv-icon">📦</span><span class="inv-name">Packages</span></button>
+                        <button class="inv-slot" role="tab" id="inv-tab-5" aria-controls="inv-5" aria-selected="false" tabindex="-1" data-rarity="epic"><span class="inv-icon">🤖</span><span class="inv-name">AI Co-pilot</span></button>
+                        <button class="inv-slot" role="tab" id="inv-tab-6" aria-controls="inv-6" aria-selected="false" tabindex="-1" data-rarity="rare"><span class="inv-icon">📚</span><span class="inv-name">Knowledge</span></button>
                     </div>
-                    <div class="character-card">
-                        <div class="card-screen">
-                            <img class="card-media"
-                                src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=600&q=80"
-                                alt="OOP & SOLID">
-                            <div class="card-overlay"></div>
-                            <div class="character-card-body">
-                                <span class="character-class">ARCHITECTURE</span>
-                                <h3 class="character-name">Clean Architecture</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Design clean, layered codebase structure, applying Design
-                                        Patterns (Factory, Observer, Singleton) to decouple complex systems.</span>
-                                    <span class="lang-vi">Thiết kế mã nguồn tách biệt phân lớp rõ ràng, áp dụng Design
-                                        Patterns (Factory, Observer, Singleton) giải quyết triệt để bài toán phình to dữ
-                                        liệu game.</span>
-                                </p>
-                            </div>
-                        </div>
+
+                    <div class="inv-panel" role="tabpanel" id="inv-1" aria-labelledby="inv-tab-1">
+                        <span class="inv-rarity">ENGINE · LEGENDARY</span>
+                        <h3 class="inv-title">Unity Engine & C#</h3>
+                        <p><span class="lang-en">Program core logic optimizing MonoBehaviour structure, computing
+                                Rigidbody physics systems, and smooth Animation states.</span>
+                            <span class="lang-vi">Lập trình logic cốt lõi ứng dụng cấu trúc MonoBehaviour tối ưu, tính toán
+                                hệ thống vật lý Rigidbody và hệ quản lý Animation mượt mà.</span></p>
                     </div>
-                    <div class="character-card">
-                        <div class="card-screen">
-                            <img class="card-media"
-                                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80"
-                                alt="CI / CD">
-                            <div class="card-overlay"></div>
-                            <div class="character-card-body">
-                                <span class="character-class">OPERATIONS</span>
-                                <h3 class="character-name">DevOps & Data</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Manage codebases with advanced Git, automated asset packaging,
-                                        and state synchronization persistence with SQLite.</span>
-                                    <span class="lang-vi">Quản trị mã nguồn bằng Git nâng cao, đóng gói tài nguyên tự
-                                        động, cùng hệ thống lưu trữ đồng bộ trạng thái qua SQLite.</span>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="inv-panel" role="tabpanel" id="inv-2" aria-labelledby="inv-tab-2" hidden>
+                        <span class="inv-rarity">ARCHITECTURE · EPIC</span>
+                        <h3 class="inv-title">Clean Architecture</h3>
+                        <p><span class="lang-en">Design clean, layered codebase structure, applying Design Patterns
+                                (Factory, Observer, Singleton) to decouple complex systems.</span>
+                            <span class="lang-vi">Thiết kế mã nguồn tách biệt phân lớp rõ ràng, áp dụng Design Patterns
+                                (Factory, Observer, Singleton) giải quyết triệt để bài toán phình to dữ liệu game.</span></p>
                     </div>
-                    <a href="Package.html" class="character-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <img class="card-media"
-                                src="https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=600&q=80"
-                                alt="Unity Packages">
-                            <div class="card-overlay"></div>
-                            <div class="character-card-body">
-                                <span class="character-class">PACKAGES</span>
-                                <h3 class="character-name">Unity Packages</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Develop and package reusable modular utilities (Upgrade
-                                        System, Object Pooling, Save System) to expedite development cycles.</span>
-                                    <span class="lang-vi">Xây dựng và đóng gói các thư viện modular tái sử dụng như
-                                        Upgrade System, Object Pooling, Save System giúp tối ưu hóa thời gian phát triển
-                                        game.</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="ai-workflow.html" class="character-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <img class="card-media"
-                                src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80"
-                                alt="AI Workflow">
-                            <div class="card-overlay"></div>
-                            <div class="character-card-body">
-                                <span class="character-class">AI CO-PILOT</span>
-                                <h3 class="character-name">AI-Assisted Game Dev</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Leverage AI models (Claude, Copilot, Gemini) for architecture
-                                        planning, code refactoring, and accelerated production workflows.</span>
-                                    <span class="lang-vi">Ứng dụng các mô hình AI (Claude, Copilot, Gemini) vào thiết kế
-                                        kiến trúc game, tối ưu hóa mã nguồn và đẩy nhanh quy trình sản xuất.</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="knowledge.html" class="character-card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <img class="card-media"
-                                src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80"
-                                alt="Knowledge Shares">
-                            <div class="card-overlay"></div>
-                            <div class="character-card-body">
-                                <span class="character-class">SHARING</span>
-                                <h3 class="character-name">Knowledge Shares</h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Systematize and share advanced knowledge about Design
-                                        Patterns, Best Practices, and performance optimization in game
-                                        programming.</span>
-                                    <span class="lang-vi">Hệ thống hóa và chia sẻ kiến thức chuyên sâu về Design
-                                        Patterns, Best Practices và tối ưu hóa hiệu năng trong lập trình game.</span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                    <div class="inv-panel" role="tabpanel" id="inv-3" aria-labelledby="inv-tab-3" hidden>
+                        <span class="inv-rarity">OPERATIONS · RARE</span>
+                        <h3 class="inv-title">DevOps & Data</h3>
+                        <p><span class="lang-en">Manage codebases with advanced Git, automated asset packaging, and state
+                                synchronization persistence with SQLite.</span>
+                            <span class="lang-vi">Quản trị mã nguồn bằng Git nâng cao, đóng gói tài nguyên tự động, cùng hệ
+                                thống lưu trữ đồng bộ trạng thái qua SQLite.</span></p>
+                    </div>
+                    <div class="inv-panel" role="tabpanel" id="inv-4" aria-labelledby="inv-tab-4" hidden>
+                        <span class="inv-rarity">PACKAGES · EPIC</span>
+                        <h3 class="inv-title">Unity Packages</h3>
+                        <p><span class="lang-en">Develop and package reusable modular utilities (Upgrade System, Object
+                                Pooling, Save System) to expedite development cycles.</span>
+                            <span class="lang-vi">Xây dựng và đóng gói các thư viện modular tái sử dụng như Upgrade System,
+                                Object Pooling, Save System giúp tối ưu hóa thời gian phát triển game.</span></p>
+                        <a href="Package.html" class="inv-link"><span class="lang-en">Inspect item →</span><span class="lang-vi">Xem chi tiết →</span></a>
+                    </div>
+                    <div class="inv-panel" role="tabpanel" id="inv-5" aria-labelledby="inv-tab-5" hidden>
+                        <span class="inv-rarity">AI CO-PILOT · EPIC</span>
+                        <h3 class="inv-title">AI-Assisted Game Dev</h3>
+                        <p><span class="lang-en">Leverage AI models (Claude, Copilot, Gemini) for architecture planning,
+                                code refactoring, and accelerated production workflows.</span>
+                            <span class="lang-vi">Ứng dụng các mô hình AI (Claude, Copilot, Gemini) vào thiết kế kiến trúc
+                                game, tối ưu hóa mã nguồn và đẩy nhanh quy trình sản xuất.</span></p>
+                        <a href="ai-workflow.html" class="inv-link"><span class="lang-en">Inspect item →</span><span class="lang-vi">Xem chi tiết →</span></a>
+                    </div>
+                    <div class="inv-panel" role="tabpanel" id="inv-6" aria-labelledby="inv-tab-6" hidden>
+                        <span class="inv-rarity">SHARING · RARE</span>
+                        <h3 class="inv-title">Knowledge Shares</h3>
+                        <p><span class="lang-en">Systematize and share advanced knowledge about Design Patterns, Best
+                                Practices, and performance optimization in game programming.</span>
+                            <span class="lang-vi">Hệ thống hóa và chia sẻ kiến thức chuyên sâu về Design Patterns, Best
+                                Practices và tối ưu hóa hiệu năng trong lập trình game.</span></p>
+                        <a href="knowledge.html" class="inv-link"><span class="lang-en">Inspect item →</span><span class="lang-vi">Xem chi tiết →</span></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2526,75 +2764,91 @@
                             class="lang-vi">Hành trình & Cột mốc</span></h2>
                     <div class="section-divider"></div>
                 </div>
-                <div class="grid-2">
-                    <div class="card">
-                        <div class="card-screen">
-                            <img class="card-media" src="assets/707.webp" alt="Thành lập">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <h3 class="card-title"><span class="lang-en">Learning & Research Phase</span><span
+
+                <!-- quest map: milestones as quests along a path that fills as you scroll (world.js) -->
+                <ol class="quests">
+                    <li class="quest">
+                        <span class="quest-node" aria-hidden="true">01</span>
+                        <div class="quest-card">
+                            <img src="assets/707.webp" alt="Thành lập" loading="lazy">
+                            <div>
+                                <span class="quest-status">QUEST 01 · <span class="lang-en">COMPLETE</span><span class="lang-vi">HOÀN THÀNH</span> ✓</span>
+                                <h3 class="quest-title"><span class="lang-en">Learning & Research Phase</span><span
                                         class="lang-vi">Giai đoạn học tập & nghiên cứu</span></h3>
-                                <p class="card-text">
-                                    <span class="lang-en">The studio grew out of deep study in software engineering and game programming, the base of how we think about algorithms and run projects.</span>
-                                    <span class="lang-vi">Studio bắt đầu từ quá trình nghiên cứu chuyên sâu Kỹ thuật phần mềm và Lập trình Game, nền tảng cho cách chúng tôi tư duy thuật toán và vận hành dự án.</span>
-                                </p>
+                                <p><span class="lang-en">The studio grew out of deep study in software engineering and game
+                                        programming, the base of how we think about algorithms and run projects.</span>
+                                    <span class="lang-vi">Studio bắt đầu từ quá trình nghiên cứu chuyên sâu Kỹ thuật phần mềm và
+                                        Lập trình Game, nền tảng cho cách chúng tôi tư duy thuật toán và vận hành dự án.</span></p>
                             </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-screen">
-                            <img class="card-media" src="assets/Screenshot 2026-09-30 123737.webp" alt="Đào tạo">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <h3 class="card-title"><span class="lang-en">Certificates & Practice</span><span
+                    </li>
+                    <li class="quest">
+                        <span class="quest-node" aria-hidden="true">02</span>
+                        <div class="quest-card">
+                            <img src="assets/Screenshot 2026-09-30 123737.webp" alt="Đào tạo" loading="lazy">
+                            <div>
+                                <span class="quest-status">QUEST 02 · <span class="lang-en">COMPLETE</span><span class="lang-vi">HOÀN THÀNH</span> ✓</span>
+                                <h3 class="quest-title"><span class="lang-en">Certificates & Practice</span><span
                                         class="lang-vi">Chứng chỉ & Dự án thực tế</span></h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Our team holds specialized Unity 2D/3D certifications and keeps shipping real projects to grow industry experience and technical depth.</span>
-                                    <span class="lang-vi">Đội ngũ sở hữu chứng chỉ chuyên sâu về phát triển game Unity 2D/3D và liên tục làm dự án thực tế để tích lũy kinh nghiệm và chiều sâu kỹ thuật.</span>
-                                </p>
+                                <p><span class="lang-en">Our team holds specialized Unity 2D/3D certifications and keeps
+                                        shipping real projects to grow industry experience and technical depth.</span>
+                                    <span class="lang-vi">Đội ngũ sở hữu chứng chỉ chuyên sâu về phát triển game Unity 2D/3D và
+                                        liên tục làm dự án thực tế để tích lũy kinh nghiệm và chiều sâu kỹ thuật.</span></p>
                             </div>
                         </div>
-                    </div>
-                    <a href="GameJam.html" class="card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <img class="card-media" src="assets/GameJam.webp" alt="Game Jam Log">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Competition
-                                        / Hackathon</span><span class="lang-vi">Cạnh tranh / Hackathon</span></span>
-                                <h3 class="card-title"><span class="lang-en">Participating in Game Jams</span><span
+                    </li>
+                    <li class="quest">
+                        <span class="quest-node" aria-hidden="true">03</span>
+                        <a href="GameJam.html" class="quest-card">
+                            <img src="assets/GameJam.webp" alt="Game Jam Log" loading="lazy">
+                            <div>
+                                <span class="quest-status">QUEST 03 · <span class="lang-en">COMPETITION / HACKATHON</span><span class="lang-vi">CẠNH TRANH / HACKATHON</span></span>
+                                <h3 class="quest-title"><span class="lang-en">Participating in Game Jams</span><span
                                         class="lang-vi">Tham gia thi Game Jam</span></h3>
-                                <p class="card-text">
-                                    <span class="lang-en">We push ourselves at Game Jam tournaments: rapid prototypes, tight scope and teamwork under extreme time pressure.</span>
-                                    <span class="lang-vi">Chúng tôi thử thách mình tại các giải Game Jam: làm prototype nhanh, giới hạn scope và phối hợp nhóm dưới áp lực thời gian cực lớn.</span>
-                                </p>
+                                <p><span class="lang-en">We push ourselves at Game Jam tournaments: rapid prototypes, tight
+                                        scope and teamwork under extreme time pressure.</span>
+                                    <span class="lang-vi">Chúng tôi thử thách mình tại các giải Game Jam: làm prototype nhanh, giới
+                                        hạn scope và phối hợp nhóm dưới áp lực thời gian cực lớn.</span></p>
+                                <span class="quest-link"><span class="lang-en">Open quest log →</span><span class="lang-vi">Xem nhật ký →</span></span>
                             </div>
-                        </div>
-                    </a>
-                    <a href="PreviousJobs.html" class="card" style="text-decoration: none;">
-                        <div class="card-screen">
-                            <img class="card-media" src="assets/2aobor2c8g3a9ki0aajoujym4annym0crma66f1k1.webp"
-                                alt="Previous Jobs">
-                            <div class="card-overlay"></div>
-                            <div class="card-body">
-                                <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Experience /
-                                        History</span><span class="lang-vi">Kinh nghiệm / Lịch sử</span></span>
-                                <h3 class="card-title"><span class="lang-en">Working History</span><span
+                        </a>
+                    </li>
+                    <li class="quest">
+                        <span class="quest-node" aria-hidden="true">04</span>
+                        <a href="PreviousJobs.html" class="quest-card">
+                            <img src="assets/2aobor2c8g3a9ki0aajoujym4annym0crma66f1k1.webp" alt="Previous Jobs" loading="lazy">
+                            <div>
+                                <span class="quest-status">QUEST 04 · <span class="lang-en">EXPERIENCE / HISTORY</span><span class="lang-vi">KINH NGHIỆM / LỊCH SỬ</span></span>
+                                <h3 class="quest-title"><span class="lang-en">Working History</span><span
                                         class="lang-vi">Lịch sử làm việc</span></h3>
-                                <p class="card-text">
-                                    <span class="lang-en">Our founder's track record: FPT University, freelance contracts and an internship at the DXLab research department.</span>
-                                    <span class="lang-vi">Kinh nghiệm thực tế của founder: Đại học FPT, các dự án freelance và thực tập tại phòng nghiên cứu DXLab.</span>
-                                </p>
+                                <p><span class="lang-en">Our founder's track record: FPT University, freelance contracts and an
+                                        internship at the DXLab research department.</span>
+                                    <span class="lang-vi">Kinh nghiệm thực tế của founder: Đại học FPT, các dự án freelance và
+                                        thực tập tại phòng nghiên cứu DXLab.</span></p>
+                                <span class="quest-link"><span class="lang-en">Open quest log →</span><span class="lang-vi">Xem nhật ký →</span></span>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </li>
+                    <li class="quest quest-next">
+                        <span class="quest-node" aria-hidden="true">?</span>
+                        <a href="#contact" class="quest-card">
+                            <div>
+                                <span class="quest-status">NEXT QUEST · <span class="lang-en">AVAILABLE</span><span class="lang-vi">ĐANG MỞ</span></span>
+                                <h3 class="quest-title"><span class="lang-en">Build something with us</span><span
+                                        class="lang-vi">Cùng chúng tôi làm game</span></h3>
+                                <span class="quest-link"><span class="lang-en">Accept quest →</span><span class="lang-vi">Nhận nhiệm vụ →</span></span>
+                            </div>
+                        </a>
+                    </li>
+                </ol>
             </div>
         </section>
 
         <section id="contact" class="section contact-section">
             <div class="container">
                 <div class="section-header">
+                    <span class="section-eyebrow"><span class="lang-en">HIRING / COLLABORATION</span><span
+                            class="lang-vi">TUYỂN DỤNG / HỢP TÁC</span></span>
                     <h2 class="contact-title"><span class="lang-en">Contact <span>SSS Studio</span></span><span
                             class="lang-vi">Liên hệ với <span>SSS Studio</span></span></h2>
                     <div class="section-divider"></div>
@@ -2607,6 +2861,8 @@
                         có cơ hội hợp tác, tuyển dụng hoặc trao đổi ý tưởng phát triển sản phẩm.</span>
                 </p>
 
+                <div class="terminal">
+                <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i><span>start_simulation.exe · new_collaboration</span></div>
                 <form id="contactForm" class="contact-form">
                     <div class="form-group">
                         <span class="form-icon">👤</span>
@@ -2643,11 +2899,12 @@
                             required></textarea>
                     </div>
                     <button type="submit" class="form-submit">
-                        <span class="lang-en">Send Message to SSS Studio</span>
-                        <span class="lang-vi">Gửi Tin Nhắn Cho SSS Studio</span>
+                        <span class="lang-en">[ ▶ Send message ]</span>
+                        <span class="lang-vi">[ ▶ Gửi tin nhắn ]</span>
                     </button>
                     <div id="formMessage" class="form-message"></div>
                 </form>
+                </div>
             </div>
         </section>
     </div>
@@ -2727,7 +2984,7 @@
             const cards = section.querySelectorAll('.card, .character-card');
 
             if (title) {
-                const split = SplitText.create(title.querySelectorAll('span'), { type: 'chars' });
+                const split = SplitText.create(title.querySelectorAll('span'), { type: 'words,chars' }); // words keep a title from breaking mid-word
                 gsap.from(split.chars, {
                     scrollTrigger: { trigger: section, start: 'top 80%' },
                     opacity: 0,
@@ -2814,7 +3071,7 @@
 
             const isEn = (localStorage.getItem('lang') || 'en') === 'en';
             submitBtn.disabled = true;
-            submitBtn.textContent = isEn ? 'TRANSMITTING...' : 'ĐANG TRANSMIT...';
+            submitBtn.textContent = isEn ? '[ TRANSMITTING... ]' : '[ ĐANG GỬI... ]';
             messageDiv.className = 'form-message';
             messageDiv.textContent = '';
 
@@ -2832,12 +3089,12 @@
                     messageDiv.textContent = isEn ? '✅ Message sent successfully! SSS Studio will get back to you as soon as possible.' : '✅ Gửi tin nhắn thành công! SSS Studio sẽ liên hệ lại với bạn trong thời gian sớm nhất.';
                     document.getElementById('contactForm').reset();
                     submitBtn.disabled = false;
-                    submitBtn.textContent = isEn ? 'Send Message to SSS Studio' : 'Gửi Tin Nhắn Cho SSS Studio';
+                    submitBtn.textContent = isEn ? '[ ▶ Send message ]' : '[ ▶ Gửi tin nhắn ]';
                 }, function (error) {
                     messageDiv.className = 'form-message error';
                     messageDiv.textContent = isEn ? '❌ Connection error: ' + (error.text || 'Routing connection failed!') : '❌ Lỗi kết nối: ' + (error.text || 'Xảy ra lỗi định tuyến kết nối!');
                     submitBtn.disabled = false;
-                    submitBtn.textContent = isEn ? 'Send Message to SSS Studio' : 'Gửi Tin Nhắn Cho SSS Studio';
+                    submitBtn.textContent = isEn ? '[ ▶ Send message ]' : '[ ▶ Gửi tin nhắn ]';
                 });
         });
         // GSAP High-End Animations

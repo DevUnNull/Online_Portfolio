@@ -63,6 +63,7 @@
 | `founder-mode.js` | Nút chuyển chế độ founder + confetti |
 | `boot.js` | Màn khởi động 3 chữ S |
 | `achievements.js` | Toast thành tựu toàn trang |
+| `world.js` | Mây rơi, minimap, túi đồ, bản đồ nhiệm vụ (phần dưới Home) |
 | `voxelScenes.js` | Dữ liệu 8 cảnh voxel. **Thêm hoặc sửa đảo ở đây**, key là `href` của slide |
 | `detail_page.css` | Style chung cho 18 trang chi tiết + View Transitions |
 
@@ -101,6 +102,14 @@
 - [ ] (Tuỳ chọn) HUD / bản đồ khám phá trên trang con. Chưa làm.
 - [ ] Footer: link "Privacy Policy" / "Terms of Service" vẫn trỏ `#` (chưa có trang).
 - [ ] (Tuỳ chọn) Section Projects đổi thành "Simulation Modes" có thanh chỉ số cho từng game.
+
+### Bước 5b: Phần dưới Home thành "thế giới game" liền mạch ✅ (`world.js`)
+- [x] **Rơi xuyên mây**: hết 8 đảo là một dải mây voxel 3 lớp parallax (canvas). Nền toàn bộ phần dưới là bầu trời liên tục (`--sky-top/mid/bottom`), có sao khi xuống sâu. Section bỏ nền navy phẳng. Nam = mây chỉ có viền, Hoàng = mây màu kẹo.
+- [x] **Tiêu đề kiểu zone**: `ZONE 01 · …` tự đánh số bằng CSS counter.
+- [x] **Minimap** bên phải (desktop > 1024px), hiện sau khi rời Hero, bấm để nhảy zone.
+- [x] **Tech/Tools = túi đồ** (section `#skills` trước đó bị `display:none`, nay hiện lại): 6 ô vật phẩm có độ hiếm, bảng chi tiết bên cạnh, dùng được phím mũi tên. Link Package / AI workflow / Knowledge nằm trong bảng.
+- [x] **Journey = bản đồ nhiệm vụ**: đường đi sáng dần khi cuộn, các mốc QUEST 01–04 + "NEXT QUEST" dẫn tới Contact.
+- [x] **Contact = terminal** `start_simulation.exe`, nút `[ ▶ Send message ]`.
 
 ### Bước 6: Kiểm thử thật
 - [ ] Thử trên **điện thoại thật** (vuốt cảm ứng qua 8 đảo, hiệu năng).
