@@ -13,19 +13,57 @@
     <!-- Open Graph cho các AI đọc link -->
     <meta property="og:title" content="SSS - Super Startup Simulator Studio" />
     <meta property="og:description" content="Studio phát triển game độc lập sáng tạo, nhà phát triển của Brain Rot Runner và đối tác gia công phần mềm game chất lượng cao." />
-    <meta property="og:url" content="https://link-cong-ty-cua-boss-man.com" />
+    <meta property="og:url" content="https://devunnull.github.io/Online_Portfolio/" />
     <meta property="og:type" content="website" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+    <script type="importmap">
+        { "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        } }
+    </script>
+    <script type="module" src="hero3d.js"></script>
     <script src="lang-switcher.js" defer></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Cormorant+Garamond+Decorative:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&family=VT323&display=swap');
+
+        @view-transition {
+            navigation: auto;
+        }
+
+        ::view-transition-old(root) {
+            animation: vt-out 0.35s ease both;
+        }
+
+        ::view-transition-new(root) {
+            animation: vt-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @keyframes vt-out {
+            to { opacity: 0; transform: scale(0.97); filter: blur(8px); }
+        }
+
+        @keyframes vt-in {
+            from { opacity: 0; transform: scale(1.03); filter: blur(8px); }
+        }
+
+        html.lenis, html.lenis body { height: auto; }
+        .lenis-smooth { scroll-behavior: auto !important; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after,
+            ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
         :root {
             --blood-red: #0284c7;
@@ -54,12 +92,8 @@
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'Lora', serif;
+            font-family: 'Inter', sans-serif;
             background: #020617;
             color: var(--cream);
             overflow-x: hidden;
@@ -76,32 +110,6 @@
             pointer-events: none;
             overflow: hidden;
             background: linear-gradient(180deg, #090f1b 0%, #1e293b 50%, #020617 100%);
-        }
-
-        .joly-flickering-grid {
-            position: absolute;
-            inset: 0;
-            opacity: 0.18;
-            background-image:
-                radial-gradient(var(--crimson) 1px, transparent 0),
-                radial-gradient(var(--amber) 1px, transparent 0);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            animation: jolyFlicker 8s infinite alternate;
-        }
-
-        @keyframes jolyFlicker {
-
-            0%,
-            100% {
-                opacity: 0.12;
-                filter: brightness(0.8);
-            }
-
-            50% {
-                opacity: 0.22;
-                filter: brightness(1.3);
-            }
         }
 
         .joly-aurora {
@@ -126,13 +134,6 @@
             to {
                 transform: rotate(360deg) scale(1.1);
             }
-        }
-
-        #joly-particles {
-            position: absolute;
-            inset: 0;
-            mix-blend-mode: screen;
-            opacity: 0.4;
         }
 
         /* ============================================================
@@ -253,7 +254,7 @@
         }
 
         .navbar-cta {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 0.75rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -332,8 +333,19 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(2, 6, 23, 0.9) 0%, rgba(8, 47, 73, 0.15) 30%, rgba(2, 6, 23, 0.95) 80%);
+            background:
+                linear-gradient(90deg, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.2) 50%, rgba(2, 6, 23, 0.2) 100%),
+                linear-gradient(to bottom, transparent 70%, #020617 100%);
             z-index: 0;
+        }
+
+        #hero-animated-bg {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        #hero-animated-bg.ready {
+            opacity: 1;
         }
 
         .hero-content {
@@ -365,7 +377,7 @@
         }
 
         .hero-eyebrow {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 0.8rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
@@ -384,7 +396,7 @@
         }
 
         .hero-title-sub {
-            font-family: 'Lora', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 1.05rem;
             text-transform: uppercase;
             color: var(--crimson);
@@ -437,7 +449,7 @@
             inset: 0;
             border-radius: inherit;
             padding: 1.5px;
-            background: linear-gradient(var(--joly-beam-deg, 0deg), var(--crimson), transparent 40%, var(--bright-gold) 50%, transparent 90%);
+            background: rgba(255, 255, 255, 0.08);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -466,7 +478,7 @@
         }
 
         .section {
-            padding: 6rem 2rem;
+            padding: 8rem 2rem;
             position: relative;
         }
 
@@ -506,11 +518,10 @@
             color: var(--crimson);
             margin-bottom: 0.5rem;
             display: inline-block;
-            text-shadow: 0 0 10px rgba(14, 165, 233, 0.4);
         }
 
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(2.2rem, 3.5vw, 3.2rem);
             color: var(--cream);
             font-weight: 700;
@@ -549,7 +560,6 @@
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
             cursor: pointer;
             overflow: hidden;
-            --joly-beam-deg: 0deg;
         }
 
         .card:hover,
@@ -568,16 +578,6 @@
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.04);
-        }
-
-        .card-notch {
-            margin: 1rem auto 0;
-            height: 4px;
-            width: 55px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.15);
-            z-index: 4;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .card-media {
@@ -632,7 +632,7 @@
 
         .card-title,
         .character-name {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.4rem;
             color: var(--cream);
             font-weight: 700;
@@ -651,7 +651,7 @@
            BUTTONS
            ============================================================ */
         .btn {
-            font-family: 'Lora', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.2em;
@@ -722,7 +722,7 @@
             font-size: clamp(2rem, 4vw, 2.8rem);
             margin-bottom: 1.5rem;
             color: var(--cream);
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .contact-title span {
@@ -775,7 +775,7 @@
             border: none;
             outline: none;
             color: var(--cream);
-            font-family: 'Lora', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.95rem;
         }
 
@@ -796,7 +796,7 @@
             border: 1px solid var(--crimson);
             color: var(--cream);
             padding: 1rem 3rem;
-            font-family: 'Lora', serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 700;
             letter-spacing: 0.15em;
             text-transform: uppercase;
@@ -848,12 +848,11 @@
         }
 
         .footer-brand {
-            font-family: 'Cormorant Garamond Decorative', serif;
+            font-family: 'VT323', monospace;
             font-size: 1.8rem;
             color: var(--crimson);
             display: block;
             margin-bottom: 1rem;
-            text-shadow: 0 0 15px var(--glow-red);
             text-decoration: none;
         }
 
@@ -1027,6 +1026,76 @@
             font-size: 1rem;
             line-height: 1.6;
             max-width: 90%;
+        }
+
+        /* Horizontal pinned projects (class added by JS on desktop only) */
+        .projects-progress {
+            display: none;
+        }
+
+        #projects.is-horizontal {
+            min-height: 100vh;
+            padding: 6.5rem 0 2rem;
+            overflow: hidden;
+        }
+
+        #projects.is-horizontal .section-header {
+            margin-bottom: 2.5rem;
+        }
+
+        #projects.is-horizontal .bento-grid {
+            display: flex;
+            gap: 2rem;
+            width: max-content;
+            padding: 0 8vw;
+            margin-left: calc(50% - 50vw);
+            will-change: transform;
+        }
+
+        #projects.is-horizontal .double-bezel {
+            flex-shrink: 0;
+            width: min(56vw, 900px);
+            height: 56vh;
+            min-height: 0;
+        }
+
+        #projects.is-horizontal .bento-col-4 {
+            width: min(32vw, 520px);
+        }
+
+        #projects.is-horizontal .bento-col-6 {
+            width: min(42vw, 680px);
+        }
+
+        #projects.is-horizontal .double-bezel:hover {
+            transform: none;
+        }
+
+        #projects.is-horizontal .bezel-img-bg {
+            width: 120%;
+            left: -10%;
+            opacity: 0.4;
+        }
+
+        #projects.is-horizontal .double-bezel:hover .bezel-img-bg {
+            opacity: 0.6;
+        }
+
+        #projects.is-horizontal .projects-progress {
+            display: block;
+            height: 2px;
+            max-width: 400px;
+            margin: 2rem auto 0;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .projects-progress span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--crimson), var(--burnt-orange));
+            box-shadow: 0 0 10px var(--glow-red);
+            transform: scaleX(0);
+            transform-origin: left;
         }
 
         @media (max-width: 768px) {
@@ -1409,6 +1478,182 @@
             box-shadow: 0 0 10px #0ff;
             transform: scale(1.2);
         }
+
+        /* Hero carousel = HUD caption under the 3D arcade cabinet (hero3d.js shows the art on the CRT) */
+        .hero-right {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 0;
+        }
+
+        .hero {
+            height: 100vh;
+            height: 100svh;
+            min-height: 560px;
+        }
+
+        .hero-split {
+            height: 100%;
+            padding-bottom: 2.5rem;
+        }
+
+        .explore-hud {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-bottom: 0.6rem;
+            font-family: 'VT323', monospace;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            color: #0ff;
+            text-shadow: 0 1px 2px #000;
+        }
+
+        .explore-hud b {
+            color: #facc15;
+            font-weight: 400;
+        }
+
+        .explore-keys {
+            color: var(--light-grey);
+        }
+
+        .explore-hud kbd {
+            display: inline-block;
+            min-width: 1.4em;
+            margin-right: 0.2em;
+            padding: 0 0.3em;
+            border: 1px solid var(--light-grey);
+            border-bottom-width: 3px;
+            border-radius: 4px;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .explore-toast {
+            position: absolute;
+            top: 96px;
+            left: 50%;
+            z-index: 5;
+            padding: 0.5rem 1.2rem;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid #facc15;
+            color: #fde68a;
+            font-family: 'VT323', monospace;
+            font-size: 1.25rem;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -16px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .explore-toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        button.scifi-dot {
+            border: none;
+            padding: 0;
+        }
+
+        .scifi-carousel-container,
+        .scifi-carousel-container:hover {
+            aspect-ratio: auto;
+            height: 170px;
+            transform: none;
+            border-width: 1px;
+            background: rgba(2, 6, 23, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .scifi-slide img,
+        .scifi-slide-overlay,
+        .scifi-badge.top-right {
+            display: none;
+        }
+
+        .scifi-slide-desc {
+            margin-bottom: 0;
+            padding-right: 9rem;
+        }
+
+        .scifi-pagination {
+            top: 1.4rem;
+            bottom: auto;
+            left: auto;
+            right: 1.2rem;
+            transform: none;
+        }
+
+        /* outgoing caption fades fast so old and new text don't overlap */
+        .scifi-slide:not(.active) {
+            transition-duration: 0.15s;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-right {
+                min-height: 0;
+            }
+
+            .hero {
+                padding: 0;
+            }
+
+            .hero-split {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 100px 1.25rem 1.5rem;
+            }
+
+            .hero-desc,
+            .hero-pills {
+                display: none !important;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: nowrap !important;
+            }
+
+            .hero-buttons .arcade-btn {
+                padding: 8px 12px !important;
+                font-size: 0.9rem !important;
+                white-space: nowrap;
+            }
+
+            .explore-keys {
+                display: none;
+            }
+
+            .scifi-carousel-container,
+            .scifi-carousel-container:hover {
+                height: 210px;
+            }
+
+            .scifi-slide-title {
+                font-size: 1.6rem;
+            }
+
+            .scifi-slide-desc {
+                padding-right: 0;
+                margin-bottom: 2.6rem;
+                font-size: 0.75rem;
+            }
+
+            .scifi-pagination {
+                top: auto;
+                right: auto;
+                bottom: 1.6rem;
+                left: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -1432,13 +1677,11 @@
 
     <div class="joly-bg-container" aria-hidden="true">
         <div class="joly-aurora"></div>
-        <div class="joly-flickering-grid"></div>
-        <canvas id="joly-particles"></canvas>
     </div>
 
     <nav class="navbar" role="navigation">
         <a href="#home" class="navbar-brand">
-            <img src="assets/Logo.png" alt="SSS Studio Logo">
+            <img src="assets/Logo.webp" alt="SSS Studio Logo">
         </a>
 
         <ul class="navbar-nav" id="navMenu">
@@ -1461,13 +1704,14 @@
     </nav>
 
     <section id="home" class="hero"
-        style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+        style="position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
 
         <div class="retro-scanlines"></div>
+        <div class="explore-toast" id="exploreToast" role="status" aria-live="polite"></div>
 
         <!-- Animated Background Canvas -->
         <canvas id="hero-animated-bg"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.8;"></canvas>
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
         <div class="hero-overlay" style="z-index: 1;"></div>
 
         <div class="hero-split">
@@ -1479,7 +1723,7 @@
                 </div>
 
                 <h1 class="hero-massive-title"
-                    style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.1; margin: 1rem 0; letter-spacing: 2px; font-family: 'VT323', monospace; text-transform: uppercase; color: var(--cream); text-shadow: 0 0 15px rgba(0, 255, 255, 0.5), 3px 3px 0px rgba(0,0,0,0.8);">
+                    style="font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.1; margin: 1rem 0; letter-spacing: 2px; font-family: 'VT323', monospace; text-transform: uppercase; color: var(--cream); text-shadow: 3px 3px 0px rgba(0,0,0,0.8);">
                     <span class="lang-en">WE BUILD WORLDS<br>WORTH PLAYING</span>
                     <span class="lang-vi">KIẾN TẠO NHỮNG<br>THẾ GIỚI ẢO</span>
                 </h1>
@@ -1510,6 +1754,12 @@
             </div>
 
             <div class="hero-right">
+                <div class="explore-hud">
+                    <span><span class="lang-en">◆ ISLANDS DISCOVERED</span><span class="lang-vi">◆ ĐẢO ĐÃ KHÁM PHÁ</span>
+                        <b id="exploreCount">1/8</b></span>
+                    <span class="explore-keys"><kbd>←</kbd><kbd>→</kbd> <span class="lang-en">or scroll to travel</span><span
+                            class="lang-vi">hoặc cuộn để du hành</span></span>
+                </div>
                 <div class="scifi-carousel-container" id="heroCarousel">
                     <div class="scifi-corner tl"></div>
                     <div class="scifi-corner tr"></div>
@@ -1517,7 +1767,7 @@
                     <div class="scifi-corner br"></div>
 
                     <a href="707TheReunion.html" class="scifi-slide active">
-                        <img src="assets/707.png" alt="707 The Reunion">
+                        <img src="assets/707.webp" alt="707 The Reunion">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ PSYCHO HORROR</div>
                         <div class="scifi-badge top-right">▶ NEW RELEASE</div>
@@ -1527,7 +1777,7 @@
                     </a>
 
                     <a href="LastTrain.html" class="scifi-slide">
-                        <img src="assets/LastTrain.jpg" alt="Last Train">
+                        <img src="assets/LastTrain.webp" alt="Last Train">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ HORROR / MYSTERY</div>
                         <div class="scifi-badge top-right">▶ NEW PROJECT</div>
@@ -1537,7 +1787,7 @@
                     </a>
 
                     <a href="ChienBinhXanhNhi.html" class="scifi-slide">
-                        <img src="assets/pannerChienBinhXanhNhi.png" alt="Chiến Binh Xanh Nhí">
+                        <img src="assets/pannerChienBinhXanhNhi.webp" alt="Chiến Binh Xanh Nhí">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ FEATURED PROJECT</div>
                         <div class="scifi-badge top-right">▶ IN DEVELOPMENT</div>
@@ -1547,7 +1797,7 @@
                     </a>
 
                     <a href="BehindTheMask.html" class="scifi-slide">
-                        <img src="assets/BehindTheMask.png" alt="Behind the Mask">
+                        <img src="assets/BehindTheMask.webp" alt="Behind the Mask">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ GAME JAM</div>
                         <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
@@ -1556,7 +1806,7 @@
                     </a>
 
                     <a href="BrainrotRunner.html" class="scifi-slide">
-                        <img src="assets/BrainrotRunner.png" alt="Brainrot Runner">
+                        <img src="assets/BrainrotRunner.webp" alt="Brainrot Runner">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ PROCEDURAL RUNNER</div>
                         <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
@@ -1565,7 +1815,7 @@
                     </a>
 
                     <a href="HeroicDefense.html" class="scifi-slide">
-                        <img src="assets/HeroicDefender.png" alt="Heroic Defense">
+                        <img src="assets/HeroicDefender.webp" alt="Heroic Defense">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ TOWER DEFENSE</div>
                         <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
@@ -1574,7 +1824,7 @@
                     </a>
 
                     <a href="JungleSurvivor.html" class="scifi-slide">
-                        <img src="assets/Jungle.png" alt="Jungle Survivor">
+                        <img src="assets/Jungle.webp" alt="Jungle Survivor">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ ACTION PLATFORMER</div>
                         <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
@@ -1583,7 +1833,7 @@
                     </a>
 
                     <a href="MixieEmpire.html" class="scifi-slide">
-                        <img src="assets/Mixie EmpirePaner.png" alt="Mixie Empire">
+                        <img src="assets/Mixie EmpirePaner.webp" alt="Mixie Empire">
                         <div class="scifi-slide-overlay"></div>
                         <div class="scifi-badge top-left">★ SIMULATION</div>
                         <div class="scifi-badge bottom-right">VIEW DETAILS ➞</div>
@@ -1656,10 +1906,9 @@
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/in707_2.png" alt="Objective Background 1">
+                            <img class="card-media" src="assets/in707_2.webp" alt="Objective Background 1">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Core Objective</span><span
@@ -1675,10 +1924,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/in707_3.png" alt="Game Dev Philosophy">
+                            <img class="card-media" src="assets/in707_3.webp" alt="Game Dev Philosophy">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Development Philosophy</span><span
@@ -1711,14 +1959,15 @@
                         <span class="lang-en">We are a studio of over 30 passionate members across all disciplines,
                             specializing in creating high-quality 2D and 3D games. Here is our core leadership
                             team.</span>
+                        <span class="lang-vi">Chúng tôi là studio với hơn 30 thành viên đầy đam mê ở mọi mảng, chuyên
+                            phát triển game 2D và 3D chất lượng cao. Dưới đây là đội ngũ lãnh đạo cốt lõi.</span>
                     </p>
                 </div>
 
                 <div class="grid-3">
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/AvataHoang.jpg" alt="Hoang Avatar"
+                            <img class="card-media" src="assets/AvataHoang.webp" alt="Hoang Avatar"
                                 style="object-position: center; opacity: 1;">
                             <div class="card-overlay"
                                 style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
@@ -1731,10 +1980,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/Avata.jpg" alt="Hai Avatar"
+                            <img class="card-media" src="assets/Avata.webp" alt="Hai Avatar"
                                 style="object-position: top; opacity: 1;">
                             <div class="card-overlay"
                                 style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
@@ -1747,10 +1995,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/AvataNam.jpg" alt="Nam Avatar"
+                            <img class="card-media" src="assets/AvataNam.webp" alt="Nam Avatar"
                                 style="object-position: top; opacity: 1;">
                             <div class="card-overlay"
                                 style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
@@ -1782,7 +2029,7 @@
                     <!-- Project 1 (Col-8) -->
                     <a href="BrainrotRunner.html" class="double-bezel bento-col-8 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/BrainrotRunner.png" alt="Brainrot Runner">
+                            <img class="bezel-img-bg" src="assets/BrainrotRunner.webp" alt="Brainrot Runner">
                             <div class="bezel-gradient"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag">Procedural Runner / Team</span>
@@ -1802,7 +2049,7 @@
                     <!-- Project 2 (Col-4) -->
                     <a href="BehindTheMask.html" class="double-bezel bento-col-4 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/BehindTheMask.png" alt="Behind the Mask">
+                            <img class="bezel-img-bg" src="assets/BehindTheMask.webp" alt="Behind the Mask">
                             <div class="bezel-gradient"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag"
@@ -1822,7 +2069,7 @@
                     <!-- Project 3 (Col-4) -->
                     <a href="HeroicDefense.html" class="double-bezel bento-col-4 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/HeroicDefender.png" alt="Heroic Defense">
+                            <img class="bezel-img-bg" src="assets/HeroicDefender.webp" alt="Heroic Defense">
                             <div class="bezel-gradient"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag">Tower Defense</span>
@@ -1840,7 +2087,7 @@
                     <!-- Project 4 (Col-8) -->
                     <a href="ChienBinhXanhNhi.html" class="double-bezel bento-col-8 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/pannerChienBinhXanhNhi.png" alt="Chiến Binh Xanh Nhí">
+                            <img class="bezel-img-bg" src="assets/pannerChienBinhXanhNhi.webp" alt="Chiến Binh Xanh Nhí">
                             <div class="bezel-gradient"
                                 style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
                             <div class="bezel-content">
@@ -1861,7 +2108,7 @@
                     <!-- Project 5 (Col-6) -->
                     <a href="JungleSurvivor.html" class="double-bezel bento-col-6 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/Jungle.png" alt="Jungle Survivor">
+                            <img class="bezel-img-bg" src="assets/Jungle.webp" alt="Jungle Survivor">
                             <div class="bezel-gradient"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag">Action Platformer</span>
@@ -1873,7 +2120,7 @@
                     <!-- Project 6 (Col-6) -->
                     <a href="MixieEmpire.html" class="double-bezel bento-col-6 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/Mixie EmpirePaner.png" alt="Mixie Empire">
+                            <img class="bezel-img-bg" src="assets/Mixie EmpirePaner.webp" alt="Mixie Empire">
                             <div class="bezel-gradient"></div>
                             <div class="bezel-content">
                                 <span class="bezel-tag"
@@ -1887,7 +2134,7 @@
                     <!-- Project 7 (Col-12) -->
                     <a href="LastTrain.html" class="double-bezel bento-col-12 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/LastTrain.jpg" alt="Last Train">
+                            <img class="bezel-img-bg" src="assets/LastTrain.webp" alt="Last Train">
                             <div class="bezel-gradient"
                                 style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
                             <div class="bezel-content">
@@ -1908,7 +2155,7 @@
                     <!-- Project 8 (Col-12) -->
                     <a href="707TheReunion.html" class="double-bezel bento-col-12 gs-reveal">
                         <div class="double-bezel-inner">
-                            <img class="bezel-img-bg" src="assets/707.png" alt="707 The Reunion">
+                            <img class="bezel-img-bg" src="assets/707.webp" alt="707 The Reunion">
                             <div class="bezel-gradient"
                                 style="background: linear-gradient(to top, rgba(2,6,23,1) 5%, transparent 100%);"></div>
                             <div class="bezel-content">
@@ -1926,6 +2173,7 @@
                         </div>
                     </a>
                 </div>
+                <div class="projects-progress" aria-hidden="true"><span></span></div>
             </div>
         </section>
 
@@ -1939,9 +2187,8 @@
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-3">
-                    <div class="character-card joly-beam-card">
+                    <div class="character-card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
                             <img class="card-media"
                                 src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80"
                                 alt="C# / Unity">
@@ -1958,9 +2205,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="character-card joly-beam-card">
+                    <div class="character-card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
                             <img class="card-media"
                                 src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=600&q=80"
                                 alt="OOP & SOLID">
@@ -1978,9 +2224,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="character-card joly-beam-card">
+                    <div class="character-card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
                             <img class="card-media"
                                 src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80"
                                 alt="CI / CD">
@@ -1997,9 +2242,8 @@
                             </div>
                         </div>
                     </div>
-                    <a href="Package.html" class="character-card joly-beam-card" style="text-decoration: none;">
+                    <a href="Package.html" class="character-card" style="text-decoration: none;">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
                             <img class="card-media"
                                 src="https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=600&q=80"
                                 alt="Unity Packages">
@@ -2017,9 +2261,8 @@
                             </div>
                         </div>
                     </a>
-                    <a href="ai-workflow.html" class="character-card joly-beam-card" style="text-decoration: none;">
+                    <a href="ai-workflow.html" class="character-card" style="text-decoration: none;">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
                             <img class="card-media"
                                 src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=600&q=80"
                                 alt="AI Workflow">
@@ -2036,9 +2279,8 @@
                             </div>
                         </div>
                     </a>
-                    <a href="knowledge.html" class="character-card joly-beam-card" style="text-decoration: none;">
+                    <a href="knowledge.html" class="character-card" style="text-decoration: none;">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
                             <img class="card-media"
                                 src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80"
                                 alt="Knowledge Shares">
@@ -2070,10 +2312,9 @@
                     <div class="section-divider"></div>
                 </div>
                 <div class="grid-2">
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/707.png" alt="Thành lập">
+                            <img class="card-media" src="assets/707.webp" alt="Thành lập">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Learning & Research Phase</span><span
@@ -2089,10 +2330,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card joly-beam-card">
+                    <div class="card">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/Screenshot 2026-09-30 123737.png" alt="Đào tạo">
+                            <img class="card-media" src="assets/Screenshot 2026-09-30 123737.webp" alt="Đào tạo">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <h3 class="card-title"><span class="lang-en">Certificates & Practice</span><span
@@ -2108,10 +2348,9 @@
                             </div>
                         </div>
                     </div>
-                    <a href="GameJam.html" class="card joly-beam-card" style="text-decoration: none;">
+                    <a href="GameJam.html" class="card" style="text-decoration: none;">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/GameJam.jpg" alt="Game Jam Log">
+                            <img class="card-media" src="assets/GameJam.webp" alt="Game Jam Log">
                             <div class="card-overlay"></div>
                             <div class="card-body">
                                 <span class="card-tag" style="margin-bottom: 0.5rem;"><span class="lang-en">Competition
@@ -2129,10 +2368,9 @@
                             </div>
                         </div>
                     </a>
-                    <a href="PreviousJobs.html" class="card joly-beam-card" style="text-decoration: none;">
+                    <a href="PreviousJobs.html" class="card" style="text-decoration: none;">
                         <div class="card-screen">
-                            <div class="card-notch"></div>
-                            <img class="card-media" src="assets/2aobor2c8g3a9ki0aajoujym4annym0crma66f1k1.jpg"
+                            <img class="card-media" src="assets/2aobor2c8g3a9ki0aajoujym4annym0crma66f1k1.webp"
                                 alt="Previous Jobs">
                             <div class="card-overlay"></div>
                             <div class="card-body">
@@ -2239,7 +2477,7 @@
             <div>
                 <p class="footer-heading"><span class="lang-en">Links</span><span class="lang-vi">Liên kết</span></p>
                 <ul class="footer-links">
-                    <li><a href="https://github.com/DevSSS Studio" target="_blank"><span class="lang-en">Personal
+                    <li><a href="https://github.com/DevUnNull" target="_blank"><span class="lang-en">Personal
                                 GitHub</span><span class="lang-vi">GitHub cá nhân</span></a></li>
                     <li><a href="#contact"><span class="lang-en">Hiring / Collaboration</span><span
                                 class="lang-vi">Tuyển dụng / Hợp tác</span></a></li>
@@ -2262,170 +2500,42 @@
         gsap.registerPlugin(ScrollTrigger);
 
         /* ============================================================
-           JOLYUI INTEGRATION: PARTICLES EFFECT CANVAS LOGIC
+           SMOOTH SCROLL (LENIS) + SPLIT-TEXT TITLE REVEALS
            ============================================================ */
-        const particleCanvas = document.getElementById('joly-particles');
-        const pCtx = particleCanvas.getContext('2d');
-        let particlesArray = [];
-
-        function resizeParticlesCanvas() {
-            particleCanvas.width = window.innerWidth;
-            particleCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeParticlesCanvas);
-        resizeParticlesCanvas();
-
-        class DarkParticle {
-            constructor() {
-                this.x = Math.random() * particleCanvas.width;
-                this.y = Math.random() * particleCanvas.height;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * -0.6 - 0.1;
-                this.alpha = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.y < 0) {
-                    this.y = particleCanvas.height;
-                    this.x = Math.random() * particleCanvas.width;
-                }
-            }
-            draw() {
-                pCtx.save();
-                pCtx.globalAlpha = this.alpha;
-                pCtx.fillStyle = Math.random() > 0.5 ? '#38bdf8' : '#34d399';
-                pCtx.beginPath();
-                pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                pCtx.fill();
-                pCtx.restore();
-            }
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let lenis = null;
+        if (!reduceMotion && window.Lenis) {
+            lenis = new Lenis({ lerp: 0.1 });
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add(t => lenis.raf(t * 1000));
+            gsap.ticker.lagSmoothing(0);
         }
 
-        for (let i = 0; i < 65; i++) {
-            particlesArray.push(new DarkParticle());
-        }
-
-        function animateBackgroundLayers() {
-            pCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animateBackgroundLayers);
-        }
-        animateBackgroundLayers();
-
-
-        /* ============================================================
-           JOLYUI INTEGRATION: BORDER BEAM EFFECT ROTATION (GSAP)
-           ============================================================ */
-        const beamCards = gsap.utils.toArray('.joly-beam-card');
-        beamCards.forEach(card => {
-            gsap.set(card, { '--joly-beam-deg': '0deg' });
-            gsap.to(card, {
-                '--joly-beam-deg': '360deg',
-                duration: 4,
-                ease: 'none',
-                repeat: -1
-            });
+        gsap.registerPlugin(SplitText);
+        // Both language spans are split so the reveal works after switching language
+        const heroTitleSplit = SplitText.create('.hero-massive-title > span', { type: 'chars' });
+        gsap.from(heroTitleSplit.chars, {
+            yPercent: 110, opacity: 0, duration: 0.9, ease: 'power4.out',
+            stagger: 0.025, delay: 0.3
         });
-
-
-        /* ============================================================
-           HERO PIXEL STARFIELD ANIMATION
-           ============================================================ */
-        const heroCanvas = document.getElementById('hero-animated-bg');
-        if (heroCanvas) {
-            const hCtx = heroCanvas.getContext('2d');
-            let stars = [];
-
-            const resizeHeroCanvas = () => {
-                heroCanvas.width = heroCanvas.parentElement.clientWidth;
-                heroCanvas.height = heroCanvas.parentElement.clientHeight;
-            };
-            window.addEventListener('resize', resizeHeroCanvas);
-            resizeHeroCanvas();
-
-            class Star {
-                constructor() {
-                    this.x = Math.random() * heroCanvas.width;
-                    this.y = Math.random() * heroCanvas.height;
-                    this.z = Math.random() * 2; // depth and speed multiplier
-                    this.size = Math.random() > 0.8 ? 3 : 2;
-                }
-                update() {
-                    this.x -= (this.z * 0.5 + 0.2); // moving left
-                    if (this.x < 0) {
-                        this.x = heroCanvas.width;
-                        this.y = Math.random() * heroCanvas.height;
-                    }
-                }
-                draw() {
-                    hCtx.fillStyle = `rgba(255, 255, 255, ${this.z / 2 + 0.1})`;
-                    hCtx.fillRect(this.x, this.y, this.size, this.size);
-                }
-            }
-
-            for (let i = 0; i < 150; i++) stars.push(new Star());
-
-            function animateHero() {
-                hCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-                for (let i = 0; i < stars.length; i++) {
-                    stars[i].update();
-                    stars[i].draw();
-                }
-                requestAnimationFrame(animateHero);
-            }
-            animateHero();
-        }
-
-
-        /* ============================================================
-           GSAP SCROLL PARALLAX
-           ============================================================ */
-        const heroSection = document.querySelector('.hero');
-        const heroContent = document.querySelector('.hero-content');
-        const heroAvatar = document.querySelector('.hero-avatar-wrapper');
-
-        if (heroContent) {
-            gsap.to(heroContent, {
-                y: () => heroSection.offsetHeight * 0.35,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true
-                }
-            });
-        }
-
-        if (heroAvatar) {
-            gsap.to(heroAvatar, {
-                y: () => heroSection.offsetHeight * 0.45,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true
-                }
-            });
-        }
+        gsap.from('.hero-eyebrow, .hero-desc, .hero-buttons, .hero-pills, .hero-right', {
+            y: 30, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1, delay: 0.6
+        });
 
         gsap.utils.toArray('.section').forEach(section => {
             const title = section.querySelector('.section-title');
             const cards = section.querySelectorAll('.card, .character-card');
 
             if (title) {
-                gsap.from(title, {
+                const split = SplitText.create(title.querySelectorAll('span'), { type: 'chars' });
+                gsap.from(split.chars, {
                     scrollTrigger: { trigger: section, start: 'top 80%' },
                     opacity: 0,
-                    y: 30,
-                    duration: 1,
-                    ease: 'power3.out'
+                    y: 24,
+                    rotateX: -90,
+                    duration: 0.8,
+                    stagger: 0.02,
+                    ease: 'back.out(2)'
                 });
             }
 
@@ -2448,23 +2558,26 @@
             menu.classList.toggle('active');
         }
 
-        // Setup smooth scrolling trigger for JolyUI Liquid Metal Buttons Stacks
-        document.querySelectorAll('.joly-liquid-metal-btn').forEach(button => {
-            button.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+        // All in-page links scroll through Lenis (native hash jumps fight it)
+        function scrollToHash(hash) {
+            const targetElement = document.querySelector(hash);
+            if (!targetElement) return;
+            // pinned sections move inside their pin-spacer; measure the spacer so "Home" returns to the top
+            const anchor = targetElement.parentElement.classList.contains('pin-spacer') ? targetElement.parentElement : targetElement;
+            const offsetTop = Math.max(0, anchor.getBoundingClientRect().top + window.scrollY - 80);
+            lenis ? lenis.scrollTo(offsetTop) : window.scrollTo({ top: offsetTop, behavior: reduceMotion ? 'auto' : 'smooth' });
+        }
 
-                if (targetElement) {
-                    const offsetTop = targetElement.getBoundingClientRect().top + window.scrollY - 80;
-                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-                }
-
-                // Cập nhật trạng thái active
+        document.addEventListener('click', e => {
+            const link = e.target.closest('a[href^="#"]');
+            if (!link || link.getAttribute('href').length < 2) return;
+            e.preventDefault();
+            scrollToHash(link.getAttribute('href'));
+            if (link.classList.contains('joly-liquid-metal-btn')) {
                 document.querySelectorAll('.joly-liquid-metal-btn').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                document.getElementById('navMenu').classList.remove('active');
-            });
+                link.classList.add('active');
+            }
+            document.getElementById('navMenu').classList.remove('active');
         });
 
         // ScrollSpy: Cập nhật active nav link khi cuộn trang
@@ -2492,6 +2605,8 @@
             });
         });
 
+        emailjs.init("MOLpO-iLyosZ0ibHv");
+
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const submitBtn = this.querySelector('.form-submit');
@@ -2511,7 +2626,7 @@
                 message: this.message.value
             };
 
-            emailjs.send('service_profileSSS Studio', 'template_mv6kgpc', templateParams)
+            emailjs.send('service_profileUnNull', 'template_mv6kgpc', templateParams)
                 .then(function () {
                     messageDiv.className = 'form-message success';
                     messageDiv.textContent = isEn ? '✅ Message sent successfully! SSS Studio will get back to you as soon as possible.' : '✅ Gửi tin nhắn thành công! SSS Studio sẽ liên hệ lại với bạn trong thời gian sớm nhất.';
@@ -2525,210 +2640,17 @@
                     submitBtn.textContent = isEn ? 'Send Message to SSS Studio' : 'Gửi Tin Nhắn Cho SSS Studio';
                 });
         });
-    </script>
-
-    <script>
-        const sphereCanvas = document.getElementById("sphere-canvas");
-        if (sphereCanvas) {
-            const sScene = new THREE.Scene();
-
-            const sCamera = new THREE.PerspectiveCamera(50, sphereCanvas.clientWidth / sphereCanvas.clientHeight, 0.1, 1000);
-            sCamera.position.z = 7.5;
-
-            const sRenderer = new THREE.WebGLRenderer({ canvas: sphereCanvas, alpha: true, antialias: true });
-            sRenderer.setSize(sphereCanvas.clientWidth, sphereCanvas.clientHeight);
-            sRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            const sphereGroup = new THREE.Group();
-            sScene.add(sphereGroup);
-
-            // LÕI NĂNG LƯỢNG HẠT 3D (PARTICLE ENGINE CORE)
-            const particleCount = 150;
-            const pGeometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            const colors = new Float32Array(particleCount * 3);
-
-            for (let i = 0; i < particleCount; i++) {
-                const u = Math.random();
-                const v = Math.random();
-                const theta = u * 2.0 * Math.PI;
-                const phi = Math.acos(2.0 * v - 1.0);
-                const r = Math.cbrt(Math.random()) * 1.2;
-
-                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-                positions[i * 3 + 2] = r * Math.cos(phi);
-
-                const isRed = Math.random() > 0.3;
-                colors[i * 3] = isRed ? 1.0 : 0.91;
-                colors[i * 3 + 1] = isRed ? 0.12 : 0.75;
-                colors[i * 3 + 2] = isRed ? 0.22 : 0.38;
-            }
-
-            pGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            pGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const pMaterial = new THREE.PointsMaterial({
-                size: 0.08,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.85,
-                blending: THREE.AdditiveBlending,
-                depthWrite: false
-            });
-
-            const coreParticles = new THREE.Points(pGeometry, pMaterial);
-            sphereGroup.add(coreParticles);
-
-            // Vành đai bụi hành tinh ngoài rìa
-            const ringGeometry = new THREE.TorusGeometry(3.1, 0.04, 8, 48);
-            const ringMaterial = new THREE.MeshBasicMaterial({
-                color: 0xC41E3A,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.25
-            });
-            const backgroundRing = new THREE.Mesh(ringGeometry, ringMaterial);
-            backgroundRing.rotation.x = Math.PI / 2;
-            sScene.add(backgroundRing);
-
-            // HỆ THỐNG CÁC TẤM PANEL ẢNH PHẲNG (IMAGE PANELS)
-            const projectListData = [
-                { title: "Brainrot Runner", img: "assets/BrainrotRunner.png" },
-                { title: "Behind the Mask", img: "assets/BehindTheMask.png" },
-                { title: "Heroic Defense", img: "assets/HeroicDefender.png" },
-                { title: "Jungle Survivor", img: "assets/Jungle.png" }
-            ];
-
-            const textureLoader = new THREE.TextureLoader();
-            const radius = 3.2;
-            const panelsArray = [];
-
-            projectListData.forEach((proj, idx) => {
-                const planeGeo = new THREE.PlaneGeometry(2.4, 1.5);
-                const pTexture = textureLoader.load(proj.img);
-                pTexture.minFilter = THREE.LinearFilter;
-
-                const planeMat = new THREE.MeshStandardMaterial({
-                    map: pTexture,
-                    side: THREE.DoubleSide,
-                    roughness: 0.2,
-                    metalness: 0.1
-                });
-
-                const panelMesh = new THREE.Mesh(planeGeo, planeMat);
-                const angle = (idx / projectListData.length) * Math.PI * 2;
-
-                panelMesh.position.x = Math.sin(angle) * radius;
-                panelMesh.position.z = Math.cos(angle) * radius;
-                panelMesh.rotation.y = angle;
-                panelMesh.userData = { title: proj.title };
-
-                sphereGroup.add(panelMesh);
-                panelsArray.push(panelMesh);
-            });
-
-            const frontStudioLight = new THREE.DirectionalLight(0xffffff, 2.5);
-            frontStudioLight.position.set(0, 2, 8);
-            sScene.add(frontStudioLight);
-
-            const fillRedAmbiance = new THREE.PointLight(0xC41E3A, 2.0, 15);
-            fillRedAmbiance.position.set(0, 0, 0);
-            sScene.add(fillRedAmbiance);
-
-            let isDraggingSphere = false;
-            let pointerStartDeltaY = 0;
-            const overlayTitle = document.getElementById('sphere-project-title');
-
-            sphereCanvas.addEventListener('mousedown', (e) => {
-                isDraggingSphere = true;
-                pointerStartDeltaY = e.clientX;
-            });
-
-            window.addEventListener('mouseup', () => {
-                isDraggingSphere = false;
-            });
-
-            sphereCanvas.addEventListener('mousemove', (e) => {
-                if (isDraggingSphere) {
-                    const deltaX = e.clientX - pointerStartDeltaY;
-                    sphereGroup.rotation.y += deltaX * 0.004;
-                    pointerStartDeltaY = e.clientX;
-
-                    let closestPanel = null;
-                    let maxZ = -Infinity;
-                    panelsArray.forEach(panel => {
-                        const worldPos = new THREE.Vector3();
-                        panel.getWorldPosition(worldPos);
-                        if (worldPos.z > maxZ) {
-                            maxZ = worldPos.z;
-                            closestPanel = panel;
-                        }
-                    });
-
-                    if (closestPanel && overlayTitle) {
-                        overlayTitle.textContent = closestPanel.userData.title;
-                    }
-                }
-            });
-
-            let clock = new THREE.Clock();
-
-            function mainSphereLoop() {
-                requestAnimationFrame(mainSphereLoop);
-                const elapsedTime = clock.getElapsedTime();
-
-                if (!isDraggingSphere) {
-                    sphereGroup.rotation.y += 0.002;
-
-                    let closestPanel = null;
-                    let maxZ = -Infinity;
-                    panelsArray.forEach(panel => {
-                        const worldPos = new THREE.Vector3();
-                        panel.getWorldPosition(worldPos);
-                        if (worldPos.z > maxZ) {
-                            maxZ = worldPos.z;
-                            closestPanel = panel;
-                        }
-                    });
-                    if (closestPanel && overlayTitle) {
-                        overlayTitle.textContent = closestPanel.userData.title;
-                    }
-                }
-
-                const pPositions = coreParticles.geometry.attributes.position.array;
-                for (let i = 0; i < particleCount; i++) {
-                    pPositions[i * 3 + 1] += Math.sin(elapsedTime + i) * 0.001;
-                }
-                coreParticles.geometry.attributes.position.needsUpdate = true;
-                coreParticles.rotation.z -= 0.001;
-
-                backgroundRing.rotation.z = elapsedTime * 0.05;
-
-                sRenderer.render(sScene, sCamera);
-            }
-            mainSphereLoop();
-
-            window.addEventListener("resize", () => {
-                const w = sphereCanvas.clientWidth;
-                const h = sphereCanvas.clientHeight;
-                sCamera.aspect = w / h;
-                sCamera.updateProjectionMatrix();
-                sRenderer.setSize(w, h);
-            });
-        } // End if (sphereCanvas)
         // GSAP High-End Animations
         gsap.registerPlugin(ScrollTrigger);
 
-        // 3. Quest Discovered Popup
         gsap.utils.toArray('.section-eyebrow, .sim-eyebrow').forEach(function (elem) {
 
             gsap.fromTo(elem,
-                { scale: 0, opacity: 0, x: -50 },
+                { opacity: 0, y: 12 },
                 {
-                    scale: 1, opacity: 1, x: 0,
-                    duration: 1.2,
-                    ease: "elastic.out(1, 0.4)",
+                    opacity: 1, y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: elem,
                         start: "top 90%",
@@ -2738,62 +2660,105 @@
             );
         });
 
-        // Basic reveal for cards
-        gsap.utils.toArray('.gs-reveal').forEach(function (elem) {
-            gsap.fromTo(elem,
-                { y: 60, opacity: 0, filter: 'blur(8px)' },
-                {
-                    y: 0, opacity: 1, filter: 'blur(0px)',
-                    duration: 1.2,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: elem,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
-                    }
+        const projectsMM = gsap.matchMedia();
+
+        // Desktop: pin #projects and scroll the cards horizontally
+        projectsMM.add('(min-width: 1025px) and (prefers-reduced-motion: no-preference)', () => {
+            const section = document.getElementById('projects');
+            const track = section.querySelector('.bento-grid');
+            const bar = section.querySelector('.projects-progress span');
+            section.classList.add('is-horizontal');
+
+            const distance = () => track.scrollWidth - window.innerWidth;
+            const tween = gsap.to(track, {
+                x: () => -distance(),
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top top',
+                    end: () => '+=' + distance(),
+                    pin: true,
+                    refreshPriority: 1, // created after later sections' triggers; refresh first so they account for the pin spacing
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    onUpdate: self => gsap.set(bar, { scaleX: self.progress })
                 }
-            );
+            });
+
+            track.querySelectorAll('.double-bezel').forEach(card => {
+                gsap.fromTo(card.querySelector('.bezel-img-bg'), { xPercent: -10 }, {
+                    xPercent: 10, ease: 'none',
+                    scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true }
+                });
+                gsap.from(card.querySelector('.bezel-content'), {
+                    y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
+                    scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left 75%', toggleActions: 'play none none reverse' }
+                });
+            });
+
+            return () => section.classList.remove('is-horizontal');
+        });
+
+        // Tablet / mobile: keep the bento grid with a simple reveal
+        projectsMM.add('(max-width: 1024px)', () => {
+            gsap.utils.toArray('.gs-reveal').forEach(function (elem) {
+                gsap.fromTo(elem,
+                    { y: 60, opacity: 0 },
+                    {
+                        y: 0, opacity: 1,
+                        duration: 1.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
         });
 
         /* ============================================================
            SCIFI CAROUSEL LOGIC
            ============================================================ */
+        // The caption follows the island the explorer stands on (hero3d.js dispatches 'hero-slide');
+        // dots switch the caption right away and ask hero3d.js to travel there ('hero-goto').
         const scifiSlides = document.querySelectorAll('.scifi-slide');
         const paginationContainer = document.getElementById('heroPagination');
         let currentScifiSlide = 0;
-        let scifiInterval;
 
         if (scifiSlides.length > 0) {
             scifiSlides.forEach((slide, index) => {
-                const dot = document.createElement('div');
-                dot.classList.add('scifi-dot');
-                if (index === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToScifiSlide(index));
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'scifi-dot' + (index === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', slide.querySelector('.scifi-slide-title').textContent);
+                dot.addEventListener('click', () => {
+                    showScifiSlide(index);
+                    window.dispatchEvent(new CustomEvent('hero-goto', { detail: index }));
+                });
                 paginationContainer.appendChild(dot);
             });
 
             const scifiDots = document.querySelectorAll('.scifi-dot');
-
-            function goToScifiSlide(n) {
+            const showScifiSlide = n => {
                 scifiSlides[currentScifiSlide].classList.remove('active');
                 scifiDots[currentScifiSlide].classList.remove('active');
-                currentScifiSlide = (n + scifiSlides.length) % scifiSlides.length;
-                scifiSlides[currentScifiSlide].classList.add('active');
-                scifiDots[currentScifiSlide].classList.add('active');
-                resetScifiInterval();
-            }
-
-            function nextScifiSlide() {
-                goToScifiSlide(currentScifiSlide + 1);
-            }
-
-            function resetScifiInterval() {
-                clearInterval(scifiInterval);
-                scifiInterval = setInterval(nextScifiSlide, 4000);
-            }
-
-            resetScifiInterval();
+                currentScifiSlide = n;
+                scifiSlides[n].classList.add('active');
+                scifiDots[n].classList.add('active');
+            };
+            window.addEventListener('hero-slide', e => showScifiSlide(e.detail));
         }
+
+        // Morph the clicked project's title into the detail page <h1> (cross-document View Transition)
+        document.querySelectorAll('.scifi-slide, .double-bezel').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelectorAll('.scifi-slide-title, .bezel-title').forEach(t => t.style.viewTransitionName = '');
+                const title = link.querySelector('.scifi-slide-title, .bezel-title');
+                if (title) title.style.viewTransitionName = 'project-title';
+            });
+        });
     </script>
 
     <!-- Vietnam Game Ecosystem Section cho SEO & AI Crawlers (Ẩn thị giác, giữ nguyên HTML cho AI đọc) -->

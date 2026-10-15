@@ -23,7 +23,7 @@
         }
 
         .lang-switcher-btn {
-            font-family: 'Lora', serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.08em;
