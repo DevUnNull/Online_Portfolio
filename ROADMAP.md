@@ -1,7 +1,7 @@
 # SSS Studio Website: Tiến độ & Lộ trình
 
 > Cập nhật: 15/10/2026. Đọc file này trước khi làm tiếp.
-> ⚠️ **Chưa commit gì cả.** Toàn bộ thay đổi đang nằm trong working tree. Nên commit trước khi làm tiếp.
+> Code nằm trên nhánh `redesign-explorer` (chưa merge vào `main`, chưa push).
 
 ---
 
@@ -60,6 +60,7 @@
 |---|---|
 | `index.html` | Trang chính (CSS + HTML + script carousel/Lenis/Projects) |
 | `hero3d.js` | Engine bản đồ khám phá (Three.js r170 qua importmap) |
+| `founder-mode.js` | Nút chuyển chế độ founder + confetti |
 | `voxelScenes.js` | Dữ liệu 8 cảnh voxel. **Thêm hoặc sửa đảo ở đây**, key là `href` của slide |
 | `detail_page.css` | Style chung cho 18 trang chi tiết + View Transitions |
 
@@ -68,17 +69,17 @@
 ## 3. Lộ trình tiếp theo 🗺️
 
 ### Bước 0: Dọn dẹp trước khi làm (khoảng 10 phút)
-- [ ] **Commit** toàn bộ thay đổi hiện tại.
+- [x] **Commit** toàn bộ thay đổi (nhánh `redesign-explorer`).
 - [ ] Quyết định có xoá ảnh PNG/JPG gốc trong `assets/` không (web đã dùng `.webp`). Giữ lại thì repo vẫn nặng khoảng 30MB.
 - [ ] Gửi thử 1 tin qua form liên hệ để xác nhận EmailJS chạy.
 
-### Bước 3: Nút chuyển 3 chế độ founder ⭐ (ưu tiên kế tiếp)
-- [ ] Nút trên navbar: `[ Hải · Đa dạng ] [ Nam · Tối giản ] [ Hoàng · Màu mè ]`, câu dẫn *"Mô phỏng website này qua góc nhìn của từng founder"*.
-- [ ] Mỗi chế độ là một bộ biến CSS `html[data-mode="..."]` cộng tham số cho `hero3d.js`:
-  - **Hải** (mặc định): như hiện tại.
-  - **Nam**: đen trắng, voxel chỉ hiện cạnh, chuyển động chậm, gần như không hiệu ứng.
-  - **Hoàng**: màu kẹo bão hoà, bloom mạnh, confetti, gradient chạy.
-- [ ] Lưu lựa chọn vào `localStorage` (giống `lang-switcher.js`).
+### Bước 3: Nút chuyển 3 chế độ founder ✅
+- [x] Nút `Hải / Nam / Hoàng` trên navbar (`founder-mode.js`). Câu dẫn để ở tooltip.
+- [x] `html[data-mode="hai|nam|hoang"]` ghi đè biến màu. Màu HUD của Hero gom vào biến `--hud` / `--hud-rgb`.
+  - **Nam**: đen trắng, voxel chỉ vẽ cạnh (shader trong `hero3d.js`), tắt bloom, camera trôi chậm, bỏ glow/bóng, ảnh xám.
+  - **Hoàng**: màu kẹo, bloom 1.2, tiêu đề nhiều màu đổi hue, gradient chạy trên nút active, **confetti** khi chuyển chế độ và khi khám phá đảo (sự kiện `island-discovered`).
+- [x] Lưu vào `localStorage` key `mode`. Sự kiện `founder-mode` cho code khác nghe.
+- [ ] Trang con chưa có chế độ (mới chỉ `index.html`). Nút EN/VI vẫn giữ màu xanh.
 
 ### Bước 3b: Phần Team thành màn "Chọn nhân vật"
 - [ ] 3 thẻ như màn chọn nhân vật trong game: tên, chức vụ, thanh chỉ số (Đa dạng / Tối giản / Màu mè).

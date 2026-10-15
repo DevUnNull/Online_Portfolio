@@ -29,6 +29,7 @@
     </script>
     <script type="module" src="hero3d.js"></script>
     <script src="lang-switcher.js" defer></script>
+    <script src="founder-mode.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700&family=VT323&display=swap');
@@ -82,6 +83,8 @@
             --shadow-red: rgba(2, 132, 199, 0.35);
             --glow-red: rgba(14, 165, 233, 0.5);
             --glow-amber: rgba(16, 185, 129, 0.45);
+            --hud: #00ffff;
+            --hud-rgb: 0, 255, 255;
         }
 
         *,
@@ -1266,9 +1269,9 @@
         }
 
         .hero-pill {
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: #0ff;
+            background: rgba(var(--hud-rgb), 0.05);
+            border: 1px solid rgba(var(--hud-rgb), 0.3);
+            color: var(--hud);
             padding: 0.4rem 0.8rem;
             font-size: 0.85rem;
             font-family: 'VT323', monospace;
@@ -1283,10 +1286,10 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16/9;
-            border: 2px solid #0ff;
+            border: 2px solid var(--hud);
             border-radius: 4px;
             background: rgba(2, 6, 23, 0.8);
-            box-shadow: -15px 15px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 255, 255, 0.2), inset 0 0 20px rgba(0, 255, 255, 0.1);
+            box-shadow: -15px 15px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(var(--hud-rgb), 0.2), inset 0 0 20px rgba(var(--hud-rgb), 0.1);
             overflow: hidden;
             transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
             transform-style: preserve-3d;
@@ -1295,7 +1298,7 @@
 
         .scifi-carousel-container:hover {
             transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-            box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.2);
+            box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.7), 0 0 30px rgba(var(--hud-rgb), 0.4), inset 0 0 20px rgba(var(--hud-rgb), 0.2);
         }
 
         .scifi-carousel-container::before {
@@ -1326,7 +1329,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            border: 2px solid #0ff;
+            border: 2px solid var(--hud);
             z-index: 5;
         }
 
@@ -1365,8 +1368,8 @@
             font-family: 'VT323', monospace;
             font-size: 0.9rem;
             background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #0ff;
-            color: #0ff;
+            border: 1px solid var(--hud);
+            color: var(--hud);
         }
 
         .scifi-badge.top-left {
@@ -1385,15 +1388,15 @@
         .scifi-badge.bottom-right {
             bottom: 1rem;
             right: 1rem;
-            background: rgba(0, 255, 255, 0.1);
-            border-color: #0ff;
-            color: #0ff;
+            background: rgba(var(--hud-rgb), 0.1);
+            border-color: var(--hud);
+            color: var(--hud);
             cursor: pointer;
             transition: background 0.2s;
         }
 
         .scifi-badge.bottom-right:hover {
-            background: rgba(0, 255, 255, 0.3);
+            background: rgba(var(--hud-rgb), 0.3);
         }
 
         .scifi-slide {
@@ -1467,15 +1470,15 @@
         .scifi-dot {
             width: 8px;
             height: 8px;
-            background: rgba(0, 255, 255, 0.3);
+            background: rgba(var(--hud-rgb), 0.3);
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .scifi-dot.active {
-            background: #0ff;
-            box-shadow: 0 0 10px #0ff;
+            background: var(--hud);
+            box-shadow: 0 0 10px var(--hud);
             transform: scale(1.2);
         }
 
@@ -1508,7 +1511,7 @@
             font-family: 'VT323', monospace;
             font-size: 1.05rem;
             letter-spacing: 1px;
-            color: #0ff;
+            color: var(--hud);
             text-shadow: 0 1px 2px #000;
         }
 
@@ -1654,6 +1657,136 @@
                 left: 1.5rem;
             }
         }
+
+        /* ============================================================
+           FOUNDER MODES (founder-mode.js): Hải = default, Nam = minimal, Hoàng = flashy
+           ============================================================ */
+        .mode-switch {
+            display: inline-flex;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 2px;
+        }
+
+        .mode-switch button {
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.7rem;
+            border: none;
+            border-radius: 18px;
+            background: transparent;
+            color: var(--parchment);
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .mode-switch button:hover { color: var(--cream); }
+        .mode-switch button:focus-visible { outline: 2px solid var(--bright-gold); outline-offset: 1px; }
+        .mode-switch button[aria-pressed="true"] { background: var(--crimson); color: var(--black-coal); }
+
+        #hero-animated-bg { transition: opacity 1.2s ease, filter 0.6s ease; }
+
+        .confetti-bit {
+            position: fixed;
+            top: -12px;
+            width: 9px;
+            height: 14px;
+            z-index: 100000;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .mode-switch button { padding: 0.2rem 0.5rem; font-size: 0.95rem; }
+        }
+
+        /* Nam: black & white, no glow, no decoration */
+        html[data-mode="nam"] {
+            --blood-red: #e5e5e5;
+            --crimson: #fafafa;
+            --dark-bg: #0a0a0a;
+            --black-coal: #000000;
+            --dark-card: #111111;
+            --burnt-orange: #a3a3a3;
+            --amber: #737373;
+            --light-grey: #d4d4d4;
+            --parchment: #a3a3a3;
+            --cream: #fafafa;
+            --bright-gold: #fafafa;
+            --border-dark: #262626;
+            --border-mid: #404040;
+            --shadow-red: transparent;
+            --glow-red: transparent;
+            --glow-amber: transparent;
+            --hud: #fafafa;
+            --hud-rgb: 250, 250, 250;
+        }
+
+        html[data-mode="nam"] body,
+        html[data-mode="nam"] .joly-bg-container { background: #000; }
+        html[data-mode="nam"] .joly-aurora,
+        html[data-mode="nam"] .retro-scanlines { display: none; }
+        html[data-mode="nam"] *:not(.confetti-bit) { text-shadow: none !important; box-shadow: none !important; }
+        html[data-mode="nam"] #hero-animated-bg { filter: grayscale(1) contrast(1.15); }
+        html[data-mode="nam"] section img { filter: grayscale(1); }
+        html[data-mode="nam"] .navbar { background: rgba(0, 0, 0, 0.85); border-color: #262626; }
+        html[data-mode="nam"] .navbar-brand img { border-color: #fafafa; filter: grayscale(1); }
+        html[data-mode="nam"] .navbar-nav .nav-item .joly-liquid-metal-btn.active { background: #fafafa; color: #000; }
+        html[data-mode="nam"] .explore-toast { border-color: #fafafa; color: #fafafa; background: #000; }
+
+        /* Hoàng: candy colours, glow everywhere, rainbow titles */
+        html[data-mode="hoang"] {
+            --blood-red: #db2777;
+            --crimson: #f472b6;
+            --dark-bg: #1e0b3a;
+            --black-coal: #12051f;
+            --dark-card: #2a1150;
+            --burnt-orange: #facc15;
+            --amber: #f97316;
+            --light-grey: #f5d0fe;
+            --parchment: #e9a8f5;
+            --cream: #fff7fb;
+            --bright-gold: #a3e635;
+            --border-dark: #4c1d95;
+            --border-mid: #7c3aed;
+            --shadow-red: rgba(219, 39, 119, 0.5);
+            --glow-red: rgba(244, 114, 182, 0.75);
+            --glow-amber: rgba(250, 204, 21, 0.6);
+            --hud: #f472b6;
+            --hud-rgb: 244, 114, 182;
+        }
+
+        html[data-mode="hoang"] body { background: #12051f; }
+        html[data-mode="hoang"] .joly-bg-container { background: linear-gradient(180deg, #2a0b4a 0%, #4a0e4e 50%, #12051f 100%); }
+        html[data-mode="hoang"] .joly-aurora {
+            background: radial-gradient(circle at 30% 30%, rgba(244, 114, 182, 0.35), transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(250, 204, 21, 0.25), transparent 50%),
+                radial-gradient(circle at 50% 40%, rgba(34, 211, 238, 0.25), transparent 45%);
+            animation-duration: 8s;
+        }
+        html[data-mode="hoang"] #hero-animated-bg { filter: saturate(1.6); }
+        html[data-mode="hoang"] .navbar { border-color: rgba(244, 114, 182, 0.4); box-shadow: 0 0 30px rgba(244, 114, 182, 0.35); }
+        html[data-mode="hoang"] .navbar-brand img { border-color: #f472b6; box-shadow: 0 0 14px #f472b6; }
+        html[data-mode="hoang"] .navbar-nav .nav-item .joly-liquid-metal-btn.active,
+        html[data-mode="hoang"] .mode-switch button[aria-pressed="true"] {
+            background: linear-gradient(90deg, #f472b6, #facc15, #22d3ee, #f472b6);
+            background-size: 300% 100%;
+            animation: candy-run 3s linear infinite;
+            color: #12051f;
+        }
+        html[data-mode="hoang"] .section-title,
+        html[data-mode="hoang"] .hero-massive-title { animation: candy-hue 6s linear infinite; }
+        /* titles are split into per-char divs (SplitText), so colour the chars instead of clipping a gradient */
+        html[data-mode="hoang"] .section-title div:nth-child(3n+1),
+        html[data-mode="hoang"] .hero-massive-title div:nth-child(3n+1) { color: #f472b6; }
+        html[data-mode="hoang"] .section-title div:nth-child(3n+2),
+        html[data-mode="hoang"] .hero-massive-title div:nth-child(3n+2) { color: #facc15; }
+        html[data-mode="hoang"] .section-title div:nth-child(3n),
+        html[data-mode="hoang"] .hero-massive-title div:nth-child(3n) { color: #22d3ee; }
+        html[data-mode="hoang"] .explore-toast { border-color: #f472b6; color: #fff; background: linear-gradient(90deg, #db2777, #7c3aed); box-shadow: 0 0 24px #f472b6; }
+
+        @keyframes candy-run { to { background-position: 300% 0; } }
+        @keyframes candy-hue { to { filter: hue-rotate(360deg); } }
     </style>
 </head>
 
@@ -1695,6 +1828,12 @@
                         class="lang-en">Contact</span><span class="lang-vi">Liên hệ</span></a></li>
         </ul>
 
+        <div class="mode-switch" role="group" aria-label="View this site through each founder's eyes"
+            title="View this site through each founder's eyes / Mô phỏng website qua góc nhìn từng founder">
+            <button type="button" data-mode="hai" title="Hải · Diverse / Đa dạng">Hải</button>
+            <button type="button" data-mode="nam" title="Nam · Minimal / Tối giản">Nam</button>
+            <button type="button" data-mode="hoang" title="Hoàng · Flashy / Màu mè">Hoàng</button>
+        </div>
 
         <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMenu()">
             <span></span>
@@ -1717,7 +1856,7 @@
         <div class="hero-split">
             <div class="hero-left">
                 <div class="hero-eyebrow"
-                    style="color: #0ff; font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem; font-family: 'VT323', monospace; font-size: 1.2rem;">
+                    style="color: var(--hud); font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem; font-family: 'VT323', monospace; font-size: 1.2rem;">
                     <span class="lang-en">[ SSS STUDIO ]</span>
                     <span class="lang-vi">[ SSS STUDIO ]</span>
                 </div>
@@ -1738,7 +1877,7 @@
 
                 <div class="hero-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
                     <a href="#projects" class="arcade-btn"
-                        style="background: rgba(0, 255, 255, 0.1); border-color: #0ff; color: #0ff; box-shadow: 4px 4px 0px #0ff; padding: 10px 20px; font-size: 1rem;"><span
+                        style="background: rgba(var(--hud-rgb), 0.1); border-color: var(--hud); color: var(--hud); box-shadow: 4px 4px 0px var(--hud); padding: 10px 20px; font-size: 1rem;"><span
                             class="lang-en">EXPLORE OUR GAMES ></span><span class="lang-vi">KHÁM PHÁ DỰ ÁN ></span></a>
                     <a href="#studio-team" class="arcade-btn"
                         style="background: transparent; border-color: var(--light-grey); color: var(--light-grey); box-shadow: 4px 4px 0px var(--light-grey); padding: 10px 20px; font-size: 1rem;"><span

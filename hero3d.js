@@ -53,6 +53,18 @@ if (renderer) {
     const VOXEL = 0.3;
     const boxGeo = new THREE.BoxGeometry(VOXEL * 0.94, VOXEL * 0.94, VOXEL * 0.94);
     const voxMat = new THREE.MeshStandardMaterial({ roughness: 0.75, metalness: 0.05 });
+    // Nam mode draws voxels as outlines only: keep the face border, discard the rest
+    const edgesOnly = { value: 0 };
+    voxMat.defines = { USE_UV: '' };
+    voxMat.onBeforeCompile = shader => {
+        shader.uniforms.uEdges = edgesOnly;
+        shader.fragmentShader = 'uniform float uEdges;\n' + shader.fragmentShader.replace('#include <dithering_fragment>', `#include <dithering_fragment>
+            if (uEdges > 0.5) {
+                float d = min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y));
+                if (d > 0.07) discard;
+                gl_FragColor.rgb = vec3(0.9);
+            }`);
+    };
     const tmpColor = new THREE.Color();
     const dummy = new THREE.Object3D();
 
@@ -226,8 +238,21 @@ if (renderer) {
 
     const composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
-    composer.addPass(new UnrealBloomPass(new THREE.Vector2(1, 1), 0.8, 0.4, 0.95)); // high threshold: only glow voxels bloom
+    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.8, 0.4, 0.95); // high threshold: only glow voxels bloom
+    composer.addPass(bloom);
     composer.addPass(new OutputPass());
+
+    // founder modes (founder-mode.js): Nam = outlines, no bloom, slow camera; Hoàng = heavy bloom
+    let camEase = 0.001;
+    const applyMode = mode => {
+        edgesOnly.value = mode === 'nam' ? 1 : 0;
+        bloom.enabled = mode !== 'nam';
+        bloom.strength = mode === 'hoang' ? 1.2 : 0.8;
+        bloom.threshold = mode === 'hoang' ? 0.8 : 0.95;
+        camEase = mode === 'nam' ? 0.08 : 0.001;
+        if (reduceMotion) frame();
+    };
+    window.addEventListener('founder-mode', e => applyMode(e.detail));
 
     // desktop: island framed right of the text; portrait: island centred between title and caption
     const camOffset = new THREE.Vector3(), lookOffset = new THREE.Vector3();
@@ -259,6 +284,7 @@ if (renderer) {
         if (island.discovered) return;
         island.discovered = true;
         island.morph(island.found);
+        if (i > 0) window.dispatchEvent(new CustomEvent('island-discovered', { detail: i }));
         const found = islands.filter(s => s.discovered).length;
         if (counter) counter.textContent = `${found}/${islands.length}`;
         if (toast && i > 0) {
@@ -336,7 +362,7 @@ if (renderer) {
         a.copy(islands[i0].home).lerp(islands[i1].home, k);
         camPos.copy(a).add(camOffset).add(b.set(pointer.x * 0.8, -pointer.y * 0.4, 0));
         camLook.copy(a).add(lookOffset);
-        const smooth = firstFrame || reduceMotion ? 1 : 1 - Math.pow(0.001, dt);
+        const smooth = firstFrame || reduceMotion ? 1 : 1 - Math.pow(camEase, dt);
         camera.position.lerp(camPos, smooth);
         lookNow.lerp(camLook, smooth);
         camera.lookAt(lookNow);
@@ -360,6 +386,7 @@ if (renderer) {
         if (visible && !document.hidden) frame();
     }
 
+    applyMode(document.documentElement.dataset.mode);
     if (reduceMotion) {
         frame();
         window.addEventListener('resize', frame);
