@@ -1,7 +1,19 @@
 # SSS Studio Website: Tiến độ & Lộ trình
 
 > Cập nhật: 15/10/2026. Đọc file này trước khi làm tiếp.
-> Code nằm trên nhánh `redesign-explorer` (chưa merge vào `main`, chưa push).
+> Code nằm trên nhánh **`redesign-explorer`** (đã push lên GitHub, **chưa merge vào `main`**). GitHub Pages vẫn đang chạy bản cũ của `main`.
+
+## 📍 Đang dừng ở đây
+
+**Đã xong:** Bước 0 (commit), 3, 3b, 4, 5, 5b. Toàn bộ phần thiết kế chính đã hoàn thành.
+
+**Việc tiếp theo, theo thứ tự:**
+1. **Bước 6: kiểm thử thật**. Quan trọng nhất là **hiệu năng**: cảnh 3D giờ chạy suốt cả trang (không chỉ Hero). Mở trên điện thoại thật và máy yếu, nếu giật thì xem gợi ý ở Bước 6.
+2. Gửi thử 1 tin qua form liên hệ (EmailJS chưa test thật).
+3. Thấy ổn thì **merge `redesign-explorer` vào `main`** để GitHub Pages cập nhật.
+4. Việc nhỏ còn treo: xoá ảnh PNG/JPG gốc?, link Privacy/Terms ở footer, nút EN/VI vẫn màu xanh ở mọi chế độ, các mục "(Tuỳ chọn)".
+
+**Cách xem nhanh:** chạy server (mục 5), mở tab ẩn danh để thấy màn boot. Muốn xem lại boot trong tab thường: xoá `sessionStorage` key `booted`. Muốn reset thành tựu: xoá `localStorage` key `achievements`.
 
 ---
 
@@ -82,7 +94,8 @@
   - **Nam**: đen trắng, voxel chỉ vẽ cạnh (shader trong `hero3d.js`), tắt bloom, camera trôi chậm, bỏ glow/bóng, ảnh xám.
   - **Hoàng**: màu kẹo, bloom 1.2, tiêu đề nhiều màu đổi hue, gradient chạy trên nút active, **confetti** khi chuyển chế độ và khi khám phá đảo (sự kiện `island-discovered`).
 - [x] Lưu vào `localStorage` key `mode`. Sự kiện `founder-mode` cho code khác nghe.
-- [ ] Trang con chưa có chế độ (mới chỉ `index.html`). Nút EN/VI vẫn giữ màu xanh.
+- [x] Trang con đã theo chế độ (xem Bước 5).
+- [ ] Nút EN/VI (`lang-switcher.js`) vẫn giữ màu xanh ở mọi chế độ.
 
 ### Bước 3b: Phần Team thành màn "Chọn nhân vật" ✅
 - [x] 3 thẻ `.char-pick` (tên, chức vụ, thanh chỉ số 10 ô Đa dạng / Tối giản / Màu mè, nút Chọn, huy hiệu "P1" nhấp nháy trên thẻ đang chọn).
@@ -93,7 +106,7 @@
 - [x] **Màn khởi động** (`boot.js`, trước đó không có preloader): **Hải** = S "mô phỏng": một ván Snake, con rắn bò thành chữ S, ăn táo xong thì hoá xanh thành chính chữ S (`drawSnake`, `PATH`) → **Hoàng** = S hình rồng bản đồ Việt Nam có Hoàng Sa, Trường Sa (toạ độ trong mảng `VN`) → **Nam** = S một nét → "SUPER STARTUP SIMULATOR" + `Loading world... %`. Tối thiểu 2.9s, tối đa 4.5s, 1 lần mỗi phiên (`sessionStorage`), bấm phím/click để bỏ qua, tắt khi reduced-motion. Intro chữ Hero chờ sự kiện `boot-done`.
 - [x] **Achievement toast** (`achievements.js`, lưu `localStorage` key `achievements`): Explorer (8/8 đảo), Shape Shifter (thử đủ 3 chế độ founder), Talent Scout (tới phần Liên hệ). Thêm thành tựu: thêm vào `LIST` rồi gọi `unlock(id)`.
 - [ ] (Tuỳ chọn) Thanh chỉ số kiểu game sim: `Games Shipped: 8 · Team: 30+ · Genres: 6`.
-- [ ] (Tuỳ chọn) Form liên hệ đổi giọng: nút `[ START SIMULATION ]`.
+- [x] Form liên hệ thành terminal (xem Bước 5b).
 
 ### Bước 5: Đồng bộ nội dung & trang con
 - [x] Giọng **studio** cho Journey + footer ("SSS Studio · Super Startup Simulator", © SSS Studio). Giữ nguyên dữ kiện (FPT, DXLab, Game Jam, chứng chỉ Unity), không thêm cột mốc mới. Nút trang con đổi thành "← Back to SSS Studio / Về SSS Studio".
@@ -114,7 +127,7 @@
 
 ### Bước 6: Kiểm thử thật
 - [ ] Thử trên **điện thoại thật** (vuốt cảm ứng qua 8 đảo, hiệu năng).
-- [ ] Đo FPS trên máy yếu. Nếu giật: giảm `UnrealBloomPass` hoặc tắt bloom trên mobile trong `hero3d.js`.
+- [ ] Đo FPS trên máy yếu. Nếu giật, theo thứ tự dễ trước: tắt bloom trên mobile (`bloom.enabled` trong `hero3d.js`), giảm `setPixelRatio` (đang 1.5), giảm số khung hình sau khi đã lặn xuống (`descent === 1`), giảm `CLOUDS`/`DECK`.
 - [ ] Thử Safari (View Transitions cần Safari 18.2+, các bản cũ hơn vẫn chuyển trang bình thường).
 
 ---
@@ -126,6 +139,10 @@
 - `lenis` là biến `let` toàn cục trong `index.html`. `hero3d.js` truy cập qua `smoothScroller()`.
 - Hai section được ghim (Hero, Projects) dùng `refreshPriority` để vị trí các section phía dưới tính đúng. Nếu thêm section ghim mới, nhớ đặt tương tự.
 - Carousel Hero **không còn tự chạy**. Chú thích đi theo đảo (sự kiện `hero-slide`), còn chấm tròn yêu cầu bay tới đảo (sự kiện `hero-goto`).
+- **Canvas 3D nằm ngoài Hero** (`<canvas id="hero-animated-bg">` ngay sau `.joly-bg-container`, `position: fixed`) và render liên tục cả trang. Đừng đưa nó vào lại trong `#home`: Hero bị ghim/transform sẽ làm hỏng `position: fixed`.
+- Lớp `.hero-overlay` và `.retro-scanlines` có `mask-image` mờ dần ở đáy để Hero trượt lên không để lại mép. Thêm lớp mới vào Hero thì làm tương tự.
+- Số `ZONE xx` là CSS counter trên `.parallax-wrapper .section` (dùng selector con cháu vì Projects bị bọc trong `pin-spacer`). Minimap đánh số theo mảng `ZONES` trong `world.js`; thêm/bớt section thì sửa cả hai.
+- Các sự kiện dùng chung: `founder-mode`, `island-discovered` ({index, found, total}), `boot-done`, `hero-slide`, `hero-goto`.
 - Thêm game mới: thêm slide vào `#heroCarousel` trong `index.html` và thêm cảnh cùng key `href` vào `voxelScenes.js`. Lưới đảo: x, z từ -6 đến 5, y = 1 trở lên. Ô góc (5, 5) dành cho nhân vật nên để trống.
 
 ## 5. Cách chạy thử
