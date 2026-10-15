@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Inter:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 :root {
     --blood-red: #0284c7;
@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     background: #020617;
     color: var(--cream);
     padding: 3rem 1.5rem;
@@ -40,7 +40,7 @@ body {
 }
 
 .back, .back-btn, .detail-button, .outline-link, .project-link, .back-link {
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -68,7 +68,7 @@ body {
 }
 
 h1 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 5vw, 3rem);
     color: var(--bright-gold);
     text-shadow: 0 0 15px var(--glow-amber);
@@ -79,7 +79,7 @@ h1 {
 }
 
 h2 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.6rem;
     color: var(--cream);
     margin: 2.5rem 0 1rem;
@@ -89,7 +89,7 @@ h2 {
 }
 
 h3 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.3rem;
     color: var(--bright-gold);
     margin: 1.5rem 0 0.5rem;
@@ -119,7 +119,7 @@ p, li {
     background: rgba(2, 132, 199, 0.25);
     font-size: 0.8rem;
     color: var(--bright-gold);
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -199,7 +199,7 @@ th, td {
 th {
     background: rgba(2, 132, 199, 0.15);
     color: var(--bright-gold);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -247,7 +247,7 @@ td {
 
 .project-title {
     margin: 0;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.5rem;
     color: var(--bright-gold);
     font-weight: 700;
@@ -344,7 +344,7 @@ td {
 }
 
 .package-name {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--bright-gold);
@@ -360,7 +360,7 @@ td {
     background: rgba(2, 132, 199, 0.25);
     font-size: 0.75rem;
     color: var(--bright-gold);
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .package-video {
@@ -390,7 +390,7 @@ td {
 .package-link {
     margin-top: 6px;
     align-self: flex-start;
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -464,7 +464,7 @@ td {
     background: rgba(2, 132, 199, 0.25);
     color: var(--bright-gold);
     font-size: 0.8rem;
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .job-projects {
@@ -556,7 +556,7 @@ td {
     padding: 2px 6px;
     margin-right: 4px;
     border-radius: 4px;
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
 }
 
 /* knowledge.html specific classes */
@@ -579,7 +579,7 @@ td {
     background: rgba(2, 132, 199, 0.25);
     font-size: 0.8rem;
     color: var(--bright-gold);
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -591,7 +591,7 @@ td {
 }
 
 .cta-link {
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -669,7 +669,7 @@ td {
     background: rgba(2, 132, 199, 0.25);
     font-size: 0.8rem;
     color: var(--bright-gold);
-    font-family: 'Lora', serif;
+    font-family: 'Inter', sans-serif;
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -707,3 +707,90 @@ td {
     box-shadow: 0 0 10px var(--glow-red);
 }
 
+
+/* Page transitions (View Transitions API) */
+@view-transition {
+    navigation: auto;
+}
+
+h1 {
+    view-transition-name: project-title;
+}
+
+::view-transition-old(root) {
+    animation: vt-out 0.35s ease both;
+}
+
+::view-transition-new(root) {
+    animation: vt-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+::view-transition-group(project-title) {
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes vt-out {
+    to { opacity: 0; transform: scale(0.97); filter: blur(8px); }
+}
+
+@keyframes vt-in {
+    from { opacity: 0; transform: scale(1.03); filter: blur(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+        animation: none !important;
+    }
+}
+
+/* ============================================================
+   FOUNDER MODES (founder-mode.js, chosen on the home page): Nam = minimal, Hoàng = flashy
+   ============================================================ */
+html[data-mode="nam"] {
+    --blood-red: #e5e5e5;
+    --crimson: #fafafa;
+    --dark-bg: #0a0a0a;
+    --black-coal: #000000;
+    --dark-card: #111111;
+    --burnt-orange: #a3a3a3;
+    --amber: #737373;
+    --light-grey: #d4d4d4;
+    --parchment: #a3a3a3;
+    --cream: #fafafa;
+    --bright-gold: #fafafa;
+    --border-dark: #262626;
+    --border-mid: #404040;
+    --shadow-red: transparent;
+    --glow-red: transparent;
+    --glow-amber: transparent;
+}
+
+html[data-mode="nam"] body { background: #000; }
+html[data-mode="nam"] .container { background: #0a0a0a; border-radius: 0; }
+html[data-mode="nam"] *:not(.confetti-bit) { text-shadow: none !important; box-shadow: none !important; }
+html[data-mode="nam"] img { filter: grayscale(1); }
+
+html[data-mode="hoang"] {
+    --blood-red: #db2777;
+    --crimson: #f472b6;
+    --dark-bg: #1e0b3a;
+    --black-coal: #12051f;
+    --dark-card: #2a1150;
+    --burnt-orange: #facc15;
+    --amber: #f97316;
+    --light-grey: #f5d0fe;
+    --parchment: #e9a8f5;
+    --cream: #fff7fb;
+    --bright-gold: #a3e635;
+    --border-dark: #4c1d95;
+    --border-mid: #7c3aed;
+    --shadow-red: rgba(219, 39, 119, 0.5);
+    --glow-red: rgba(244, 114, 182, 0.75);
+    --glow-amber: rgba(250, 204, 21, 0.6);
+}
+
+html[data-mode="hoang"] body { background: radial-gradient(circle at 20% 0%, #4a0e4e, #12051f 60%); }
+html[data-mode="hoang"] .container { background: linear-gradient(145deg, rgba(42, 17, 80, 0.95), rgba(30, 11, 58, 0.98)); }
+html[data-mode="hoang"] h1 { animation: candy-hue 6s linear infinite; }
+@keyframes candy-hue { to { filter: hue-rotate(360deg); } }
