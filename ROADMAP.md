@@ -89,7 +89,7 @@
 - [x] Hover/focus thì xem trước chế độ cho cả trang, click thì giữ (`founder-mode.js`). Chỉ số đặt tạm, sửa trong `style="--v: N"`.
 
 ### Bước 4: Lớp "Startup Simulator" + điểm nhấn của Hoàng
-- [x] **Màn khởi động** (`boot.js`, trước đó không có preloader): S voxel → S một nét → S bùng màu → "SUPER STARTUP SIMULATOR" + `Loading world... %` (theo ảnh không-lazy đã tải). Tối thiểu 1.9s, tối đa 4s, 1 lần mỗi phiên (`sessionStorage`), bấm phím/click để bỏ qua, tắt khi reduced-motion. Intro chữ Hero chờ sự kiện `boot-done`.
+- [x] **Màn khởi động** (`boot.js`, trước đó không có preloader): **Hải** = S "copy mọi thứ" (lần lượt bắt chước serif, meme, script, terminal, outline, gothic, S của Nam, S của Hoàng rồi chốt thành voxel) → **Hoàng** = S hình rồng bản đồ Việt Nam có Hoàng Sa, Trường Sa (toạ độ trong mảng `VN`) → **Nam** = S một nét → "SUPER STARTUP SIMULATOR" + `Loading world... %`. Tối thiểu 2.9s, tối đa 4.5s, 1 lần mỗi phiên (`sessionStorage`), bấm phím/click để bỏ qua, tắt khi reduced-motion. Intro chữ Hero chờ sự kiện `boot-done`.
 - [x] **Achievement toast** (`achievements.js`, lưu `localStorage` key `achievements`): Explorer (8/8 đảo), Shape Shifter (thử đủ 3 chế độ founder), Talent Scout (tới phần Liên hệ). Thêm thành tựu: thêm vào `LIST` rồi gọi `unlock(id)`.
 - [ ] (Tuỳ chọn) Thanh chỉ số kiểu game sim: `Games Shipped: 8 · Team: 30+ · Genres: 6`.
 - [ ] (Tuỳ chọn) Form liên hệ đổi giọng: nút `[ START SIMULATION ]`.
