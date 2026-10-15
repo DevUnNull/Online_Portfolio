@@ -28,16 +28,27 @@
         mode = next;
         document.documentElement.dataset.mode = mode;
         try { localStorage.setItem('mode', mode); } catch (e) { }
-        document.querySelectorAll('.mode-switch button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+        syncButtons();
         window.dispatchEvent(new CustomEvent('founder-mode', { detail: mode }));
         confetti();
     }
 
+    const syncButtons = () => document.querySelectorAll('.mode-switch button, .char-btn')
+        .forEach(b => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+
     window.addEventListener('island-discovered', confetti);
     window.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.mode-switch button').forEach(b => {
-            b.setAttribute('aria-pressed', String(b.dataset.mode === mode));
-            b.addEventListener('click', () => setMode(b.dataset.mode));
+        syncButtons();
+        document.querySelectorAll('.mode-switch button').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+        // Team "character select": hovering/focusing a card previews that founder's skin, clicking keeps it
+        document.querySelectorAll('.char-pick').forEach(card => {
+            const preview = () => { document.documentElement.dataset.mode = card.dataset.mode; };
+            const restore = () => { document.documentElement.dataset.mode = mode; };
+            card.addEventListener('pointerenter', preview);
+            card.addEventListener('pointerleave', restore);
+            card.addEventListener('focusin', preview);
+            card.addEventListener('focusout', restore);
+            card.addEventListener('click', () => setMode(card.dataset.mode));
         });
     });
 })();

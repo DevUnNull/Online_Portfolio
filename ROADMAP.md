@@ -81,9 +81,10 @@
 - [x] Lưu vào `localStorage` key `mode`. Sự kiện `founder-mode` cho code khác nghe.
 - [ ] Trang con chưa có chế độ (mới chỉ `index.html`). Nút EN/VI vẫn giữ màu xanh.
 
-### Bước 3b: Phần Team thành màn "Chọn nhân vật"
-- [ ] 3 thẻ như màn chọn nhân vật trong game: tên, chức vụ, thanh chỉ số (Đa dạng / Tối giản / Màu mè).
-- [ ] Mỗi thẻ mang phong cách của người đó. Hover thì xem trước chế độ tương ứng.
+### Bước 3b: Phần Team thành màn "Chọn nhân vật" ✅
+- [x] 3 thẻ `.char-pick` (tên, chức vụ, thanh chỉ số 10 ô Đa dạng / Tối giản / Màu mè, nút Chọn, huy hiệu "P1" nhấp nháy trên thẻ đang chọn).
+- [x] Mỗi thẻ mang phong cách riêng: Hải = pixel, bóng lệch cứng · Nam = viền 1 nét, đen trắng · Hoàng = khung gradient kẹo, glow.
+- [x] Hover/focus thì xem trước chế độ cho cả trang, click thì giữ (`founder-mode.js`). Chỉ số đặt tạm, sửa trong `style="--v: N"`.
 
 ### Bước 4: Lớp "Startup Simulator" + điểm nhấn của Hoàng
 - [ ] **Màn khởi động** thay preloader: 3 chữ S tự lắp ráp (voxel / một nét / bùng màu) rồi thành logo "Super Startup Simulator". Kèm thanh `Loading world... %`.

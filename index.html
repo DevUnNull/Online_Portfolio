@@ -1785,6 +1785,90 @@
         html[data-mode="hoang"] .hero-massive-title div:nth-child(3n) { color: #22d3ee; }
         html[data-mode="hoang"] .explore-toast { border-color: #f472b6; color: #fff; background: linear-gradient(90deg, #db2777, #7c3aed); box-shadow: 0 0 24px #f472b6; }
 
+        /* Team = character select screen; each card wears its founder's style */
+        .char-select-hint {
+            text-align: center;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--hud);
+            margin: -1.5rem 0 2.5rem;
+        }
+
+        .char-pick .card-screen { height: 460px; }
+        .char-pick .card-overlay { background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.95) 75%); }
+        .char-role { color: var(--bright-gold); font-weight: 700; letter-spacing: 1px; font-size: 0.85rem; }
+
+        .char-stats {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 0.35rem 0.8rem;
+            margin: 0.9rem 0 1.1rem;
+            font-family: 'VT323', monospace;
+            font-size: 1.05rem;
+            color: var(--light-grey);
+        }
+
+        /* 10-segment bars: dim track on the <dd>, lit segments on ::before (width = value) */
+        .char-stats dd {
+            position: relative;
+            height: 10px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) calc(100% - 2px), transparent 0) 0 0 / 10% 100% repeat-x;
+        }
+
+        .char-stats dd::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: calc(var(--v) * 10%);
+            background: linear-gradient(90deg, var(--seg, var(--hud)) calc(100% - 2px), transparent 0) 0 0 / calc(100% / var(--v)) 100% repeat-x;
+        }
+
+        .char-btn {
+            font-family: 'VT323', monospace;
+            font-size: 1.15rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.45rem;
+            border: 1px solid var(--seg, var(--hud));
+            background: transparent;
+            color: var(--cream);
+            cursor: pointer;
+        }
+
+        .char-btn[aria-pressed="true"] { background: var(--seg, var(--hud)); color: #000; }
+        .char-btn:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+
+        .char-badge {
+            display: none;
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 3;
+            padding: 0.1rem 0.6rem;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            background: var(--seg, var(--hud));
+            color: #000;
+            animation: badge-blink 1s steps(2) infinite;
+        }
+
+        .char-pick:has(.char-btn[aria-pressed="true"]) .char-badge { display: block; }
+        @keyframes badge-blink { 50% { opacity: 0.4; } }
+
+        /* Hải: pixel art, hard offset shadow */
+        .char-pick[data-mode="hai"] { --seg: #38bdf8; border-radius: 4px; background: #0c4a6e; box-shadow: 8px 8px 0 #0ea5e9; }
+        .char-pick[data-mode="hai"] .card-screen { border-radius: 2px; }
+        /* Nam: one thin line, black and white */
+        .char-pick[data-mode="nam"] { --seg: #fafafa; border-radius: 0; background: #000; border: 1px solid #fafafa; padding: 10px; }
+        .char-pick[data-mode="nam"] .card-screen { border-radius: 0; }
+        .char-pick[data-mode="nam"] .card-media { filter: grayscale(1); }
+        .char-pick[data-mode="nam"] .card-title { font-family: 'Inter', sans-serif; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; }
+        /* Hoàng: candy gradient frame with glow */
+        .char-pick[data-mode="hoang"] { --seg: #f472b6; background: linear-gradient(135deg, #f472b6, #a78bfa, #facc15); box-shadow: 0 0 30px rgba(244, 114, 182, 0.45); }
+        .char-pick[data-mode="hoang"] .card-title { color: #facc15; }
+
         @keyframes candy-run { to { background-position: 300% 0; } }
         @keyframes candy-hue { to { filter: hue-rotate(360deg); } }
     </style>
@@ -2103,49 +2187,62 @@
                     </p>
                 </div>
 
-                <div class="grid-3">
-                    <div class="card">
+                <p class="char-select-hint"><span class="lang-en">&gt; SELECT YOUR FOUNDER: the whole site re-skins to their style</span><span
+                        class="lang-vi">&gt; CHỌN FOUNDER: cả website sẽ đổi theo phong cách của người đó</span></p>
+
+                <!-- character select: hover previews a founder mode, click/Select keeps it (founder-mode.js) -->
+                <div class="grid-3 char-select">
+                    <div class="card char-pick" data-mode="hoang">
                         <div class="card-screen">
                             <img class="card-media" src="assets/AvataHoang.webp" alt="Hoang Avatar"
                                 style="object-position: center; opacity: 1;">
-                            <div class="card-overlay"
-                                style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
-                            </div>
-                            <div class="card-body" style="text-align: center;">
+                            <div class="card-overlay"></div>
+                            <span class="char-badge">P1</span>
+                            <div class="card-body">
                                 <h3 class="card-title">Hoàng</h3>
-                                <p class="card-text"
-                                    style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
-                                    Chief Production Officer</p>
+                                <p class="char-role">Chief Production Officer</p>
+                                <dl class="char-stats">
+                                    <dt><span class="lang-en">Diverse</span><span class="lang-vi">Đa dạng</span></dt><dd style="--v: 6"></dd>
+                                    <dt><span class="lang-en">Minimal</span><span class="lang-vi">Tối giản</span></dt><dd style="--v: 3"></dd>
+                                    <dt><span class="lang-en">Flashy</span><span class="lang-vi">Màu mè</span></dt><dd style="--v: 10"></dd>
+                                </dl>
+                                <button type="button" class="char-btn" data-mode="hoang"><span class="lang-en">Select</span><span class="lang-vi">Chọn</span></button>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card char-pick" data-mode="hai">
                         <div class="card-screen">
                             <img class="card-media" src="assets/Avata.webp" alt="Hai Avatar"
                                 style="object-position: top; opacity: 1;">
-                            <div class="card-overlay"
-                                style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
-                            </div>
-                            <div class="card-body" style="text-align: center;">
+                            <div class="card-overlay"></div>
+                            <span class="char-badge">P1</span>
+                            <div class="card-body">
                                 <h3 class="card-title">Hải</h3>
-                                <p class="card-text"
-                                    style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
-                                    CEO & Co-Founder</p>
+                                <p class="char-role">CEO & Co-Founder</p>
+                                <dl class="char-stats">
+                                    <dt><span class="lang-en">Diverse</span><span class="lang-vi">Đa dạng</span></dt><dd style="--v: 10"></dd>
+                                    <dt><span class="lang-en">Minimal</span><span class="lang-vi">Tối giản</span></dt><dd style="--v: 4"></dd>
+                                    <dt><span class="lang-en">Flashy</span><span class="lang-vi">Màu mè</span></dt><dd style="--v: 6"></dd>
+                                </dl>
+                                <button type="button" class="char-btn" data-mode="hai"><span class="lang-en">Select</span><span class="lang-vi">Chọn</span></button>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card char-pick" data-mode="nam">
                         <div class="card-screen">
                             <img class="card-media" src="assets/AvataNam.webp" alt="Nam Avatar"
                                 style="object-position: top; opacity: 1;">
-                            <div class="card-overlay"
-                                style="background: linear-gradient(to bottom, transparent 60%, rgba(5, 4, 0, 0.95) 100%);">
-                            </div>
-                            <div class="card-body" style="text-align: center;">
+                            <div class="card-overlay"></div>
+                            <span class="char-badge">P1</span>
+                            <div class="card-body">
                                 <h3 class="card-title">Nam</h3>
-                                <p class="card-text"
-                                    style="color: var(--bright-gold); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 1px;">
-                                    Chief Technology Officer</p>
+                                <p class="char-role">Chief Technology Officer</p>
+                                <dl class="char-stats">
+                                    <dt><span class="lang-en">Diverse</span><span class="lang-vi">Đa dạng</span></dt><dd style="--v: 3"></dd>
+                                    <dt><span class="lang-en">Minimal</span><span class="lang-vi">Tối giản</span></dt><dd style="--v: 10"></dd>
+                                    <dt><span class="lang-en">Flashy</span><span class="lang-vi">Màu mè</span></dt><dd style="--v: 2"></dd>
+                                </dl>
+                                <button type="button" class="char-btn" data-mode="nam"><span class="lang-en">Select</span><span class="lang-vi">Chọn</span></button>
                             </div>
                         </div>
                     </div>
