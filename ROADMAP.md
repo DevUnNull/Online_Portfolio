@@ -95,9 +95,11 @@
 - [ ] (Tuỳ chọn) Form liên hệ đổi giọng: nút `[ START SIMULATION ]`.
 
 ### Bước 5: Đồng bộ nội dung & trang con
-- [ ] Viết lại giọng **studio** cho phần Journey ("Challenging myself"…) và footer ("NGỌC HẢI").
-- [ ] Quyết định về **các section SEO đang ẩn** (`#about-sss`, `#vietnam-game-ecosystem`, có bảng so sánh với Hiker Games/Topebox). Giữ, bỏ, hay cho hiện ra? Google có thể coi là cloaking.
-- [ ] Đưa phong cách mới (bản đồ khám phá, HUD) sang 18 trang chi tiết. Hiện mới đồng bộ font và chuyển trang.
+- [x] Giọng **studio** cho Journey + footer ("SSS Studio · Super Startup Simulator", © SSS Studio). Giữ nguyên dữ kiện (FPT, DXLab, Game Jam, chứng chỉ Unity), không thêm cột mốc mới. Nút trang con đổi thành "← Back to SSS Studio / Về SSS Studio".
+- [x] **SEO ẩn đã xoá** (`#about-sss`, `#vietnam-game-ecosystem`, bảng so sánh với studio khác). Thay bằng **JSON-LD Organization** trong `<head>` + 1 đoạn giới thiệu hiện rõ ở phần About (founder UnNull, Nguyễn Mai Ngọc Hải).
+- [x] 18 trang con theo **chế độ founder** đã chọn (`founder-mode.js` + phần FOUNDER MODES cuối `detail_page.css`).
+- [ ] (Tuỳ chọn) HUD / bản đồ khám phá trên trang con. Chưa làm.
+- [ ] Footer: link "Privacy Policy" / "Terms of Service" vẫn trỏ `#` (chưa có trang).
 - [ ] (Tuỳ chọn) Section Projects đổi thành "Simulation Modes" có thanh chỉ số cho từng game.
 
 ### Bước 6: Kiểm thử thật
