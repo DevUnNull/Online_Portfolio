@@ -104,7 +104,8 @@
 - [ ] (Tuỳ chọn) Section Projects đổi thành "Simulation Modes" có thanh chỉ số cho từng game.
 
 ### Bước 5b: Phần dưới Home thành "thế giới game" liền mạch ✅ (`world.js`)
-- [x] **Rơi xuyên mây**: hết 8 đảo là một dải mây voxel 3 lớp parallax (canvas). Nền toàn bộ phần dưới là bầu trời liên tục (`--sky-top/mid/bottom`), có sao khi xuống sâu. Section bỏ nền navy phẳng. Nam = mây chỉ có viền, Hoàng = mây màu kẹo.
+- [x] **Một thế giới duy nhất**: canvas 3D (`#hero-animated-bg`) giờ là nền **cố định của cả trang**, không còn nằm trong Hero. Hết 8 đảo, cuộn tiếp thì **camera 3D lao xuống** xuyên tầng mây dày dưới đảo cuối (`DECK` trong `hero3d.js`), trời chuyển sang đêm đầy sao (`uNight`). Các section nổi trên thế giới đó, không còn mép cắt. Pha lao xuống ăn theo ScrollTrigger của `.parallax-wrapper` (từ `top bottom` tới `top 20%`).
+- [x] Dự phòng khi không có WebGL: bầu trời CSS (`--sky-top/mid/bottom`) + mây 2D canvas trong `world.js`. Chỉ hiện khi `html` không có class `world-3d`.
 - [x] **Tiêu đề kiểu zone**: `ZONE 01 · …` tự đánh số bằng CSS counter.
 - [x] **Minimap** bên phải (desktop > 1024px), hiện sau khi rời Hero, bấm để nhảy zone.
 - [x] **Tech/Tools = túi đồ** (section `#skills` trước đó bị `display:none`, nay hiện lại): 6 ô vật phẩm có độ hiếm, bảng chi tiết bên cạnh, dùng được phím mũi tên. Link Package / AI workflow / Knowledge nằm trong bảng.

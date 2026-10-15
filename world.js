@@ -7,7 +7,7 @@
 
     // ---------- cloud dive: three canvas layers of voxel cloud clumps, the nearer the faster ----------
     const band = document.querySelector('.cloud-dive');
-    if (band) {
+    if (band && !document.documentElement.classList.contains('world-3d')) { // 2D fallback only when there is no WebGL world
         const LAYERS = [{ size: 16, alpha: 0.35, count: 26, speed: 0.4 }, { size: 26, alpha: 0.6, count: 16, speed: 0.8 }, { size: 42, alpha: 0.92, count: 9, speed: 1.4 }];
         const canvases = LAYERS.map(() => band.appendChild(document.createElement('canvas')));
         // fixed seed so the clouds don't reshuffle on every resize

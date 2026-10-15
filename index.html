@@ -360,9 +360,15 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(90deg, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.2) 50%, rgba(2, 6, 23, 0.2) 100%),
-                linear-gradient(to bottom, transparent 70%, var(--sky-top) 100%);
+                linear-gradient(90deg, rgba(2, 6, 23, 0.85) 0%, rgba(2, 6, 23, 0.2) 50%, rgba(2, 6, 23, 0.2) 100%);
             z-index: 0;
+        }
+
+        /* the world canvas stays put while the hero scrolls away, so hero-only layers must not leave an edge */
+        .hero-overlay,
+        .retro-scanlines {
+            -webkit-mask-image: linear-gradient(#000 55%, transparent);
+            mask-image: linear-gradient(#000 55%, transparent);
         }
 
         #hero-animated-bg {
@@ -1724,6 +1730,11 @@
 
         .cloud-dive canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
+        /* with WebGL the 3D world itself is the sky; the CSS sky and 2D clouds above are only the fallback */
+        html.world-3d .parallax-wrapper { background: linear-gradient(transparent, rgba(2, 6, 23, 0.3) 60vh); }
+        html.world-3d .sky-stars,
+        html.world-3d .cloud-dive { display: none; }
+
         .section-hint {
             font-family: 'VT323', monospace;
             font-size: 1.15rem;
@@ -2195,6 +2206,10 @@
         <div class="joly-aurora"></div>
     </div>
 
+    <!-- The 3D world (hero3d.js): fixed behind the whole page, so leaving the hero is a camera dive, not a cut -->
+    <canvas id="hero-animated-bg"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+
     <nav class="navbar" role="navigation">
         <a href="#home" class="navbar-brand">
             <img src="assets/Logo.webp" alt="SSS Studio Logo">
@@ -2231,9 +2246,6 @@
         <div class="retro-scanlines"></div>
         <div class="explore-toast" id="exploreToast" role="status" aria-live="polite"></div>
 
-        <!-- Animated Background Canvas -->
-        <canvas id="hero-animated-bg"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
         <div class="hero-overlay" style="z-index: 1;"></div>
 
         <div class="hero-split">

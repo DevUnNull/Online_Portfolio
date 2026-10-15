@@ -23,6 +23,7 @@ try {
 
 if (renderer) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    document.documentElement.classList.add('world-3d'); // index.html drops its CSS fallback sky
 
     const scene = new THREE.Scene();
     scene.fog = new THREE.Fog(0x1e3a5f, 30, 120);
@@ -31,10 +32,10 @@ if (renderer) {
     // --- Twilight sky dome with twinkling stars near the top ---
     const skyMat = new THREE.ShaderMaterial({
         side: THREE.BackSide, depthWrite: false, fog: false,
-        uniforms: { uTime: { value: 0 } },
+        uniforms: { uTime: { value: 0 }, uNight: { value: 0 } },
         vertexShader: 'varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
         fragmentShader: `
-            varying vec3 vDir; uniform float uTime;
+            varying vec3 vDir; uniform float uTime; uniform float uNight;
             float hash(vec3 p){ return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
             void main(){
                 float h = vDir.y;
@@ -42,7 +43,9 @@ if (renderer) {
                 col = mix(col, vec3(0.03, 0.05, 0.14), smoothstep(0.12, 0.7, h));                           // deep night overhead
                 col = mix(col, vec3(0.08, 0.16, 0.30), smoothstep(0.0, -0.4, h));                           // below: sea of dusk
                 vec3 cell = floor(vDir * 180.0);
-                float star = step(0.997, hash(cell)) * smoothstep(0.15, 0.5, h);
+                // below the clouds (uNight → 1) dusk turns into a deep night full of stars
+                col = mix(col, mix(vec3(0.015, 0.03, 0.09), vec3(0.004, 0.008, 0.03), smoothstep(-0.2, 0.6, h)), uNight);
+                float star = step(0.997, hash(cell)) * mix(smoothstep(0.15, 0.5, h), 0.7, uNight);
                 col += star * (0.6 + 0.4 * sin(uTime * 2.0 + hash(cell) * 40.0));
                 gl_FragColor = vec4(col, 1.0);
             }`
@@ -182,12 +185,13 @@ if (renderer) {
     }
 
     // Voxel clouds drifting between the islands
-    const CLOUDS = 36, PUFFS = 9;
+    const CLOUDS = 36, DECK = 22, PUFFS = 9;
     const cloudMesh = new THREE.InstancedMesh(
         new THREE.BoxGeometry(1, 1, 1),
         new THREE.MeshStandardMaterial({ color: 0xe0f2fe, roughness: 1, transparent: true, opacity: 0.85 }),
-        CLOUDS * PUFFS
+        (CLOUDS + DECK) * PUFFS
     );
+    const puffs = () => Array.from({ length: PUFFS }, () => [(Math.random() - 0.5) * 4, Math.random() * 0.8, (Math.random() - 0.5) * 2, 0.8 + Math.random() * 1.4]);
     // keep clouds out of the camera corridor: either a low layer under the islands, or drifting along the far sides
     const clouds = Array.from({ length: CLOUDS }, (_, i) => {
         const low = i % 2 === 0, side = i % 4 === 1 ? 1 : -1;
@@ -195,9 +199,15 @@ if (renderer) {
         return {
             minX, maxX, x: minX + Math.random() * (maxX - minX),
             y: low ? -12 + Math.random() * 5 : -5 + Math.random() * 12, z: 15 - Math.random() * 140,
-            speed: 0.3 + Math.random() * 0.6,
-            puffs: Array.from({ length: PUFFS }, () => [(Math.random() - 0.5) * 4, Math.random() * 0.8, (Math.random() - 0.5) * 2, 0.8 + Math.random() * 1.4])
+            speed: 0.3 + Math.random() * 0.6, puffs: puffs()
         };
+    });
+    // a dense cloud deck right under the last island: the camera dives through it when the page scrolls on
+    const lastHome = islands[islands.length - 1].home;
+    for (let i = 0; i < DECK; i++) clouds.push({
+        minX: lastHome.x - 30, maxX: lastHome.x + 30, x: lastHome.x - 30 + Math.random() * 60,
+        y: -11 + Math.random() * 3, z: lastHome.z + 12 - Math.random() * 40,
+        speed: 0.15 + Math.random() * 0.25, puffs: puffs()
     });
     scene.add(cloudMesh);
     const updateClouds = dt => {
@@ -272,7 +282,7 @@ if (renderer) {
 
     // --- Travel: scroll progress through the pinned hero = position along the journey ---
     const last = islands.length - 1;
-    let journey = 0, current = -1, travelTrigger = null, toastTimer, direction = 1;
+    let journey = 0, current = -1, travelTrigger = null, toastTimer, direction = 1, descent = 0;
     const toast = document.getElementById('exploreToast');
     const counter = document.getElementById('exploreCount');
     const heroLeft = document.querySelector('.hero-left');
@@ -326,14 +336,19 @@ if (renderer) {
             const frac = journey - Math.floor(journey);
             if (frac > 0.02 && frac < 0.98) goTo(direction > 0 ? Math.ceil(journey) : Math.floor(journey));
         });
+        // leaving the hero: while the rest of the page scrolls in, the camera dives down through the cloud layer
+        const below = document.querySelector('.parallax-wrapper');
+        if (below) window.ScrollTrigger.create({
+            trigger: below, start: 'top bottom', end: 'top 20%',
+            onUpdate: self => { descent = self.progress; }
+        });
         window.ScrollTrigger.refresh();
     }
 
-    let visible = true;
-    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(hero);
 
     const clock = new THREE.Clock();
     const camPos = new THREE.Vector3(), camLook = new THREE.Vector3(), lookNow = new THREE.Vector3();
+    const diveAhead = new THREE.Vector3(0, 1.5, -40), fogDusk = scene.fog.color.clone(), fogNight = new THREE.Color(0x030712);
     const a = new THREE.Vector3(), b = new THREE.Vector3();
     const pointer = { x: 0, y: 0 };
     window.addEventListener('pointermove', e => {
@@ -362,6 +377,16 @@ if (renderer) {
         a.copy(islands[i0].home).lerp(islands[i1].home, k);
         camPos.copy(a).add(camOffset).add(b.set(pointer.x * 0.8, -pointer.y * 0.4, 0));
         camLook.copy(a).add(lookOffset);
+        // dive: drop ~24 units (through the low clouds at y -12..-7), nose down mid-fall, level out looking ahead
+        const d = descent * descent * (3 - 2 * descent);
+        if (d > 0) {
+            camPos.y -= d * 24;
+            camPos.z -= d * 8;
+            camLook.lerp(b.copy(camPos).add(diveAhead), d);
+            camLook.y -= Math.sin(Math.PI * d) * 10;
+        }
+        skyMat.uniforms.uNight.value = d;
+        scene.fog.color.lerpColors(fogDusk, fogNight, d);
         const smooth = firstFrame || reduceMotion ? 1 : 1 - Math.pow(camEase, dt);
         camera.position.lerp(camPos, smooth);
         lookNow.lerp(camLook, smooth);
@@ -383,7 +408,7 @@ if (renderer) {
 
     function loop() {
         requestAnimationFrame(loop);
-        if (visible && !document.hidden) frame();
+        if (!document.hidden) frame(); // the world is the backdrop of the whole page now, not just the hero
     }
 
     applyMode(document.documentElement.dataset.mode);
