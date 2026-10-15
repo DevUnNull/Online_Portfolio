@@ -1,5 +1,5 @@
 // Boot screen: the three S's of SSS, one per founder, then "Super Startup Simulator" with a "Loading world... %" bar.
-//   Hải  = the simulator: the S is a tiny playfield that runs Snake, Tetris and Pac-Man along its own shape, then settles as voxels
+//   Hải  = the simulator: a game of Snake whose snake crawls into the S
 //   Hoàng = a dragon S shaped like the map of Việt Nam, with Hoàng Sa and Trường Sa
 //   Nam  = one clean stroke
 // Once per browser session; any key/click skips. Loaded in <head> without defer so the page is hidden before first paint.
@@ -27,13 +27,9 @@
         .boot-who { font-size: 1rem; letter-spacing: 2px; color: #64748b; min-height: 1.2em; opacity: 0; animation: boot-fade 0.3s ease forwards; }
 
         /* Hải */
-        .boot-hai { position: relative; width: 68px; height: 96px; display: flex; align-items: flex-end; justify-content: center; }
         .boot-sim { width: 68px; height: 96px; }
-        .boot-hai:not(.done) .boot-vox, .boot-hai.done .boot-sim { display: none; }
-        .boot-vox { display: grid; grid-template-columns: repeat(5, 12px); gap: 2px; }
-        .boot-vox i { width: 12px; height: 12px; background: #38bdf8; opacity: 0; animation: boot-drop 0.35s cubic-bezier(.3,1.6,.6,1) forwards; animation-delay: calc(var(--i) * 12ms); }
-        .boot-vox i.off { visibility: hidden; }
-        @keyframes boot-drop { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: none; } }
+        .boot-sim.done { animation: boot-eat 0.35s ease-out; }
+        @keyframes boot-eat { from { transform: scale(1.12); filter: brightness(2.2); } }
 
         /* Hoàng */
         .boot-map { width: 128px; height: auto; overflow: visible; }
@@ -60,43 +56,19 @@
     `;
     document.head.appendChild(style);
 
-    // Hải's playfield: the 19 cells of a 5×7 pixel S, in drawing order (top-right → top-left → down → right → down → left)
+    // Hải's S is a game of Snake: the snake crawls the 19 cells of a 5×7 pixel S
+    // (top-right → top-left → down → right → down → left), eats the apple at the end and becomes the letter
     const PATH = [[4, 0], [3, 0], [2, 0], [1, 0], [0, 0], [0, 1], [0, 2], [0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [4, 4], [4, 5], [4, 6], [3, 6], [2, 6], [1, 6], [0, 6]];
-    const CELL = 14, SIZE = 12;
-    const PIECES = [16, 12, 8, 4, 0].map(s => PATH.slice(s, s + 4)); // S cut into tetrominoes, dropped bottom piece first
-    const TETRIS_COLORS = ['#a855f7', '#f97316', '#eab308', '#06b6d4', '#ef4444'];
-    // each game: [label, duration ms, draw(ctx, progress 0..1)]
-    const GAMES = [
-        ['snake', 520, (ctx, p) => {
-            const n = Math.min(PATH.length, Math.floor(p * PATH.length) + 1);
-            const [ac, ar] = PATH[PATH.length - 1];
-            if (n < PATH.length) { ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(ac * CELL + 6, ar * CELL + 6, 5, 0, 7); ctx.fill(); }
-            PATH.slice(0, n).forEach(([c, r], i) => { ctx.fillStyle = i === n - 1 ? '#bbf7d0' : '#22c55e'; ctx.fillRect(c * CELL, r * CELL, SIZE, SIZE); });
-        }],
-        ['tetris', 560, (ctx, p) => PIECES.forEach((piece, i) => {
-            const lp = Math.min(1, Math.max(0, (p - i * 0.18) / 0.18));
-            if (!lp) return;
-            const dy = -Math.ceil((1 - lp) * 7) * CELL; // falls in whole rows, like the real thing
-            ctx.fillStyle = TETRIS_COLORS[i];
-            piece.forEach(([c, r]) => ctx.fillRect(c * CELL, r * CELL + dy, SIZE, SIZE));
-        })],
-        ['pac-man', 560, (ctx, p, t) => {
-            const pos = p * (PATH.length - 1), i = Math.floor(pos), f = pos - i;
-            const [c0, r0] = PATH[i], [c1, r1] = PATH[Math.min(i + 1, PATH.length - 1)];
-            ctx.fillStyle = '#fde68a';
-            PATH.slice(i + 1).forEach(([c, r]) => ctx.fillRect(c * CELL + 4, r * CELL + 4, 4, 4));
-            const x = (c0 + (c1 - c0) * f) * CELL + 6, y = (r0 + (r1 - r0) * f) * CELL + 6;
-            const dir = Math.atan2(r1 - r0, c1 - c0), mouth = 0.15 + 0.55 * Math.abs(Math.sin(t / 45));
-            ctx.fillStyle = '#facc15';
-            ctx.beginPath(); ctx.moveTo(x, y); ctx.arc(x, y, 7, dir + mouth, dir + Math.PI * 2 - mouth); ctx.fill();
-            const g = PATH[Math.max(0, i - 3)]; // a ghost gives chase three cells behind
-            if (i >= 3) {
-                ctx.fillStyle = '#f472b6';
-                ctx.beginPath(); ctx.arc(g[0] * CELL + 6, g[1] * CELL + 5, 6, Math.PI, 0); ctx.fill();
-                ctx.fillRect(g[0] * CELL, g[1] * CELL + 5, SIZE, 7);
-            }
-        }]
-    ];
+    const CELL = 14, SIZE = 12, SNAKE_MS = 900;
+    const drawSnake = (ctx, n) => {
+        const [ac, ar] = PATH[PATH.length - 1];
+        if (n < PATH.length) { ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(ac * CELL + 6, ar * CELL + 6, 5, 0, 7); ctx.fill(); }
+        const done = n >= PATH.length;
+        PATH.slice(0, n).forEach(([c, r], i) => {
+            ctx.fillStyle = done ? '#38bdf8' : i === n - 1 ? '#bbf7d0' : '#22c55e';
+            ctx.fillRect(c * CELL, r * CELL, SIZE, SIZE);
+        });
+    };
 
     // simplified outline of Việt Nam as [lon, lat]: north border west→east, coast south to Cà Mau, then the western border back north
     const VN = [[102.14, 22.4], [102.6, 22.75], [103.3, 22.8], [103.97, 22.5], [104.4, 22.8], [104.8, 23.1], [105.33, 23.39], [105.9, 23.0],
@@ -140,8 +112,6 @@
 
     window.addEventListener('DOMContentLoaded', () => {
         if (typeof lenis !== 'undefined' && lenis) lenis.stop();
-        const sRows = ['#####', '#....', '#....', '#####', '....#', '....#', '#####'];
-        const vox = sRows.join('').split('').map((c, i) => `<i style="--i:${i}"${c === '#' ? '' : ' class="off"'}></i>`).join('');
         const boot = document.createElement('div');
         boot.className = 'boot';
         boot.setAttribute('role', 'status');
@@ -149,7 +119,7 @@
         const vi = document.documentElement.lang === 'vi';
         boot.innerHTML = `
             <div class="boot-letters" aria-hidden="true">
-                <div class="boot-col"><div class="boot-hai"><canvas class="boot-sim"></canvas><div class="boot-vox">${vox}</div></div><span class="boot-who boot-hai-label"></span></div>
+                <div class="boot-col"><canvas class="boot-sim"></canvas><span class="boot-who boot-hai-label"></span></div>
                 <div class="boot-col">${mapSvg()}<span class="boot-who" style="animation-delay: 1.9s">HOÀNG</span></div>
                 <div class="boot-col"><svg class="boot-line" width="56" height="96" viewBox="0 0 56 96"><path d="M46 14 C 36 2, 8 4, 10 24 S 48 44, 46 68 S 14 96, 6 78" pathLength="200"/></svg><span class="boot-who" style="animation-delay: 2.4s">NAM</span></div>
             </div>
@@ -160,21 +130,19 @@
         boot.addEventListener('click', end);
         window.addEventListener('keydown', end, { once: true });
 
-        // Hải's S simulates one game after another on its own shape, then becomes voxels
-        const hai = boot.querySelector('.boot-hai'), label = boot.querySelector('.boot-hai-label');
+        // Hải: the snake crawls into an S, eats the apple, turns blue
+        const label = boot.querySelector('.boot-hai-label');
         const sim = boot.querySelector('.boot-sim'), ctx = sim.getContext('2d'), dpr = window.devicePixelRatio || 1;
         sim.width = 68 * dpr; sim.height = 96 * dpr;
         ctx.scale(dpr, dpr);
         const simStart = performance.now();
         (function play(now) {
             if (ended) return;
-            let t = now - simStart;
-            const game = GAMES.find(g => (t -= g[1]) < 0);
-            if (!game) { hai.classList.add('done'); label.textContent = 'HẢI'; return; }
+            const n = Math.min(PATH.length, Math.floor((now - simStart) / SNAKE_MS * PATH.length) + 1);
             ctx.clearRect(0, 0, 68, 96);
-            game[2](ctx, 1 + t / game[1], now);
-            label.textContent = 'sim: ' + game[0];
-            requestAnimationFrame(play);
+            drawSnake(ctx, n);
+            if (n < PATH.length) requestAnimationFrame(play);
+            else { sim.classList.add('done'); label.textContent = 'HẢI'; }
         })(simStart);
 
         // real progress = eager images loaded (lazy ones would never finish while hidden); window load = 100%
