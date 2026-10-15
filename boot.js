@@ -23,8 +23,6 @@
         }
         .boot.out { opacity: 0; pointer-events: none; }
         .boot-letters { display: flex; align-items: flex-end; gap: clamp(1.2rem, 5vw, 3rem); }
-        .boot-col { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
-        .boot-who { font-size: 1rem; letter-spacing: 2px; color: #64748b; min-height: 1.2em; opacity: 0; animation: boot-fade 0.3s ease forwards; }
 
         /* Hải */
         .boot-sim { width: 68px; height: 96px; }
@@ -119,9 +117,9 @@
         const vi = document.documentElement.lang === 'vi';
         boot.innerHTML = `
             <div class="boot-letters" aria-hidden="true">
-                <div class="boot-col"><canvas class="boot-sim"></canvas><span class="boot-who boot-hai-label"></span></div>
-                <div class="boot-col">${mapSvg()}<span class="boot-who" style="animation-delay: 1.9s">HOÀNG</span></div>
-                <div class="boot-col"><svg class="boot-line" width="56" height="96" viewBox="0 0 56 96"><path d="M46 14 C 36 2, 8 4, 10 24 S 48 44, 46 68 S 14 96, 6 78" pathLength="200"/></svg><span class="boot-who" style="animation-delay: 2.4s">NAM</span></div>
+                <canvas class="boot-sim"></canvas>
+                ${mapSvg()}
+                <svg class="boot-line" width="56" height="96" viewBox="0 0 56 96"><path d="M46 14 C 36 2, 8 4, 10 24 S 48 44, 46 68 S 14 96, 6 78" pathLength="200"/></svg>
             </div>
             <div class="boot-name">SUPER STARTUP SIMULATOR</div>
             <div class="boot-bar"><span>${vi ? 'Đang tải thế giới...' : 'Loading world...'} <b class="boot-pct">0</b>%</span><div class="boot-track"><div class="boot-fill"></div></div></div>
@@ -131,7 +129,6 @@
         window.addEventListener('keydown', end, { once: true });
 
         // Hải: the snake crawls into an S, eats the apple, turns blue
-        const label = boot.querySelector('.boot-hai-label');
         const sim = boot.querySelector('.boot-sim'), ctx = sim.getContext('2d'), dpr = window.devicePixelRatio || 1;
         sim.width = 68 * dpr; sim.height = 96 * dpr;
         ctx.scale(dpr, dpr);
@@ -142,7 +139,7 @@
             ctx.clearRect(0, 0, 68, 96);
             drawSnake(ctx, n);
             if (n < PATH.length) requestAnimationFrame(play);
-            else { sim.classList.add('done'); label.textContent = 'HẢI'; }
+            else sim.classList.add('done');
         })(simStart);
 
         // real progress = eager images loaded (lazy ones would never finish while hidden); window load = 100%
